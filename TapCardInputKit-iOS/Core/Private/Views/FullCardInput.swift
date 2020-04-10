@@ -1,5 +1,5 @@
 //
-//  CardInputMode.swift
+//  FullCardInput.swift
 //  TapCardInputKit-iOS
 //
 //  Created by Osama Rabie on 10/04/2020.
@@ -7,11 +7,3 @@
 //
 
 import Foundation
-
-
-@objc public enum CardInputMode:Int {
-    
-    case InlineCardInput = 0
-    case FullCardInput = 1
-    
-}

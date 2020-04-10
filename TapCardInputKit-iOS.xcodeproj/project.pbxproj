@@ -40,6 +40,8 @@
 		E8911CFF243F450A00398252 /* DefaultDarkTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8911CFE243F450A00398252 /* DefaultDarkTheme.json */; };
 		E8911D012440485F00398252 /* TapCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D002440485F00398252 /* TapCardInput.swift */; };
 		E8911D05244049B200398252 /* CardInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D04244049B200398252 /* CardInputMode.swift */; };
+		E8911D072440674500398252 /* TapCardBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D062440674500398252 /* TapCardBarButton.swift */; };
+		E8911D0924407DB100398252 /* FullCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D0824407DB100398252 /* FullCardInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		E8911CFE243F450A00398252 /* DefaultDarkTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultDarkTheme.json; sourceTree = "<group>"; };
 		E8911D002440485F00398252 /* TapCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardInput.swift; sourceTree = "<group>"; };
 		E8911D04244049B200398252 /* CardInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputMode.swift; sourceTree = "<group>"; };
+		E8911D062440674500398252 /* TapCardBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardBarButton.swift; sourceTree = "<group>"; };
+		E8911D0824407DB100398252 /* FullCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				E8159E25243DA7790021B880 /* InlineCardInput.swift */,
+				E8911D0824407DB100398252 /* FullCardInput.swift */,
+				E8911D062440674500398252 /* TapCardBarButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -510,10 +516,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8911D05244049B200398252 /* CardInputMode.swift in Sources */,
+				E8911D0924407DB100398252 /* FullCardInput.swift in Sources */,
 				E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */,
 				E8159E21243DA2650021B880 /* CardExpiryTextField.swift in Sources */,
 				E8159E23243DA4C60021B880 /* CardCVVTextField.swift in Sources */,
 				E8159E19243D85A50021B880 /* CrardInputTextFieldStatusEnum.swift in Sources */,
+				E8911D072440674500398252 /* TapCardBarButton.swift in Sources */,
 				E8911D012440485F00398252 /* TapCardInput.swift in Sources */,
 				E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */,
 				E8159E1F243D888F0021B880 /* CardNumberTextField.swift in Sources */,
