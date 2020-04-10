@@ -1,0 +1,6 @@
+framework module Pods_TapCardInputKit_iOS {
+  umbrella header "Pods-TapCardInputKit-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

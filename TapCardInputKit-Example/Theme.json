@@ -1,0 +1,20 @@
+{
+  "inlineCard": {
+      "commonAttributes": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#F3CD05",
+          "cornerRadius":10,
+          "borderWidth": 1,
+          "itemSpacing": 5
+      },
+      "iconImage": {
+          "image": ""
+      },
+      "textFields": {
+          "textColor": "#000000",
+          "errorTextColor": "#FF0000",
+          "font": "15",
+          "placeHolderColor" : "#000000"
+      }
+  }
+}

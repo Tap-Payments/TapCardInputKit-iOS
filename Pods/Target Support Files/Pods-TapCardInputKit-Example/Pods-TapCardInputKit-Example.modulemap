@@ -1,0 +1,6 @@
+framework module Pods_TapCardInputKit_Example {
+  umbrella header "Pods-TapCardInputKit-Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

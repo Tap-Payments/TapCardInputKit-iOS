@@ -1,0 +1,6 @@
+framework module TapThemeManager2020 {
+  umbrella header "TapThemeManager2020-umbrella.h"
+
+  export *
+  module * { export * }
+}
