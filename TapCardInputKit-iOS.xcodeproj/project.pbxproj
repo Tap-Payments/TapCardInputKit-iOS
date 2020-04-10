@@ -38,6 +38,8 @@
 		E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E69243E3C030021B880 /* DefaultLightTheme.json */; };
 		E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911CFA243ED95F00398252 /* TapCardTextField.swift */; };
 		E8911CFF243F450A00398252 /* DefaultDarkTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8911CFE243F450A00398252 /* DefaultDarkTheme.json */; };
+		E8911D012440485F00398252 /* TapCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D002440485F00398252 /* TapCardInput.swift */; };
+		E8911D05244049B200398252 /* CardInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D04244049B200398252 /* CardInputMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		E8159E69243E3C030021B880 /* DefaultLightTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultLightTheme.json; sourceTree = "<group>"; };
 		E8911CFA243ED95F00398252 /* TapCardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardTextField.swift; sourceTree = "<group>"; };
 		E8911CFE243F450A00398252 /* DefaultDarkTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultDarkTheme.json; sourceTree = "<group>"; };
+		E8911D002440485F00398252 /* TapCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardInput.swift; sourceTree = "<group>"; };
+		E8911D04244049B200398252 /* CardInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,8 +221,9 @@
 		E8159E12243D83F20021B880 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				E8911D022440498E00398252 /* Views */,
 				E8159E1D243D88750021B880 /* TextFields */,
-				E8159E1A243D871C0021B880 /* enum */,
+				E8159E1A243D871C0021B880 /* enums */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 		E8159E13243D83F60021B880 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				E8911D032440499D00398252 /* enums */,
 				E8159E24243DA75F0021B880 /* CardInput */,
 				E8159E14243D84860021B880 /* TextFields */,
 			);
@@ -248,11 +254,11 @@
 			path = enums;
 			sourceTree = "<group>";
 		};
-		E8159E1A243D871C0021B880 /* enum */ = {
+		E8159E1A243D871C0021B880 /* enums */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = enum;
+			path = enums;
 			sourceTree = "<group>";
 		};
 		E8159E1D243D88750021B880 /* TextFields */ = {
@@ -270,7 +276,7 @@
 		E8159E24243DA75F0021B880 /* CardInput */ = {
 			isa = PBXGroup;
 			children = (
-				E8159E25243DA7790021B880 /* InlineCardInput.swift */,
+				E8911D002440485F00398252 /* TapCardInput.swift */,
 			);
 			path = CardInput;
 			sourceTree = "<group>";
@@ -291,6 +297,22 @@
 				E8911CFE243F450A00398252 /* DefaultDarkTheme.json */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		E8911D022440498E00398252 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8159E25243DA7790021B880 /* InlineCardInput.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E8911D032440499D00398252 /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				E8911D04244049B200398252 /* CardInputMode.swift */,
+			);
+			path = enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,10 +509,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8911D05244049B200398252 /* CardInputMode.swift in Sources */,
 				E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */,
 				E8159E21243DA2650021B880 /* CardExpiryTextField.swift in Sources */,
 				E8159E23243DA4C60021B880 /* CardCVVTextField.swift in Sources */,
 				E8159E19243D85A50021B880 /* CrardInputTextFieldStatusEnum.swift in Sources */,
+				E8911D012440485F00398252 /* TapCardInput.swift in Sources */,
 				E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */,
 				E8159E1F243D888F0021B880 /* CardNumberTextField.swift in Sources */,
 				E8159E26243DA7790021B880 /* InlineCardInput.swift in Sources */,

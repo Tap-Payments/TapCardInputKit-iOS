@@ -7,34 +7,18 @@
 //
 
 import UIKit
-import SnapKit
 import TapThemeManager2020
 
-@objc public class InlineCardInput: UIView {
+internal class InlineCardInput: TapCardInput {
     
-    lazy var scrollView = UIScrollView()
-    lazy var stackView = UIStackView()
+   
     
-    lazy var icon = UIImageView()
-    lazy var cardNumber  = CardNumberTextField()
-    lazy var cardName  = CardNameTextField()
-    lazy var cardExpiry  = CardExpiryTextField()
-    lazy var cardCVV     = CardCVVTextField()
-    lazy var showCardName:Bool = true
-    lazy var fields:[TapCardTextField] = [cardNumber,cardName,cardExpiry,cardCVV]
-    internal lazy var applyingDefaultTheme:Bool = true
-    
-    internal var themingDictionary:NSDictionary? {
+    override var themingDictionary:NSDictionary? {
         didSet{
             matchThemeAttributes()
         }
     }
-    
-    var spacing:CGFloat = 7 {
-        didSet{
-            
-        }
-    }
+   
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)

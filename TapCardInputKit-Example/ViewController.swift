@@ -11,11 +11,6 @@ import TapCardInputKit_iOS
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var smallInlineCardInput: InlineCardInput! {
-        didSet{
-           // smallInlineCardInput.applyTheme(withJsonTheme: "Theme")
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
