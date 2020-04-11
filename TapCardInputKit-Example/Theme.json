@@ -16,5 +16,24 @@
           "font": "15",
           "placeHolderColor" : "#000000"
       }
+  },
+  "fullCard": {
+      "commonAttributes": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#000000",
+          "cornerRadius":10,
+          "borderWidth": 2,
+          "itemSpacing": 0,
+          "separatorColor": "#0000001E"
+      },
+      "iconImage": {
+          "image": ""
+      },
+      "textFields": {
+          "textColor": "#000000",
+          "errorTextColor": "#FF0000",
+          "font": "15",
+          "placeHolderColor" : "#00000055"
+      }
   }
 }

@@ -42,6 +42,7 @@
 		E8911D05244049B200398252 /* CardInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D04244049B200398252 /* CardInputMode.swift */; };
 		E8911D072440674500398252 /* TapCardBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D062440674500398252 /* TapCardBarButton.swift */; };
 		E8911D0924407DB100398252 /* FullCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D0824407DB100398252 /* FullCardInput.swift */; };
+		E8B8CB552441ECB90060E0F3 /* scanIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B8CB542441ECB90060E0F3 /* scanIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		E8911D04244049B200398252 /* CardInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputMode.swift; sourceTree = "<group>"; };
 		E8911D062440674500398252 /* TapCardBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardBarButton.swift; sourceTree = "<group>"; };
 		E8911D0824407DB100398252 /* FullCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardInput.swift; sourceTree = "<group>"; };
+		E8B8CB542441ECB90060E0F3 /* scanIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +299,7 @@
 				E8159E59243DCB7E0021B880 /* american-express.png */,
 				E8159E53243DCA3F0021B880 /* card.png */,
 				E8159E27243DAB3F0021B880 /* bank.png */,
+				E8B8CB542441ECB90060E0F3 /* scanIcon.png */,
 				E8159E69243E3C030021B880 /* DefaultLightTheme.json */,
 				E8911CFE243F450A00398252 /* DefaultDarkTheme.json */,
 			);
@@ -420,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8159E5F243DCB7E0021B880 /* diners-club.png in Resources */,
+				E8B8CB552441ECB90060E0F3 /* scanIcon.png in Resources */,
 				E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */,
 				E8159E5E243DCB7E0021B880 /* jcb.png in Resources */,
 				E8159E28243DAB3F0021B880 /* bank.png in Resources */,

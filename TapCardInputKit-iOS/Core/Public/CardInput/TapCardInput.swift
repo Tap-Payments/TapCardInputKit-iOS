@@ -30,39 +30,69 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var fields:[TapCardTextField] = [cardNumber,cardName,cardExpiry,cardCVV]
     internal lazy var applyingDefaultTheme:Bool = true
     internal var themingDictionary:NSDictionary?
-    internal var spacing:CGFloat = 7 {
+    internal var themePath:String = "inlineCard"
+    internal var spacing:CGFloat = 7
+    // Public
+    var cardInputMode:CardInputMode = .FullCardInput {
         didSet{
-            
+            switch cardInputMode {
+            case .InlineCardInput:
+                themePath = "inlineCard"
+            case .FullCardInput:
+                themePath = "fullCard"
+            }
         }
     }
-    // Public
-    lazy var cardInputMode:CardInputMode = .InlineCardInput
     lazy var showCardName:Bool = true
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)
         self.backgroundColor = .clear
         //self.addSubview(contentView!)
+        //setupViews()
+    }
+    
+    
+    @objc public func setup(for cardInputMode:CardInputMode,withDictionaryTheme:NSDictionary) {
+        
+        applyingDefaultTheme = true
+        self.cardInputMode = cardInputMode
+        applyTheme(with: withDictionaryTheme)
+        setupViews()
+    }
+    
+    @objc public func setup(for cardInputMode:CardInputMode,withJsonTheme:String) {
+        
+        applyingDefaultTheme = true
+        self.cardInputMode = cardInputMode
+        applyTheme(with: withJsonTheme)
+        setupViews()
+    }
+    
+    @objc public func setup(for cardInputMode:CardInputMode) {
+        
+        applyingDefaultTheme = true
+        self.cardInputMode = cardInputMode
         setupViews()
     }
     
     
-    /// Apply  the theme values from the theme file to the matching outlets
-    @objc public func applyTheme(withDictionaryTheme:NSDictionary)
-    {
-        applyingDefaultTheme = false
-        TapThemeManager.setTapTheme(themeDict: withDictionaryTheme)
-        themingDictionary = TapThemeManager.currentTheme
-    }
     
-    /// Apply  the theme values from the theme file to the matching outlets
-    @objc public func applyTheme(withJsonTheme:String)
-    {
-        applyingDefaultTheme = false
-        TapThemeManager.setTapTheme(jsonName: withJsonTheme)
-        themingDictionary = TapThemeManager.currentTheme
-    }
-    
+       /// Apply  the theme values from the theme file to the matching outlets
+       internal func applyTheme(with dictionaryTheme:NSDictionary)
+       {
+           applyingDefaultTheme = false
+           TapThemeManager.setTapTheme(themeDict: dictionaryTheme)
+           themingDictionary = TapThemeManager.currentTheme
+       }
+       
+       /// Apply  the theme values from the theme file to the matching outlets
+       internal func applyTheme(with jsonTheme:String)
+       {
+           applyingDefaultTheme = false
+           TapThemeManager.setTapTheme(jsonName: jsonTheme)
+           themingDictionary = TapThemeManager.currentTheme
+       }
     
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -93,7 +123,7 @@ internal protocol TapCardInputCommonProtocol {
                 print("TapThemeManager WARNING: Can't read json 'DefaultTheme' at: \(jsonPath)")
                 return
         }
-        applyTheme(withDictionaryTheme: jsonDict)
+        applyTheme(with: jsonDict)
         applyingDefaultTheme = true
     }
     
@@ -101,29 +131,29 @@ internal protocol TapCardInputCommonProtocol {
     internal func setTextColors() {
         fields.forEach { (field) in
             // text colors
-            field.normalTextColor = TapThemeManager.colorValue(for: "inlineCard.textFields.textColor") ?? .black
+            field.normalTextColor = TapThemeManager.colorValue(for: "\(themePath).textFields.textColor") ?? .black
             // Error text colors
-            field.errorTextColor = TapThemeManager.colorValue(for: "inlineCard.textFields.errorTextColor") ?? .black
+            field.errorTextColor = TapThemeManager.colorValue(for: "\(themePath).textFields.errorTextColor") ?? .black
             // placeholder colors
-            field.placeHolderTextColor = TapThemeManager.colorValue(for: "inlineCard.textFields.placeHolderColor") ?? .black
+            field.placeHolderTextColor = TapThemeManager.colorValue(for: "\(themePath).textFields.placeHolderColor") ?? .black
         }
     }
     
     internal func setFonts() {
-        
         fields.forEach { (field) in
             // Fonts
-            field.tap_theme_font = "inlineCard.textFields.font"
+            field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
         }
     }
     
     
     internal func setCommonUI() {
         // background
-        self.tap_theme_backgroundColor = "inlineCard.commonAttributes.backgroundColor"
-        self.layer.tap_theme_borderColor = "inlineCard.commonAttributes.borderColor"
-        self.layer.tap_theme_borderWidth = "inlineCard.commonAttributes.borderWidth"
-        self.layer.tap_theme_cornerRadious = "inlineCard.commonAttributes.cornerRadius"
+        self.tap_theme_backgroundColor = ThemeUIColorSelector.init(keyPath: "\(themePath).commonAttributes.backgroundColor")
+        self.layer.tap_theme_borderColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.borderColor")
+        self.layer.tap_theme_borderWidth = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.borderWidth")
+        self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
+        self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
     }
     
     
@@ -131,7 +161,9 @@ internal protocol TapCardInputCommonProtocol {
         icon.image = UIImage(named: "bank", in: Bundle(for: type(of: self)), compatibleWith: nil)
         icon.contentMode = .scaleAspectFit
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
-            self?.updateWidths(for: self?.cardNumber)
+            if self?.cardInputMode == .InlineCardInput {
+                self?.updateWidths(for: self?.cardNumber)
+            }
         }) { [weak self] (brand) in
             if let nonNullSelf = self {
                 if let nonNullBrand = brand {
@@ -142,20 +174,26 @@ internal protocol TapCardInputCommonProtocol {
             }
         }
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
-            self?.updateWidths(for: self?.cardName)
+            if self?.cardInputMode == .InlineCardInput {
+                self?.updateWidths(for: self?.cardName)
+            }
         })
         cardExpiry.setup(placeholder: "MM/YY") {  [weak self] (isEditing) in
-            self?.updateWidths(for: self?.cardExpiry)
+            if self?.cardInputMode == .InlineCardInput {
+                self?.updateWidths(for: self?.cardExpiry)
+            }
             
         }
         cardCVV.setup(placeholder: "CVV") {  [weak self] (isEditing) in
-            self?.updateWidths(for: self?.cardCVV)
+            if self?.cardInputMode == .InlineCardInput {
+                self?.updateWidths(for: self?.cardCVV)
+            }
             
         }
     }
     
     
-    func addDoneButtonOnKeyboard(for field:TapCardTextField, previous:Bool = false, next:Bool = false, done:Bool = false) {
+    internal func addDoneButtonOnKeyboard(for field:TapCardTextField, previous:Bool = false, next:Bool = false, done:Bool = false) {
         
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
@@ -211,6 +249,14 @@ internal protocol TapCardInputCommonProtocol {
        }
     
     internal func addToolBarButtons() {
+        
+        switch cardInputMode {
+        case .InlineCardInput:
+            fields = [cardNumber,cardName,cardExpiry,cardCVV]
+        case .FullCardInput:
+            fields = [cardNumber,cardExpiry,cardCVV,cardName]
+        }
+        
         for (index, cardField) in fields.enumerated() {
             var showPrevious = false, showNext = false, showDone = false
             showPrevious = (index > 0)
@@ -227,6 +273,14 @@ extension TapCardInput:TapCardInputCommonProtocol {
    
     
     internal func matchThemeAttributes() {
+        
+        switch cardInputMode {
+        case .InlineCardInput:
+            themePath = "inlineCard"
+        case .FullCardInput:
+            themePath = "fullCard"
+        }
+        
         setTextColors()
         setFonts()
         setCommonUI()
@@ -235,7 +289,8 @@ extension TapCardInput:TapCardInputCommonProtocol {
     
     
     internal func setupViews() {
-        applyDefaultTheme()
+        
+        if applyingDefaultTheme { applyDefaultTheme() }
         
         matchThemeAttributes()
         
@@ -259,6 +314,8 @@ extension TapCardInput:TapCardInputCommonProtocol {
         switch cardInputMode {
         case .InlineCardInput:
             setupInlineConstraints()
+        case .FullCardInput:
+            setupFullConstraints()
         default:
             return
         }
@@ -270,6 +327,8 @@ extension TapCardInput:TapCardInputCommonProtocol {
         switch cardInputMode {
         case .InlineCardInput:
             addInlineViews()
+        case .FullCardInput:
+            addFullViews()
         default:
             return
         }
