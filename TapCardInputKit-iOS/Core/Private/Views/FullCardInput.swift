@@ -29,14 +29,18 @@ extension TapCardInput {
         icon.snp.remakeConstraints { (make) in
             make.width.equalTo(32)
         }
+        scanButton.snp.remakeConstraints { (make) in
+            make.width.equalTo(32)
+            //make.height.equalTo(32)
+        }
         cardNumber.setContentCompressionResistancePriority(.required, for: .horizontal)
         cardNumber.snp.remakeConstraints { (make) in
-            make.height.equalToSuperview()
+            //make.height.equalToSuperview()
         }
         
         cardName.snp.remakeConstraints { (make) in
             //make.width.equalToSuperview()
-            make.height.equalToSuperview()
+           // make.height.equalToSuperview()
         }
       
         
@@ -81,7 +85,7 @@ extension TapCardInput {
             let fieldsStackView:UIStackView = UIStackView()
             fieldsStackView.axis = .horizontal
             fieldsStackView.backgroundColor = .yellow
-            fieldsStackView.spacing = spacing
+            fieldsStackView.spacing = max(spacing,7)
             
             stackView.addArrangedSubview(fieldsStackView)
             fieldsStackView.snp.remakeConstraints { (make) in
@@ -98,6 +102,7 @@ extension TapCardInput {
                 // Card and icon row
                 fieldsStackView.addArrangedSubview(cardNumber)
                 fieldsStackView.addArrangedSubview(icon)
+                fieldsStackView.addArrangedSubview(scanButton)
             }else if i == 1 {
                 // expiry and cvv
                 fieldsStackView.distribution = .fillProportionally
@@ -110,7 +115,7 @@ extension TapCardInput {
                 horizontalSeparatorView.snp.remakeConstraints { (make) in
                     make.height.equalToSuperview()
                     make.width.equalTo(1)
-                    make.right.equalTo(cardCVV.snp.left).offset(-7)
+                    //make.right.equalTo(cardCVV.snp.left).offset(-7)
                 }
             }else if i == 2 {
                 // name

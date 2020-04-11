@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cardFull.setup(for: .FullCardInput, withJsonTheme: "Theme")
-        cardInline.setup(for: .InlineCardInput)
+        cardFull.setup(for: .FullCardInput)
+        //cardInline.setup(for: .InlineCardInput)
     }
 
 

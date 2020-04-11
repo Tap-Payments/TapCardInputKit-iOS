@@ -23,6 +23,7 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var scrollView = UIScrollView()
     internal lazy var stackView = UIStackView()
     internal lazy var icon = UIImageView()
+    internal lazy var scanButton = UIButton()
     internal lazy var cardNumber  = CardNumberTextField()
     internal lazy var cardName  = CardNameTextField()
     internal lazy var cardExpiry  = CardExpiryTextField()
@@ -43,7 +44,8 @@ internal protocol TapCardInputCommonProtocol {
             }
         }
     }
-    lazy var showCardName:Bool = true
+    //lazy var showCardName:Bool = true
+    lazy var showScanningOption:Bool = true
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)
@@ -160,6 +162,11 @@ internal protocol TapCardInputCommonProtocol {
     internal func configureViews() {
         icon.image = UIImage(named: "bank", in: Bundle(for: type(of: self)), compatibleWith: nil)
         icon.contentMode = .scaleAspectFit
+        
+        scanButton.setTitle("", for: .normal)
+        scanButton.setImage(UIImage(named: "scanIcon", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+        scanButton.contentMode = .scaleAspectFit
+        
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
             if self?.cardInputMode == .InlineCardInput {
                 self?.updateWidths(for: self?.cardNumber)
@@ -302,9 +309,9 @@ extension TapCardInput:TapCardInputCommonProtocol {
         
         addToolBarButtons()
         
-        if !showCardName {
+        /*if !showCardName {
             removeCardName()
-        }
+        }*/
         
         
     }
