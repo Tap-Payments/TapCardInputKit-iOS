@@ -9,12 +9,17 @@
 import UIKit
 import SnapKit
 import TapThemeManager2020
+import class CommonDataModelsKit_iOS.TapCard
 
 internal protocol TapCardInputCommonProtocol {
     
     func setupConstraints()
     func addViews()
     func updateWidths(for subView:UIView?)
+}
+
+@objc public protocol TapCardInputProtocol {
+    func cardDataChanged(tapCard:TapCard)
 }
 
 @objc public class TapCardInput: UIView {

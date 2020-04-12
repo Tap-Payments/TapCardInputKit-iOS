@@ -50,8 +50,12 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
         return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
     }
     
-    func textFieldStatus() -> CrardInputTextFieldStatusEnum {
-        let validationState = CardValidator.validate(cardNumber: self.text?.onlyDigits() ?? "").validationState
+    func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
+        var nonNullCardNumber =  self.text?.onlyDigits() ?? ""
+        if let _ = cardNumber {
+            nonNullCardNumber = cardNumber!
+        }
+        let validationState = CardValidator.validate(cardNumber: nonNullCardNumber).validationState
         switch validationState {
             case .incomplete:
                 return .Incomplete
@@ -62,9 +66,9 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
         }
     }
     
-    func isValid() -> Bool {
+    func isValid(cardNumber:String? = nil) -> Bool {
         
-        return textFieldStatus() == .Valid
+        return textFieldStatus(cardNumber:cardNumber) == .Valid
     }
 }
 
@@ -91,11 +95,13 @@ extension CardNumberTextField:UITextFieldDelegate {
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
         let filteredText:String = updatedText.digitsWithSpaces()
         let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
+        self.textColor = errorTextColor
         
         if let nonNullCardBrandBlock = cardBrandDetected {
             nonNullCardBrandBlock(validation.cardBrand)
+            self.textColor = (validation.validationState == .valid) ? normalTextColor : errorTextColor
         }
-        self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
+        
         return updatedText == filteredText && validation.validationState != .invalid
     }
     

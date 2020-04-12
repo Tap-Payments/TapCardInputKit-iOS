@@ -10,9 +10,9 @@ import UIKit
 import enum TapCardValidator.CardBrand
 @objc internal protocol CardInputTextFieldProtocol {
     /// This method will what is the status of the textfield
-    func textFieldStatus()->CrardInputTextFieldStatusEnum
+    func textFieldStatus(cardNumber:String?)->CrardInputTextFieldStatusEnum
     /// This is a valiation method that defines how to validate the input of this textfield
-    func isValid()->Bool
+    func isValid(cardNumber:String?)->Bool
     /// Compute the field width
     func calculatedWidth() -> CGFloat
 }

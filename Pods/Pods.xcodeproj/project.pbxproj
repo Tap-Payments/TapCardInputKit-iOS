@@ -7,253 +7,283 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0141EBFEA14A71217DD8E1ADF4FB6A13 /* ThemeCgColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AAAF60464FE3843B04BB1F2E89273E /* ThemeCgColorSelector.swift */; };
-		01C550A53C9E2047C83F8E85BBB558E6 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A9D54E6CFA698B8DA9BF063A7FB16 /* ConstraintLayoutSupportDSL.swift */; };
-		039EAFE7935113805F3FC21BF1B7C9D5 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D07494DBD4DAD2FD967758EDEB491 /* LayoutConstraint.swift */; };
+		0141EBFEA14A71217DD8E1ADF4FB6A13 /* ThemeCgColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F30E4B2374F1B5D257227B973831E8B /* ThemeCgColorSelector.swift */; };
+		01C550A53C9E2047C83F8E85BBB558E6 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C722DAA76AAA8A9F3D7AD2EBF8C76A8 /* ConstraintLayoutSupportDSL.swift */; };
+		039EAFE7935113805F3FC21BF1B7C9D5 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BF09DB997D7BCE7038AFE134ED8F5 /* LayoutConstraint.swift */; };
 		04543980C4A7CE442330B0F1BC4A9A54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		056C51FC4D18829637E32E6B2F22C32E /* ThemeImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5AF4F831447F76DBC04C29E35A9A /* ThemeImageSelector.swift */; };
+		056C51FC4D18829637E32E6B2F22C32E /* ThemeImageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DB80B2CFAE587118FADAAB4970F58 /* ThemeImageSelector.swift */; };
+		0EDF80177C98F494A3F83B2D56B193CE /* CommonDataModelsKit-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F9482BA9596875B10795548B8AECF /* CommonDataModelsKit-iOS-dummy.m */; };
+		13FB373D7C4E7909B9BBD6D045F7D22F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		1647EFB7AADFF862A56F33147A9C6E51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		168EB20037650AA00BF85C2B56FD8E52 /* TapThemePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D318179ACE51FF5E94EA66FE61D73E /* TapThemePath.swift */; };
-		169C208729F10CF4C1BD7009B2C9DEF9 /* ThemeUIColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B3960B52B6620033AC4180E7A2220 /* ThemeUIColorSelector.swift */; };
-		1956E392D500F3CD899D39A5F805736D /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A77636EAF0D7BB8ACE3E6FE0C6079F /* Typealiases.swift */; };
-		1AFB1E9136716C0B61D6C700FF1E60FD /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27569913BA63C4F0EBABAE5C94931E3 /* ConstraintLayoutGuide+Extensions.swift */; };
-		1CCADEC29213F955721B406A4863CAE1 /* TapThemeManager+array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43294942D92361DB75906AB3129B846C /* TapThemeManager+array.swift */; };
-		1E06AD6EEA489C6FFC6059307B73B5D2 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E83C09EBAC3E4AC0C605430114C366 /* CardValidator.swift */; };
-		21AB1101BBE4D28D74ED4EDF0D59025A /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4543923F20BCE615A7D4607D2F2F96 /* ConstraintInsets.swift */; };
-		232B2F922E972D9F43D2EE15ACECE734 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2B67146E465A053B427DC2B72E3FD /* ConstraintPriority.swift */; };
-		259BE12343575C1ACA000F7CA8A7C1EC /* ThemeDictionarySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BD14EE594448A201D5040BBFD56805 /* ThemeDictionarySelector.swift */; };
-		29662EDDBAA82CC7A3D4F5815CDAAADE /* ThemeFontSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EAA9C4040F841AB509BE1163AD8D35 /* ThemeFontSelector.swift */; };
-		2A1BBBC87AC2367BD14610A9D10D285E /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921047EE557C01A13E510CF2EAE99B77 /* ConstraintAttributes.swift */; };
-		2C06F2E972444D359754D21AC46BFFE2 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68DA4F69C31DDC3EB5C416CD29E98F0 /* ConstraintInsetTarget.swift */; };
-		2C7383E805D4DFE0BCEAE7CEB1126E41 /* CardBINRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C076374443C289438AE02766E10F51 /* CardBINRange.swift */; };
-		3045CB8D0951FA5DEB5869530FFD0BED /* ThemeActivityIndicatorViewStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BF3F2A8870315A37FDABE76BE2003 /* ThemeActivityIndicatorViewStyleSelector.swift */; };
-		33A9A817C85FCE26FEC3C27D61585DDD /* ThemeKeyboardAppearanceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC89209E5D048C8D25D430E0AE986FFE /* ThemeKeyboardAppearanceSelector.swift */; };
-		34ADCDCDBC5341A3BC979528C409CE71 /* TapThemeManager2020-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 334364F46F8F4A6E0C7C2CB1A33FBC18 /* TapThemeManager2020-dummy.m */; };
-		3BFC243AB9BD579969F0D5756560BCAA /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520EBF4472C782E3BA52D99CF628347 /* Constraint.swift */; };
-		3E5285F4F36EAD77ECABBFB7F36BB1BB /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFA486A110232154FC40CC5EFE03237 /* ConstraintView+Extensions.swift */; };
-		41ED491FAFD71BEC4B7AB9C3B8797AF2 /* Pods-TapCardInputKit-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E694AA7CCFDB0AA2BDA06412D8907A /* Pods-TapCardInputKit-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BD2BB5FDD4C8A31E8403F69A02658CE /* UIKit+TapTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A68DEAAB173317ED3E222F1AE833EF /* UIKit+TapTheme.swift */; };
-		4C7A676DAE95EEAC3787A75349F0862D /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8302E9A630B1CBF801A990DB4C2E4FF1 /* SnapKit-dummy.m */; };
-		51CD5887014967E77E58F5A163996454 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C5E32FBDA454305B6DFC5F0D31A16 /* ConstraintMaker.swift */; };
-		556638BC4207FDD87985217CE1563AFE /* NSObject+tapTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4624E8EA2AD6944D74266885E8D9C /* NSObject+tapTheme.swift */; };
-		57B1876F2BE4168E5BFDB63D8CC849A0 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC349FB3E05C8210F94A80F8458B689 /* ConstraintLayoutSupport.swift */; };
-		5854DF509E8A016B6235793D04083035 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203AA3C0B28454F7A1E0471B1A18336E /* ConstraintConstantTarget.swift */; };
-		5BB9394BAD736BFE2296EF22F888C29C /* TapThemeManager2020-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 04511D72AC9EB3B72262229949A0B044 /* TapThemeManager2020-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		618E77DE17BE2EEC6182447CECA76C29 /* TapThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6168F863DEB66DC0C60B0B94D8D4986 /* TapThemeManager.swift */; };
-		69CCBEEDFCA6D743D80026568D961919 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5184DC4326D7C7ADEDD9C9A74C610C /* ConstraintMakerExtendable.swift */; };
-		69E3A06BBDFDC7D06A9D4BDC4E895E73 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867CD16AB2FD02024FC70BED240335CC /* ConstraintRelatableTarget.swift */; };
+		168EB20037650AA00BF85C2B56FD8E52 /* TapThemePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BDFE10843C58DFD9FD29445D955D89 /* TapThemePath.swift */; };
+		169C208729F10CF4C1BD7009B2C9DEF9 /* ThemeUIColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15842C3204F8531F225098D41FAB4D /* ThemeUIColorSelector.swift */; };
+		1956E392D500F3CD899D39A5F805736D /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B1EC157A3AFCAA5AC1EBAD0AADE73 /* Typealiases.swift */; };
+		1AFB1E9136716C0B61D6C700FF1E60FD /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848359355875E14F8185ED22FF6EC90B /* ConstraintLayoutGuide+Extensions.swift */; };
+		1B65896F638350CBD4C6DFEA76823B8B /* CommonDataModelsKit-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 602283867362541458CEE87F3597C3C9 /* CommonDataModelsKit-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CCADEC29213F955721B406A4863CAE1 /* TapThemeManager+array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACDD6B5D3D3807336D020DAB70D12B3 /* TapThemeManager+array.swift */; };
+		1E06AD6EEA489C6FFC6059307B73B5D2 /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B91FD663A84197B1035117A0065412 /* CardValidator.swift */; };
+		21AB1101BBE4D28D74ED4EDF0D59025A /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7846BA04D3D33B381CD064A196C0C83 /* ConstraintInsets.swift */; };
+		232B2F922E972D9F43D2EE15ACECE734 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A7FC90FAE1E7FC9B9CA3351CE9DE89 /* ConstraintPriority.swift */; };
+		259BE12343575C1ACA000F7CA8A7C1EC /* ThemeDictionarySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676C918FCAD1317FA0631EC1058EC45E /* ThemeDictionarySelector.swift */; };
+		29662EDDBAA82CC7A3D4F5815CDAAADE /* ThemeFontSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B17F84A417BF7AD43866D2169368D7 /* ThemeFontSelector.swift */; };
+		2A1BBBC87AC2367BD14610A9D10D285E /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25140210884045A4F5E387222E49232B /* ConstraintAttributes.swift */; };
+		2C06F2E972444D359754D21AC46BFFE2 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE1C4CBF8A6B688B2262A498FB673 /* ConstraintInsetTarget.swift */; };
+		2C7383E805D4DFE0BCEAE7CEB1126E41 /* CardBINRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF44C28AD35E7A1FD5289E30825391 /* CardBINRange.swift */; };
+		3045CB8D0951FA5DEB5869530FFD0BED /* ThemeActivityIndicatorViewStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D94B067D7436DF8447E0C068418667A /* ThemeActivityIndicatorViewStyleSelector.swift */; };
+		33A9A817C85FCE26FEC3C27D61585DDD /* ThemeKeyboardAppearanceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EA8C4345C0B963B001CC7E5CEE9C6 /* ThemeKeyboardAppearanceSelector.swift */; };
+		34ADCDCDBC5341A3BC979528C409CE71 /* TapThemeManager2020-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338827EF02AD08F62995579F1CF46C6 /* TapThemeManager2020-dummy.m */; };
+		3958D26BCD30A293A00270D924286AEB /* TapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD802D06126AD392EB79EA6BE081802 /* TapCard.swift */; };
+		3BFC243AB9BD579969F0D5756560BCAA /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8033A097B6DDF0860BB962E0EC6498F2 /* Constraint.swift */; };
+		3E5285F4F36EAD77ECABBFB7F36BB1BB /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A60BB296E8659742107F000E69A53 /* ConstraintView+Extensions.swift */; };
+		4BC93F893E939BEE4F8A2AA090CD3EF8 /* Pods-TapCardInputKit-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E694AA7CCFDB0AA2BDA06412D8907A /* Pods-TapCardInputKit-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BD2BB5FDD4C8A31E8403F69A02658CE /* UIKit+TapTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0DFE7C190334B43534E0E86C72679 /* UIKit+TapTheme.swift */; };
+		4C7A676DAE95EEAC3787A75349F0862D /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EC231FED0AAC90729AE98B42F8E88E0B /* SnapKit-dummy.m */; };
+		51CD5887014967E77E58F5A163996454 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391EBF293FEE229F9F8274EFF6A9440D /* ConstraintMaker.swift */; };
+		54537C808DC65B5CB147048064889DCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		556638BC4207FDD87985217CE1563AFE /* NSObject+tapTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6765A3E5522D31F5FA2813D9128FABA9 /* NSObject+tapTheme.swift */; };
+		57B1876F2BE4168E5BFDB63D8CC849A0 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910DBD604AA0C6520E86A3782CFDEE6 /* ConstraintLayoutSupport.swift */; };
+		5854DF509E8A016B6235793D04083035 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFAC96EB22F34F3EB2A137032A1DEED /* ConstraintConstantTarget.swift */; };
+		5BB9394BAD736BFE2296EF22F888C29C /* TapThemeManager2020-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B011DBA08189E545956B61480DF90EC /* TapThemeManager2020-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		618E77DE17BE2EEC6182447CECA76C29 /* TapThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF5DA0381A1E23C4A1370E33CB0BFF /* TapThemeManager.swift */; };
+		69CCBEEDFCA6D743D80026568D961919 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12664784AA667473708A8101B2148EB /* ConstraintMakerExtendable.swift */; };
+		69E3A06BBDFDC7D06A9D4BDC4E895E73 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD6E9B3779AE514E3559CB64895AA1C /* ConstraintRelatableTarget.swift */; };
+		6A7E5BF96E959C97C2A291FA249209E4 /* TapCurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B370B4329214239CE29B5442CB1779 /* TapCurrencyCode.swift */; };
 		6CE144624ECDFFE6503F44D9AEE8588A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		6E0CCF4A3E90CE8154BC479EDE5FC729 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		6E0EB9E7FAAEDBB7A73ECF3095F69C4A /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338B3147EB302F798E6785466A0E26F0 /* UILayoutSupport+Extensions.swift */; };
-		6E0F13FA497A74E393B712834166003C /* ThemeVibranceBlurEffectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733AF32A6FD5CFA441E3E492B7DF5506 /* ThemeVibranceBlurEffectSelector.swift */; };
-		71DE9DC2FA583526AB4D1FD7F00C099C /* ConstraintDirectionalInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B183EBB0F3936C3CE043F6FC6295E0B /* ConstraintDirectionalInsetTarget.swift */; };
-		75E146C12D1287228A0B493E87CDE31F /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF689EDD6A0292E01DA57D94CC171C53 /* ConstraintMakerRelatable.swift */; };
-		77C9889055A3B32EA13A9616824DB0ED /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D88D4354D7705D22920EAF6248BB38 /* ConstraintLayoutGuideDSL.swift */; };
-		7C1702076F3A31D8D2D45A4A9F09B266 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F487ADB31DA1E0AEED16248DD0B153 /* ConstraintMakerEditable.swift */; };
-		8277256ADEC3C4DCF79957D1CA681A9A /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AD2B6078A59B9894EF221E853ED37 /* ConstraintDSL.swift */; };
-		8428CC7F720B5E719B1B6B4186FA0B0B /* TapThemeManagerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B840A6A3ACC9419389772F135E8B4 /* TapThemeManagerParser.swift */; };
-		85F68DEEE1FED8BECE0EF4F6BD13D6B5 /* ThemeStringAttributesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE47A419D86FD3F2BDB063817FB73559 /* ThemeStringAttributesSelector.swift */; };
-		8705BBF0D428BF0AE1B554A377ECC540 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0FFEC8E4B923B4A6A32C6D65C26612 /* ConstraintOffsetTarget.swift */; };
-		889D2280906FEFBB8DA0AE40C5DC752C /* ThemeCGFloatSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3968BE92C616746A18F851A580AF9172 /* ThemeCGFloatSelector.swift */; };
-		9396714A4B4278B5DBE66E2491B783D2 /* ThemeStateSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0135EC8A79FEAB122DB09FA87877E /* ThemeStateSelector.swift */; };
-		981D8BC5369041A40BB16B23452E789E /* DefinedCardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E043D557A602A8804D449D1020BFA42B /* DefinedCardBrand.swift */; };
-		99B5296A5EDECE0557B9DA53D9E19CA1 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369832301E7EA3E1E8E3B3D78A2B6497 /* ConstraintItem.swift */; };
-		9B09968922C73D50040C6EEF57890D6E /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FC265F71C36B69A77B86BC65790F4 /* ConstraintConfig.swift */; };
-		9D0BC33BD455EC98C0C4A928C492C7DC /* TapCardValidator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3704473D2BD7A45D65AA8A4415FF0EF /* TapCardValidator-dummy.m */; };
-		9DEF6F5BE5294D557CFF2EB624BCEAC1 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED882B48167F48B893CAC19A732A32B /* CardBrand.swift */; };
-		9ECF69B751FF9830E85D001F1E0170E7 /* ThemeStatusBarStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C82D283569E9E10085E5D84DC1F96 /* ThemeStatusBarStyleSelector.swift */; };
-		9F87687A74C6C609CA00FB93B16FB063 /* ThemeBlurEffectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCDDD9B8493380A2132BA2FA4B93D3C /* ThemeBlurEffectSelector.swift */; };
-		A269F5F5802759D60FC8105392FF2CC0 /* UIHexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E752AF8772E4AE12D9F9FDA4CE91EA23 /* UIHexColor.swift */; };
-		A270CD9EC3C541FE86E65AEDCEF500CF /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9607FF3C5F2476CA4F9252D53A0CC8 /* ConstraintLayoutGuide.swift */; };
-		A66ED57B365A35434C5BAF4B990819B7 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AE82E79C2839B8D1F128F9C3CBF392D6 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AC35C9341C4BB156BB26FDD237EE3721 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA3D35CF550148DFA0DF4752097EAD /* ConstraintDirectionalInsets.swift */; };
-		B4148659C092140F1776AA283FB0EA69 /* Pods-TapCardInputKit-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 989B3A999629163DA1E3247B405BDE29 /* Pods-TapCardInputKit-iOS-dummy.m */; };
-		B599696DFEF6B2A5ECF528F4E5BB1846 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5185671E070166E7F9E381B8FF105C4B /* ConstraintDescription.swift */; };
-		B780B272106411CBE258BB60FFC45410 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1313E5284D5A11144B2761CBEF7C2C4A /* Debugging.swift */; };
-		BECA67DFB5E0984DFAEFCB775C31972E /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4C6932A7A76DF703E41519D6096C14 /* ConstraintView.swift */; };
-		C1BE05B1244B913CACDDBF07F13DC837 /* CardValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1691B52312ED55EA49EA12534C0C5DF7 /* CardValidationState.swift */; };
-		C2B3214F07BE55992A5689A8A4848F07 /* Pods-TapCardInputKit-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CE98C062FE40E517A78526EA42BF5F /* Pods-TapCardInputKit-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C2CC8CE80B13E55ACDBD281BF4D67FEC /* ThemeScrollViewIndicatorStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73129E96B8E1C21F38F4CE837FFAD7 /* ThemeScrollViewIndicatorStyleSelector.swift */; };
-		C412F27D75AFC0DF0F0289DBB270931C /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CF7A78779EE97C825112621975DA1 /* ConstraintMakerFinalizable.swift */; };
-		CE62FEABA57B2B53EABF8C7DCCC6B2C4 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D3A9603F01AB17328BAA64CD03E68 /* ConstraintRelation.swift */; };
-		D07D157B7D60F69FE225378D78C1892B /* ThemeNavigationBarAppearanceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771DCD4724075A5A4183FB4A755E06CF /* ThemeNavigationBarAppearanceSelector.swift */; };
-		D4697DC40F3B059E4A0867838CA1814E /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8010716480DFD4280938CF88238BC37 /* ConstraintMultiplierTarget.swift */; };
-		D940611971E1117EFA2BAFCE136C3D6D /* Pods-TapCardInputKit-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D00F1C0BE0744D6674DA5C3E361178B0 /* Pods-TapCardInputKit-Example-dummy.m */; };
-		DD1DA5CA8C39247DE7CED778A8E9FF51 /* SelectorsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39553900D110CDFAEF544A69A8C6FBC1 /* SelectorsConstants.swift */; };
-		E1C636DE2D149B0887B417EE2948BF68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		E8F2429683B3015CBD39CE883770BCA7 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1285B83FCB7ACFAF7661284AF08C51 /* ConstraintPriorityTarget.swift */; };
-		E9A970BC24EA15832F248EA020072746 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF581EB280900175DA4BC3815490C9B9 /* LayoutConstraintItem.swift */; };
-		EB1726F5E0D0EEBA20E4528B1E37A8FA /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24633C60BFAFDD1A20414075EEAB0791 /* ConstraintViewDSL.swift */; };
-		EB49347C5F0BAB14355AA21920D3B45E /* ViewsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116043D32C4CB6B5B330C515AD266570 /* ViewsExtensions.swift */; };
-		EE909C7C786140109051BC9562EEC7C8 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A848C6729CF014266B2130B1198DAD /* ConstraintMakerPriortizable.swift */; };
-		F31C30B5E56FB05A88521A8731103543 /* TapCardValidator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3566754751F91B2FC744E709F09142DD /* TapCardValidator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F553FEB8E051D53ACA9BD9A3CD9CD844 /* ThemeBarStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC69198C749488DA8A1AECCFA2080D1 /* ThemeBarStyleSelector.swift */; };
-		FFF1CC4AC329A2C4C975CB3455223E95 /* ThemeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74579A214DF2AFFE5C7CBCF7D17DF930 /* ThemeSelector.swift */; };
+		6E0EB9E7FAAEDBB7A73ECF3095F69C4A /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019EFB798D946C367F72BA6262DBCDC /* UILayoutSupport+Extensions.swift */; };
+		6E0F13FA497A74E393B712834166003C /* ThemeVibranceBlurEffectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C930F1E8DC54C189AFBF3333F83D15C /* ThemeVibranceBlurEffectSelector.swift */; };
+		71DE9DC2FA583526AB4D1FD7F00C099C /* ConstraintDirectionalInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073A1782C204D36F339EB709570E6CC8 /* ConstraintDirectionalInsetTarget.swift */; };
+		75E146C12D1287228A0B493E87CDE31F /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9900F6A503EF2BDBB6F32044A83D81E4 /* ConstraintMakerRelatable.swift */; };
+		77C9889055A3B32EA13A9616824DB0ED /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CCB8C87667963D02893659903A360 /* ConstraintLayoutGuideDSL.swift */; };
+		7A49FC78AF3372FBD3886D449FB596A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		7C1702076F3A31D8D2D45A4A9F09B266 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E0D7008D430098AE756A9F40D335D /* ConstraintMakerEditable.swift */; };
+		8277256ADEC3C4DCF79957D1CA681A9A /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6AD45229EACA6A318EA54D730BFD73 /* ConstraintDSL.swift */; };
+		8428CC7F720B5E719B1B6B4186FA0B0B /* TapThemeManagerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC2B51350E93D2D8493DB5C1E5CB86A /* TapThemeManagerParser.swift */; };
+		85F68DEEE1FED8BECE0EF4F6BD13D6B5 /* ThemeStringAttributesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368D605B27FA09B7287D7FF13FE40E2 /* ThemeStringAttributesSelector.swift */; };
+		8705BBF0D428BF0AE1B554A377ECC540 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375C5D8DBAD1BE15A14964563EC965FA /* ConstraintOffsetTarget.swift */; };
+		889D2280906FEFBB8DA0AE40C5DC752C /* ThemeCGFloatSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B158D8E1E189C0F886C4191E67D772 /* ThemeCGFloatSelector.swift */; };
+		9396714A4B4278B5DBE66E2491B783D2 /* ThemeStateSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5299695DD0650D74B2975DB4B028F88 /* ThemeStateSelector.swift */; };
+		981D8BC5369041A40BB16B23452E789E /* DefinedCardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94417470D4D56A2EBD077D1FB2CCD0C5 /* DefinedCardBrand.swift */; };
+		99B5296A5EDECE0557B9DA53D9E19CA1 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ECA9DA5E202CE6DCD974B799F57CB /* ConstraintItem.swift */; };
+		9B09968922C73D50040C6EEF57890D6E /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA43F9B660B7133F32CE914F662E880 /* ConstraintConfig.swift */; };
+		9D0BC33BD455EC98C0C4A928C492C7DC /* TapCardValidator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92780F3DF62F7A712D6D4E41C3A90DDC /* TapCardValidator-dummy.m */; };
+		9DEF6F5BE5294D557CFF2EB624BCEAC1 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B5960252D61D98D4B605CF93E31EA3 /* CardBrand.swift */; };
+		9ECF69B751FF9830E85D001F1E0170E7 /* ThemeStatusBarStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA6753EE7AB20DBC65AE6AA162A603 /* ThemeStatusBarStyleSelector.swift */; };
+		9F87687A74C6C609CA00FB93B16FB063 /* ThemeBlurEffectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD500C78D2B5E90C549E1C1437A17E /* ThemeBlurEffectSelector.swift */; };
+		A269F5F5802759D60FC8105392FF2CC0 /* UIHexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C57FB04BA8D9DAF64F1674C745EEC3 /* UIHexColor.swift */; };
+		A270CD9EC3C541FE86E65AEDCEF500CF /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B89746FA9915C0EAB0FDBD55DB5E74A /* ConstraintLayoutGuide.swift */; };
+		A66ED57B365A35434C5BAF4B990819B7 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1BD8611604E0F74F892EC5D4E52FE3 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7E749C10F7F2565EC63CCC1C24D7B46 /* Pods-TapCardInputKit-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01CE98C062FE40E517A78526EA42BF5F /* Pods-TapCardInputKit-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC35C9341C4BB156BB26FDD237EE3721 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE794BB726B13BE8C26246D53D33B66A /* ConstraintDirectionalInsets.swift */; };
+		B599696DFEF6B2A5ECF528F4E5BB1846 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E934F328C4BCB866A14B2005F53F889 /* ConstraintDescription.swift */; };
+		B780B272106411CBE258BB60FFC45410 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BAD8BC5676BD694D9EBDD53F33568 /* Debugging.swift */; };
+		BECA67DFB5E0984DFAEFCB775C31972E /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A96FB5BEEAC3FD8786FBD421E4757D2 /* ConstraintView.swift */; };
+		C1BE05B1244B913CACDDBF07F13DC837 /* CardValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6BE8152F15FE519BFA86DA44FE3EFE /* CardValidationState.swift */; };
+		C2CC8CE80B13E55ACDBD281BF4D67FEC /* ThemeScrollViewIndicatorStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2328BB75A5D4FD5D96C14F7584DF83D /* ThemeScrollViewIndicatorStyleSelector.swift */; };
+		C412F27D75AFC0DF0F0289DBB270931C /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A4B3962F0467155F67A9E2FF4D9647 /* ConstraintMakerFinalizable.swift */; };
+		C56BF901A8204D8F0EEE955961AAF932 /* Pods-TapCardInputKit-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 989B3A999629163DA1E3247B405BDE29 /* Pods-TapCardInputKit-iOS-dummy.m */; };
+		CE62FEABA57B2B53EABF8C7DCCC6B2C4 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6298F503B11A287572720B34B7BCCDD7 /* ConstraintRelation.swift */; };
+		D07D157B7D60F69FE225378D78C1892B /* ThemeNavigationBarAppearanceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06486959846B7E0136C26DA7C04BCF71 /* ThemeNavigationBarAppearanceSelector.swift */; };
+		D4697DC40F3B059E4A0867838CA1814E /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE35003079794CE3BFB601DD791D7B /* ConstraintMultiplierTarget.swift */; };
+		D96055D30BD8731604E8D2A46AEED34B /* TapCountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EE1929427C507F4D89E3B6C7F7EB9C /* TapCountryCode.swift */; };
+		DD1DA5CA8C39247DE7CED778A8E9FF51 /* SelectorsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6590C741F9B4A15BA8D969BCD1E93AF9 /* SelectorsConstants.swift */; };
+		E8F2429683B3015CBD39CE883770BCA7 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC2D40359464063F47966FA2E783F3 /* ConstraintPriorityTarget.swift */; };
+		E9A970BC24EA15832F248EA020072746 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2407B13BAA798A8F878DA111A7ABB0A7 /* LayoutConstraintItem.swift */; };
+		EB1726F5E0D0EEBA20E4528B1E37A8FA /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53371B738565950842D427AC31DE5EC2 /* ConstraintViewDSL.swift */; };
+		EB49347C5F0BAB14355AA21920D3B45E /* ViewsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2458E31086CA56BF308BC0EFCB26761B /* ViewsExtensions.swift */; };
+		EE909C7C786140109051BC9562EEC7C8 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2CD78D1E6A6FF5ED662BCE76495C3B /* ConstraintMakerPriortizable.swift */; };
+		EF234FB0EAE0BC3FB059049B291CEF42 /* Pods-TapCardInputKit-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D00F1C0BE0744D6674DA5C3E361178B0 /* Pods-TapCardInputKit-Example-dummy.m */; };
+		F31C30B5E56FB05A88521A8731103543 /* TapCardValidator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E53237762DC4A9E81D18717D1D533471 /* TapCardValidator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F553FEB8E051D53ACA9BD9A3CD9CD844 /* ThemeBarStyleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1765D5E4E422FE201CBF0E35967909 /* ThemeBarStyleSelector.swift */; };
+		FFF1CC4AC329A2C4C975CB3455223E95 /* ThemeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45055DA14974395F65F44C3FEFFCCF88 /* ThemeSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1C981DDC6E74A2D1F0EC00511C59B2A3 /* PBXContainerItemProxy */ = {
+		37290EEFC6F256CCA3E6C84E699D1CB1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 825F97B2072B2DA1CE2BCB9F2CF51624;
 			remoteInfo = TapCardValidator;
 		};
-		81213F99F7EE9813311043174E474223 /* PBXContainerItemProxy */ = {
+		5A922C168E39C0B229CE5950BE92A4C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
 			remoteInfo = SnapKit;
 		};
-		C3893EA094201BFDD2425BEB581E3C16 /* PBXContainerItemProxy */ = {
+		73922C9E67EA6A8C82631137A886BDB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F73BD4CA6A0B23F38687F2A3BB7E5EC7;
 			remoteInfo = TapThemeManager2020;
 		};
-		D36A5A8E01078488B8C12CE230E74A5A /* PBXContainerItemProxy */ = {
+		850618CDDCC0A996867B580D8F7CAEBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D49B77E3C54A9573D2E2DDD93687FCBF;
+			remoteInfo = "CommonDataModelsKit-iOS";
+		};
+		8B460D63947D642F51BF2FEF01F9DCC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
+			remoteInfo = SnapKit;
+		};
+		8E82AB5D63C9D92C2F7D1B3C341EF537 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F73BD4CA6A0B23F38687F2A3BB7E5EC7;
+			remoteInfo = TapThemeManager2020;
+		};
+		99A67F282BFADD7C5A0C0AF62DD37F15 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 825F97B2072B2DA1CE2BCB9F2CF51624;
 			remoteInfo = TapCardValidator;
 		};
-		EF27E9BBA96686752E8AFBC9DDDAF456 /* PBXContainerItemProxy */ = {
+		B23511833C9CD7E1CB3E0632A99192EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
-			remoteInfo = SnapKit;
-		};
-		FB1293C8B20C16FF7BB9BB3BC2EBDF3A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F73BD4CA6A0B23F38687F2A3BB7E5EC7;
-			remoteInfo = TapThemeManager2020;
+			remoteGlobalIDString = D49B77E3C54A9573D2E2DDD93687FCBF;
+			remoteInfo = "CommonDataModelsKit-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		009BF09DB997D7BCE7038AFE134ED8F5 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
+		00BC2D40359464063F47966FA2E783F3 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriorityTarget.swift; path = Source/ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
 		01CE98C062FE40E517A78526EA42BF5F /* Pods-TapCardInputKit-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TapCardInputKit-Example-umbrella.h"; sourceTree = "<group>"; };
-		038CC3E4BF32CEF735FF0CAA74C120DD /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
-		04511D72AC9EB3B72262229949A0B044 /* TapThemeManager2020-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapThemeManager2020-umbrella.h"; sourceTree = "<group>"; };
-		07A77636EAF0D7BB8ACE3E6FE0C6079F /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Source/Typealiases.swift; sourceTree = "<group>"; };
-		084468527173B33CD125C24E7C247DCE /* TapThemeManager2020-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapThemeManager2020-prefix.pch"; sourceTree = "<group>"; };
-		0ABB1C2182E8F9A44A14B5326B2EDF34 /* TapCardValidator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapCardValidator-prefix.pch"; sourceTree = "<group>"; };
-		0D6B3960B52B6620033AC4180E7A2220 /* ThemeUIColorSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeUIColorSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeUIColorSelector.swift; sourceTree = "<group>"; };
-		116043D32C4CB6B5B330C515AD266570 /* ViewsExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewsExtensions.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Extensions/ViewsExtensions.swift; sourceTree = "<group>"; };
-		11AA3D35CF550148DFA0DF4752097EAD /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
+		0378A27FEFD87BDB557234EC860D13F1 /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
+		052C5F75979F446836C1F85C91EA5D54 /* SnapKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SnapKit-Info.plist"; sourceTree = "<group>"; };
+		06486959846B7E0136C26DA7C04BCF71 /* ThemeNavigationBarAppearanceSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeNavigationBarAppearanceSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeNavigationBarAppearanceSelector.swift; sourceTree = "<group>"; };
+		073A1782C204D36F339EB709570E6CC8 /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
+		082BAD8BC5676BD694D9EBDD53F33568 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
+		0A96FB5BEEAC3FD8786FBD421E4757D2 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Source/ConstraintView.swift; sourceTree = "<group>"; };
+		0B89746FA9915C0EAB0FDBD55DB5E74A /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		0D6AD45229EACA6A318EA54D730BFD73 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
+		0D94B067D7436DF8447E0C068418667A /* ThemeActivityIndicatorViewStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeActivityIndicatorViewStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeActivityIndicatorViewStyleSelector.swift; sourceTree = "<group>"; };
 		1219FDEF1BC235BCAFA0EAE2D0408B15 /* Pods-TapCardInputKit-iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TapCardInputKit-iOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		1313E5284D5A11144B2761CBEF7C2C4A /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
-		1691B52312ED55EA49EA12534C0C5DF7 /* CardValidationState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardValidationState.swift; path = TapCardValidator/Source/CardValidationState.swift; sourceTree = "<group>"; };
-		17A68DEAAB173317ED3E222F1AE833EF /* UIKit+TapTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIKit+TapTheme.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Extensions/UIKit+TapTheme.swift"; sourceTree = "<group>"; };
 		18E694AA7CCFDB0AA2BDA06412D8907A /* Pods-TapCardInputKit-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TapCardInputKit-iOS-umbrella.h"; sourceTree = "<group>"; };
-		1B183EBB0F3936C3CE043F6FC6295E0B /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
-		1BE80BAA2A4463551008C33E53A61A1E /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
-		1D0FFEC8E4B923B4A6A32C6D65C26612 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Source/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
-		1D2CF7A78779EE97C825112621975DA1 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Source/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		1910DBD604AA0C6520E86A3782CFDEE6 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupport.swift; path = Source/ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
+		1C930F1E8DC54C189AFBF3333F83D15C /* ThemeVibranceBlurEffectSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeVibranceBlurEffectSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeVibranceBlurEffectSelector.swift; sourceTree = "<group>"; };
 		1D6E8D9CA1EE43E8D2F2773151FB4CED /* TapCardValidator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TapCardValidator.framework; path = TapCardValidator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		203AA3C0B28454F7A1E0471B1A18336E /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
-		24633C60BFAFDD1A20414075EEAB0791 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
-		260C82D283569E9E10085E5D84DC1F96 /* ThemeStatusBarStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStatusBarStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStatusBarStyleSelector.swift; sourceTree = "<group>"; };
+		1E934F328C4BCB866A14B2005F53F889 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
+		22E3BE0FFFC050E35FC7D39066C88CED /* CommonDataModelsKit-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CommonDataModelsKit-iOS-prefix.pch"; sourceTree = "<group>"; };
+		23B91FD663A84197B1035117A0065412 /* CardValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardValidator.swift; path = TapCardValidator/Source/CardValidator.swift; sourceTree = "<group>"; };
+		2407B13BAA798A8F878DA111A7ABB0A7 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Source/LayoutConstraintItem.swift; sourceTree = "<group>"; };
+		2458E31086CA56BF308BC0EFCB26761B /* ViewsExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewsExtensions.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Extensions/ViewsExtensions.swift; sourceTree = "<group>"; };
+		25140210884045A4F5E387222E49232B /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
+		259E0D7008D430098AE756A9F40D335D /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Source/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
+		2B78B47A3A2CCECBC90FBADC6FCFA00C /* CommonDataModelsKit-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CommonDataModelsKit-iOS-Info.plist"; sourceTree = "<group>"; };
+		2D6BE8152F15FE519BFA86DA44FE3EFE /* CardValidationState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardValidationState.swift; path = TapCardValidator/Source/CardValidationState.swift; sourceTree = "<group>"; };
+		2E1765D5E4E422FE201CBF0E35967909 /* ThemeBarStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeBarStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeBarStyleSelector.swift; sourceTree = "<group>"; };
+		2EC2B51350E93D2D8493DB5C1E5CB86A /* TapThemeManagerParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemeManagerParser.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManagerParser.swift; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		334364F46F8F4A6E0C7C2CB1A33FBC18 /* TapThemeManager2020-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TapThemeManager2020-dummy.m"; sourceTree = "<group>"; };
-		338B3147EB302F798E6785466A0E26F0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Source/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
-		34F487ADB31DA1E0AEED16248DD0B153 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Source/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
-		3566754751F91B2FC744E709F09142DD /* TapCardValidator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapCardValidator-umbrella.h"; sourceTree = "<group>"; };
+		324E7578413670459F2055EA9E908920 /* CommonDataModelsKit_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CommonDataModelsKit_iOS.framework; path = "CommonDataModelsKit-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3338827EF02AD08F62995579F1CF46C6 /* TapThemeManager2020-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TapThemeManager2020-dummy.m"; sourceTree = "<group>"; };
+		35B370B4329214239CE29B5442CB1779 /* TapCurrencyCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapCurrencyCode.swift; path = "CommonDataModelsKit-iOS/CommonDataModelsKit-iOS/Core/enums/TapCurrencyCode.swift"; sourceTree = "<group>"; };
 		362866AFC440700B20C626CA9EB34E6A /* Pods_TapCardInputKit_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TapCardInputKit_iOS.framework; path = "Pods-TapCardInputKit-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		369832301E7EA3E1E8E3B3D78A2B6497 /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Source/ConstraintItem.swift; sourceTree = "<group>"; };
-		376D3A9603F01AB17328BAA64CD03E68 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
-		377187FB9219A8C46E2F93B718EC1230 /* TapCardValidator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TapCardValidator-Info.plist"; sourceTree = "<group>"; };
-		38EE1FAA3F19D844AD416D5AEF1749A6 /* TapThemeManager2020.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TapThemeManager2020.xcconfig; sourceTree = "<group>"; };
-		39553900D110CDFAEF544A69A8C6FBC1 /* SelectorsConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectorsConstants.swift; path = TapThemeManager2020/TapThemeManager2020/Core/enums/SelectorsConstants.swift; sourceTree = "<group>"; };
-		3968BE92C616746A18F851A580AF9172 /* ThemeCGFloatSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeCGFloatSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeCGFloatSelector.swift; sourceTree = "<group>"; };
-		3CD2DCC4432A4DDBF7476FAC4691755E /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SnapKit.modulemap; sourceTree = "<group>"; };
-		3D5184DC4326D7C7ADEDD9C9A74C610C /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
-		3EC69198C749488DA8A1AECCFA2080D1 /* ThemeBarStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeBarStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeBarStyleSelector.swift; sourceTree = "<group>"; };
-		413BF3F2A8870315A37FDABE76BE2003 /* ThemeActivityIndicatorViewStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeActivityIndicatorViewStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeActivityIndicatorViewStyleSelector.swift; sourceTree = "<group>"; };
-		43294942D92361DB75906AB3129B846C /* TapThemeManager+array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TapThemeManager+array.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManager+array.swift"; sourceTree = "<group>"; };
+		375C5D8DBAD1BE15A14964563EC965FA /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Source/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
+		391EBF293FEE229F9F8274EFF6A9440D /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
+		3C722DAA76AAA8A9F3D7AD2EBF8C76A8 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Source/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
+		3D1BD8611604E0F74F892EC5D4E52FE3 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
+		45055DA14974395F65F44C3FEFFCCF88 /* ThemeSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeSelector.swift; sourceTree = "<group>"; };
 		45DD5844A2E6F80467ED7886B79857E3 /* Pods-TapCardInputKit-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TapCardInputKit-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		46981811FD24CCE9B64664CB5B681746 /* TapThemeManager2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TapThemeManager2020.framework; path = TapThemeManager2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46A4B3962F0467155F67A9E2FF4D9647 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Source/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		4B011DBA08189E545956B61480DF90EC /* TapThemeManager2020-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapThemeManager2020-umbrella.h"; sourceTree = "<group>"; };
 		4B8D42388F196D8C82CC2FEEED06680B /* Pods-TapCardInputKit-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TapCardInputKit-iOS-Info.plist"; sourceTree = "<group>"; };
-		4D9607FF3C5F2476CA4F9252D53A0CC8 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
-		4FF26E95168F0ED7B43E9467F8DD8143 /* SnapKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SnapKit-Info.plist"; sourceTree = "<group>"; };
-		5185671E070166E7F9E381B8FF105C4B /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
-		51E43E6F4C9676DB9F404CAFB51C285A /* TapThemeManager2020-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TapThemeManager2020-Info.plist"; sourceTree = "<group>"; };
-		51FE15F7F10945876E88FA27CD487CDD /* TapCardValidator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TapCardValidator.modulemap; sourceTree = "<group>"; };
-		539D07494DBD4DAD2FD967758EDEB491 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
+		53371B738565950842D427AC31DE5EC2 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		53F8B55FCAC69275EE505C7F683978A5 /* Pods-TapCardInputKit-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TapCardInputKit-Example-Info.plist"; sourceTree = "<group>"; };
-		551FC265F71C36B69A77B86BC65790F4 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
-		55A402E82F93A5E85E5BFDF9BB0857D9 /* TapCardValidator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TapCardValidator.xcconfig; sourceTree = "<group>"; };
+		56F2AD9B63EC7492002ED6B85B2ED39D /* CommonDataModelsKit-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "CommonDataModelsKit-iOS.modulemap"; sourceTree = "<group>"; };
 		58AA2AB1202C0DCE1551AA3C7D1161CA /* Pods_TapCardInputKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TapCardInputKit_Example.framework; path = "Pods-TapCardInputKit-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6520EBF4472C782E3BA52D99CF628347 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Source/Constraint.swift; sourceTree = "<group>"; };
-		6A4C6932A7A76DF703E41519D6096C14 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Source/ConstraintView.swift; sourceTree = "<group>"; };
+		5D27F56284DAFAC7DA29D11A344076FD /* TapCardValidator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TapCardValidator.modulemap; sourceTree = "<group>"; };
+		602283867362541458CEE87F3597C3C9 /* CommonDataModelsKit-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CommonDataModelsKit-iOS-umbrella.h"; sourceTree = "<group>"; };
+		6298F503B11A287572720B34B7BCCDD7 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
+		64EE1929427C507F4D89E3B6C7F7EB9C /* TapCountryCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapCountryCode.swift; path = "CommonDataModelsKit-iOS/CommonDataModelsKit-iOS/Core/enums/TapCountryCode.swift"; sourceTree = "<group>"; };
+		6590C741F9B4A15BA8D969BCD1E93AF9 /* SelectorsConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectorsConstants.swift; path = TapThemeManager2020/TapThemeManager2020/Core/enums/SelectorsConstants.swift; sourceTree = "<group>"; };
+		6765A3E5522D31F5FA2813D9128FABA9 /* NSObject+tapTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+tapTheme.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Extensions/NSObject+tapTheme.swift"; sourceTree = "<group>"; };
+		676C918FCAD1317FA0631EC1058EC45E /* ThemeDictionarySelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeDictionarySelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeDictionarySelector.swift; sourceTree = "<group>"; };
 		6A6048BDED074BFA31FF23912A84083B /* Pods-TapCardInputKit-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TapCardInputKit-Example.release.xcconfig"; sourceTree = "<group>"; };
-		6D73129E96B8E1C21F38F4CE837FFAD7 /* ThemeScrollViewIndicatorStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeScrollViewIndicatorStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeScrollViewIndicatorStyleSelector.swift; sourceTree = "<group>"; };
-		6F5A9D54E6CFA698B8DA9BF063A7FB16 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Source/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
-		733AF32A6FD5CFA441E3E492B7DF5506 /* ThemeVibranceBlurEffectSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeVibranceBlurEffectSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeVibranceBlurEffectSelector.swift; sourceTree = "<group>"; };
-		74579A214DF2AFFE5C7CBCF7D17DF930 /* ThemeSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeSelector.swift; sourceTree = "<group>"; };
-		771DCD4724075A5A4183FB4A755E06CF /* ThemeNavigationBarAppearanceSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeNavigationBarAppearanceSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeNavigationBarAppearanceSelector.swift; sourceTree = "<group>"; };
-		78EAA9C4040F841AB509BE1163AD8D35 /* ThemeFontSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeFontSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeFontSelector.swift; sourceTree = "<group>"; };
+		6AD6E9B3779AE514E3559CB64895AA1C /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Source/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
+		6E6EA8C4345C0B963B001CC7E5CEE9C6 /* ThemeKeyboardAppearanceSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeKeyboardAppearanceSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeKeyboardAppearanceSelector.swift; sourceTree = "<group>"; };
+		7368D605B27FA09B7287D7FF13FE40E2 /* ThemeStringAttributesSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStringAttributesSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStringAttributesSelector.swift; sourceTree = "<group>"; };
+		74CD500C78D2B5E90C549E1C1437A17E /* ThemeBlurEffectSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeBlurEffectSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeBlurEffectSelector.swift; sourceTree = "<group>"; };
+		75570761CBBBCC3F5DEE57EC2AD560D5 /* TapCardValidator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapCardValidator-prefix.pch"; sourceTree = "<group>"; };
 		79CB5A9899C7F4A5D929EAD1F70E2F04 /* Pods-TapCardInputKit-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TapCardInputKit-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		7A1285B83FCB7ACFAF7661284AF08C51 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriorityTarget.swift; path = Source/ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
-		7BC349FB3E05C8210F94A80F8458B689 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupport.swift; path = Source/ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
-		7C4543923F20BCE615A7D4607D2F2F96 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Source/ConstraintInsets.swift; sourceTree = "<group>"; };
-		7CB2B67146E465A053B427DC2B72E3FD /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Source/ConstraintPriority.swift; sourceTree = "<group>"; };
-		82B0135EC8A79FEAB122DB09FA87877E /* ThemeStateSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStateSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStateSelector.swift; sourceTree = "<group>"; };
-		8302E9A630B1CBF801A990DB4C2E4FF1 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
-		867CD16AB2FD02024FC70BED240335CC /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Source/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
-		8A2C5E32FBDA454305B6DFC5F0D31A16 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
-		8C0A5AF4F831447F76DBC04C29E35A9A /* ThemeImageSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeImageSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeImageSelector.swift; sourceTree = "<group>"; };
+		7E2CD78D1E6A6FF5ED662BCE76495C3B /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPriortizable.swift; path = Source/ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
+		7F30E4B2374F1B5D257227B973831E8B /* ThemeCgColorSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeCgColorSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeCgColorSelector.swift; sourceTree = "<group>"; };
+		8033A097B6DDF0860BB962E0EC6498F2 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Source/Constraint.swift; sourceTree = "<group>"; };
+		836F9482BA9596875B10795548B8AECF /* CommonDataModelsKit-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CommonDataModelsKit-iOS-dummy.m"; sourceTree = "<group>"; };
+		848359355875E14F8185ED22FF6EC90B /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
+		85B5960252D61D98D4B605CF93E31EA3 /* CardBrand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardBrand.swift; path = TapCardValidator/Source/CardBrand.swift; sourceTree = "<group>"; };
 		8CFC13D42F3E58EA41640F3508D24F21 /* Pods-TapCardInputKit-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TapCardInputKit-iOS.modulemap"; sourceTree = "<group>"; };
-		8DB4624E8EA2AD6944D74266885E8D9C /* NSObject+tapTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+tapTheme.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Extensions/NSObject+tapTheme.swift"; sourceTree = "<group>"; };
-		921047EE557C01A13E510CF2EAE99B77 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
+		8DF3D734484DC4C40F6F26220EDFCBB9 /* TapCardValidator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TapCardValidator.xcconfig; sourceTree = "<group>"; };
+		8EFE35003079794CE3BFB601DD791D7B /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		8F9E9D2F56463EFBCFBC98EE0B2DC90D /* TapThemeManager2020-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TapThemeManager2020-Info.plist"; sourceTree = "<group>"; };
+		92780F3DF62F7A712D6D4E41C3A90DDC /* TapCardValidator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TapCardValidator-dummy.m"; sourceTree = "<group>"; };
 		92A021185203B27E6E1A8334ADE075B2 /* Pods-TapCardInputKit-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TapCardInputKit-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		94417470D4D56A2EBD077D1FB2CCD0C5 /* DefinedCardBrand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefinedCardBrand.swift; path = TapCardValidator/Source/DefinedCardBrand.swift; sourceTree = "<group>"; };
 		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		989B3A999629163DA1E3247B405BDE29 /* Pods-TapCardInputKit-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TapCardInputKit-iOS-dummy.m"; sourceTree = "<group>"; };
-		9B2AD2B6078A59B9894EF221E853ED37 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
+		9900F6A503EF2BDBB6F32044A83D81E4 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Source/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		9A2DB80B2CFAE587118FADAAB4970F58 /* ThemeImageSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeImageSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeImageSelector.swift; sourceTree = "<group>"; };
+		9BF6A3F7E23266EFB7A0A849C5EDA933 /* TapThemeManager2020.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TapThemeManager2020.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A2D318179ACE51FF5E94EA66FE61D73E /* TapThemePath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemePath.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemePath.swift; sourceTree = "<group>"; };
-		A8C076374443C289438AE02766E10F51 /* CardBINRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardBINRange.swift; path = TapCardValidator/Source/CardBINRange.swift; sourceTree = "<group>"; };
+		A1FF44C28AD35E7A1FD5289E30825391 /* CardBINRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardBINRange.swift; path = TapCardValidator/Source/CardBINRange.swift; sourceTree = "<group>"; };
 		AD0F45D8767823E45705CBA5CAFEDA37 /* Pods-TapCardInputKit-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TapCardInputKit-Example.modulemap"; sourceTree = "<group>"; };
-		AE47A419D86FD3F2BDB063817FB73559 /* ThemeStringAttributesSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStringAttributesSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStringAttributesSelector.swift; sourceTree = "<group>"; };
 		AE48F96F622B60880DFB770DF32FFD73 /* Pods-TapCardInputKit-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TapCardInputKit-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		AE82E79C2839B8D1F128F9C3CBF392D6 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
-		B6E83C09EBAC3E4AC0C605430114C366 /* CardValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardValidator.swift; path = TapCardValidator/Source/CardValidator.swift; sourceTree = "<group>"; };
-		BC89209E5D048C8D25D430E0AE986FFE /* ThemeKeyboardAppearanceSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeKeyboardAppearanceSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeKeyboardAppearanceSelector.swift; sourceTree = "<group>"; };
-		BED882B48167F48B893CAC19A732A32B /* CardBrand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardBrand.swift; path = TapCardValidator/Source/CardBrand.swift; sourceTree = "<group>"; };
-		C3704473D2BD7A45D65AA8A4415FF0EF /* TapCardValidator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TapCardValidator-dummy.m"; sourceTree = "<group>"; };
+		B34B7D734A06EFF50C00A1F0ABFED12C /* TapThemeManager2020-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapThemeManager2020-prefix.pch"; sourceTree = "<group>"; };
+		B47B5CD701E354B11403CE915B05A32A /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SnapKit.modulemap; sourceTree = "<group>"; };
+		B6A7FC90FAE1E7FC9B9CA3351CE9DE89 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Source/ConstraintPriority.swift; sourceTree = "<group>"; };
+		B7846BA04D3D33B381CD064A196C0C83 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Source/ConstraintInsets.swift; sourceTree = "<group>"; };
+		BB5A60BB296E8659742107F000E69A53 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		C0B158D8E1E189C0F886C4191E67D772 /* ThemeCGFloatSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeCGFloatSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeCGFloatSelector.swift; sourceTree = "<group>"; };
+		C2328BB75A5D4FD5D96C14F7584DF83D /* ThemeScrollViewIndicatorStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeScrollViewIndicatorStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeScrollViewIndicatorStyleSelector.swift; sourceTree = "<group>"; };
+		C2C57FB04BA8D9DAF64F1674C745EEC3 /* UIHexColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIHexColor.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Extensions/UIHexColor.swift; sourceTree = "<group>"; };
+		C5299695DD0650D74B2975DB4B028F88 /* ThemeStateSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStateSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStateSelector.swift; sourceTree = "<group>"; };
 		C563E9D74B3ED0897FF4CD22B831DF28 /* Pods-TapCardInputKit-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TapCardInputKit-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C68DA4F69C31DDC3EB5C416CD29E98F0 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Source/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
-		CD9B840A6A3ACC9419389772F135E8B4 /* TapThemeManagerParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemeManagerParser.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManagerParser.swift; sourceTree = "<group>"; };
+		C9B17F84A417BF7AD43866D2169368D7 /* ThemeFontSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeFontSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeFontSelector.swift; sourceTree = "<group>"; };
+		CFA43F9B660B7133F32CE914F662E880 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
 		D00F1C0BE0744D6674DA5C3E361178B0 /* Pods-TapCardInputKit-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TapCardInputKit-Example-dummy.m"; sourceTree = "<group>"; };
-		D27569913BA63C4F0EBABAE5C94931E3 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
-		D3A848C6729CF014266B2130B1198DAD /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPriortizable.swift; path = Source/ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
-		D6BD14EE594448A201D5040BBFD56805 /* ThemeDictionarySelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeDictionarySelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeDictionarySelector.swift; sourceTree = "<group>"; };
-		D8010716480DFD4280938CF88238BC37 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		D019EFB798D946C367F72BA6262DBCDC /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Source/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
+		D30B1EC157A3AFCAA5AC1EBAD0AADE73 /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Source/Typealiases.swift; sourceTree = "<group>"; };
+		D41BE1C4CBF8A6B688B2262A498FB673 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Source/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
+		D57D4AAA6329844151B1B45BE5426CAC /* TapCardValidator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TapCardValidator-Info.plist"; sourceTree = "<group>"; };
+		D6BDFE10843C58DFD9FD29445D955D89 /* TapThemePath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemePath.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemePath.swift; sourceTree = "<group>"; };
+		D98ECA9DA5E202CE6DCD974B799F57CB /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Source/ConstraintItem.swift; sourceTree = "<group>"; };
+		DE794BB726B13BE8C26246D53D33B66A /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
 		DF782026E069F90D7C856A263CE8E1B8 /* Pods-TapCardInputKit-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TapCardInputKit-Example-frameworks.sh"; sourceTree = "<group>"; };
-		E043D557A602A8804D449D1020BFA42B /* DefinedCardBrand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefinedCardBrand.swift; path = TapCardValidator/Source/DefinedCardBrand.swift; sourceTree = "<group>"; };
-		E6168F863DEB66DC0C60B0B94D8D4986 /* TapThemeManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemeManager.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManager.swift; sourceTree = "<group>"; };
-		E6AAAF60464FE3843B04BB1F2E89273E /* ThemeCgColorSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeCgColorSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeCgColorSelector.swift; sourceTree = "<group>"; };
-		E752AF8772E4AE12D9F9FDA4CE91EA23 /* UIHexColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIHexColor.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Extensions/UIHexColor.swift; sourceTree = "<group>"; };
-		EBCDDD9B8493380A2132BA2FA4B93D3C /* ThemeBlurEffectSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeBlurEffectSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeBlurEffectSelector.swift; sourceTree = "<group>"; };
-		EF581EB280900175DA4BC3815490C9B9 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Source/LayoutConstraintItem.swift; sourceTree = "<group>"; };
-		F1D88D4354D7705D22920EAF6248BB38 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		E1C0DFE7C190334B43534E0E86C72679 /* UIKit+TapTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIKit+TapTheme.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Extensions/UIKit+TapTheme.swift"; sourceTree = "<group>"; };
+		E3D5989FD277343F2D3A03E3EB30EFE2 /* CommonDataModelsKit-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CommonDataModelsKit-iOS.xcconfig"; sourceTree = "<group>"; };
+		E53237762DC4A9E81D18717D1D533471 /* TapCardValidator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TapCardValidator-umbrella.h"; sourceTree = "<group>"; };
+		EC231FED0AAC90729AE98B42F8E88E0B /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
+		ECCA6753EE7AB20DBC65AE6AA162A603 /* ThemeStatusBarStyleSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeStatusBarStyleSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeStatusBarStyleSelector.swift; sourceTree = "<group>"; };
+		ED15842C3204F8531F225098D41FAB4D /* ThemeUIColorSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeUIColorSelector.swift; path = TapThemeManager2020/TapThemeManager2020/Core/ThemeSelectors/ThemeUIColorSelector.swift; sourceTree = "<group>"; };
+		EFFC977C81880EFFCF70DED2FB90AB6D /* TapThemeManager2020.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TapThemeManager2020.modulemap; sourceTree = "<group>"; };
+		F0D9CF62360D8F71B40EE6422EBDFB64 /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
+		F12664784AA667473708A8101B2148EB /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		F2DF5DA0381A1E23C4A1370E33CB0BFF /* TapThemeManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapThemeManager.swift; path = TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManager.swift; sourceTree = "<group>"; };
 		F3A89D1EA5A7794A220802E7350020BE /* Pods-TapCardInputKit-iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TapCardInputKit-iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FC39C65358847B638DC16F49225D2442 /* TapThemeManager2020.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TapThemeManager2020.modulemap; sourceTree = "<group>"; };
-		FDFA486A110232154FC40CC5EFE03237 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
-		FF689EDD6A0292E01DA57D94CC171C53 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Source/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		FACDD6B5D3D3807336D020DAB70D12B3 /* TapThemeManager+array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TapThemeManager+array.swift"; path = "TapThemeManager2020/TapThemeManager2020/Core/Manager/TapThemeManager+array.swift"; sourceTree = "<group>"; };
+		FAD802D06126AD392EB79EA6BE081802 /* TapCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TapCard.swift; path = "CommonDataModelsKit-iOS/CommonDataModelsKit-iOS/Core/models/TapCard.swift"; sourceTree = "<group>"; };
+		FB1CCB8C87667963D02893659903A360 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		FBFAC96EB22F34F3EB2A137032A1DEED /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		28EE76EE966A9EE390E82A627A550861 /* Frameworks */ = {
+		2666C74EC7D0F93886D9258682AED7D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E0CCF4A3E90CE8154BC479EDE5FC729 /* Foundation.framework in Frameworks */,
+				7A49FC78AF3372FBD3886D449FB596A1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,11 +303,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B68F605E83FCE7EF2A7B4DC5C8544197 /* Frameworks */ = {
+		5E526B196F94E62DE91AD857C2B615B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1C636DE2D149B0887B417EE2948BF68 /* Foundation.framework in Frameworks */,
+				54537C808DC65B5CB147048064889DCA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6344DE3F40C1A4BFD002A13F186664E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13FB373D7C4E7909B9BBD6D045F7D22F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,16 +330,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00BD3EC97F4212C36E66AB42FCB9BD84 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B03C4552F2F5332E93D8548FF0CAE0D2 /* SnapKit */,
-				E440416EE5866DDFE2013A1ADA87D680 /* TapCardValidator */,
-				87F257E00F8F5423C0C2DAB70BB270FA /* TapThemeManager2020 */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		1FD8A737707D972E0A88D2EBD1F97D6F /* Pods-TapCardInputKit-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,110 +346,152 @@
 			path = "Target Support Files/Pods-TapCardInputKit-iOS";
 			sourceTree = "<group>";
 		};
-		21E745C627FDF416E8F76A3A09298C3C /* Products */ = {
+		2B0663097E834FCE5716D60B9D1E6B99 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				58AA2AB1202C0DCE1551AA3C7D1161CA /* Pods_TapCardInputKit_Example.framework */,
-				362866AFC440700B20C626CA9EB34E6A /* Pods_TapCardInputKit_iOS.framework */,
-				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
-				1D6E8D9CA1EE43E8D2F2773151FB4CED /* TapCardValidator.framework */,
-				46981811FD24CCE9B64664CB5B681746 /* TapThemeManager2020.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2A832B6E278FB2FF5353B65E02AD63F4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				3CD2DCC4432A4DDBF7476FAC4691755E /* SnapKit.modulemap */,
-				1BE80BAA2A4463551008C33E53A61A1E /* SnapKit.xcconfig */,
-				8302E9A630B1CBF801A990DB4C2E4FF1 /* SnapKit-dummy.m */,
-				4FF26E95168F0ED7B43E9467F8DD8143 /* SnapKit-Info.plist */,
-				038CC3E4BF32CEF735FF0CAA74C120DD /* SnapKit-prefix.pch */,
-				AE82E79C2839B8D1F128F9C3CBF392D6 /* SnapKit-umbrella.h */,
+				EFFC977C81880EFFCF70DED2FB90AB6D /* TapThemeManager2020.modulemap */,
+				9BF6A3F7E23266EFB7A0A849C5EDA933 /* TapThemeManager2020.xcconfig */,
+				3338827EF02AD08F62995579F1CF46C6 /* TapThemeManager2020-dummy.m */,
+				8F9E9D2F56463EFBCFBC98EE0B2DC90D /* TapThemeManager2020-Info.plist */,
+				B34B7D734A06EFF50C00A1F0ABFED12C /* TapThemeManager2020-prefix.pch */,
+				4B011DBA08189E545956B61480DF90EC /* TapThemeManager2020-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SnapKit";
+			path = "../Target Support Files/TapThemeManager2020";
 			sourceTree = "<group>";
 		};
-		87F257E00F8F5423C0C2DAB70BB270FA /* TapThemeManager2020 */ = {
+		3B2B7367BEBECEB7859FC835C0051643 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8DB4624E8EA2AD6944D74266885E8D9C /* NSObject+tapTheme.swift */,
-				39553900D110CDFAEF544A69A8C6FBC1 /* SelectorsConstants.swift */,
-				E6168F863DEB66DC0C60B0B94D8D4986 /* TapThemeManager.swift */,
-				43294942D92361DB75906AB3129B846C /* TapThemeManager+array.swift */,
-				CD9B840A6A3ACC9419389772F135E8B4 /* TapThemeManagerParser.swift */,
-				A2D318179ACE51FF5E94EA66FE61D73E /* TapThemePath.swift */,
-				413BF3F2A8870315A37FDABE76BE2003 /* ThemeActivityIndicatorViewStyleSelector.swift */,
-				3EC69198C749488DA8A1AECCFA2080D1 /* ThemeBarStyleSelector.swift */,
-				EBCDDD9B8493380A2132BA2FA4B93D3C /* ThemeBlurEffectSelector.swift */,
-				E6AAAF60464FE3843B04BB1F2E89273E /* ThemeCgColorSelector.swift */,
-				3968BE92C616746A18F851A580AF9172 /* ThemeCGFloatSelector.swift */,
-				D6BD14EE594448A201D5040BBFD56805 /* ThemeDictionarySelector.swift */,
-				78EAA9C4040F841AB509BE1163AD8D35 /* ThemeFontSelector.swift */,
-				8C0A5AF4F831447F76DBC04C29E35A9A /* ThemeImageSelector.swift */,
-				BC89209E5D048C8D25D430E0AE986FFE /* ThemeKeyboardAppearanceSelector.swift */,
-				771DCD4724075A5A4183FB4A755E06CF /* ThemeNavigationBarAppearanceSelector.swift */,
-				6D73129E96B8E1C21F38F4CE837FFAD7 /* ThemeScrollViewIndicatorStyleSelector.swift */,
-				74579A214DF2AFFE5C7CBCF7D17DF930 /* ThemeSelector.swift */,
-				82B0135EC8A79FEAB122DB09FA87877E /* ThemeStateSelector.swift */,
-				260C82D283569E9E10085E5D84DC1F96 /* ThemeStatusBarStyleSelector.swift */,
-				AE47A419D86FD3F2BDB063817FB73559 /* ThemeStringAttributesSelector.swift */,
-				0D6B3960B52B6620033AC4180E7A2220 /* ThemeUIColorSelector.swift */,
-				733AF32A6FD5CFA441E3E492B7DF5506 /* ThemeVibranceBlurEffectSelector.swift */,
-				E752AF8772E4AE12D9F9FDA4CE91EA23 /* UIHexColor.swift */,
-				17A68DEAAB173317ED3E222F1AE833EF /* UIKit+TapTheme.swift */,
-				116043D32C4CB6B5B330C515AD266570 /* ViewsExtensions.swift */,
-				F22F1F8A798DEE012D526A02B40700B8 /* Support Files */,
+				5D27F56284DAFAC7DA29D11A344076FD /* TapCardValidator.modulemap */,
+				8DF3D734484DC4C40F6F26220EDFCBB9 /* TapCardValidator.xcconfig */,
+				92780F3DF62F7A712D6D4E41C3A90DDC /* TapCardValidator-dummy.m */,
+				D57D4AAA6329844151B1B45BE5426CAC /* TapCardValidator-Info.plist */,
+				75570761CBBBCC3F5DEE57EC2AD560D5 /* TapCardValidator-prefix.pch */,
+				E53237762DC4A9E81D18717D1D533471 /* TapCardValidator-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TapCardValidator";
+			sourceTree = "<group>";
+		};
+		41C8C88EA2367D2A0D7F3CE47A88B634 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				56F2AD9B63EC7492002ED6B85B2ED39D /* CommonDataModelsKit-iOS.modulemap */,
+				E3D5989FD277343F2D3A03E3EB30EFE2 /* CommonDataModelsKit-iOS.xcconfig */,
+				836F9482BA9596875B10795548B8AECF /* CommonDataModelsKit-iOS-dummy.m */,
+				2B78B47A3A2CCECBC90FBADC6FCFA00C /* CommonDataModelsKit-iOS-Info.plist */,
+				22E3BE0FFFC050E35FC7D39066C88CED /* CommonDataModelsKit-iOS-prefix.pch */,
+				602283867362541458CEE87F3597C3C9 /* CommonDataModelsKit-iOS-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/CommonDataModelsKit-iOS";
+			sourceTree = "<group>";
+		};
+		453EA103D1D7C52EE8936D9964837486 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				8033A097B6DDF0860BB962E0EC6498F2 /* Constraint.swift */,
+				25140210884045A4F5E387222E49232B /* ConstraintAttributes.swift */,
+				CFA43F9B660B7133F32CE914F662E880 /* ConstraintConfig.swift */,
+				FBFAC96EB22F34F3EB2A137032A1DEED /* ConstraintConstantTarget.swift */,
+				1E934F328C4BCB866A14B2005F53F889 /* ConstraintDescription.swift */,
+				DE794BB726B13BE8C26246D53D33B66A /* ConstraintDirectionalInsets.swift */,
+				073A1782C204D36F339EB709570E6CC8 /* ConstraintDirectionalInsetTarget.swift */,
+				0D6AD45229EACA6A318EA54D730BFD73 /* ConstraintDSL.swift */,
+				B7846BA04D3D33B381CD064A196C0C83 /* ConstraintInsets.swift */,
+				D41BE1C4CBF8A6B688B2262A498FB673 /* ConstraintInsetTarget.swift */,
+				D98ECA9DA5E202CE6DCD974B799F57CB /* ConstraintItem.swift */,
+				0B89746FA9915C0EAB0FDBD55DB5E74A /* ConstraintLayoutGuide.swift */,
+				848359355875E14F8185ED22FF6EC90B /* ConstraintLayoutGuide+Extensions.swift */,
+				FB1CCB8C87667963D02893659903A360 /* ConstraintLayoutGuideDSL.swift */,
+				1910DBD604AA0C6520E86A3782CFDEE6 /* ConstraintLayoutSupport.swift */,
+				3C722DAA76AAA8A9F3D7AD2EBF8C76A8 /* ConstraintLayoutSupportDSL.swift */,
+				391EBF293FEE229F9F8274EFF6A9440D /* ConstraintMaker.swift */,
+				259E0D7008D430098AE756A9F40D335D /* ConstraintMakerEditable.swift */,
+				F12664784AA667473708A8101B2148EB /* ConstraintMakerExtendable.swift */,
+				46A4B3962F0467155F67A9E2FF4D9647 /* ConstraintMakerFinalizable.swift */,
+				7E2CD78D1E6A6FF5ED662BCE76495C3B /* ConstraintMakerPriortizable.swift */,
+				9900F6A503EF2BDBB6F32044A83D81E4 /* ConstraintMakerRelatable.swift */,
+				8EFE35003079794CE3BFB601DD791D7B /* ConstraintMultiplierTarget.swift */,
+				375C5D8DBAD1BE15A14964563EC965FA /* ConstraintOffsetTarget.swift */,
+				B6A7FC90FAE1E7FC9B9CA3351CE9DE89 /* ConstraintPriority.swift */,
+				00BC2D40359464063F47966FA2E783F3 /* ConstraintPriorityTarget.swift */,
+				6AD6E9B3779AE514E3559CB64895AA1C /* ConstraintRelatableTarget.swift */,
+				6298F503B11A287572720B34B7BCCDD7 /* ConstraintRelation.swift */,
+				0A96FB5BEEAC3FD8786FBD421E4757D2 /* ConstraintView.swift */,
+				BB5A60BB296E8659742107F000E69A53 /* ConstraintView+Extensions.swift */,
+				53371B738565950842D427AC31DE5EC2 /* ConstraintViewDSL.swift */,
+				082BAD8BC5676BD694D9EBDD53F33568 /* Debugging.swift */,
+				009BF09DB997D7BCE7038AFE134ED8F5 /* LayoutConstraint.swift */,
+				2407B13BAA798A8F878DA111A7ABB0A7 /* LayoutConstraintItem.swift */,
+				D30B1EC157A3AFCAA5AC1EBAD0AADE73 /* Typealiases.swift */,
+				D019EFB798D946C367F72BA6262DBCDC /* UILayoutSupport+Extensions.swift */,
+				C7E353FF9DAA970557E5B4245D7D429D /* Support Files */,
+			);
+			name = SnapKit;
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		7C8715F60FB6132FA158E6CB45FE4053 /* TapThemeManager2020 */ = {
+			isa = PBXGroup;
+			children = (
+				6765A3E5522D31F5FA2813D9128FABA9 /* NSObject+tapTheme.swift */,
+				6590C741F9B4A15BA8D969BCD1E93AF9 /* SelectorsConstants.swift */,
+				F2DF5DA0381A1E23C4A1370E33CB0BFF /* TapThemeManager.swift */,
+				FACDD6B5D3D3807336D020DAB70D12B3 /* TapThemeManager+array.swift */,
+				2EC2B51350E93D2D8493DB5C1E5CB86A /* TapThemeManagerParser.swift */,
+				D6BDFE10843C58DFD9FD29445D955D89 /* TapThemePath.swift */,
+				0D94B067D7436DF8447E0C068418667A /* ThemeActivityIndicatorViewStyleSelector.swift */,
+				2E1765D5E4E422FE201CBF0E35967909 /* ThemeBarStyleSelector.swift */,
+				74CD500C78D2B5E90C549E1C1437A17E /* ThemeBlurEffectSelector.swift */,
+				7F30E4B2374F1B5D257227B973831E8B /* ThemeCgColorSelector.swift */,
+				C0B158D8E1E189C0F886C4191E67D772 /* ThemeCGFloatSelector.swift */,
+				676C918FCAD1317FA0631EC1058EC45E /* ThemeDictionarySelector.swift */,
+				C9B17F84A417BF7AD43866D2169368D7 /* ThemeFontSelector.swift */,
+				9A2DB80B2CFAE587118FADAAB4970F58 /* ThemeImageSelector.swift */,
+				6E6EA8C4345C0B963B001CC7E5CEE9C6 /* ThemeKeyboardAppearanceSelector.swift */,
+				06486959846B7E0136C26DA7C04BCF71 /* ThemeNavigationBarAppearanceSelector.swift */,
+				C2328BB75A5D4FD5D96C14F7584DF83D /* ThemeScrollViewIndicatorStyleSelector.swift */,
+				45055DA14974395F65F44C3FEFFCCF88 /* ThemeSelector.swift */,
+				C5299695DD0650D74B2975DB4B028F88 /* ThemeStateSelector.swift */,
+				ECCA6753EE7AB20DBC65AE6AA162A603 /* ThemeStatusBarStyleSelector.swift */,
+				7368D605B27FA09B7287D7FF13FE40E2 /* ThemeStringAttributesSelector.swift */,
+				ED15842C3204F8531F225098D41FAB4D /* ThemeUIColorSelector.swift */,
+				1C930F1E8DC54C189AFBF3333F83D15C /* ThemeVibranceBlurEffectSelector.swift */,
+				C2C57FB04BA8D9DAF64F1674C745EEC3 /* UIHexColor.swift */,
+				E1C0DFE7C190334B43534E0E86C72679 /* UIKit+TapTheme.swift */,
+				2458E31086CA56BF308BC0EFCB26761B /* ViewsExtensions.swift */,
+				2B0663097E834FCE5716D60B9D1E6B99 /* Support Files */,
 			);
 			name = TapThemeManager2020;
 			path = TapThemeManager2020;
 			sourceTree = "<group>";
 		};
-		B03C4552F2F5332E93D8548FF0CAE0D2 /* SnapKit */ = {
+		87642EACE6749A998DEBFC6D098B6FFF /* CommonDataModelsKit-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6520EBF4472C782E3BA52D99CF628347 /* Constraint.swift */,
-				921047EE557C01A13E510CF2EAE99B77 /* ConstraintAttributes.swift */,
-				551FC265F71C36B69A77B86BC65790F4 /* ConstraintConfig.swift */,
-				203AA3C0B28454F7A1E0471B1A18336E /* ConstraintConstantTarget.swift */,
-				5185671E070166E7F9E381B8FF105C4B /* ConstraintDescription.swift */,
-				11AA3D35CF550148DFA0DF4752097EAD /* ConstraintDirectionalInsets.swift */,
-				1B183EBB0F3936C3CE043F6FC6295E0B /* ConstraintDirectionalInsetTarget.swift */,
-				9B2AD2B6078A59B9894EF221E853ED37 /* ConstraintDSL.swift */,
-				7C4543923F20BCE615A7D4607D2F2F96 /* ConstraintInsets.swift */,
-				C68DA4F69C31DDC3EB5C416CD29E98F0 /* ConstraintInsetTarget.swift */,
-				369832301E7EA3E1E8E3B3D78A2B6497 /* ConstraintItem.swift */,
-				4D9607FF3C5F2476CA4F9252D53A0CC8 /* ConstraintLayoutGuide.swift */,
-				D27569913BA63C4F0EBABAE5C94931E3 /* ConstraintLayoutGuide+Extensions.swift */,
-				F1D88D4354D7705D22920EAF6248BB38 /* ConstraintLayoutGuideDSL.swift */,
-				7BC349FB3E05C8210F94A80F8458B689 /* ConstraintLayoutSupport.swift */,
-				6F5A9D54E6CFA698B8DA9BF063A7FB16 /* ConstraintLayoutSupportDSL.swift */,
-				8A2C5E32FBDA454305B6DFC5F0D31A16 /* ConstraintMaker.swift */,
-				34F487ADB31DA1E0AEED16248DD0B153 /* ConstraintMakerEditable.swift */,
-				3D5184DC4326D7C7ADEDD9C9A74C610C /* ConstraintMakerExtendable.swift */,
-				1D2CF7A78779EE97C825112621975DA1 /* ConstraintMakerFinalizable.swift */,
-				D3A848C6729CF014266B2130B1198DAD /* ConstraintMakerPriortizable.swift */,
-				FF689EDD6A0292E01DA57D94CC171C53 /* ConstraintMakerRelatable.swift */,
-				D8010716480DFD4280938CF88238BC37 /* ConstraintMultiplierTarget.swift */,
-				1D0FFEC8E4B923B4A6A32C6D65C26612 /* ConstraintOffsetTarget.swift */,
-				7CB2B67146E465A053B427DC2B72E3FD /* ConstraintPriority.swift */,
-				7A1285B83FCB7ACFAF7661284AF08C51 /* ConstraintPriorityTarget.swift */,
-				867CD16AB2FD02024FC70BED240335CC /* ConstraintRelatableTarget.swift */,
-				376D3A9603F01AB17328BAA64CD03E68 /* ConstraintRelation.swift */,
-				6A4C6932A7A76DF703E41519D6096C14 /* ConstraintView.swift */,
-				FDFA486A110232154FC40CC5EFE03237 /* ConstraintView+Extensions.swift */,
-				24633C60BFAFDD1A20414075EEAB0791 /* ConstraintViewDSL.swift */,
-				1313E5284D5A11144B2761CBEF7C2C4A /* Debugging.swift */,
-				539D07494DBD4DAD2FD967758EDEB491 /* LayoutConstraint.swift */,
-				EF581EB280900175DA4BC3815490C9B9 /* LayoutConstraintItem.swift */,
-				07A77636EAF0D7BB8ACE3E6FE0C6079F /* Typealiases.swift */,
-				338B3147EB302F798E6785466A0E26F0 /* UILayoutSupport+Extensions.swift */,
-				2A832B6E278FB2FF5353B65E02AD63F4 /* Support Files */,
+				FAD802D06126AD392EB79EA6BE081802 /* TapCard.swift */,
+				64EE1929427C507F4D89E3B6C7F7EB9C /* TapCountryCode.swift */,
+				35B370B4329214239CE29B5442CB1779 /* TapCurrencyCode.swift */,
+				41C8C88EA2367D2A0D7F3CE47A88B634 /* Support Files */,
 			);
-			name = SnapKit;
-			path = SnapKit;
+			name = "CommonDataModelsKit-iOS";
+			path = "CommonDataModelsKit-iOS";
+			sourceTree = "<group>";
+		};
+		BC24CE7CD379584069E371D285B13296 /* TapCardValidator */ = {
+			isa = PBXGroup;
+			children = (
+				A1FF44C28AD35E7A1FD5289E30825391 /* CardBINRange.swift */,
+				85B5960252D61D98D4B605CF93E31EA3 /* CardBrand.swift */,
+				2D6BE8152F15FE519BFA86DA44FE3EFE /* CardValidationState.swift */,
+				23B91FD663A84197B1035117A0065412 /* CardValidator.swift */,
+				94417470D4D56A2EBD077D1FB2CCD0C5 /* DefinedCardBrand.swift */,
+				3B2B7367BEBECEB7859FC835C0051643 /* Support Files */,
+			);
+			name = TapCardValidator;
+			path = TapCardValidator;
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -432,13 +502,27 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		C7E353FF9DAA970557E5B4245D7D429D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B47B5CD701E354B11403CE915B05A32A /* SnapKit.modulemap */,
+				F0D9CF62360D8F71B40EE6422EBDFB64 /* SnapKit.xcconfig */,
+				EC231FED0AAC90729AE98B42F8E88E0B /* SnapKit-dummy.m */,
+				052C5F75979F446836C1F85C91EA5D54 /* SnapKit-Info.plist */,
+				0378A27FEFD87BDB557234EC860D13F1 /* SnapKit-prefix.pch */,
+				3D1BD8611604E0F74F892EC5D4E52FE3 /* SnapKit-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SnapKit";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				00BD3EC97F4212C36E66AB42FCB9BD84 /* Pods */,
-				21E745C627FDF416E8F76A3A09298C3C /* Products */,
+				E6FE6A9CB13CAF1958E57584EB022CCB /* Pods */,
+				E09D39CEB1C3E6E4ED8C9E24C8E799A5 /* Products */,
 				F353ED11EBF1333E83365E84DF176383 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -468,46 +552,28 @@
 			path = "Target Support Files/Pods-TapCardInputKit-Example";
 			sourceTree = "<group>";
 		};
-		E440416EE5866DDFE2013A1ADA87D680 /* TapCardValidator */ = {
+		E09D39CEB1C3E6E4ED8C9E24C8E799A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A8C076374443C289438AE02766E10F51 /* CardBINRange.swift */,
-				BED882B48167F48B893CAC19A732A32B /* CardBrand.swift */,
-				1691B52312ED55EA49EA12534C0C5DF7 /* CardValidationState.swift */,
-				B6E83C09EBAC3E4AC0C605430114C366 /* CardValidator.swift */,
-				E043D557A602A8804D449D1020BFA42B /* DefinedCardBrand.swift */,
-				F1779C1D11FF66C27DCCECC5E17F8EFD /* Support Files */,
+				324E7578413670459F2055EA9E908920 /* CommonDataModelsKit_iOS.framework */,
+				58AA2AB1202C0DCE1551AA3C7D1161CA /* Pods_TapCardInputKit_Example.framework */,
+				362866AFC440700B20C626CA9EB34E6A /* Pods_TapCardInputKit_iOS.framework */,
+				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
+				1D6E8D9CA1EE43E8D2F2773151FB4CED /* TapCardValidator.framework */,
+				46981811FD24CCE9B64664CB5B681746 /* TapThemeManager2020.framework */,
 			);
-			name = TapCardValidator;
-			path = TapCardValidator;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		F1779C1D11FF66C27DCCECC5E17F8EFD /* Support Files */ = {
+		E6FE6A9CB13CAF1958E57584EB022CCB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				51FE15F7F10945876E88FA27CD487CDD /* TapCardValidator.modulemap */,
-				55A402E82F93A5E85E5BFDF9BB0857D9 /* TapCardValidator.xcconfig */,
-				C3704473D2BD7A45D65AA8A4415FF0EF /* TapCardValidator-dummy.m */,
-				377187FB9219A8C46E2F93B718EC1230 /* TapCardValidator-Info.plist */,
-				0ABB1C2182E8F9A44A14B5326B2EDF34 /* TapCardValidator-prefix.pch */,
-				3566754751F91B2FC744E709F09142DD /* TapCardValidator-umbrella.h */,
+				87642EACE6749A998DEBFC6D098B6FFF /* CommonDataModelsKit-iOS */,
+				453EA103D1D7C52EE8936D9964837486 /* SnapKit */,
+				BC24CE7CD379584069E371D285B13296 /* TapCardValidator */,
+				7C8715F60FB6132FA158E6CB45FE4053 /* TapThemeManager2020 */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/TapCardValidator";
-			sourceTree = "<group>";
-		};
-		F22F1F8A798DEE012D526A02B40700B8 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				FC39C65358847B638DC16F49225D2442 /* TapThemeManager2020.modulemap */,
-				38EE1FAA3F19D844AD416D5AEF1749A6 /* TapThemeManager2020.xcconfig */,
-				334364F46F8F4A6E0C7C2CB1A33FBC18 /* TapThemeManager2020-dummy.m */,
-				51E43E6F4C9676DB9F404CAFB51C285A /* TapThemeManager2020-Info.plist */,
-				084468527173B33CD125C24E7C247DCE /* TapThemeManager2020-prefix.pch */,
-				04511D72AC9EB3B72262229949A0B044 /* TapThemeManager2020-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/TapThemeManager2020";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F353ED11EBF1333E83365E84DF176383 /* Targets Support Files */ = {
@@ -530,11 +596,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2878335A16CDF0E07E4C2840EBB1D705 /* Headers */ = {
+		1E971DEA72C6A9685918587FCC5520AE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2B3214F07BE55992A5689A8A4848F07 /* Pods-TapCardInputKit-Example-umbrella.h in Headers */,
+				1B65896F638350CBD4C6DFEA76823B8B /* CommonDataModelsKit-iOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,11 +620,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4C61510B03DB381F895F7E5C6B4C /* Headers */ = {
+		A57F84FD7DAF04DCB6A0C3B8A9F9614F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ED491FAFD71BEC4B7AB9C3B8797AF2 /* Pods-TapCardInputKit-iOS-umbrella.h in Headers */,
+				A7E749C10F7F2565EC63CCC1C24D7B46 /* Pods-TapCardInputKit-Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA11A4445F3CC43A0398278941688FAC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BC93F893E939BEE4F8A2AA090CD3EF8 /* Pods-TapCardInputKit-iOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,21 +675,40 @@
 			productReference = 1D6E8D9CA1EE43E8D2F2773151FB4CED /* TapCardValidator.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F4049A4AD55F887FD692F9EECAC87FAE /* Pods-TapCardInputKit-iOS */ = {
+		D49B77E3C54A9573D2E2DDD93687FCBF /* CommonDataModelsKit-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F99EE33D7BCE3290193C87517ED0DA34 /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-iOS" */;
+			buildConfigurationList = 61C83CCCFD3454F934904C97B2215AEC /* Build configuration list for PBXNativeTarget "CommonDataModelsKit-iOS" */;
 			buildPhases = (
-				F8AB4C61510B03DB381F895F7E5C6B4C /* Headers */,
-				8284739B4A69D4D721B607A8A3D8EB7F /* Sources */,
-				B68F605E83FCE7EF2A7B4DC5C8544197 /* Frameworks */,
-				2D077FB6CFCBC40DBFEA6F989B3AAD5E /* Resources */,
+				1E971DEA72C6A9685918587FCC5520AE /* Headers */,
+				FE8B0F258D882DABEB8AD683BDE32303 /* Sources */,
+				6344DE3F40C1A4BFD002A13F186664E7 /* Frameworks */,
+				AEA84EF9B432CD472359F176305155F8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E07C7D32FDE8BECB54A5E24851F26BA0 /* PBXTargetDependency */,
-				7F05DFA374B9F9C5F0D38BF3565562F0 /* PBXTargetDependency */,
-				8DBDB973A054150E1C88FE259B95CB24 /* PBXTargetDependency */,
+			);
+			name = "CommonDataModelsKit-iOS";
+			productName = "CommonDataModelsKit-iOS";
+			productReference = 324E7578413670459F2055EA9E908920 /* CommonDataModelsKit_iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F4049A4AD55F887FD692F9EECAC87FAE /* Pods-TapCardInputKit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AC392CDBF2F798F4DC835F57537310A /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-iOS" */;
+			buildPhases = (
+				EA11A4445F3CC43A0398278941688FAC /* Headers */,
+				E18EAF094708A1E01378047182734D69 /* Sources */,
+				2666C74EC7D0F93886D9258682AED7D1 /* Frameworks */,
+				E06CDC499BC48BCAA4718AB319D99888 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D258F8B80BF7D4D1FB2906CD60340CD /* PBXTargetDependency */,
+				FF98CA0099FF57FC6D383301B7EC6D27 /* PBXTargetDependency */,
+				011FE6D4A87B88606CB41B363F4A0BE6 /* PBXTargetDependency */,
+				A11911CC3B64788B1A3AB31C83491E79 /* PBXTargetDependency */,
 			);
 			name = "Pods-TapCardInputKit-iOS";
 			productName = "Pods-TapCardInputKit-iOS";
@@ -624,19 +717,20 @@
 		};
 		F41AF615C213B90CE25B49BFC1B1BE1B /* Pods-TapCardInputKit-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBFCE287BFA6CC40833649197CE7BBE1 /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-Example" */;
+			buildConfigurationList = CEF456892AEE52DD41A85F634F16590A /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-Example" */;
 			buildPhases = (
-				2878335A16CDF0E07E4C2840EBB1D705 /* Headers */,
-				5F5D6993D9AD872E2EBD6ABA1E4C2F66 /* Sources */,
-				28EE76EE966A9EE390E82A627A550861 /* Frameworks */,
-				AD76A98A593012B54069E82A7F49E111 /* Resources */,
+				A57F84FD7DAF04DCB6A0C3B8A9F9614F /* Headers */,
+				1955A3BB747FCFFEC6AC0134B609912A /* Sources */,
+				5E526B196F94E62DE91AD857C2B615B0 /* Frameworks */,
+				4BB3741DB480C96853D2A0D16912939B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A8CA96033D1EDF62F4DF9A915C54D7D2 /* PBXTargetDependency */,
-				2A59CA77B0344FD49B1DE9A50C08264B /* PBXTargetDependency */,
-				8CAE139D05A31FC46FC1F43A238D48F0 /* PBXTargetDependency */,
+				1677D426268C259F3BA41E2C72A5D95B /* PBXTargetDependency */,
+				5A25C9B63AA5B1848E26C649A6F6E1F3 /* PBXTargetDependency */,
+				2EED860E0BE1ED0392714F691EAE1F73 /* PBXTargetDependency */,
+				ADC8BE3A29049010EFE2681F833FDCAB /* PBXTargetDependency */,
 			);
 			name = "Pods-TapCardInputKit-Example";
 			productName = "Pods-TapCardInputKit-Example";
@@ -679,10 +773,11 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 21E745C627FDF416E8F76A3A09298C3C /* Products */;
+			productRefGroup = E09D39CEB1C3E6E4ED8C9E24C8E799A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				D49B77E3C54A9573D2E2DDD93687FCBF /* CommonDataModelsKit-iOS */,
 				F41AF615C213B90CE25B49BFC1B1BE1B /* Pods-TapCardInputKit-Example */,
 				F4049A4AD55F887FD692F9EECAC87FAE /* Pods-TapCardInputKit-iOS */,
 				19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */,
@@ -700,7 +795,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D077FB6CFCBC40DBFEA6F989B3AAD5E /* Resources */ = {
+		4BB3741DB480C96853D2A0D16912939B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -721,7 +816,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD76A98A593012B54069E82A7F49E111 /* Resources */ = {
+		AEA84EF9B432CD472359F176305155F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E06CDC499BC48BCAA4718AB319D99888 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -765,19 +867,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F5D6993D9AD872E2EBD6ABA1E4C2F66 /* Sources */ = {
+		1955A3BB747FCFFEC6AC0134B609912A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D940611971E1117EFA2BAFCE136C3D6D /* Pods-TapCardInputKit-Example-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8284739B4A69D4D721B607A8A3D8EB7F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B4148659C092140F1776AA283FB0EA69 /* Pods-TapCardInputKit-iOS-dummy.m in Sources */,
+				EF234FB0EAE0BC3FB059049B291CEF42 /* Pods-TapCardInputKit-Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,51 +932,82 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E18EAF094708A1E01378047182734D69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C56BF901A8204D8F0EEE955961AAF932 /* Pods-TapCardInputKit-iOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE8B0F258D882DABEB8AD683BDE32303 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EDF80177C98F494A3F83B2D56B193CE /* CommonDataModelsKit-iOS-dummy.m in Sources */,
+				3958D26BCD30A293A00270D924286AEB /* TapCard.swift in Sources */,
+				D96055D30BD8731604E8D2A46AEED34B /* TapCountryCode.swift in Sources */,
+				6A7E5BF96E959C97C2A291FA249209E4 /* TapCurrencyCode.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2A59CA77B0344FD49B1DE9A50C08264B /* PBXTargetDependency */ = {
+		011FE6D4A87B88606CB41B363F4A0BE6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TapCardValidator;
 			target = 825F97B2072B2DA1CE2BCB9F2CF51624 /* TapCardValidator */;
-			targetProxy = 1C981DDC6E74A2D1F0EC00511C59B2A3 /* PBXContainerItemProxy */;
+			targetProxy = 37290EEFC6F256CCA3E6C84E699D1CB1 /* PBXContainerItemProxy */;
 		};
-		7F05DFA374B9F9C5F0D38BF3565562F0 /* PBXTargetDependency */ = {
+		1677D426268C259F3BA41E2C72A5D95B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CommonDataModelsKit-iOS";
+			target = D49B77E3C54A9573D2E2DDD93687FCBF /* CommonDataModelsKit-iOS */;
+			targetProxy = B23511833C9CD7E1CB3E0632A99192EE /* PBXContainerItemProxy */;
+		};
+		2EED860E0BE1ED0392714F691EAE1F73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TapCardValidator;
 			target = 825F97B2072B2DA1CE2BCB9F2CF51624 /* TapCardValidator */;
-			targetProxy = D36A5A8E01078488B8C12CE230E74A5A /* PBXContainerItemProxy */;
+			targetProxy = 99A67F282BFADD7C5A0C0AF62DD37F15 /* PBXContainerItemProxy */;
 		};
-		8CAE139D05A31FC46FC1F43A238D48F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TapThemeManager2020;
-			target = F73BD4CA6A0B23F38687F2A3BB7E5EC7 /* TapThemeManager2020 */;
-			targetProxy = C3893EA094201BFDD2425BEB581E3C16 /* PBXContainerItemProxy */;
-		};
-		8DBDB973A054150E1C88FE259B95CB24 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TapThemeManager2020;
-			target = F73BD4CA6A0B23F38687F2A3BB7E5EC7 /* TapThemeManager2020 */;
-			targetProxy = FB1293C8B20C16FF7BB9BB3BC2EBDF3A /* PBXContainerItemProxy */;
-		};
-		A8CA96033D1EDF62F4DF9A915C54D7D2 /* PBXTargetDependency */ = {
+		5A25C9B63AA5B1848E26C649A6F6E1F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SnapKit;
 			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
-			targetProxy = 81213F99F7EE9813311043174E474223 /* PBXContainerItemProxy */;
+			targetProxy = 5A922C168E39C0B229CE5950BE92A4C1 /* PBXContainerItemProxy */;
 		};
-		E07C7D32FDE8BECB54A5E24851F26BA0 /* PBXTargetDependency */ = {
+		5D258F8B80BF7D4D1FB2906CD60340CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CommonDataModelsKit-iOS";
+			target = D49B77E3C54A9573D2E2DDD93687FCBF /* CommonDataModelsKit-iOS */;
+			targetProxy = 850618CDDCC0A996867B580D8F7CAEBC /* PBXContainerItemProxy */;
+		};
+		A11911CC3B64788B1A3AB31C83491E79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TapThemeManager2020;
+			target = F73BD4CA6A0B23F38687F2A3BB7E5EC7 /* TapThemeManager2020 */;
+			targetProxy = 8E82AB5D63C9D92C2F7D1B3C341EF537 /* PBXContainerItemProxy */;
+		};
+		ADC8BE3A29049010EFE2681F833FDCAB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TapThemeManager2020;
+			target = F73BD4CA6A0B23F38687F2A3BB7E5EC7 /* TapThemeManager2020 */;
+			targetProxy = 73922C9E67EA6A8C82631137A886BDB7 /* PBXContainerItemProxy */;
+		};
+		FF98CA0099FF57FC6D383301B7EC6D27 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SnapKit;
 			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
-			targetProxy = EF27E9BBA96686752E8AFBC9DDDAF456 /* PBXContainerItemProxy */;
+			targetProxy = 8B460D63947D642F51BF2FEF01F9DCC7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		020BEC27E3AD6D7C84D288C148A58E74 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BE80BAA2A4463551008C33E53A61A1E /* SnapKit.xcconfig */;
+			baseConfigurationReference = F0D9CF62360D8F71B40EE6422EBDFB64 /* SnapKit.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -916,44 +1041,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		05A65BA72D99D51CD77D561178D98FF5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45DD5844A2E6F80467ED7886B79857E3 /* Pods-TapCardInputKit-iOS.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-TapCardInputKit-iOS/Pods-TapCardInputKit-iOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TapCardInputKit-iOS/Pods-TapCardInputKit-iOS.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		131356BE54884448CA49C07BEDF4BB2A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1021,7 +1108,7 @@
 		};
 		2E3C8A300772E0028147E4BAF0D5078A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BE80BAA2A4463551008C33E53A61A1E /* SnapKit.xcconfig */;
+			baseConfigurationReference = F0D9CF62360D8F71B40EE6422EBDFB64 /* SnapKit.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1055,45 +1142,9 @@
 			};
 			name = Debug;
 		};
-		85CC98E77936F0B58C06DC996EA11EBC /* Release */ = {
+		407C91E3677AB152F0B6CD879FA06CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55A402E82F93A5E85E5BFDF9BB0857D9 /* TapCardValidator.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TapCardValidator/TapCardValidator-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TapCardValidator/TapCardValidator-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/TapCardValidator/TapCardValidator.modulemap";
-				PRODUCT_MODULE_NAME = TapCardValidator;
-				PRODUCT_NAME = TapCardValidator;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		951A1AF48F62A9C7F31990AC57BD06FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38EE1FAA3F19D844AD416D5AEF1749A6 /* TapThemeManager2020.xcconfig */;
+			baseConfigurationReference = E3D5989FD277343F2D3A03E3EB30EFE2 /* CommonDataModelsKit-iOS.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1105,8 +1156,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TapThemeManager2020/TapThemeManager2020-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1114,95 +1165,20 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020.modulemap";
-				PRODUCT_MODULE_NAME = TapThemeManager2020;
-				PRODUCT_NAME = TapThemeManager2020;
+				MODULEMAP_FILE = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS.modulemap";
+				PRODUCT_MODULE_NAME = CommonDataModelsKit_iOS;
+				PRODUCT_NAME = CommonDataModelsKit_iOS;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		A703EC4A026AF413103296A1A9123152 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38EE1FAA3F19D844AD416D5AEF1749A6 /* TapThemeManager2020.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TapThemeManager2020/TapThemeManager2020-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020.modulemap";
-				PRODUCT_MODULE_NAME = TapThemeManager2020;
-				PRODUCT_NAME = TapThemeManager2020;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		BC7D47A981B97B70EECAE97EFE147EF7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE48F96F622B60880DFB770DF32FFD73 /* Pods-TapCardInputKit-Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-TapCardInputKit-Example/Pods-TapCardInputKit-Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TapCardInputKit-Example/Pods-TapCardInputKit-Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C5D9B9770B680C94B2177D4C2B9189B8 /* Release */ = {
+		4C2A948A583B012A25AC08D9457C9D72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A6048BDED074BFA31FF23912A84083B /* Pods-TapCardInputKit-Example.release.xcconfig */;
 			buildSettings = {
@@ -1241,9 +1217,9 @@
 			};
 			name = Release;
 		};
-		CBBA84BC2C441C5664B9DA7FFF546B85 /* Debug */ = {
+		85CC98E77936F0B58C06DC996EA11EBC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55A402E82F93A5E85E5BFDF9BB0857D9 /* TapCardValidator.xcconfig */;
+			baseConfigurationReference = 8DF3D734484DC4C40F6F26220EDFCBB9 /* TapCardValidator.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1270,6 +1246,228 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		891C9ED945085812C28FA7D335F90119 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3D5989FD277343F2D3A03E3EB30EFE2 /* CommonDataModelsKit-iOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/CommonDataModelsKit-iOS/CommonDataModelsKit-iOS.modulemap";
+				PRODUCT_MODULE_NAME = CommonDataModelsKit_iOS;
+				PRODUCT_NAME = CommonDataModelsKit_iOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		951A1AF48F62A9C7F31990AC57BD06FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BF6A3F7E23266EFB7A0A849C5EDA933 /* TapThemeManager2020.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TapThemeManager2020/TapThemeManager2020-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020.modulemap";
+				PRODUCT_MODULE_NAME = TapThemeManager2020;
+				PRODUCT_NAME = TapThemeManager2020;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9CACD47002BE3FE76CFC06B6A2DC2420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45DD5844A2E6F80467ED7886B79857E3 /* Pods-TapCardInputKit-iOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TapCardInputKit-iOS/Pods-TapCardInputKit-iOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TapCardInputKit-iOS/Pods-TapCardInputKit-iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A703EC4A026AF413103296A1A9123152 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BF6A3F7E23266EFB7A0A849C5EDA933 /* TapThemeManager2020.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TapThemeManager2020/TapThemeManager2020-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TapThemeManager2020/TapThemeManager2020.modulemap";
+				PRODUCT_MODULE_NAME = TapThemeManager2020;
+				PRODUCT_NAME = TapThemeManager2020;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CBBA84BC2C441C5664B9DA7FFF546B85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DF3D734484DC4C40F6F26220EDFCBB9 /* TapCardValidator.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TapCardValidator/TapCardValidator-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TapCardValidator/TapCardValidator-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TapCardValidator/TapCardValidator.modulemap";
+				PRODUCT_MODULE_NAME = TapCardValidator;
+				PRODUCT_NAME = TapCardValidator;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D32811D807529966194880C819EADC00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE48F96F622B60880DFB770DF32FFD73 /* Pods-TapCardInputKit-Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TapCardInputKit-Example/Pods-TapCardInputKit-Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TapCardInputKit-Example/Pods-TapCardInputKit-Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1336,7 +1534,7 @@
 			};
 			name = Release;
 		};
-		FB1BA1E03B5A0EF2B3480C2BC6981373 /* Release */ = {
+		FCDF9BC8B4539BB61EA99053BA3DE596 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79CB5A9899C7F4A5D929EAD1F70E2F04 /* Pods-TapCardInputKit-iOS.release.xcconfig */;
 			buildSettings = {
@@ -1378,11 +1576,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3AC392CDBF2F798F4DC835F57537310A /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CACD47002BE3FE76CFC06B6A2DC2420 /* Debug */,
+				FCDF9BC8B4539BB61EA99053BA3DE596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				131356BE54884448CA49C07BEDF4BB2A /* Debug */,
 				F090CD07A80273D5A73C8EA19224ADDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61C83CCCFD3454F934904C97B2215AEC /* Build configuration list for PBXNativeTarget "CommonDataModelsKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				407C91E3677AB152F0B6CD879FA06CEB /* Debug */,
+				891C9ED945085812C28FA7D335F90119 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1405,15 +1621,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BBFCE287BFA6CC40833649197CE7BBE1 /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BC7D47A981B97B70EECAE97EFE147EF7 /* Debug */,
-				C5D9B9770B680C94B2177D4C2B9189B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C073FC87FAD3B69073102D592D2278DC /* Build configuration list for PBXNativeTarget "TapThemeManager2020" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1423,11 +1630,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F99EE33D7BCE3290193C87517ED0DA34 /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-iOS" */ = {
+		CEF456892AEE52DD41A85F634F16590A /* Build configuration list for PBXNativeTarget "Pods-TapCardInputKit-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				05A65BA72D99D51CD77D561178D98FF5 /* Debug */,
-				FB1BA1E03B5A0EF2B3480C2BC6981373 /* Release */,
+				D32811D807529966194880C819EADC00 /* Debug */,
+				4C2A948A583B012A25AC08D9457C9D72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

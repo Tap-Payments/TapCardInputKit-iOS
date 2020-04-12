@@ -36,7 +36,7 @@ class CardNameTextField:TapCardTextField {
 
 extension CardNameTextField: CardInputTextFieldProtocol {
     
-    func textFieldStatus() -> CrardInputTextFieldStatusEnum {
+    func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
          if let text = self.text {
              if text.alphabetOnly() == text.lowercased() {
                  return .Valid
@@ -50,7 +50,7 @@ extension CardNameTextField: CardInputTextFieldProtocol {
          return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
      }
     
-    func isValid() -> Bool {
+    func isValid(cardNumber:String? = nil) -> Bool {
         
         return textFieldStatus() == .Valid
      }

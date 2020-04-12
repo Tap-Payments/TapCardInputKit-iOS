@@ -17,4 +17,5 @@ target 'TapCardInputKit-iOS' do
   pod 'SnapKit'
   pod 'TapCardValidator'
   pod 'TapThemeManager2020'
+  pod 'CommonDataModelsKit-iOS'
 end

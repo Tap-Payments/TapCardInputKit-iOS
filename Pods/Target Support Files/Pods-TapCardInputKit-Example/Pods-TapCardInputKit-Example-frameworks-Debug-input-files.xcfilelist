@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-TapCardInputKit-Example/Pods-TapCardInputKit-Example-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CommonDataModelsKit-iOS/CommonDataModelsKit_iOS.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/TapCardValidator/TapCardValidator.framework
 ${BUILT_PRODUCTS_DIR}/TapThemeManager2020/TapThemeManager2020.framework

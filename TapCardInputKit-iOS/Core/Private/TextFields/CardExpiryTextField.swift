@@ -41,7 +41,7 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
         return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
     }
     
-    func textFieldStatus() -> CrardInputTextFieldStatusEnum {
+    func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
         
         let currentYear = Calendar.current.component(.year, from: Date()) % 100   // This will give you current year (i.e. if 2019 then it will be 19)
         let currentMonth = Calendar.current.component(.month, from: Date()) // This will give you current month (i.e if June then it will be 6)
@@ -69,7 +69,7 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
         return .Valid
     }
     
-    func isValid() -> Bool {
+    func isValid(cardNumber:String? = nil) -> Bool {
         
         return textFieldStatus() == .Valid
     }
