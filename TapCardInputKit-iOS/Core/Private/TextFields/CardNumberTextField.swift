@@ -18,7 +18,7 @@ class CardNumberTextField:TapCardTextField {
         
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
-        self.fillBiggestAvailableSpace = true
+        self.fillBiggestAvailableSpace = false
         
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
  
