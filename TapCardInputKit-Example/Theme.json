@@ -27,7 +27,12 @@
           "separatorColor": "#0000001E"
       },
       "iconImage": {
-          "image": ""
+          "image": "bank",
+          "width": 32
+      },
+      "scanImage": {
+          "image": "scanIcon",
+          "width": 32
       },
       "textFields": {
           "textColor": "#000000",

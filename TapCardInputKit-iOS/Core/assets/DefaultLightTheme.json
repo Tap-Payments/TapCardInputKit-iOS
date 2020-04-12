@@ -8,8 +8,13 @@
           "itemSpacing": 5
       },
       "iconImage": {
-          "image": ""
+          "image": "bank",
+          "width": 32
       },
+      "scanImage": {
+          "image": "scanIcon",
+          "width": 32
+      }
       "textFields": {
           "textColor": "#000000",
           "errorTextColor": "#FF0000",
@@ -27,8 +32,13 @@
           "separatorColor": "#0000001E"
       },
       "iconImage": {
-          "image": ""
+          "image": "bank",
+          "width": 32
       },
+      "scanImage": {
+          "image": "scanIcon",
+          "width": 32
+      }
       "textFields": {
           "textColor": "#000000",
           "errorTextColor": "#FF0000",

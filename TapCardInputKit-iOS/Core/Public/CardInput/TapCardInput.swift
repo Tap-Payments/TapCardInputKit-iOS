@@ -279,6 +279,8 @@ internal protocol TapCardInputCommonProtocol {
 extension TapCardInput:TapCardInputCommonProtocol {
    
     
+    
+    
     internal func matchThemeAttributes() {
         
         switch cardInputMode {
