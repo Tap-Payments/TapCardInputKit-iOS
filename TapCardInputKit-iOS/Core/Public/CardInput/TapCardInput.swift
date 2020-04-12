@@ -160,11 +160,11 @@ internal protocol TapCardInputCommonProtocol {
     
     
     internal func configureViews() {
-        icon.image = UIImage(named: "bank", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
         icon.contentMode = .scaleAspectFit
         
         scanButton.setTitle("", for: .normal)
-        scanButton.setImage(UIImage(named: "scanIcon", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+        scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
         scanButton.contentMode = .scaleAspectFit
         
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
@@ -176,7 +176,7 @@ internal protocol TapCardInputCommonProtocol {
                 if let nonNullBrand = brand {
                     nonNullSelf.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: nonNullSelf)), compatibleWith: nil)
                 }else {
-                    nonNullSelf.icon.image = UIImage(named: "bank", in: Bundle(for: type(of: nonNullSelf)), compatibleWith: nil)
+                    nonNullSelf.icon.image = TapThemeManager.imageValue(for: "\(nonNullSelf.themePath).iconImage.image")
                 }
             }
         }
@@ -279,7 +279,15 @@ internal protocol TapCardInputCommonProtocol {
 extension TapCardInput:TapCardInputCommonProtocol {
    
     
-    
+    internal func loadImage(with resourceName:String) -> UIImage {
+        if let image = UIImage(named: resourceName, in: Bundle(for: type(of: self)), compatibleWith: nil) {
+            return image
+        }
+        if let image = UIImage(named: resourceName) {
+            return image
+        }
+        return UIImage()
+    }
     
     internal func matchThemeAttributes() {
         
