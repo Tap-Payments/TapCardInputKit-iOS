@@ -111,6 +111,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
        } else if updatedText.count == 1 {
 
            if updatedText > "1" {
+            textField.text = "0\(updatedText)/"
                return false
            }
        } else if updatedText.count == 2 { //Prevent user to not enter month more than 12
