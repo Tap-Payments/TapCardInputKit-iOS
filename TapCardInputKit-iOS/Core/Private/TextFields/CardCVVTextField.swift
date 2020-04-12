@@ -10,7 +10,14 @@ import UIKit
 
 class CardCVVTextField:TapCardTextField {
     
-    var cvvLength:Int = 3
+    var cvvLength:Int = 3 {
+        didSet{
+            if let text = self.text,
+                text.count > cvvLength {
+                self.text = text.substring(to: cvvLength)
+            }
+        }
+    }
     
     func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil) {
 
@@ -95,3 +102,25 @@ extension CardCVVTextField:UITextFieldDelegate {
     }
 }
 
+internal extension String {
+
+    func index(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+
+    func substring(from: Int) -> String {
+        let fromIndex = index(from: from)
+        return String(self[fromIndex...])
+    }
+
+    func substring(to: Int) -> String {
+        let toIndex = index(from: to)
+        return String(self[..<toIndex])
+    }
+
+    func substring(with r: Range<Int>) -> String {
+        let startIndex = index(from: r.lowerBound)
+        let endIndex = index(from: r.upperBound)
+        return String(self[startIndex..<endIndex])
+    }
+}

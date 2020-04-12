@@ -95,14 +95,16 @@ extension CardNumberTextField:UITextFieldDelegate {
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
         let filteredText:String = updatedText.digitsWithSpaces()
         let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
-        self.textColor = errorTextColor
+        //self.textColor = errorTextColor
         
         if let nonNullCardBrandBlock = cardBrandDetected {
             nonNullCardBrandBlock(validation.cardBrand)
+        }
+        let shouldUpdate:Bool = (updatedText == filteredText && validation.validationState != .invalid)
+        if shouldUpdate {
             self.textColor = (validation.validationState == .valid) ? normalTextColor : errorTextColor
         }
-        
-        return updatedText == filteredText && validation.validationState != .invalid
+        return shouldUpdate
     }
     
     @objc func didChangeText(textField:UITextField) {

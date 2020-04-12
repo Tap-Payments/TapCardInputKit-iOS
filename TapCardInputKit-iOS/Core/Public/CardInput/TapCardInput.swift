@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import TapThemeManager2020
 import class CommonDataModelsKit_iOS.TapCard
+import TapCardValidator
 
 internal protocol TapCardInputCommonProtocol {
     
@@ -180,8 +181,10 @@ internal protocol TapCardInputCommonProtocol {
             if let nonNullSelf = self {
                 if let nonNullBrand = brand {
                     nonNullSelf.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: nonNullSelf)), compatibleWith: nil)
+                    nonNullSelf.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
                 }else {
                     nonNullSelf.icon.image = TapThemeManager.imageValue(for: "\(nonNullSelf.themePath).iconImage.image")
+                    nonNullSelf.cardCVV.cvvLength = 3
                 }
             }
         }
