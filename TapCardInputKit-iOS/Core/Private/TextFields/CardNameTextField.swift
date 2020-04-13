@@ -14,7 +14,9 @@ import protocol UIKit.UITextFieldDelegate
 
 class CardNameTextField:TapCardTextField {
     
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil) {
+    var cardNameChanged: ((String) -> ())? =  nil
+    
+    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil) {
         
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
@@ -23,6 +25,9 @@ class CardNameTextField:TapCardTextField {
         self.fillBiggestAvailableSpace = true
         
         self.editingStatusChanged = editingStatusChanged
+        self.cardNameChanged = cardNameChanged
+        
+        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         
         self.delegate = self
     }
@@ -71,6 +76,12 @@ extension CardNameTextField:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(false)
+        }
+    }
+    
+    @objc func didChangeText(textField:UITextField) {
+        if let nonNullBlock = cardNameChanged {
+            nonNullBlock(textField.text!)
         }
     }
     

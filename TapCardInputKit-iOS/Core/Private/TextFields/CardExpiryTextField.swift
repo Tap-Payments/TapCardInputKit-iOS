@@ -13,8 +13,9 @@ import protocol UIKit.UITextFieldDelegate
 
 class CardExpiryTextField:TapCardTextField {
     
+    var cardExpiryChanged: ((String,String) -> ())? =  nil
     
-    func setup(with minVisibleChars: Int = 5, maxVisibleChars: Int = 5, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil) {
+    func setup(with minVisibleChars: Int = 5, maxVisibleChars: Int = 5, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardExpiryChanged: ((String,String) -> ())? =  nil) {
         
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         
@@ -22,6 +23,7 @@ class CardExpiryTextField:TapCardTextField {
         
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
+        self.cardExpiryChanged = cardExpiryChanged
         
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
@@ -92,6 +94,9 @@ extension CardExpiryTextField:UITextFieldDelegate {
             nonNullEditingBlock(false)
         }
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
+        if self.isValid(), let nonNullBlock = cardExpiryChanged {
+           nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3))
+       }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -119,6 +124,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
         }
         return false
     }
+    
     
     internal func changeText(with month:String?, year:String?) {
         

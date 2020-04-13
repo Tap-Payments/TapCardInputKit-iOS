@@ -115,7 +115,7 @@ extension String {
     }
     
     func alphabetOnly() -> String {
-        return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz".contains($0) }
+        return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz ".contains($0) }
     }
     
     

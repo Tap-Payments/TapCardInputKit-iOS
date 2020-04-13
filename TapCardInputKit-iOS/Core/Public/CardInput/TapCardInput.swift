@@ -38,8 +38,10 @@ internal protocol TapCardInputCommonProtocol {
     internal var themingDictionary:NSDictionary?
     internal var themePath:String = "inlineCard"
     internal var spacing:CGFloat = 7
+    internal var tapCard:TapCard = .init()
+    
     // Public
-    var cardInputMode:CardInputMode = .FullCardInput {
+    @objc public var cardInputMode:CardInputMode = .FullCardInput {
         didSet{
             switch cardInputMode {
             case .InlineCardInput:
@@ -50,7 +52,8 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     //lazy var showCardName:Bool = true
-    lazy var showScanningOption:Bool = true
+    @objc public lazy var showScanningOption:Bool = true
+    @objc public  var delegate:TapCardInputProtocol?
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)
@@ -93,21 +96,21 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-       /// Apply  the theme values from the theme file to the matching outlets
-       internal func applyTheme(with dictionaryTheme:NSDictionary)
-       {
-           applyingDefaultTheme = false
-           TapThemeManager.setTapTheme(themeDict: dictionaryTheme)
-           themingDictionary = TapThemeManager.currentTheme
-       }
-       
-       /// Apply  the theme values from the theme file to the matching outlets
-       internal func applyTheme(with jsonTheme:String)
-       {
-           applyingDefaultTheme = false
-           TapThemeManager.setTapTheme(jsonName: jsonTheme)
-           themingDictionary = TapThemeManager.currentTheme
-       }
+    /// Apply  the theme values from the theme file to the matching outlets
+    internal func applyTheme(with dictionaryTheme:NSDictionary)
+    {
+        applyingDefaultTheme = false
+        TapThemeManager.setTapTheme(themeDict: dictionaryTheme)
+        themingDictionary = TapThemeManager.currentTheme
+    }
+    
+    /// Apply  the theme values from the theme file to the matching outlets
+    internal func applyTheme(with jsonTheme:String)
+    {
+        applyingDefaultTheme = false
+        TapThemeManager.setTapTheme(jsonName: jsonTheme)
+        themingDictionary = TapThemeManager.currentTheme
+    }
     
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -169,6 +172,8 @@ internal protocol TapCardInputCommonProtocol {
         self.layer.tap_theme_borderWidth = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.borderWidth")
         self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
         self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
+        
+        self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
     }
     
     
@@ -184,34 +189,48 @@ internal protocol TapCardInputCommonProtocol {
             if self?.cardInputMode == .InlineCardInput {
                 self?.updateWidths(for: self?.cardNumber)
             }
-        }) { [weak self] (brand) in
-            if let nonNullSelf = self {
-                if let nonNullBrand = brand {
-                    nonNullSelf.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: nonNullSelf)), compatibleWith: nil)
-                    nonNullSelf.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
-                }else {
-                    nonNullSelf.icon.image = TapThemeManager.imageValue(for: "\(nonNullSelf.themePath).iconImage.image")
-                    nonNullSelf.cardCVV.cvvLength = 3
+            },cardBrandDetected: { [weak self] (brand) in
+                if let nonNullSelf = self {
+                    if let nonNullBrand = brand {
+                        nonNullSelf.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: nonNullSelf)), compatibleWith: nil)
+                        nonNullSelf.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
+                    }else {
+                        nonNullSelf.icon.image = TapThemeManager.imageValue(for: "\(nonNullSelf.themePath).iconImage.image")
+                        nonNullSelf.cardCVV.cvvLength = 3
+                    }
                 }
-            }
-        }
+            },cardNumberChanged: { [weak self] (cardNumber) in
+                self?.tapCard.tapCardNumber = cardNumber
+                self?.cardDatachanged()
+        })
+        
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
             if self?.cardInputMode == .InlineCardInput {
                 self?.updateWidths(for: self?.cardName)
             }
+            },cardNameChanged: { [weak self] (cardName) in
+                self?.tapCard.tapCardName = cardName
+                self?.cardDatachanged()
         })
-        cardExpiry.setup(placeholder: "MM/YY") {  [weak self] (isEditing) in
+        
+        cardExpiry.setup(placeholder: "MM/YY",editingStatusChanged: {[weak self] (isEditing) in
             if self?.cardInputMode == .InlineCardInput {
                 self?.updateWidths(for: self?.cardExpiry)
-            }
-            
-        }
-        cardCVV.setup(placeholder: "CVV") {  [weak self] (isEditing) in
+            }}, cardExpiryChanged: {  [weak self] (cardMonth,cardYear) in
+                self?.tapCard.tapCardExpiryMonth = cardMonth
+                self?.tapCard.tapCardExpiryYear = cardYear
+                self?.cardDatachanged()
+        })
+        
+        cardCVV.setup(placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
             if self?.cardInputMode == .InlineCardInput {
                 self?.updateWidths(for: self?.cardCVV)
             }
-            
-        }
+            },cardCVVChanged: {  [weak self] (cardCVV) in
+                self?.tapCard.tapCardCVV = cardCVV
+                self?.cardDatachanged()
+                
+        })
     }
     
     
@@ -250,25 +269,25 @@ internal protocol TapCardInputCommonProtocol {
     
     
     @objc internal func doneAction(sender:TapCardBarButton) {
-           if let field = sender.cardField {
-               field.resignFirstResponder()
-           }
-       }
-       
-       
-       @objc internal func nextAction(sender:TapCardBarButton) {
-            if let field = sender.cardField,
-               let currentFieldIndex = fields.firstIndex(of: field) {
-                fields[currentFieldIndex+1].becomeFirstResponder()
-            }
-       }
-       
-       @objc internal func previousAction(sender:TapCardBarButton) {
-           if let field = sender.cardField,
-              let currentFieldIndex = fields.firstIndex(of: field) {
-               fields[currentFieldIndex-1].becomeFirstResponder()
-           }
-       }
+        if let field = sender.cardField {
+            field.resignFirstResponder()
+        }
+    }
+    
+    
+    @objc internal func nextAction(sender:TapCardBarButton) {
+        if let field = sender.cardField,
+            let currentFieldIndex = fields.firstIndex(of: field) {
+            fields[currentFieldIndex+1].becomeFirstResponder()
+        }
+    }
+    
+    @objc internal func previousAction(sender:TapCardBarButton) {
+        if let field = sender.cardField,
+            let currentFieldIndex = fields.firstIndex(of: field) {
+            fields[currentFieldIndex-1].becomeFirstResponder()
+        }
+    }
     
     internal func addToolBarButtons() {
         
@@ -287,12 +306,24 @@ internal protocol TapCardInputCommonProtocol {
             addDoneButtonOnKeyboard(for: cardField, previous: showPrevious, next: showNext, done: showDone)
         }
     }
+    
+    internal func cardDatachanged() {
+        if let nonNullDelegate = delegate {
+            nonNullDelegate.cardDataChanged(tapCard: tapCard)
+        }
+    }
+    
+    @objc internal func scanButtonClicked() {
+        if let nonNullDelegate = delegate {
+            nonNullDelegate.scanCardClicked()
+        }
+    }
 }
 
 
 
 extension TapCardInput:TapCardInputCommonProtocol {
-   
+    
     
     internal func loadImage(with resourceName:String) -> UIImage {
         if let image = UIImage(named: resourceName, in: Bundle(for: type(of: self)), compatibleWith: nil) {
@@ -335,8 +366,8 @@ extension TapCardInput:TapCardInputCommonProtocol {
         addToolBarButtons()
         
         /*if !showCardName {
-            removeCardName()
-        }*/
+         removeCardName()
+         }*/
         
         
     }

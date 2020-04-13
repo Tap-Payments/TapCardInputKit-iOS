@@ -165,12 +165,33 @@
                                     <constraint firstAttribute="height" constant="250" id="Gba-ma-Y3J"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HMM-35-cnB">
+                                <rect key="frame" x="8" y="427" width="398" height="427"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Below are the callbacks from the tap card input view up ☝" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-Nm-RH1">
+                                <rect key="frame" x="20" y="378" width="374" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="lzd-Rw-9W5" secondAttribute="trailing" constant="20" id="1Sn-Kw-QYb"/>
                             <constraint firstItem="lzd-Rw-9W5" firstAttribute="top" secondItem="X6Z-FE-XzH" secondAttribute="top" constant="20" id="3Z4-fm-Fgt"/>
+                            <constraint firstItem="HMM-35-cnB" firstAttribute="top" secondItem="kOy-Nm-RH1" secondAttribute="bottom" constant="8" id="Fia-by-BHv"/>
+                            <constraint firstItem="kOy-Nm-RH1" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="20" id="NGL-sk-h01"/>
+                            <constraint firstItem="X6Z-FE-XzH" firstAttribute="bottom" secondItem="HMM-35-cnB" secondAttribute="bottom" constant="8" id="NPu-f5-D4e"/>
+                            <constraint firstItem="kOy-Nm-RH1" firstAttribute="centerX" secondItem="DLB-7K-lnn" secondAttribute="centerX" id="WmW-2A-Wyv"/>
+                            <constraint firstItem="kOy-Nm-RH1" firstAttribute="top" secondItem="lzd-Rw-9W5" secondAttribute="bottom" constant="20" id="YEl-2B-zDn"/>
                             <constraint firstItem="lzd-Rw-9W5" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="20" id="bOl-X5-FVy"/>
+                            <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="kOy-Nm-RH1" secondAttribute="trailing" constant="20" id="cYl-aX-gbq"/>
+                            <constraint firstItem="HMM-35-cnB" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="8" id="zCn-z9-0qB"/>
+                            <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="HMM-35-cnB" secondAttribute="trailing" constant="8" id="zu4-Ry-kQA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X6Z-FE-XzH"/>
                     </view>
@@ -178,6 +199,7 @@
                     <connections>
                         <outlet property="cardInput" destination="lzd-Rw-9W5" id="DDA-hy-BYC"/>
                         <outlet property="expandedHeightConstraint" destination="Gba-ma-Y3J" id="fRf-RX-o9i"/>
+                        <outlet property="resultTextView" destination="HMM-35-cnB" id="rhi-9y-zyf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBH-Df-fp3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,6 +226,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yhK-UM-F4D"/>
+        <segue reference="ARJ-8l-7vJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -201,8 +201,8 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate {
                 
                 
                 let fullDict:NSMutableDictionary = NSMutableDictionary(dictionary:(themeDict["fullCard"] as! NSDictionary))
-                let fullCommonAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:inlineDict["commonAttributes"] as! NSDictionary)
-                let fullTextFieldAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:inlineDict["textFields"] as! NSDictionary)
+                let fullCommonAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:fullDict["commonAttributes"] as! NSDictionary)
+                let fullTextFieldAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:fullDict["textFields"] as! NSDictionary)
 
                 fullCommonAttributesDict["backgroundColor"] = dataSource["backgroundColor"]
                 fullCommonAttributesDict["borderColor"] = dataSource["borderColor"]
@@ -213,8 +213,8 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate {
                 fullTextFieldAttributesDict["errorTextColor"] = dataSource["errorTextColor"]
                 fullTextFieldAttributesDict["placeHolderColor"] = dataSource["placeHolderColor"]
 
-                inlineDict["commonAttributes"] = fullCommonAttributesDict
-                inlineDict["textFields"] = fullTextFieldAttributesDict
+                fullDict["commonAttributes"] = fullCommonAttributesDict
+                fullDict["textFields"] = fullTextFieldAttributesDict
                 themeDict["fullCard"] = fullDict
                 
                 

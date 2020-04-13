@@ -11,13 +11,15 @@ import TapCardValidator
 class CardNumberTextField:TapCardTextField {
    
     var cardBrandDetected: ((CardBrand?) -> ())? =  nil
+    var cardNumberChanged: ((String) -> ())? =  nil
     
     
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil,cardBrandDetected: ((CardBrand?) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil,cardBrandDetected: ((CardBrand?) -> ())? =  nil,cardNumberChanged: ((String) -> ())? =  nil) {
         
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
         self.fillBiggestAvailableSpace = false
+        self.cardNumberChanged = cardNumberChanged
         
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
  
@@ -98,6 +100,9 @@ extension CardNumberTextField:UITextFieldDelegate {
     
     @objc func didChangeText(textField:UITextField) {
         textField.text = textField.text!.modifyCreditCardString()
+        if let nonNullBlock = cardNumberChanged {
+            nonNullBlock(textField.text!.onlyDigits())
+        }
     }
     
     internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {

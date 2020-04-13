@@ -13,6 +13,8 @@ import protocol UIKit.UITextFieldDelegate
 
 class CardCVVTextField:TapCardTextField {
     
+    var cardCVVChanged: ((String) -> ())? =  nil
+    
     var cvvLength:Int = 3 {
         didSet{
             if let text = self.text,
@@ -22,13 +24,16 @@ class CardCVVTextField:TapCardTextField {
         }
     }
     
-    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil) {
+    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardCVVChanged: ((String) -> ())? =  nil) {
 
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         
         self.keyboardType = .phonePad
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
+        self.cardCVVChanged = cardCVVChanged
+        
+        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
@@ -98,8 +103,14 @@ extension CardCVVTextField:UITextFieldDelegate {
        }
         
         let updatedText = currentText.replacingCharacters(in: range, with: string)
-        changeText(with: updatedText, setTextAfterValidation: true)
+        let _ = changeText(with: updatedText, setTextAfterValidation: true)
         return false
+    }
+    
+    @objc func didChangeText(textField:UITextField) {
+        if let nonNullBlock = cardCVVChanged {
+            nonNullBlock(textField.text!.onlyDigits())
+        }
     }
     
     
@@ -114,6 +125,7 @@ extension CardCVVTextField:UITextFieldDelegate {
             if setTextAfterValidation {
                 self.text = updatedText
             }
+            didChangeText(textField: self)
             self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         }
         
