@@ -6,6 +6,7 @@ target 'TapCardInputKit-Example' do
   use_frameworks!
   pod 'CommonDataModelsKit-iOS'
   pod 'SheetyColors'
+  pod 'Firebase/Analytics'
   # Pods for TapCardInputKit-Example
 
 end
