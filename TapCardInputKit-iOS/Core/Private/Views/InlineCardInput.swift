@@ -6,8 +6,10 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import UIKit
-
+import class UIKit.UIStackView
+import class UIKit.UIView
+import struct UIKit.UIEdgeInsets
+import struct UIKit.CGFloat
 
 extension TapCardInput {
    

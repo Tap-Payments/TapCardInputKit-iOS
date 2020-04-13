@@ -5,8 +5,6 @@
 //  Created by Osama Rabie on 10/04/2020.
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
-
-import UIKit
 import SnapKit
 import TapThemeManager2020
 import class CommonDataModelsKit_iOS.TapCard

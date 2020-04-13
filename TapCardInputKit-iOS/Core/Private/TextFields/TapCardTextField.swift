@@ -6,7 +6,16 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import UIKit
+import struct UIKit.CGFloat
+import struct UIKit.CGRect
+import struct UIKit.CGSize
+import class UIKit.UITextField
+import class UIKit.UIColor
+import class UIKit.UIFont
+import enum UIKit.NSTextAlignment
+import protocol UIKit.UITextFieldDelegate
+
+
 import enum TapCardValidator.CardBrand
 @objc internal protocol CardInputTextFieldProtocol {
     /// This method will what is the status of the textfield

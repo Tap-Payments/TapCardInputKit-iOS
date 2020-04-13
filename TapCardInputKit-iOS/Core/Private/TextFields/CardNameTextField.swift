@@ -6,7 +6,11 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import UIKit
+import struct UIKit.CGFloat
+import struct UIKit.CGRect
+import class UIKit.UITextField
+import protocol UIKit.UITextFieldDelegate
+
 
 class CardNameTextField:TapCardTextField {
     

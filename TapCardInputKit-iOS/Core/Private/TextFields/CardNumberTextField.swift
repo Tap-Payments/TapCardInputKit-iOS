@@ -6,7 +6,6 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import UIKit
 import TapCardValidator
 
 class CardNumberTextField:TapCardTextField {

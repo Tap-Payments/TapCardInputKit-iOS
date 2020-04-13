@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import TapCardInputKit_iOS
-import class CommonDataModelsKit_iOS.TapCard
 
 class ViewController: UIViewController {
 
