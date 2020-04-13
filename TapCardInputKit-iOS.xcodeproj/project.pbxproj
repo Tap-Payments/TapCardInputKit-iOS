@@ -240,7 +240,6 @@
 			children = (
 				E8911D022440498E00398252 /* Views */,
 				E8159E1D243D88750021B880 /* TextFields */,
-				E8159E1A243D871C0021B880 /* enums */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -267,13 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				E8159E18243D85A50021B880 /* CrardInputTextFieldStatusEnum.swift */,
-			);
-			path = enums;
-			sourceTree = "<group>";
-		};
-		E8159E1A243D871C0021B880 /* enums */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = enums;
 			sourceTree = "<group>";
