@@ -15,37 +15,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WmM-UK-80k" customClass="TapCardInput" customModule="TapCardInputKit_iOS">
-                                <rect key="frame" x="20" y="64" width="374" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="8nt-PD-Ccb"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9R8-YM-xgN" customClass="TapCardInput" customModule="TapCardInputKit_iOS">
-                                <rect key="frame" x="20" y="284" width="374" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="oez-Dd-c4x"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WmM-UK-80k" secondAttribute="trailing" constant="20" id="Gis-TY-D5x"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9R8-YM-xgN" secondAttribute="trailing" constant="20" id="OLd-Ad-35w"/>
-                            <constraint firstItem="WmM-UK-80k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cM5-Uu-xg2"/>
-                            <constraint firstItem="9R8-YM-xgN" firstAttribute="top" secondItem="WmM-UK-80k" secondAttribute="bottom" constant="20" id="cyB-9C-3Vd"/>
-                            <constraint firstItem="9R8-YM-xgN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="trD-qP-BiY"/>
-                            <constraint firstItem="WmM-UK-80k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vp0-a5-DgK"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="cardFull" destination="WmM-UK-80k" id="kJL-BL-NF5"/>
-                        <outlet property="cardInline" destination="9R8-YM-xgN" id="YfA-Is-0Ti"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
