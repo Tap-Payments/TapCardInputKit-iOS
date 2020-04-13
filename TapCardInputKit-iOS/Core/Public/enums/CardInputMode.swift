@@ -8,10 +8,12 @@
 
 import Foundation
 
-
+/// Sets the mode of the card input view
 @objc public enum CardInputMode:Int {
     
+    /// This when you want show one line card input
     case InlineCardInput = 0
+    /// This when you want show full multline card input
     case FullCardInput = 1
     
 }
