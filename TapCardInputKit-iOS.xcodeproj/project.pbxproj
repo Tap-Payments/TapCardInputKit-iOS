@@ -34,9 +34,8 @@
 		E8159E63243DCB7E0021B880 /* unionpay.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5C243DCB7E0021B880 /* unionpay.png */; };
 		E8159E64243DCB7E0021B880 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5D243DCB7E0021B880 /* discover.png */; };
 		E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E65243DD4040021B880 /* CardNameTextField.swift */; };
-		E8159E68243E3A890021B880 /* LightTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* LightTheme.json */; };
+		E8159E68243E3A890021B880 /* Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* Theme.json */; };
 		E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E69243E3C030021B880 /* DefaultLightTheme.json */; };
-		E8716122244445B400B139D0 /* DarkTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8716121244445B400B139D0 /* DarkTheme.json */; };
 		E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */; };
 		E87161282444474A00B139D0 /* ExampleCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */; };
 		E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911CFA243ED95F00398252 /* TapCardTextField.swift */; };
@@ -120,9 +119,8 @@
 		E8159E5C243DCB7E0021B880 /* unionpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unionpay.png; sourceTree = "<group>"; };
 		E8159E5D243DCB7E0021B880 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
 		E8159E65243DD4040021B880 /* CardNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
-		E8159E67243E3A890021B880 /* LightTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LightTheme.json; sourceTree = "<group>"; };
+		E8159E67243E3A890021B880 /* Theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Theme.json; sourceTree = "<group>"; };
 		E8159E69243E3C030021B880 /* DefaultLightTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultLightTheme.json; sourceTree = "<group>"; };
-		E8716121244445B400B139D0 /* DarkTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DarkTheme.json; sourceTree = "<group>"; };
 		E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputSelectionTableViewController.swift; sourceTree = "<group>"; };
 		E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardInputViewController.swift; sourceTree = "<group>"; };
 		E8911CFA243ED95F00398252 /* TapCardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardTextField.swift; sourceTree = "<group>"; };
@@ -217,8 +215,7 @@
 				E8159DFF243C99DD0021B880 /* Assets.xcassets */,
 				E8159E01243C99DD0021B880 /* LaunchScreen.storyboard */,
 				E8159E04243C99DD0021B880 /* Info.plist */,
-				E8159E67243E3A890021B880 /* LightTheme.json */,
-				E8716121244445B400B139D0 /* DarkTheme.json */,
+				E8159E67243E3A890021B880 /* Theme.json */,
 				E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */,
 				E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */,
 			);
@@ -453,10 +450,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8159E03243C99DD0021B880 /* LaunchScreen.storyboard in Resources */,
-				E8716122244445B400B139D0 /* DarkTheme.json in Resources */,
 				E8B8CB572441F0A20060E0F3 /* scanIcon.png in Resources */,
 				E8B8CB562441F0990060E0F3 /* bank.png in Resources */,
-				E8159E68243E3A890021B880 /* LightTheme.json in Resources */,
+				E8159E68243E3A890021B880 /* Theme.json in Resources */,
 				E8159E00243C99DD0021B880 /* Assets.xcassets in Resources */,
 				E8159DFE243C99DC0021B880 /* Main.storyboard in Resources */,
 			);

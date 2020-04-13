@@ -21,6 +21,8 @@ class CardInputSelectionTableViewController: UITableViewController {
             showDefaultInput(isInline:true)
         case 1:
             showDefaultInput(isInline:false)
+        case 2:
+            showCustomInput()
         default:
             return
         }
@@ -31,6 +33,13 @@ class CardInputSelectionTableViewController: UITableViewController {
         
         if let example:ExampleCardInputViewController = storyboard?.instantiateViewController(withIdentifier: "ExampleCardInputViewController") as? ExampleCardInputViewController {
             example.isInline = isInline
+            self.navigationController?.pushViewController(example, animated: true)
+        }
+    }
+    
+    func showCustomInput() {
+        
+        if let example:ViewController = storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
             self.navigationController?.pushViewController(example, animated: true)
         }
     }
