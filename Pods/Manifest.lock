@@ -1,5 +1,5 @@
 PODS:
-  - CommonDataModelsKit-iOS (1.0.1)
+  - CommonDataModelsKit-iOS (1.0.2)
   - SnapKit (5.0.1)
   - TapCardValidator (1.2.6)
   - TapThemeManager2020 (0.0.1)
@@ -18,11 +18,11 @@ SPEC REPOS:
     - TapThemeManager2020
 
 SPEC CHECKSUMS:
-  CommonDataModelsKit-iOS: c42e1f329a05ac2ff5ceff735d60f27439f18b54
+  CommonDataModelsKit-iOS: d553bba0e245a2c70c45255f48c6966b0c1d419f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
   TapThemeManager2020: df3be57f5e815931e8ba63c407d3d68248ed6a7d
 
-PODFILE CHECKSUM: d04ae1fcd9b51500345eb83a007a20b90329c60e
+PODFILE CHECKSUM: b4a30d2e525f3d3d14c8da249ef5166a7829a9b1
 
 COCOAPODS: 1.8.4

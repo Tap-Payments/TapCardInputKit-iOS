@@ -21,6 +21,7 @@ internal protocol TapCardInputCommonProtocol {
 
 @objc public protocol TapCardInputProtocol {
     func cardDataChanged(tapCard:TapCard)
+    func scanCardClicked()
 }
 
 @objc public class TapCardInput: UIView {
@@ -84,6 +85,12 @@ internal protocol TapCardInputCommonProtocol {
         setupViews()
     }
     
+    @objc public func setCardData(tapCard:TapCard) {
+        cardName.text = tapCard.tapCardName ?? ""
+        let _ = cardNumber.changeText(with: tapCard.tapCardNumber ?? "", setTextAfterValidation: true)
+        let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
+        cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
+    }
     
     
        /// Apply  the theme values from the theme file to the matching outlets

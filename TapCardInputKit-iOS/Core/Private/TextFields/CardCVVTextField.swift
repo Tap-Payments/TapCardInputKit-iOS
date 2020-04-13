@@ -93,12 +93,28 @@ extension CardCVVTextField:UITextFieldDelegate {
        guard let currentText = textField.text as NSString? else {
            return false
        }
-       let updatedText = currentText.replacingCharacters(in: range, with: string)
-
-        if updatedText.count > cvvLength {
+        
+        let updatedText = currentText.replacingCharacters(in: range, with: string)
+        changeText(with: updatedText, setTextAfterValidation: true)
+        return false
+    }
+    
+    
+    internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
+        
+        let filteredText = updatedText.onlyDigits()
+        
+        
+        if updatedText.count > cvvLength ||  filteredText != updatedText {
             return false
+        }else {
+            if setTextAfterValidation {
+                self.text = updatedText
+            }
+            self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         }
-       return true
+        
+        return true
     }
 }
 

@@ -16,9 +16,9 @@ class CardExpiryTextField:TapCardTextField {
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         
         self.keyboardType = .phonePad
-      
+        
         self.minVisibleChars = minVisibleChars
-       self.maxVisibleChars = maxVisibleChars
+        self.maxVisibleChars = maxVisibleChars
         
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
@@ -50,7 +50,7 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
         
         let enteredYear = Int(text.suffix(2)) ?? 0 // get last two digit from entered string as year
         let enteredMonth = Int(text.prefix(2)) ?? 0 // get first two digit from entered string as month
-
+        
         if enteredYear > currentYear {
             if !(1 ... 12).contains(enteredMonth) {
                 return .Invalid
@@ -58,13 +58,13 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
         } else if currentYear == enteredYear {
             if enteredMonth >= currentMonth {
                 if !(1 ... 12).contains(enteredMonth) {
-                  return .Invalid
+                    return .Invalid
                 }
             } else {
                 return .Invalid
             }
         } else {
-           return .Invalid
+            return .Invalid
         }
         return .Valid
     }
@@ -92,39 +92,69 @@ extension CardExpiryTextField:UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       guard let currentText = textField.text as NSString? else {
-           return false
-       }
-       let updatedText = currentText.replacingCharacters(in: range, with: string)
-
-       if string == "" {
-        if currentText.length == 3 {
-               textField.text = "\(updatedText.prefix(1))"
-               return false
-           }
-           return true
-       } else if updatedText.count == 5 {
-           return true
-       } else if updatedText.count > 5 {
-
-           return false
-       } else if updatedText.count == 1 {
-
-           if updatedText > "1" {
-            textField.text = "0\(updatedText)/"
-               return false
-           }
-       } else if updatedText.count == 2 { //Prevent user to not enter month more than 12
-           if updatedText > "12" {
-               return false
-           }
-       }
-       if updatedText.count == 2 {
-           textField.text = "\(updatedText)/" //This will add "/" when user enters 2nd digit of month
-       } else {
-           textField.text = updatedText
-       }
-       return false
+        guard let currentText = textField.text as NSString? else {
+            return false
+        }
+        let updatedText = currentText.replacingCharacters(in: range, with: string)
+        
+        if string == "" {
+            if currentText.length == 3 {
+                textField.text = "\(updatedText.prefix(1))"
+                return false
+            }
+            return true
+        } else if updatedText.count == 5 {
+            return true
+        } else if updatedText.count > 5 {
+            return false
+        } else if updatedText.count < 3 {
+            if let nonNullMonth = formatMonthPart(with: updatedText,addSlash: true) {
+                textField.text = "\(nonNullMonth)"
+            }
+        }else if updatedText.count > 2 {
+            textField.text = updatedText
+        }
+        return false
+    }
+    
+    internal func changeText(with month:String?, year:String?) {
+        
+        if let nonNullMonth = formatMonthPart(with: month),
+            let nonNullYear = formatYearPart(with: year) {
+            self.text = "\(nonNullMonth)/\(nonNullYear)"
+        }
+        self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
+    }
+    
+    
+    internal func formatMonthPart(with month:String?, addSlash:Bool = false) -> String? {
+        var formattedMonth:String? = nil
+        if let nonNullMonth = month{
+            
+            if nonNullMonth.count == 1 {
+                if nonNullMonth > "1" {
+                    formattedMonth = "0\(nonNullMonth)\((addSlash) ? "/" : "")"
+                }else{
+                    formattedMonth = "\(nonNullMonth)"
+                }
+            }else if nonNullMonth.count == 2 { //Prevent user to not enter month more than 12
+                if nonNullMonth <= "12" {
+                    formattedMonth = "\(nonNullMonth)\((addSlash) ? "/" : "")"
+                }
+            }
+        }
+        
+        return formattedMonth
+    }
+    
+    
+    internal func formatYearPart(with year:String?) -> String? {
+        if let nonNullYear = year {
+            if nonNullYear.count == 2 {
+                return nonNullYear
+            }
+        }
+        return nil
     }
 }
 

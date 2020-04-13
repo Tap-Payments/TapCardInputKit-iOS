@@ -93,22 +93,35 @@ extension CardNumberTextField:UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         // add their new text to the existing text
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
-        let filteredText:String = updatedText.digitsWithSpaces()
-        let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
-        //self.textColor = errorTextColor
         
-        if let nonNullCardBrandBlock = cardBrandDetected {
-            nonNullCardBrandBlock(validation.cardBrand)
-        }
-        let shouldUpdate:Bool = (updatedText == filteredText && validation.validationState != .invalid)
-        if shouldUpdate {
-            self.textColor = (validation.validationState == .valid) ? normalTextColor : errorTextColor
-        }
-        return shouldUpdate
+        return changeText(with: updatedText)
     }
     
     @objc func didChangeText(textField:UITextField) {
         textField.text = textField.text!.modifyCreditCardString()
+    }
+    
+    internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
+        
+        let filteredText:String = updatedText.digitsWithSpaces()
+        let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
+        
+        if let nonNullCardBrandBlock = cardBrandDetected {
+            nonNullCardBrandBlock(validation.cardBrand)
+        }
+        
+        let shouldUpdate:Bool = (updatedText == filteredText && validation.validationState != .invalid)
+        
+        if shouldUpdate {
+            self.textColor = (validation.validationState == .valid) ? normalTextColor : errorTextColor
+        }
+        
+        if setTextAfterValidation {
+            self.text = updatedText
+            didChangeText(textField:self)
+        }
+        
+        return shouldUpdate
     }
 }
 
