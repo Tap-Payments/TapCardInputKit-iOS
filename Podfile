@@ -5,6 +5,7 @@ target 'TapCardInputKit-Example' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'CommonDataModelsKit-iOS'
+  pod 'SheetyColors'
   # Pods for TapCardInputKit-Example
 
 end

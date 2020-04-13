@@ -1,28 +1,36 @@
 PODS:
+  - Capable/Colors (1.1.4)
   - CommonDataModelsKit-iOS (1.0.2)
+  - SheetyColors (1.1.0):
+    - Capable/Colors (~> 1.1)
   - SnapKit (5.0.1)
   - TapCardValidator (1.2.6)
   - TapThemeManager2020 (0.0.1)
 
 DEPENDENCIES:
   - CommonDataModelsKit-iOS
+  - SheetyColors
   - SnapKit
   - TapCardValidator
   - TapThemeManager2020
 
 SPEC REPOS:
   trunk:
+    - Capable
     - CommonDataModelsKit-iOS
+    - SheetyColors
     - SnapKit
     - TapCardValidator
     - TapThemeManager2020
 
 SPEC CHECKSUMS:
+  Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
   CommonDataModelsKit-iOS: d553bba0e245a2c70c45255f48c6966b0c1d419f
+  SheetyColors: 8503d13ddcce9517906732ecda0193ba09ad5ee2
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
   TapThemeManager2020: df3be57f5e815931e8ba63c407d3d68248ed6a7d
 
-PODFILE CHECKSUM: b4a30d2e525f3d3d14c8da249ef5166a7829a9b1
+PODFILE CHECKSUM: 85f60db08dd24e624b53d1e5871df4b2e0ce2088
 
 COCOAPODS: 1.8.4

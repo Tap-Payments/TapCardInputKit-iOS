@@ -1,0 +1,49 @@
+{
+  "inlineCard": {
+      "commonAttributes": {
+          "backgroundColor": "#000000",
+          "borderColor": "#FFF500",
+          "cornerRadius":10,
+          "borderWidth": 1,
+          "itemSpacing": 5
+      },
+      "iconImage": {
+          "image": "bank",
+          "width": 32
+      },
+      "scanImage": {
+          "image": "scanIcon",
+          "width": 32
+      },
+      "textFields": {
+          "textColor": "#FFFFFF",
+          "errorTextColor": "#FF0000",
+          "font": "15",
+          "placeHolderColor" : "#FFFFFFAA"
+      }
+  },
+  "fullCard": {
+      "commonAttributes": {
+          "backgroundColor": "#000000",
+          "borderColor": "#FFF50000",
+          "cornerRadius":0,
+          "borderWidth": 0,
+          "itemSpacing": 5,
+          "separatorColor": "#FFFFFF"
+      },
+      "iconImage": {
+          "image": "bank",
+          "width": 32
+      },
+      "scanImage": {
+          "image": "scanIcon",
+          "width": 32
+      },
+      "textFields": {
+          "textColor": "#FFFFFF",
+          "errorTextColor": "#FF0000",
+          "font": "15",
+          "placeHolderColor" : "#FFFFFFAA"
+      }
+  }
+}

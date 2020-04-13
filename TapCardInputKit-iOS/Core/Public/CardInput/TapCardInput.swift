@@ -60,11 +60,13 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-    @objc public func setup(for cardInputMode:CardInputMode,withDictionaryTheme:NSDictionary) {
+    @objc public func setup(for cardInputMode:CardInputMode,withDictionaryTheme:NSDictionary?) {
         
         applyingDefaultTheme = true
         self.cardInputMode = cardInputMode
-        applyTheme(with: withDictionaryTheme)
+        if let nonNullThemeDict = withDictionaryTheme {
+            applyTheme(with: nonNullThemeDict)
+        }
         setupViews()
     }
     

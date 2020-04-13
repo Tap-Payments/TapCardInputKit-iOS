@@ -155,6 +155,8 @@ extension CardExpiryTextField:UITextFieldDelegate {
         if let nonNullYear = year {
             if nonNullYear.count == 2 {
                 return nonNullYear
+            }else if nonNullYear.count == 4 {
+                return nonNullYear.substring(from: 3)
             }
         }
         return nil
