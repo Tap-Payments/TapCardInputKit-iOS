@@ -31,8 +31,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            //make.left.equalTo(spacing)
-            //make.right.equalTo(-spacing)
+            make.left.equalTo(spacing)
+            make.right.equalTo(-spacing)
         }
         
         // Defines the constrints for the card icon image vie
@@ -92,7 +92,6 @@ extension TapCardInput {
         stackView.backgroundColor = .clear
         stackView.spacing = spacing
         stackView.distribution = .fillProportionally
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: max(spacing, 7), bottom: 0, right: max(spacing, 7))
         scrollView.addSubview(stackView)
         
         // Add the card fields to the stack view in order
