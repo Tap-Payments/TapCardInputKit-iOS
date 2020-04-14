@@ -14,9 +14,8 @@ import class UIKit.UIColor
 import class UIKit.UIFont
 import enum UIKit.NSTextAlignment
 import protocol UIKit.UITextFieldDelegate
-
-
 import enum TapCardValidator.CardBrand
+/// Protocol defines the common method needed to be implemented by all the card text fields, this is used to make sure all subclasses have the needed common logic
 @objc internal protocol CardInputTextFieldProtocol {
     /// This method will what is the status of the textfield
     func textFieldStatus(cardNumber:String?)->CrardInputTextFieldStatusEnum
@@ -26,6 +25,7 @@ import enum TapCardValidator.CardBrand
     func calculatedWidth() -> CGFloat
 }
 
+/// This is the super class for all the tap card fields. This will help in providing a single interface for any caller to deal with this class only to access all common attributes and methods rather than talking to each card field type alone
 internal class TapCardTextField: UITextField {
 
     /// The number of chars the textfield, the field will shrink to when another field is focused
@@ -65,6 +65,7 @@ internal class TapCardTextField: UITextField {
     /// This is a block to tell the subscriber that the editing stats had been changed, whether editing TRUE or end editing FALSE
     var editingStatusChanged:((Bool)->())?
     
+    /// This defines if the field should fill in the remaining space width wise in the inline mode
     var fillBiggestAvailableSpace:Bool = false
 
 }
@@ -76,12 +77,19 @@ extension TapCardTextField {
     
     /**
      This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
+     - Parameter textField: The textfield you need to check its width
      - Returns: The width of the textfield to show now in pixeld
      */
     func textWidth(textfield: UITextField) -> CGFloat {
         return textWidth(textfield: textfield, text: textfield.text!)
     }
     
+    /**
+    This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
+     - Parameter textField: The textfield you need to check its width
+     - Parameter text: The text you want to calculate the width needed to show them
+    - Returns: The width of the textfield to show now in pixeld
+    */
     func textWidth(textfield: UITextField, text: String) -> CGFloat {
         // Check if the minimimuum width auto calclated exists first
         if self.autoMinCalculatedWidth > 0 && !textfield.isEditing {
@@ -90,6 +98,12 @@ extension TapCardTextField {
         return textWidth(font: textfield.font, text: text)
     }
     
+    /**
+    This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
+     - Parameter font: The font you will use to show the given text
+     - Parameter text: The text you want to calculate the width needed to show them
+    - Returns: The width of the textfield to show now in pixeld
+    */
     func textWidth(font: UIFont?, text: String) -> CGFloat {
         guard let font = font else { return 0 }
         let myText = text as NSString
