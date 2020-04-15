@@ -337,21 +337,26 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     
+    /// Method that glows or the dims the card input view based on the shadow theme provided and if any of the fields is active
     internal func  updateShadow() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // The final value we will animate the shadow opacity to
+            // The final value we will animate the shadow opacity , default is 0
             var finalShadowOpacity:Float = 0.0
+            // Calculate the starting valye which is the current opacity level
             let startingValue:Float = self.layer.shadowOpacity
             // Check if any of the fields is active first
-            self.fields.forEach { (field) in
+            for field in self.fields {
                 if field.isEditing {
-                    finalShadowOpacity = Float(TapThemeManager.numberValue(for: "\(self.themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
+                    // Now we found one that is active, then we need to glow it based on the value provided from the theme
+                    finalShadowOpacity = Float(TapThemeManager.numberValue(for: "\(self.themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0
+                    )
+                    break
                 }
             }
+            // If the value we want to animate to is the current one, then we have to do nothing
+            if finalShadowOpacity == startingValue { return }
             
-            if finalShadowOpacity == startingValue {
-                return
-            }
+            // Animate the change of the shadow opacity
             let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
             shadowAnimation.fromValue = startingValue
             shadowAnimation.toValue = finalShadowOpacity
