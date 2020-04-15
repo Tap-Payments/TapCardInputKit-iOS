@@ -241,6 +241,14 @@ internal protocol TapCardInputCommonProtocol {
         self.layer.tap_theme_borderWidth = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.borderWidth")
         // The border rounded corners
         self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
+        
+        // The shadow details
+        self.layer.shadowRadius = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.radius")?.floatValue ?? 0)
+        self.layer.tap_theme_shadowColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.shadow.color")
+        self.layer.shadowOffset = CGSize(width: CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.offsetWidth")?.floatValue ?? 0), height: CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.offsetHeight")?.floatValue ?? 0))
+        self.layer.shadowOpacity = 0//Float(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
+        self.layer.masksToBounds = false
+        
         self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
         // The default card brand icon
         icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
@@ -252,6 +260,8 @@ internal protocol TapCardInputCommonProtocol {
         // Defines scan button icon
         scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
         scanButton.contentMode = .scaleAspectFit
+        
+        updateShadow()
     }
     
     /// The method is responsible for configuring and setup the card text fields
@@ -259,6 +269,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card number field with the needed data and listeners
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
+            // We will glow the shadow if needed
+            self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardNumber)
             },cardBrandDetected: { [weak self] (brand) in
@@ -272,6 +284,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card name field with the needed data and listeners
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
+            // We will glow the shadow if needed
+            self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardName)
             },cardNameChanged: { [weak self] (cardName) in
@@ -282,6 +296,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(placeholder: "MM/YY",editingStatusChanged: {[weak self] (isEditing) in
+            // We will glow the shadow if needed
+            self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardExpiry)
             }, cardExpiryChanged: {  [weak self] (cardMonth,cardYear) in
@@ -293,6 +309,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card cvv field with the needed data and listeners
         cardCVV.setup(placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
+            // We will glow the shadow if needed
+            self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardCVV)
             },cardCVVChanged: {  [weak self] (cardCVV) in
@@ -316,6 +334,30 @@ internal protocol TapCardInputCommonProtocol {
             // At any problem as fall back we set the default values again
             self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
             self.cardCVV.cvvLength = 3
+        }
+    }
+    
+    internal func  updateShadow() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // The final value we will animate the shadow opacity to
+            var finalShadowOpacity:Float = 0.0
+            let startingValue:Float = self.layer.shadowOpacity
+            // Check if any of the fields is active first
+            self.fields.forEach { (field) in
+                if field.isEditing {
+                    finalShadowOpacity = Float(TapThemeManager.numberValue(for: "\(self.themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
+                }
+            }
+            
+            if finalShadowOpacity == startingValue {
+                return
+            }
+            let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
+            shadowAnimation.fromValue = startingValue
+            shadowAnimation.toValue = finalShadowOpacity
+            shadowAnimation.duration = 0.5
+            self.layer.add(shadowAnimation, forKey: "shadowOpacity")
+            self.layer.shadowOpacity = finalShadowOpacity
         }
     }
     

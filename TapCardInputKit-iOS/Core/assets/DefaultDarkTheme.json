@@ -5,7 +5,14 @@
           "borderColor": "#FFF500",
           "cornerRadius":10,
           "borderWidth": 1,
-          "itemSpacing": 5
+          "itemSpacing": 5,
+          "shadow":{
+              "color": "#FFFFFF",
+              "radius": 3,
+              "offsetWidth": 0,
+              "offsetHeight": 0,
+              "opacity": 1
+          },
       },
       "iconImage": {
           "image": "bank",
@@ -29,7 +36,14 @@
           "cornerRadius":0,
           "borderWidth": 0,
           "itemSpacing": 5,
-          "separatorColor": "#FFFFFF"
+          "separatorColor": "#FFFFFF",
+          "shadow":{
+              "color": "#FFFFFF",
+              "radius": 3,
+              "offsetWidth": 0,
+              "offsetHeight": 0,
+              "opacity": 1
+          }
       },
       "iconImage": {
           "image": "bank",
