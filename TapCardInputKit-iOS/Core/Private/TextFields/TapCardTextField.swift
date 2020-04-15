@@ -150,4 +150,42 @@ extension String {
         return modifiedCreditCardString
     }
     
+    public func cardFormat(with spaces:[Int]) -> String {
+        let regex: NSRegularExpression
+
+        do {
+            var pattern = ""
+            var first = true
+            for group in spaces {
+                pattern += "(\\d{1,\(group)})"
+                if !first {
+                    pattern += "?"
+                }
+                first = false
+            }
+            regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options())
+        } catch {
+            fatalError("Error when creating regular expression: \(error)")
+        }
+        
+        return NSArray(array: self.onlyDigits().split(with: regex)).componentsJoined(by: " ")
+    }
+    
+    private func split(with regex: NSRegularExpression) -> [String] {
+        let matches = regex.matches(in: self, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, self.count))
+        var result = [String]()
+        
+        matches.forEach {
+            for i in 1..<$0.numberOfRanges {
+                let range = $0.range(at: i)
+                
+                if range.length > 0 {
+                    result.append(NSString(string: self).substring(with: range))
+                }
+            }
+        }
+        
+        return result
+    }
+    
 }

@@ -69,6 +69,30 @@ public final class CardValidator {
             return DefinedCardBrand(.incomplete, cardBrand)
         }
     }
+    
+    
+    public static func cardSpacing(cardNumber: String?) -> [Int] {
+        let defaultSpacing = [4,4,4,4]
+        
+        guard let number = cardNumber?.trimmingCharacters(in: Constants.whitespacesCharacterSet), number.count > 0 else {
+
+            return defaultSpacing
+        }
+
+        guard self.containsOnlyInternationalDigits(number) else {
+
+            return defaultSpacing
+        }
+
+        var binRange = CardBINRange.mostSpecific(for: number, preferredBrands: nil)
+        var cardBrand = binRange.cardBrand
+
+       
+
+        guard cardBrand != .unknown else { return defaultSpacing }
+
+        return binRange.cardNumberSpaces
+    }
 
     /// Returns correct visual spacings for a given card brand.
     ///

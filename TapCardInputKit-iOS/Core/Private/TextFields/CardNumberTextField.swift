@@ -132,7 +132,9 @@ extension CardNumberTextField:UITextFieldDelegate {
      */
     @objc func didChangeText(textField:UITextField) {
         // For the card number we need to apply the formatting of every four digits scheme before assigning the text
-        textField.text = textField.text!.modifyCreditCardString()
+        let spacing = CardValidator.cardSpacing(cardNumber: textField.text!.onlyDigits())
+        print("SPACING : \(spacing)")
+        textField.text = textField.text!.cardFormat(with: spacing)
         if let nonNullBlock = cardNumberChanged {
             // If the card number changed block is assigned, we need to fire this event
             nonNullBlock(textField.text!.onlyDigits())
