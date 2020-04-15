@@ -119,44 +119,44 @@ extension TapCardTextField {
 }
 
 extension String {
-    
+    /**
+     Returns all the charachters that are only digits
+     - Returns: A string that has only digits from the provided string
+     */
     func onlyDigits() -> String {
         return self.filter { "0123456789".contains($0) }
     }
     
+    /**
+    Returns all the charachters that are only digits and spaces
+    - Returns: A string that has only digits and spaces from the provided string
+    */
     func digitsWithSpaces() -> String {
         return self.filter { "0123456789 ".contains($0) }
     }
     
+    /**
+    Returns all the charachters that are only alphabet
+    - Returns: A lowercase string that has only alphabet from the provided string
+    */
     func alphabetOnly() -> String {
         return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz ".contains($0) }
     }
     
-    
-    func modifyCreditCardString() -> String {
-        let trimmedString = self.components(separatedBy: .whitespaces).joined()
-
-        let arrOfCharacters = Array(trimmedString)
-        var modifiedCreditCardString = ""
-
-        if(arrOfCharacters.count > 0) {
-            for i in 0...arrOfCharacters.count-1 {
-                modifiedCreditCardString.append(arrOfCharacters[i])
-                if((i+1) % 4 == 0 && i+1 != arrOfCharacters.count){
-                    modifiedCreditCardString.append(" ")
-                }
-            }
-        }
-        return modifiedCreditCardString
-    }
-    
+    /**
+     Returns a formatted credit card number with the spaces in the correct palces
+     - Parameter spaces: List of indices where you want to put the spaces in
+     - Returns: Formatted string where a space is added at the provided indices
+     */
     public func cardFormat(with spaces:[Int]) -> String {
+        // Create a regexx template that will decide where to put the spaces afterwards
         let regex: NSRegularExpression
 
         do {
             var pattern = ""
             var first = true
             for group in spaces {
+                // For every spacing index, we will create a regex pattern of DIGTS with the length of the index provided
                 pattern += "(\\d{1,\(group)})"
                 if !first {
                     pattern += "?"
