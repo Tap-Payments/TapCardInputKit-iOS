@@ -33,6 +33,7 @@ PODS:
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
     - PromisesObjC (~> 1.2)
+  - Flurry-iOS-SDK/FlurrySDK (10.3.0)
   - GoogleAppMeasurement (6.4.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -76,6 +77,7 @@ PODS:
 DEPENDENCIES:
   - CommonDataModelsKit-iOS
   - Firebase/Analytics
+  - Flurry-iOS-SDK/FlurrySDK
   - SheetyColors
   - SnapKit
   - TapCardValidator
@@ -91,6 +93,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstallations
+    - Flurry-iOS-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -111,6 +114,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 13a6564cd6d5375066bbc8940cc1753af24497f3
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseInstallations: acb3216eb9784d3b1d2d2d635ff74fa892cc0c44
+  Flurry-iOS-SDK: 128715435b5fb3a97b63d0175782ab9458175dd0
   GoogleAppMeasurement: e49be3954045b17d046f271b9cc1ec052bad9702
   GoogleDataTransport: 6ffa4dd0b6d547f8d27b91bd92fa9e197a3f5f1f
   GoogleDataTransportCCTSupport: 12f02e5c8f09c055615de90bcd5ba2c375546051
@@ -122,6 +126,6 @@ SPEC CHECKSUMS:
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
   TapThemeManager2020: df3be57f5e815931e8ba63c407d3d68248ed6a7d
 
-PODFILE CHECKSUM: ac25a377c4026a11785963d84ec8985c055168a2
+PODFILE CHECKSUM: a336e374cd76ccf71ba650748ce0b7500cc9b614
 
 COCOAPODS: 1.8.4

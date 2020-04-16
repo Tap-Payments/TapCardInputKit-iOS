@@ -36,6 +36,7 @@
 		E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E65243DD4040021B880 /* CardNameTextField.swift */; };
 		E8159E68243E3A890021B880 /* Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* Theme.json */; };
 		E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E69243E3C030021B880 /* DefaultLightTheme.json */; };
+		E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C796B24482A6700CECC81 /* FlurryLogger.swift */; };
 		E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */; };
 		E87161282444474A00B139D0 /* ExampleCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */; };
 		E871612A24447DFB00B139D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E871612924447DFB00B139D0 /* GoogleService-Info.plist */; };
@@ -122,6 +123,7 @@
 		E8159E65243DD4040021B880 /* CardNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		E8159E67243E3A890021B880 /* Theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Theme.json; sourceTree = "<group>"; };
 		E8159E69243E3C030021B880 /* DefaultLightTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultLightTheme.json; sourceTree = "<group>"; };
+		E83C796B24482A6700CECC81 /* FlurryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlurryLogger.swift; sourceTree = "<group>"; };
 		E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputSelectionTableViewController.swift; sourceTree = "<group>"; };
 		E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardInputViewController.swift; sourceTree = "<group>"; };
 		E871612924447DFB00B139D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				E8911D022440498E00398252 /* Views */,
 				E8159E1D243D88750021B880 /* TextFields */,
+				E83C796B24482A6700CECC81 /* FlurryLogger.swift */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */,
 				E8159E21243DA2650021B880 /* CardExpiryTextField.swift in Sources */,
 				E8159E23243DA4C60021B880 /* CardCVVTextField.swift in Sources */,
+				E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */,
 				E8159E19243D85A50021B880 /* CrardInputTextFieldStatusEnum.swift in Sources */,
 				E8911D072440674500398252 /* TapCardBarButton.swift in Sources */,
 				E8911D012440485F00398252 /* TapCardInput.swift in Sources */,

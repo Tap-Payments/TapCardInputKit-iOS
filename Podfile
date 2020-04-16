@@ -20,4 +20,5 @@ target 'TapCardInputKit-iOS' do
   pod 'TapCardValidator'
   pod 'TapThemeManager2020'
   pod 'CommonDataModelsKit-iOS'
+  pod 'Flurry-iOS-SDK/FlurrySDK'
 end

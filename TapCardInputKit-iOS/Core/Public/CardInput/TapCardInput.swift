@@ -122,6 +122,9 @@ internal protocol TapCardInputCommonProtocol {
         applyingDefaultTheme = true
         self.cardInputMode = cardInputMode
         applyTheme(with: withJsonTheme)
+        
+        let theme:[String:String] = ["defaultTheme":"false","themeJSON":withJsonTheme,"cardInputMode":"\(cardInputMode)"]
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:theme)
         // After applying the theme, we need now to actually setup the views
         setupViews()
     }
@@ -135,6 +138,7 @@ internal protocol TapCardInputCommonProtocol {
         applyingDefaultTheme = true
         self.cardInputMode = cardInputMode
         // After applying the theme, we need now to actually setup the views
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         setupViews()
     }
     
@@ -148,6 +152,8 @@ internal protocol TapCardInputCommonProtocol {
         let _ = cardNumber.changeText(with: tapCard.tapCardNumber ?? "", setTextAfterValidation: true)
         let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
         cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
+        
     }
     
     
@@ -160,6 +166,13 @@ internal protocol TapCardInputCommonProtocol {
         applyingDefaultTheme = false
         TapThemeManager.setTapTheme(themeDict: dictionaryTheme)
         themingDictionary = TapThemeManager.currentTheme
+        var theme:[String:String] = ["defaultTheme":"false","cardInputMode":"\(cardInputMode)"]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: themingDictionary!, options: [.prettyPrinted]) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                theme["theme"] = jsonString
+            }
+        }
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:theme)
     }
     
     /**
@@ -171,6 +184,12 @@ internal protocol TapCardInputCommonProtocol {
         applyingDefaultTheme = false
         TapThemeManager.setTapTheme(jsonName: jsonTheme)
         themingDictionary = TapThemeManager.currentTheme
+        var theme:[String:String] = ["defaultTheme":"false","cardInputMode":"\(cardInputMode)"]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: themingDictionary!, options: [.prettyPrinted]) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                theme["theme"] = jsonString
+            }
+        }
     }
     
     
@@ -330,6 +349,8 @@ internal protocol TapCardInputCommonProtocol {
             self.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil)
             // Update the cvv allowed length based on the detected card brand
             self.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
+            let brandName:String = "\(nonNullBrand)"
+            FlurryLogger.logEvent(with: "Tap_Card_Input_Brand_Detected", timed:false , params:["brandName":brandName])
         }else {
             // At any problem as fall back we set the default values again
             self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
@@ -372,6 +393,7 @@ internal protocol TapCardInputCommonProtocol {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
         }
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
     }
     
     /// The method that holds the logic needed to do when any of the scan button is clicked
@@ -380,6 +402,7 @@ internal protocol TapCardInputCommonProtocol {
             // If there is a delegate then we call the related method
             nonNullDelegate.scanCardClicked()
         }
+        FlurryLogger.logEvent(with: "Tap_Card_Input_Scan_Clicked")
     }
 }
 

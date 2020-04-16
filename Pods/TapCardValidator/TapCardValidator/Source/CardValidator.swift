@@ -84,8 +84,8 @@ public final class CardValidator {
             return defaultSpacing
         }
 
-        var binRange = CardBINRange.mostSpecific(for: number, preferredBrands: nil)
-        var cardBrand = binRange.cardBrand
+        let binRange = CardBINRange.mostSpecific(for: number, preferredBrands: nil)
+        let cardBrand = binRange.cardBrand
 
        
 
