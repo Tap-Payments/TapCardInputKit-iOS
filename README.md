@@ -72,11 +72,11 @@ $ pod update
 
 - Inline mode:
 
-  - ![Screenshot-2020-04-15-at-13-53-13](https://i.ibb.co/JmdpWb5/Screenshot-2020-04-15-at-13-53-13.png)
+  - ![inlineMode](inlineMode.png)
 
 - Full mode:
 
-  - ![Screenshot-2020-04-15-at-13-53-21](https://i.ibb.co/zxktVpW/Screenshot-2020-04-15-at-13-53-21.png)
+  - ![fullMode](fullMode.png)
 
   Making it one of the most inclusive pods in the market, yet one of the easiest to integrate with.
 
@@ -155,7 +155,7 @@ Also the KIT allows you passing the theme as Dictionary or JSON file.
 
 ### Theme Mapping
 
-![image](https://i.ibb.co/x7xRzkr/image.jpg)
+![map](themeMap.jpg)
 
 ### Theme JSON Structure
 
