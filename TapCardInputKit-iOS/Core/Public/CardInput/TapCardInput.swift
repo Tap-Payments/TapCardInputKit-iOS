@@ -9,7 +9,7 @@ import SnapKit
 import TapThemeManager2020
 import class CommonDataModelsKit_iOS.TapCard
 import TapCardValidator
-
+import LocalisationManagerKit_iOS
 /// Internal protocl for all card text fields to implement to consolidate the logic and make sure all needed logic is implemented
 internal protocol TapCardInputCommonProtocol {
     
@@ -68,7 +68,8 @@ internal protocol TapCardInputCommonProtocol {
     internal var spacing:CGFloat = 7
     /// This should hold the card data entered by the user till the moment
     internal var tapCard:TapCard = .init()
-    
+    /// Configure the localisation Manager
+    internal let sharedLocalisationManager = TapLocalisationManager.shared
     // Public
     /// This defines the mode required to show the card input view in whether Full or Inline
     @objc public var cardInputMode:CardInputMode = .FullCardInput {
@@ -250,6 +251,21 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     
+    /// Helper method to natch the localized values
+    @objc public func localize() {
+        // The default localisation file location
+        let bundle:Bundle = Bundle(for: type(of: self))
+        let defaultLocalisationFilePath:URL = URL(fileURLWithPath: bundle.path(forResource: "DefaultTapCardInputKitLocalisation", ofType: "json")!)
+        // Assign the localisation values
+        cardName.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardNumber.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardCVV.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
+    }
+    
     /// Helper method to match the common theming values to the view from the theme file
     internal func setCommonUI() {
         // background color
@@ -285,6 +301,7 @@ internal protocol TapCardInputCommonProtocol {
     
     /// The method is responsible for configuring and setup the card text fields
     internal func configureViews() {
+        
         
         // Setup the card number field with the needed data and listeners
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
@@ -337,6 +354,8 @@ internal protocol TapCardInputCommonProtocol {
                 self?.tapCard.tapCardCVV = cardCVV
                 self?.cardDatachanged()
         })
+        
+        localize()
     }
     
     /**

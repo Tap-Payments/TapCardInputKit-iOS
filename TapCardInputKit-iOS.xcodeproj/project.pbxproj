@@ -49,6 +49,7 @@
 		E8B8CB552441ECB90060E0F3 /* scanIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B8CB542441ECB90060E0F3 /* scanIcon.png */; };
 		E8B8CB562441F0990060E0F3 /* bank.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E27243DAB3F0021B880 /* bank.png */; };
 		E8B8CB572441F0A20060E0F3 /* scanIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B8CB542441ECB90060E0F3 /* scanIcon.png */; };
+		E8BC5E04244C7732007E3916 /* DefaultTapCardInputKitLocalisation.json in Resources */ = {isa = PBXBuildFile; fileRef = E8BC5E03244C7732007E3916 /* DefaultTapCardInputKitLocalisation.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		E8911D062440674500398252 /* TapCardBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardBarButton.swift; sourceTree = "<group>"; };
 		E8911D0824407DB100398252 /* FullCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardInput.swift; sourceTree = "<group>"; };
 		E8B8CB542441ECB90060E0F3 /* scanIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanIcon.png; sourceTree = "<group>"; };
+		E8BC5E03244C7732007E3916 /* DefaultTapCardInputKitLocalisation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultTapCardInputKitLocalisation.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 				E8B8CB542441ECB90060E0F3 /* scanIcon.png */,
 				E8159E69243E3C030021B880 /* DefaultLightTheme.json */,
 				E8911CFE243F450A00398252 /* DefaultDarkTheme.json */,
+				E8BC5E03244C7732007E3916 /* DefaultTapCardInputKitLocalisation.json */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				E8159E54243DCA400021B880 /* card.png in Resources */,
 				E8159E61243DCB7E0021B880 /* mastercard.png in Resources */,
 				E8159E62243DCB7E0021B880 /* visa.png in Resources */,
+				E8BC5E04244C7732007E3916 /* DefaultTapCardInputKitLocalisation.json in Resources */,
 				E8911CFF243F450A00398252 /* DefaultDarkTheme.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +715,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G46S76PUH4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -740,6 +745,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G46S76PUH4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -768,7 +774,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = G46S76PUH4;
 				INFOPLIST_FILE = "TapCardInputKit-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -789,7 +795,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = G46S76PUH4;
 				INFOPLIST_FILE = "TapCardInputKit-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

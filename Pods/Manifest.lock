@@ -62,6 +62,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.5.2):
     - GoogleUtilities/Logger
+  - LocalisationManagerKit-iOS (1.0.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - CommonDataModelsKit-iOS
   - Firebase/Analytics
   - Flurry-iOS-SDK/FlurrySDK
+  - LocalisationManagerKit-iOS
   - SheetyColors
   - SnapKit
   - TapCardValidator
@@ -98,6 +100,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - LocalisationManagerKit-iOS
     - nanopb
     - PromisesObjC
     - SheetyColors
@@ -119,6 +122,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6ffa4dd0b6d547f8d27b91bd92fa9e197a3f5f1f
   GoogleDataTransportCCTSupport: 12f02e5c8f09c055615de90bcd5ba2c375546051
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
+  LocalisationManagerKit-iOS: fe6a1f2e07d7bf73335675517d2f261f33124274
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SheetyColors: 8503d13ddcce9517906732ecda0193ba09ad5ee2
@@ -126,6 +130,6 @@ SPEC CHECKSUMS:
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
   TapThemeManager2020: df3be57f5e815931e8ba63c407d3d68248ed6a7d
 
-PODFILE CHECKSUM: a336e374cd76ccf71ba650748ce0b7500cc9b614
+PODFILE CHECKSUM: 1bb51cdffa4def0d82eea04e8985c02b35e66e36
 
 COCOAPODS: 1.8.4

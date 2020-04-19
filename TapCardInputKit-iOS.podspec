@@ -136,4 +136,5 @@ Pod::Spec.new do |spec|
   spec.dependency "TapCardValidator"
   spec.dependency "TapThemeManager2020"
   spec.dependency "CommonDataModelsKit-iOS"
+  spec.dependency "LocalisationManagerKit-iOS"
 end

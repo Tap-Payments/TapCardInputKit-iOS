@@ -1,0 +1,6 @@
+framework module LocalisationManagerKit_iOS {
+  umbrella header "LocalisationManagerKit-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

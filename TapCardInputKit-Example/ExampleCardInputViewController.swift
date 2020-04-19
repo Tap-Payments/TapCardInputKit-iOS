@@ -9,6 +9,7 @@
 import UIKit
 import TapCardInputKit_iOS
 import CommonDataModelsKit_iOS
+import LocalisationManagerKit_iOS
 
 class ExampleCardInputViewController: UIViewController {
 
@@ -18,12 +19,13 @@ class ExampleCardInputViewController: UIViewController {
     
     var themeDictionaty:NSDictionary?
     lazy var isInline:Bool = false
+    let sharedLocalisationManager = TapLocalisationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cardInput.translatesAutoresizingMaskIntoConstraints = false
-        
+        sharedLocalisationManager.localisationLocale = "en"
         self.title = isInline ? "Inline Input" : "Expanded Input"
     }
     
@@ -36,7 +38,17 @@ class ExampleCardInputViewController: UIViewController {
         cardInput.delegate = self
         cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput), withDictionaryTheme: themeDictionaty)
     }
-
+    @IBAction func languageChanged(_ sender: Any) {
+        if let segment = sender as? UISegmentedControl {
+            if segment.selectedSegmentIndex == 0 {
+                sharedLocalisationManager.localisationLocale = "en"
+            }else {
+                sharedLocalisationManager.localisationLocale = "ar"
+            }
+            cardInput.localize()
+        }
+    }
+    
 }
 
 
