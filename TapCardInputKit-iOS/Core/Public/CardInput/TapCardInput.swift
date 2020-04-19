@@ -439,11 +439,14 @@ extension TapCardInput {
         // We first define the toolbar frame we will show on top of the keyboard
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
+        // The default localisation file location
+        let bundle:Bundle = Bundle(for: type(of: self))
+        let defaultLocalisationFilePath:URL = URL(fileURLWithPath: bundle.path(forResource: "DefaultTapCardInputKitLocalisation", ofType: "json")!)
         
         // We create the previos, netx and done buttons and assign their action handlers
-        let doneButton: TapCardBarButton = TapCardBarButton(title: "Done", style: .done, target: self, action:#selector(doneAction(sender:)))
-        let previousButton: TapCardBarButton = TapCardBarButton(title: "Previous", style: .done, target: self, action: #selector(previousAction(sender:)))
-        let nextButton: TapCardBarButton = TapCardBarButton(title: "Next", style: .done, target: self, action: #selector(nextAction(sender:)))
+        let doneButton: TapCardBarButton = TapCardBarButton(title: sharedLocalisationManager.localisedValue(for: "Common.done", with: defaultLocalisationFilePath), style: .done, target: self, action:#selector(doneAction(sender:)))
+        let previousButton: TapCardBarButton = TapCardBarButton(title: sharedLocalisationManager.localisedValue(for: "Common.previous", with: defaultLocalisationFilePath), style: .done, target: self, action: #selector(previousAction(sender:)))
+        let nextButton: TapCardBarButton = TapCardBarButton(title: sharedLocalisationManager.localisedValue(for: "Common.next", with: defaultLocalisationFilePath), style: .done, target: self, action: #selector(nextAction(sender:)))
         
         // Attach the buttons to the given text field
         doneButton.cardField      = field
@@ -627,5 +630,4 @@ extension TapCardInput:TapCardInputCommonProtocol {
             return
         }
     }
-    
 }

@@ -5,6 +5,11 @@
             "cardNamePlaceHolder": "Holder name",
             "cardCVVPlaceHolder": "CVV",
             "cardExpiryPlaceHolder": "MM/YY"
+        },
+        "Common": {
+            "next": "Next",
+            "previous": "Previous",
+            "done": "Done"
         }
     },
     "ar": {
@@ -13,6 +18,11 @@
             "cardNamePlaceHolder": "صاحب البطاقة",
             "cardCVVPlaceHolder": "الرمز الأمني",
             "cardExpiryPlaceHolder": "شش/سس"
+        },
+        "Common": {
+            "next": "التالي",
+            "previous": "السابق",
+            "done": "تم"
         }
     }
 }

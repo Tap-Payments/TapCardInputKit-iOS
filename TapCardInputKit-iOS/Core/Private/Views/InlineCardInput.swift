@@ -10,6 +10,7 @@ import class UIKit.UIStackView
 import class UIKit.UIView
 import struct UIKit.UIEdgeInsets
 import struct UIKit.CGFloat
+import struct UIKit.CGPoint
 
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {
@@ -31,8 +32,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.left.equalTo(spacing)
-            make.right.equalTo(-spacing)
+            make.leading.equalTo(spacing)
+            make.trailing.equalTo(-spacing)
         }
         
         // Defines the constrints for the card icon image vie
@@ -170,6 +171,7 @@ extension TapCardInput {
     
     
     internal func updateWidths(for subView:UIView?) {
+        guard cardInputMode == .InlineCardInput else {return}
         if let nonNullView:TapCardTextField = subView as? TapCardTextField {
             //scrollView.layoutIfNeeded()
             layoutIfNeeded()
@@ -184,11 +186,18 @@ extension TapCardInput {
                 
             }) { (done) in
                 if nonNullView.isEditing {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
                         var point = nonNullView.frame.origin
-                        point.x = point.x - 5
-                        if self?.scrollView.contentOffset.x ?? 0 > point.x {
+                        if UserDefaults.standard.string(forKey: "i18n_language") == "ar" && nonNullView == self?.cardNumber {
+                            point.x = (self?.frame.width)! - point.x + 70
                             self?.scrollView.setContentOffset(point, animated: true)
+                            //self?.scrollView.adjustedContentInset
+                            self?.scrollView.layoutIfNeeded()
+                        }else {
+                            point.x = point.x - 5
+                            if self?.scrollView.contentOffset.x ?? 0 > point.x {
+                                self?.scrollView.setContentOffset(point, animated: true)
+                            }
                         }
                     }
                 }

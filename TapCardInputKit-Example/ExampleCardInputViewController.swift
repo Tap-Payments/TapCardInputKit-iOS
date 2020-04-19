@@ -19,13 +19,14 @@ class ExampleCardInputViewController: UIViewController {
     
     var themeDictionaty:NSDictionary?
     lazy var isInline:Bool = false
+    lazy var lang:String = "en"
     let sharedLocalisationManager = TapLocalisationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cardInput.translatesAutoresizingMaskIntoConstraints = false
-        sharedLocalisationManager.localisationLocale = "en"
+        sharedLocalisationManager.localisationLocale = lang
         self.title = isInline ? "Inline Input" : "Expanded Input"
     }
     
