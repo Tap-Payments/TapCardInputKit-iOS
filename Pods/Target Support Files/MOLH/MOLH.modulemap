@@ -1,0 +1,6 @@
+framework module MOLH {
+  umbrella header "MOLH-umbrella.h"
+
+  export *
+  module * { export * }
+}

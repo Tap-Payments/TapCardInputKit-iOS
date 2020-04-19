@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MOLH
 
 class CardInputSelectionTableViewController: UITableViewController {
 
@@ -17,8 +18,7 @@ class CardInputSelectionTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UserDefaults.standard.set("en", forKey: "i18n_language")
-        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        MOLH.setLanguageTo("en")
     }
 
     
@@ -40,15 +40,13 @@ class CardInputSelectionTableViewController: UITableViewController {
         let ac:UIAlertController = UIAlertController(title: "Localise?", message: "Select language", preferredStyle: .alert)
         let enAction:UIAlertAction = UIAlertAction(title: "English", style: .default) { [weak self] (_) in
             DispatchQueue.main.async { [weak self] in
-                UserDefaults.standard.set("en", forKey: "i18n_language")
-                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+                MOLH.setLanguageTo("en")
                 self?.showDefaultInput(isInline: isInline, lang: "en")
             }
         }
         let arAction:UIAlertAction = UIAlertAction(title: "عربي", style: .default) { [weak self] (_) in
             DispatchQueue.main.async { [weak self] in
-                UserDefaults.standard.set("ar", forKey: "i18n_language")
-                UIView.appearance().semanticContentAttribute = .forceRightToLeft
+                MOLH.setLanguageTo("ar")
                 self?.showDefaultInput(isInline: isInline, lang: "ar")
             }
         }

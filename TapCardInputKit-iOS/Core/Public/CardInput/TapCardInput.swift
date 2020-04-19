@@ -248,7 +248,7 @@ internal protocol TapCardInputCommonProtocol {
         fields.forEach { (field) in
             // Fonts
             field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
-            field.alignment = (UserDefaults.standard.string(forKey: "i18n_language") == "ar") ? .right : .left
+            field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
         }
     }
     
@@ -265,6 +265,7 @@ internal protocol TapCardInputCommonProtocol {
         cardCVV.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
         
         cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
+        
     }
     
     /// Helper method to match the common theming values to the view from the theme file

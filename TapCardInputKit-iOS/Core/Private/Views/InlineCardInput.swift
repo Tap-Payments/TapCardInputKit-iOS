@@ -11,6 +11,7 @@ import class UIKit.UIView
 import struct UIKit.UIEdgeInsets
 import struct UIKit.CGFloat
 import struct UIKit.CGPoint
+import struct UIKit.CGRect
 
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {
@@ -188,9 +189,11 @@ extension TapCardInput {
                 if nonNullView.isEditing {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
                         var point = nonNullView.frame.origin
-                        if UserDefaults.standard.string(forKey: "i18n_language") == "ar" && nonNullView == self?.cardNumber {
+                        if self?.sharedLocalisationManager.localisationLocale == "ar" && nonNullView == self?.cardNumber {
                             point.x = (self?.frame.width)! - point.x + 70
-                            self?.scrollView.setContentOffset(point, animated: true)
+                            self?.scrollView.scrollRectToVisible(CGRect(x: (self?.icon.frame.maxX)!+7, y: 0, width: 1, height:
+                            1), animated: true)
+                            //self?.scrollView.setContentOffset(point, animated: true)
                             //self?.scrollView.adjustedContentInset
                             self?.scrollView.layoutIfNeeded()
                         }else {

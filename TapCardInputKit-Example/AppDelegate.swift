@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import MOLH
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,11 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        
-        UserDefaults.standard.set("en", forKey: "i18n_language")
-        UIView.appearance().semanticContentAttribute = .forceLeftToRight
-        //UserDefaults.standard.synchronize()
-        //self.tableView.reloadData()
+        MOLHLanguage.setDefaultLanguage("en")
+        MOLH.shared.activate(true)
         return true
     }
 
