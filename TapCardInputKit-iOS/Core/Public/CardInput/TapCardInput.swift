@@ -248,6 +248,7 @@ internal protocol TapCardInputCommonProtocol {
         fields.forEach { (field) in
             // Fonts
             field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
+            field.alignment = (UserDefaults.standard.string(forKey: "i18n_language") == "ar") ? .right : .left
         }
     }
     
@@ -257,11 +258,11 @@ internal protocol TapCardInputCommonProtocol {
         let bundle:Bundle = Bundle(for: type(of: self))
         let defaultLocalisationFilePath:URL = URL(fileURLWithPath: bundle.path(forResource: "DefaultTapCardInputKitLocalisation", ofType: "json")!)
         // Assign the localisation values
-        cardName.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
+        cardName.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
         
-        cardNumber.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
+        cardNumber.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
         
-        cardCVV.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
+        cardCVV.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
         
         cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
     }

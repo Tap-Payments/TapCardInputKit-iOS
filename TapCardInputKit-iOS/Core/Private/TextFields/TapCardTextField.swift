@@ -47,6 +47,12 @@ internal class TapCardTextField: UITextField {
 
         }
     }
+    
+    var fieldPlaceHolder:String = "" {
+        didSet{
+            self.attributedPlaceholder = NSAttributedString(string: fieldPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
+        }
+    }
     /// The background color of the text fields
     var bgColor:UIColor = .clear {
         didSet{
