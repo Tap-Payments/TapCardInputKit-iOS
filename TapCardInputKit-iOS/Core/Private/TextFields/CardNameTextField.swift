@@ -101,6 +101,7 @@ extension CardNameTextField:UITextFieldDelegate {
     @objc func didChangeText(textField:UITextField) {
         if let nonNullBlock = cardNameChanged {
             // If the card name changed block is assigned, we need to fire this event
+            textField.text = textField.text?.uppercased()
             nonNullBlock(textField.text!)
         }
     }
