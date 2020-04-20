@@ -38,6 +38,9 @@ class CardExpiryTextField:TapCardTextField {
         self.maxVisibleChars = maxVisibleChars
         self.cardExpiryChanged = cardExpiryChanged
         
+        // Listen to the event of text change
+        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
+        
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
     }
@@ -97,6 +100,18 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
     func isValid(cardNumber:String? = nil) -> Bool {
         
         return textFieldStatus() == .Valid
+    }
+    
+    
+    /**
+        This method does the logic required when a text change event is fired for the text field
+        - Parameter textField: The text field that has its text changed
+        */
+    @objc func didChangeText(textField:UITextField) {
+       if self.isValid(), let nonNullBlock = cardExpiryChanged {
+             // If the text input by the user is valid and exxpiry changed block is assigned, we need to fire this event by passing back the entered month and year
+            nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3))
+        }
     }
 }
 

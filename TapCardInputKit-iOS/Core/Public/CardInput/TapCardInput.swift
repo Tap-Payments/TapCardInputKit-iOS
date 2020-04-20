@@ -352,6 +352,9 @@ internal protocol TapCardInputCommonProtocol {
                 // If the card expiry changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
                 self?.tapCard.tapCardExpiryMonth = cardMonth
                 self?.tapCard.tapCardExpiryYear = cardYear
+                if self?.cardExpiry.isValid() ?? false {
+                    self?.cardCVV.becomeFirstResponder()
+                }
                 self?.cardDatachanged()
         })
         
