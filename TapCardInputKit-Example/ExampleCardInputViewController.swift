@@ -47,7 +47,7 @@ class ExampleCardInputViewController: UIViewController {
             }else {
                 sharedLocalisationManager.localisationLocale = "ar"
             }
-            cardInput.localize()
+            cardInput.localize(shouldFlip: true)
         }
     }
     
