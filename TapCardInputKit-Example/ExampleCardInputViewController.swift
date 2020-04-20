@@ -16,6 +16,8 @@ class ExampleCardInputViewController: UIViewController {
     @IBOutlet weak var cardInput: TapCardInput!
     @IBOutlet weak var expandedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var resultTextView: UITextView!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
     
     var themeDictionaty:NSDictionary?
     lazy var isInline:Bool = false
@@ -35,6 +37,9 @@ class ExampleCardInputViewController: UIViewController {
         super.viewWillAppear(animated)
         
         expandedHeightConstraint.constant = isInline ? 45 : 150
+        leftConstraint.constant = isInline ? 20 : -2
+        rightConstraint.constant = isInline ? 20 : -2
+        
         self.view.layoutIfNeeded()
         
         cardInput.delegate = self

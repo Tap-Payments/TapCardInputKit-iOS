@@ -211,7 +211,9 @@
                     <connections>
                         <outlet property="cardInput" destination="lzd-Rw-9W5" id="DDA-hy-BYC"/>
                         <outlet property="expandedHeightConstraint" destination="Gba-ma-Y3J" id="fRf-RX-o9i"/>
+                        <outlet property="leftConstraint" destination="bOl-X5-FVy" id="AIu-vl-Vyp"/>
                         <outlet property="resultTextView" destination="HMM-35-cnB" id="rhi-9y-zyf"/>
+                        <outlet property="rightConstraint" destination="1Sn-Kw-QYb" id="soS-BH-RFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBH-Df-fp3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

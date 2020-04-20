@@ -306,7 +306,7 @@ internal protocol TapCardInputCommonProtocol {
         scanButton.setTitle("", for: .normal)
         // Defines scan button icon
         scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
-        scanButton.contentMode = .scaleAspectFit
+        scanButton.imageView?.contentMode = .scaleAspectFit
         
         updateShadow()
     }
