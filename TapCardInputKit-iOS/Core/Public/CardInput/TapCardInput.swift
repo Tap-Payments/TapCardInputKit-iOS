@@ -96,6 +96,10 @@ internal protocol TapCardInputCommonProtocol {
         self.backgroundColor = .clear
     }
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     /**
      Call this method when you  need to setup the view with a custom theme dictionary. Setup method is reponsible for laying out the view,  adding subviews and applying the given theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode

@@ -13,10 +13,11 @@ import LocalisationManagerKit_iOS
 
 class ExampleCardInputViewController: UIViewController {
 
-    @IBOutlet weak var cardInput: TapCardInput!
+    var cardInput: TapCardInput?
     @IBOutlet weak var expandedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var resultTextView: UITextView!
-    
+    @IBOutlet weak var cardCaontainerView: UIView!
+
     var themeDictionaty:NSDictionary?
     lazy var isInline:Bool = false
     lazy var lang:String = "en"
@@ -25,7 +26,8 @@ class ExampleCardInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cardInput.translatesAutoresizingMaskIntoConstraints = false
+//        cardInput.translatesAutoresizingMaskIntoConstraints = false
+        
         sharedLocalisationManager.localisationLocale = lang
         sharedLocalisationManager.localisationFilePath = URL(fileURLWithPath: Bundle.main.path(forResource: "CustomTapCardInputKitLocalisation", ofType: "json")!)
         self.title = isInline ? "Inline Input" : "Expanded Input"
@@ -35,10 +37,8 @@ class ExampleCardInputViewController: UIViewController {
         super.viewWillAppear(animated)
         
         expandedHeightConstraint.constant = isInline ? 45 : 150
+        refreshCardInputView()
         self.view.layoutIfNeeded()
-        
-        cardInput.delegate = self
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput), withDictionaryTheme: themeDictionaty)
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
@@ -47,8 +47,28 @@ class ExampleCardInputViewController: UIViewController {
             }else {
                 sharedLocalisationManager.localisationLocale = "ar"
             }
-            cardInput.localize(shouldFlip: true)
+            
+            
+            cardInput!.localize(shouldFlip: true)
+            refreshCardInputView()
         }
+        
+    }
+    
+    func refreshCardInputView() {
+        if let cardInput = cardInput {
+            cardInput.removeFromSuperview()
+        }
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 40, height: expandedHeightConstraint.constant)
+        cardInput = TapCardInput(frame: frame)
+        
+//        cardInput!.translatesAutoresizingMaskIntoConstraints = false
+        
+        cardCaontainerView.addSubview(cardInput!)
+        
+        cardInput!.delegate = self
+        cardInput!.setup(for: (isInline ? .InlineCardInput : .FullCardInput), withDictionaryTheme: themeDictionaty)
+        self.view.layoutIfNeeded()
     }
     
 }
