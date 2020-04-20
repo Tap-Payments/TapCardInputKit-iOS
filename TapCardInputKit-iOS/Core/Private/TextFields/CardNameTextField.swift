@@ -60,7 +60,7 @@ extension CardNameTextField: CardInputTextFieldProtocol {
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
          if let text = self.text {
             // Make sure it is valid where there is a text and the text contains only alphabets
-             if text.alphabetOnly() == text.lowercased() {
+            if text.alphabetOnly() == text.lowercased() && (text.count >= 2 && text.count <= 26) {
                  return .Valid
              }
          }
@@ -113,6 +113,6 @@ extension CardNameTextField:UITextFieldDelegate {
         // add their new text to the existing text
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
-        return updatedText.alphabetOnly() == updatedText.lowercased()
+        return updatedText.alphabetOnly() == updatedText.lowercased() && updatedText.count <= 26
     }
 }
