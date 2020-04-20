@@ -10,6 +10,8 @@ import TapThemeManager2020
 import class CommonDataModelsKit_iOS.TapCard
 import TapCardValidator
 import LocalisationManagerKit_iOS
+import MOLH
+
 /// Internal protocl for all card text fields to implement to consolidate the logic and make sure all needed logic is implemented
 internal protocol TapCardInputCommonProtocol {
     
@@ -36,7 +38,7 @@ internal protocol TapCardInputCommonProtocol {
 }
 
 /// This represents the custom view for card input provided by Tap
-@objc public class TapCardInput: UIView {
+@objc public class TapCardInput: MOLHView {
     
     // Internal
     
@@ -248,12 +250,11 @@ internal protocol TapCardInputCommonProtocol {
         fields.forEach { (field) in
             // Fonts
             field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
-            field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
         }
     }
     
     /// Helper method to natch the localized values
-    @objc public func localize() {
+    @objc public func localize(shouldFlip:Bool = true) {
         // The default localisation file location
         let bundle:Bundle = Bundle(for: type(of: self))
         let defaultLocalisationFilePath:URL = URL(fileURLWithPath: bundle.path(forResource: "DefaultTapCardInputKitLocalisation", ofType: "json")!)
@@ -265,6 +266,15 @@ internal protocol TapCardInputCommonProtocol {
         cardCVV.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
         
         cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
+        
+        
+        if shouldFlip {
+            // Change the alignments
+            fields.forEach { (field) in
+                field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            }
+            MOLH.setLanguageTo(sharedLocalisationManager.localisationLocale ?? "en")
+        }
         
     }
     

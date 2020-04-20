@@ -8,7 +8,6 @@ target 'TapCardInputKit-Example' do
   pod 'SheetyColors'
   pod 'Firebase/Analytics'
   pod 'LocalisationManagerKit-iOS'
-  pod 'MOLH'
   # Pods for TapCardInputKit-Example
 
 end
@@ -24,4 +23,5 @@ target 'TapCardInputKit-iOS' do
   pod 'CommonDataModelsKit-iOS'
   pod 'LocalisationManagerKit-iOS'
   pod 'Flurry-iOS-SDK/FlurrySDK'
+  pod 'MOLH'
 end

@@ -40,13 +40,13 @@ class CardInputSelectionTableViewController: UITableViewController {
         let ac:UIAlertController = UIAlertController(title: "Localise?", message: "Select language", preferredStyle: .alert)
         let enAction:UIAlertAction = UIAlertAction(title: "English", style: .default) { [weak self] (_) in
             DispatchQueue.main.async { [weak self] in
-                MOLH.setLanguageTo("en")
+                //MOLH.setLanguageTo("en")
                 self?.showDefaultInput(isInline: isInline, lang: "en")
             }
         }
         let arAction:UIAlertAction = UIAlertAction(title: "عربي", style: .default) { [weak self] (_) in
             DispatchQueue.main.async { [weak self] in
-                MOLH.setLanguageTo("ar")
+                //MOLH.setLanguageTo("ar")
                 self?.showDefaultInput(isInline: isInline, lang: "ar")
             }
         }
