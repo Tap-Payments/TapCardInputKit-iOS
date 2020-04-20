@@ -63,9 +63,7 @@ class ExampleCardInputViewController: UIViewController {
 extension ExampleCardInputViewController: TapCardInputProtocol {
     
     func saveCardChanged(enabled: Bool) {
-        func scanCardClicked() {
-            resultTextView.text = "SAVE CARD isENABLED : \n\(enabled)\n";
-        }
+        resultTextView.text = "SAVE CARD isENABLED : \(enabled)\n\(resultTextView.text ?? "")\n";
     }
     
    
