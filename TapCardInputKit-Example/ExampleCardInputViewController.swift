@@ -27,6 +27,7 @@ class ExampleCardInputViewController: UIViewController {
         
         cardInput.translatesAutoresizingMaskIntoConstraints = false
         sharedLocalisationManager.localisationLocale = lang
+        sharedLocalisationManager.localisationFilePath = URL(fileURLWithPath: Bundle.main.path(forResource: "CustomTapCardInputKitLocalisation", ofType: "json")!)
         self.title = isInline ? "Inline Input" : "Expanded Input"
     }
     

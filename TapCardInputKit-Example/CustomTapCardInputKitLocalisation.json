@@ -1,0 +1,29 @@
+{
+    "en": {
+        "TapCardInputKit": {
+            "cardNumberPlaceHolder": "Card number",
+            "cardNamePlaceHolder": "Holder name",
+            "cardCVVPlaceHolder": "CVV",
+            "cardExpiryPlaceHolder": "MM/YY"
+        },
+        "Common": {
+            "next": "Next",
+            "previous": "Previous",
+            "done": "Done"
+        }
+    },
+    "ar": {
+        "TapCardInputKit": {
+            "cardNumberPlaceHolder": "رقم الكارت",
+            "cardNamePlaceHolder": "صاحب الكارت",
+            "cardCVVPlaceHolder": "الرمز الأمني",
+            "cardExpiryPlaceHolder": "شش/سس"
+        },
+        "Common": {
+            "next": "التالي",
+            "previous": "السابق",
+            "done": "تم"
+        }
+    }
+}
+
