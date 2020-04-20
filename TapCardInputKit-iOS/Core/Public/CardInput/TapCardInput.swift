@@ -35,6 +35,11 @@ internal protocol TapCardInputCommonProtocol {
     func cardDataChanged(tapCard:TapCard)
     /// This method will be called once the user clicks on Scan button
     func scanCardClicked()
+    /**
+     This method will be called whenever the user change the status of the save card option
+     - Parameter enabled: Will be true if the switch is enabled and false otherwise
+     */
+    func saveCardChanged(enabled:Bool)
 }
 
 /// This represents the custom view for card input provided by Tap
@@ -398,7 +403,16 @@ internal protocol TapCardInputCommonProtocol {
                 self?.cardDatachanged()
         })
         
+        saveSwitch.addTarget(self, action: #selector(saveCardSwitchChanged), for: .valueChanged)
+        
         localize()
+    }
+    
+    @objc func saveCardSwitchChanged(_ sender:Any) {
+        if let nonNullDelegate = delegate {
+            // If there is a delegate then we call the related method
+            nonNullDelegate.saveCardChanged(enabled: saveSwitch.isOn)
+        }
     }
     
     /**

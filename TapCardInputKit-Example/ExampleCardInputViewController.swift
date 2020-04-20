@@ -61,6 +61,13 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
+    
+    func saveCardChanged(enabled: Bool) {
+        func scanCardClicked() {
+            resultTextView.text = "SAVE CARD isENABLED : \n\(enabled)\n";
+        }
+    }
+    
    
     func cardDataChanged(tapCard: TapCard) {
         resultTextView.text = "Card Number : \(tapCard.tapCardNumber ?? "")\nCard Name : \(tapCard.tapCardName ?? "")\nCard Expiry : \(tapCard.tapCardExpiryMonth ?? "")/\(tapCard.tapCardExpiryYear ?? "")\nCard CVV : \(tapCard.tapCardCVV ?? "")\n\(resultTextView.text ?? "")\n"
