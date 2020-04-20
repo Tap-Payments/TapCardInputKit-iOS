@@ -58,6 +58,10 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var cardExpiry  = CardExpiryTextField()
     /// The text field to enter the card  cvv
     internal lazy var cardCVV     = CardCVVTextField()
+    /// The save card label to be shown in full mode
+    internal lazy var saveLabel:UILabel = UILabel()
+    /// The save card switch to be shown in full mode
+    internal lazy var saveSwitch:UISwitch = UISwitch()
     /// Defines the order of the fields they are shown in, this is important to implement the navigation (nexxt and previous) between fields from the keyboard itself
     internal lazy var fields:[TapCardTextField] = [cardNumber,cardName,cardExpiry,cardCVV]
     /// States if the view is using the default TAP theme or a custom one
@@ -68,6 +72,12 @@ internal protocol TapCardInputCommonProtocol {
     internal var themePath:String = "inlineCard"
     /// The item spacing between different fields inside the stack view
     internal var spacing:CGFloat = 7
+    
+    internal var computedSpace:CGFloat{
+        get{
+            return max(spacing,7)
+        }
+    }
     /// This should hold the card data entered by the user till the moment
     internal var tapCard:TapCard = .init()
     /// Configure the localisation Manager
@@ -86,6 +96,8 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     //lazy var showCardName:Bool = true
+    /// States if the parent controller wants to show save card option, only works wth full mode
+    @objc public lazy var showSaveCardOption:Bool = false
     /// States if the parent controller wants to show a scanning option or not
     @objc public lazy var showScanningOption:Bool = true
     /// The delegate that wants to hear from the view on new data and events
@@ -135,6 +147,7 @@ internal protocol TapCardInputCommonProtocol {
     /**
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
+     - Parameter showSaveCard: Defines if the FULL mode should show save card option or not
      */
     @objc public func setup(for cardInputMode:CardInputMode) {
         
@@ -235,6 +248,7 @@ internal protocol TapCardInputCommonProtocol {
     
     /// Helper method to natch the text, error and palceholder colors from the theme to all the cards fields
     internal func setTextColors() {
+        // Set the color of the text fields
         fields.forEach { (field) in
             // text colors
             field.normalTextColor = TapThemeManager.colorValue(for: "\(themePath).textFields.textColor") ?? .black
@@ -243,6 +257,8 @@ internal protocol TapCardInputCommonProtocol {
             // placeholder colors
             field.placeHolderTextColor = TapThemeManager.colorValue(for: "\(themePath).textFields.placeHolderColor") ?? .black
         }
+        // Set the color of the save label
+        saveLabel.tap_theme_textColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.labelTextColor")
     }
     
     /// Helper method to natch the fonts from the theme to all the cards fields
@@ -251,6 +267,9 @@ internal protocol TapCardInputCommonProtocol {
             // Fonts
             field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
         }
+        
+        // Set the font of the save label
+        saveLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).saveCardOption.labelTextFont")
     }
     
     /// Helper method to natch the localized values
@@ -267,12 +286,16 @@ internal protocol TapCardInputCommonProtocol {
         
         cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
         
+        saveLabel.text = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardSaveLabel", with: defaultLocalisationFilePath)
+        
         
         if shouldFlip {
             // Change the alignments
             fields.forEach { (field) in
                 field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
             }
+            
+           saveLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
             MOLH.setLanguageTo(sharedLocalisationManager.localisationLocale ?? "en")
         }
         
@@ -307,6 +330,11 @@ internal protocol TapCardInputCommonProtocol {
         // Defines scan button icon
         scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
         scanButton.imageView?.contentMode = .scaleAspectFit
+        
+        saveSwitch.tap_theme_tintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.switchTintColor")
+        saveSwitch.tap_theme_thumbTintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.switchThumbColor")
+        saveSwitch.tap_theme_onTintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.switchOnThumbColor")
+        
         
         updateShadow()
     }

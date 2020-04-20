@@ -27,6 +27,13 @@
           "errorTextColor": "#FF0000",
           "font": "15",
           "placeHolderColor" : "#00000055"
+      },
+      "saveCardOption": {
+          "labelTextColor": "#000000",
+          "labelTextFont": "20",
+          "switchTintColor": "#00000055",
+          "switchThumbColor": "#FF0000",
+          "switchOnThumbColor": "#2ACE00"
       }
   },
   "fullCard": {
@@ -58,6 +65,13 @@
           "errorTextColor": "#FF0000",
           "font": "15",
           "placeHolderColor" : "#00000055"
+      },
+      "saveCardOption": {
+          "labelTextColor": "#000000",
+          "labelTextFont": "20",
+          "switchTintColor": "#FFFFFF",
+          "switchThumbColor": "#FFFFFF",
+          "switchOnThumbColor": "#2ACE00"
       }
   }
 }

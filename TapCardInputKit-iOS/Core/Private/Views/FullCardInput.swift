@@ -8,7 +8,11 @@
 
 import class UIKit.UIStackView
 import class UIKit.UIView
+import class UIKit.UISwitch
+import class UIKit.UILabel
 import struct UIKit.UIEdgeInsets
+import struct UIKit.CGSize
+import struct UIKit.CGFloat
 
 /// This extension provides the methods needed to setupu the views in the case of full card input mode
 extension TapCardInput {
@@ -41,6 +45,24 @@ extension TapCardInput {
             make.width.equalTo(32)
             //make.height.equalTo(32)
         }
+        
+        if showSaveCardOption {
+            // Adjust the save card views
+            
+            // Make the save label full height
+            saveLabel.snp.remakeConstraints { (make) in
+                make.height.equalToSuperview()
+                make.trailing.equalTo(saveSwitch.snp.leading).offset(-computedSpace)
+                make.leading.equalToSuperview().offset(computedSpace)
+                make.centerY.equalToSuperview()
+            }
+            saveSwitch.snp.remakeConstraints { (make) in
+                make.trailing.equalToSuperview().offset(-computedSpace)
+                make.centerY.equalToSuperview()
+            }
+        }
+        
+        
         // Define that we want the card nummber to fill as much width as possible
         cardNumber.setContentCompressionResistancePriority(.required, for: .horizontal)
         
@@ -60,7 +82,7 @@ extension TapCardInput {
         // Set the stack view attribtes
         stackView.axis = .vertical
         stackView.backgroundColor = .clear
-        stackView.spacing = spacing
+        stackView.spacing = computedSpace
         stackView.distribution = .fill
         stackView.alignment = .fill
         scrollView.addSubview(stackView)
@@ -75,19 +97,19 @@ extension TapCardInput {
         
         // We have three rows, card number + icon, card exxpiry + cvv and card name
         for i in 0...2 {
-            
+           
             let fieldsStackView:UIStackView = UIStackView()
             fieldsStackView.axis = .horizontal
             fieldsStackView.backgroundColor = .yellow
-            fieldsStackView.spacing = max(spacing,7)
+            fieldsStackView.spacing = computedSpace
             
             stackView.addArrangedSubview(fieldsStackView)
             fieldsStackView.snp.remakeConstraints { (make) in
-                //make.width.equalToSuperview()
+                make.width.equalToSuperview()
                 make.height.equalTo(40)
             }
             
-            fieldsStackView.layoutMargins = UIEdgeInsets(top: 0, left: max(spacing, 7), bottom: 0, right: max(spacing, 7))
+            fieldsStackView.layoutMargins = UIEdgeInsets(top: 0, left: computedSpace, bottom: 0, right: computedSpace)
             fieldsStackView.isLayoutMarginsRelativeArrangement = true
             
             
@@ -124,5 +146,35 @@ extension TapCardInput {
                 make.width.equalToSuperview()
             }
         }
+        
+        // Save card option
+        // Check if the parent caller wants to show it
+        if showSaveCardOption {
+            addSaveOptionsView()
+        }
+    }
+    
+    
+    internal func addSaveOptionsView() {
+        let saveCardView:UIView = UIView()
+        saveCardView.backgroundColor = .clear
+        stackView.addArrangedSubview(saveCardView)
+        
+        saveLabel.numberOfLines = 2
+        saveLabel.minimumScaleFactor = 0.5
+        
+        let maxLabelWidth: CGFloat = self.frame.width
+        let neededSize = saveLabel.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        saveCardView.snp.remakeConstraints { (make) in
+            make.height.equalTo(neededSize.height + 2*computedSpace)
+            make.width.equalToSuperview()
+        }
+        
+        
+        
+        saveCardView.addSubview(saveLabel)
+        saveCardView.addSubview(saveSwitch)
+        
     }
 }

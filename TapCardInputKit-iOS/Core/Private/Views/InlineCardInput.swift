@@ -33,8 +33,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.leading.equalTo(spacing)
-            make.trailing.equalTo(-spacing)
+            make.leading.equalTo(computedSpace)
+            make.trailing.equalTo(-computedSpace)
         }
         
         // Defines the constrints for the card icon image vie
@@ -92,7 +92,7 @@ extension TapCardInput {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.backgroundColor = .clear
-        stackView.spacing = spacing
+        stackView.spacing = computedSpace
         stackView.distribution = .fillProportionally
         scrollView.addSubview(stackView)
         
@@ -149,7 +149,7 @@ extension TapCardInput {
         // Now it is the time to calculate the actual empty space we have beyond the last subview and distribute them across the marked fields
         
         // Get the total width
-        let totalWidth = frame.width - spacing
+        let totalWidth = frame.width - computedSpace
         // Calculate the extra space that will add to the marked fields equally
         let extraSpaceWidthValue = (totalWidth - lastFilledPoint) / CGFloat(fillingSpaceComponents.count)
         
