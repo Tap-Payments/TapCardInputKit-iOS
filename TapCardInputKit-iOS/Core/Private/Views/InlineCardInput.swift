@@ -33,8 +33,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.leading.equalTo(computedSpace)
-            make.trailing.equalTo(-computedSpace)
+            make.leading.equalTo(fullInputLeftRightMargin)
+            make.trailing.equalTo(fullInputLeftRightMargin)
         }
         
         // Defines the constrints for the card icon image vie
@@ -187,14 +187,14 @@ extension TapCardInput {
                 
             }) { (done) in
                 if nonNullView.isEditing {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
                         var point = nonNullView.frame.origin
                         if self?.sharedLocalisationManager.localisationLocale == "ar" && nonNullView == self?.cardNumber {
-                            point.x = (self?.frame.width)! - point.x + 70
-                            self?.scrollView.scrollRectToVisible(CGRect(x: (self?.icon.frame.maxX)!+7, y: 0, width: 1, height:
-                            1), animated: true)
-                            //self?.scrollView.setContentOffset(point, animated: true)
-                            //self?.scrollView.adjustedContentInset
+                            point.x = (self?.scrollView.contentOffset.x)!
+                            point.x += (self?.icon.frame.width ?? 0)
+                            point.x += (self?.computedSpace ?? 0)
+                            point.x += (self?.fullInputLeftRightMargin ?? 0)
+                            self?.scrollView.setContentOffset(point, animated: true)
                             self?.scrollView.layoutIfNeeded()
                         }else {
                             point.x = point.x - 5
