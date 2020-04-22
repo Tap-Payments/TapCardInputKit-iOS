@@ -3,7 +3,7 @@
       "commonAttributes": {
           "backgroundColor": "#FFFFFF",
           "borderColor": "#0066FF",
-          "cornerRadius": 10,
+          "cornerRadius": 0,
           "borderWidth": 1,
           "itemSpacing": 5,
           "shadow":{

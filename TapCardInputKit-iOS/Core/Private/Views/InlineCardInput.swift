@@ -98,10 +98,13 @@ extension TapCardInput {
         
         // Add the card fields to the stack view in order
         stackView.addArrangedSubview(icon)
-        stackView.addArrangedSubview(cardNumber)
-        stackView.addArrangedSubview(cardName)
+        fields.forEach { (field) in
+            stackView.addArrangedSubview(field)
+        }
+        /*stackView.addArrangedSubview(cardNumber)
         stackView.addArrangedSubview(cardExpiry)
         stackView.addArrangedSubview(cardCVV)
+        stackView.addArrangedSubview(cardName)*/
     }
     
     

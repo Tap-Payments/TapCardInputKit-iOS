@@ -68,7 +68,7 @@ internal protocol TapCardInputCommonProtocol {
     /// The save card switch to be shown in full mode
     internal lazy var saveSwitch:UISwitch = UISwitch()
     /// Defines the order of the fields they are shown in, this is important to implement the navigation (nexxt and previous) between fields from the keyboard itself
-    internal lazy var fields:[TapCardTextField] = [cardNumber,cardName,cardExpiry,cardCVV]
+    internal lazy var fields:[TapCardTextField] = [cardNumber,cardExpiry,cardCVV,cardName]
     /// States if the view is using the default TAP theme or a custom one
     internal lazy var applyingDefaultTheme:Bool = true
     /// The current theme being applied
@@ -582,7 +582,7 @@ extension TapCardInput {
         // Based on the card input mode, we define the ordering of the card fields
         switch cardInputMode {
         case .InlineCardInput:
-            fields = [cardNumber,cardName,cardExpiry,cardCVV]
+            fields = [cardNumber,cardExpiry,cardCVV,cardName]
         case .FullCardInput:
             fields = [cardNumber,cardExpiry,cardCVV,cardName]
         }
