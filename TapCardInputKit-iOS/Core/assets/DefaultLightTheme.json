@@ -51,6 +51,7 @@
               "offsetHeight": 0,
               "opacity": 1
           },
+          "widthMargin": 15
       },
       "iconImage": {
           "image": "bank",

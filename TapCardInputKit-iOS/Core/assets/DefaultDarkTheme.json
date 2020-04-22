@@ -2,7 +2,7 @@
   "inlineCard": {
       "commonAttributes": {
           "backgroundColor": "#000000",
-          "borderColor": "#FFF500",
+          "borderColor": "#FFFFFF",
           "cornerRadius":10,
           "borderWidth": 1,
           "itemSpacing": 5,
@@ -50,7 +50,8 @@
               "offsetWidth": 0,
               "offsetHeight": 0,
               "opacity": 1
-          }
+          },
+          "widthMargin": 15
       },
       "iconImage": {
           "image": "bank",

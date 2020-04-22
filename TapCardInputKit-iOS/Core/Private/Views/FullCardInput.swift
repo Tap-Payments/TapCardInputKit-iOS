@@ -29,7 +29,8 @@ extension TapCardInput {
         }
         // The vertical stack view will be used to layout the card fields vertical. It will be filling the scroll view with a padding on both sides
         stackView.snp.remakeConstraints { (make) in
-            make.width.equalToSuperview()
+            make.width.equalToSuperview().offset(-fullInputLeftRightMargin*2)
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }

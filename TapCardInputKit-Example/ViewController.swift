@@ -20,10 +20,16 @@ class ViewController: UIViewController {
         dataSource["backgroundColor"] = "#FFFFFF"
         dataSource["borderColor"] = "#0066FF"
         dataSource["cornerRadius"] = 10
-        dataSource["borderWidth"] = 1
+        dataSource["borderWidth"] = 0
         dataSource["textColor"] = "#000000"
         dataSource["errorTextColor"] = "#FF0000"
         dataSource["placeHolderColor"] = "#00000055"
+        dataSource["widthMargin"] = 15
+        dataSource["labelTextFont"] = 15
+        dataSource["labelTextColor"] = "#000000"
+        dataSource["switchTintColor"] = "#FFFFFF"
+        dataSource["switchThumbColor"] = "#FFFFFF"
+        dataSource["switchOnThumbColor"] = "#2ACE00"
         
         configTableView.dataSource = self
         configTableView.delegate = self
@@ -203,18 +209,29 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate {
                 let fullDict:NSMutableDictionary = NSMutableDictionary(dictionary:(themeDict["fullCard"] as! NSDictionary))
                 let fullCommonAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:fullDict["commonAttributes"] as! NSDictionary)
                 let fullTextFieldAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:fullDict["textFields"] as! NSDictionary)
-
+                let saveCardOptionAttributesDict:NSMutableDictionary = NSMutableDictionary(dictionary:fullDict["saveCardOption"] as! NSDictionary)
+                
+                
                 fullCommonAttributesDict["backgroundColor"] = dataSource["backgroundColor"]
                 fullCommonAttributesDict["borderColor"] = dataSource["borderColor"]
                 fullCommonAttributesDict["cornerRadius"] = dataSource["cornerRadius"]
                 fullCommonAttributesDict["borderWidth"] = dataSource["borderWidth"]
+                fullCommonAttributesDict["widthMargin"] = dataSource["widthMargin"]
+                
 
                 fullTextFieldAttributesDict["textColor"] = dataSource["textColor"]
                 fullTextFieldAttributesDict["errorTextColor"] = dataSource["errorTextColor"]
                 fullTextFieldAttributesDict["placeHolderColor"] = dataSource["placeHolderColor"]
+                
+                saveCardOptionAttributesDict["labelTextFont"] = dataSource["labelTextFont"]
+                saveCardOptionAttributesDict["labelTextColor"] = dataSource["labelTextColor"]
+                saveCardOptionAttributesDict["switchTintColor"] = dataSource["switchTintColor"]
+                saveCardOptionAttributesDict["switchThumbColor"] = dataSource["switchThumbColor"]
+                saveCardOptionAttributesDict["switchOnThumbColor"] = dataSource["switchOnThumbColor"]
 
                 fullDict["commonAttributes"] = fullCommonAttributesDict
                 fullDict["textFields"] = fullTextFieldAttributesDict
+                fullDict["saveCardOption"] = saveCardOptionAttributesDict
                 themeDict["fullCard"] = fullDict
                 
                 

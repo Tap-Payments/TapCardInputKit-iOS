@@ -77,6 +77,9 @@ internal protocol TapCardInputCommonProtocol {
     internal var themePath:String = "inlineCard"
     /// The item spacing between different fields inside the stack view
     internal var spacing:CGFloat = 7
+    /// The left and right padding around the full input card mode
+    internal var fullInputLeftRightMargin:CGFloat = 15
+    
     
     internal var computedSpace:CGFloat{
         get{
@@ -325,6 +328,7 @@ internal protocol TapCardInputCommonProtocol {
         self.layer.masksToBounds = false
         
         self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
+        self.fullInputLeftRightMargin = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.widthMargin")?.floatValue ?? 0)
         // The default card brand icon
         icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
         icon.contentMode = .scaleAspectFit
