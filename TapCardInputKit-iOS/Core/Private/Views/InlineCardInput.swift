@@ -33,8 +33,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.leading.equalTo(fullInputLeftRightMargin)
-            make.trailing.equalTo(fullInputLeftRightMargin)
+            make.leading.equalTo(inputLeftRightMargin)
+            make.trailing.equalTo(inputLeftRightMargin)
         }
         
         // Defines the constrints for the card icon image vie
@@ -193,7 +193,7 @@ extension TapCardInput {
                             point.x = (self?.scrollView.contentOffset.x)!
                             point.x += (self?.icon.frame.width ?? 0)
                             point.x += (self?.computedSpace ?? 0)
-                            point.x += (self?.fullInputLeftRightMargin ?? 0)
+                            point.x += (self?.inputLeftRightMargin ?? 0)
                             self?.scrollView.setContentOffset(point, animated: true)
                             self?.scrollView.layoutIfNeeded()
                         }else {
