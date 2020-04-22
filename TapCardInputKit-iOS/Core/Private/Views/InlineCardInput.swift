@@ -38,9 +38,9 @@ extension TapCardInput {
         }
         
         // Defines the constrints for the card icon image vie
-        icon.snp.remakeConstraints { (make) in
+        scanButton.snp.remakeConstraints { (make) in
             make.width.equalTo(32)
-            make.height.equalTo(icon.snp.width)
+            //make.height.equalTo(32)
         }
         
         // Defines the constrints for the card number field
@@ -97,14 +97,10 @@ extension TapCardInput {
         scrollView.addSubview(stackView)
         
         // Add the card fields to the stack view in order
-        stackView.addArrangedSubview(icon)
+        stackView.addArrangedSubview(scanButton)
         fields.forEach { (field) in
             stackView.addArrangedSubview(field)
         }
-        /*stackView.addArrangedSubview(cardNumber)
-        stackView.addArrangedSubview(cardExpiry)
-        stackView.addArrangedSubview(cardCVV)
-        stackView.addArrangedSubview(cardName)*/
     }
     
     

@@ -426,14 +426,25 @@ internal protocol TapCardInputCommonProtocol {
     internal func cardBrandDetected(with brand:CardBrand?) {
         if let nonNullBrand = brand {
             // Set the new icon based on the detected card brand
-            self.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil)
+            if cardInputMode == .FullCardInput {
+                self.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil)
+            }else {
+                self.scanButton.setImage(UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+                self.scanButton.isUserInteractionEnabled = false
+            }
             // Update the cvv allowed length based on the detected card brand
             self.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
             let brandName:String = "\(nonNullBrand)"
             FlurryLogger.logEvent(with: "Tap_Card_Input_Brand_Detected", timed:false , params:["brandName":brandName])
         }else {
             // At any problem as fall back we set the default values again
-            self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
+            if cardInputMode == .FullCardInput {
+                self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
+            }else {
+                self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
+                self.scanButton.isUserInteractionEnabled = true
+            }
+            
             self.cardCVV.cvvLength = 3
         }
     }
