@@ -37,7 +37,7 @@ class ExampleCardInputViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        expandedHeightConstraint.constant = isInline ? 45 : 150
+        expandedHeightConstraint.constant = isInline ? 45 : 190
         leftConstraint.constant = isInline ? 20 : -2
         rightConstraint.constant = isInline ? 20 : -2
         

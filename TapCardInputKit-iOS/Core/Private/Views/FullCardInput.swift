@@ -82,7 +82,7 @@ extension TapCardInput {
         // Set the stack view attribtes
         stackView.axis = .vertical
         stackView.backgroundColor = .clear
-        stackView.spacing = computedSpace
+        stackView.spacing = spacing
         stackView.distribution = .fill
         stackView.alignment = .fill
         scrollView.addSubview(stackView)
@@ -167,7 +167,7 @@ extension TapCardInput {
         let neededSize = saveLabel.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat.greatestFiniteMagnitude))
         
         saveCardView.snp.remakeConstraints { (make) in
-            make.height.equalTo(neededSize.height + 2*computedSpace)
+            make.height.equalTo(neededSize.height + 3*computedSpace)
             make.width.equalToSuperview()
         }
         
