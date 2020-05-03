@@ -1,0 +1,30 @@
+{
+    "en": {
+        "TapCardInputKit": {
+            "cardNumberPlaceHolder": "Card number",
+            "cardNamePlaceHolder": "Holder name",
+            "cardCVVPlaceHolder": "CVV",
+            "cardExpiryPlaceHolder": "MM/YY",
+            "cardSaveLabel": "For faster and more secure checkout,\nsave your card"
+        },
+        "Common": {
+            "next": "Next",
+            "previous": "Previous",
+            "done": "Done"
+        }
+    },
+    "ar": {
+        "TapCardInputKit": {
+            "cardNumberPlaceHolder": "رقم البطاقة",
+            "cardNamePlaceHolder": "صاحب البطاقة",
+            "cardCVVPlaceHolder": "الرمز الأمني",
+            "cardExpiryPlaceHolder": "شش/سس",
+            "cardSaveLabel": "لشراء أسرع و أكثر أماناً،\nإحفظ البطاقة"
+        },
+        "Common": {
+            "next": "التالي",
+            "previous": "السابق",
+            "done": "تم"
+        }
+    }
+}
