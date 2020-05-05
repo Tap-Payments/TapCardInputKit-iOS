@@ -10,6 +10,8 @@ import class UIKit.UIFont
 import class UIKit.UIColor
 import struct UIKit.CGFloat
 import enum UIKit.UIStatusBarStyle
+import enum TapFontsKit.TapFont
+import class LocalisationManagerKit_iOS.TapLocalisationManager
 
 /// All the methods required to parse String values provided in the theme file into readable iOS values like UIColor, UIFont, etc.
 @objc extension TapThemeManager {
@@ -127,7 +129,20 @@ import enum UIKit.UIStatusBarStyle
         // Check if the theme file provides both font name and font size
         let elements = string.components(separatedBy: ",")
         if elements.count == 2 {
-            return UIFont(name: elements[0], size: CGFloat(Float(elements[1])!))!
+            // Check first if the font exists in the caller main bundle
+            if let fontFromMainBundle = UIFont(name: elements[0], size: CGFloat(Float(elements[1])!)) {
+                return fontFromMainBundle
+            }else{
+                // If not, we check it in our default common fonts kit
+                do {
+                  let data = try JSONEncoder().encode(elements[0])
+                  let decoder = JSONDecoder()
+                  let tapFont:TapFont = try decoder.decode(TapFont.self, from: data)
+                    return tapFont.localizedWithSize(CGFloat(Float(elements[1])!), languageIdentifier: (TapLocalisationManager.shared.localisationLocale ?? "en"))
+                } catch {
+                  print(error.localizedDescription)
+                }
+            }
         }
         
         // Check if the theme file provides ONLY size, then we just provide the system font with tthe given size

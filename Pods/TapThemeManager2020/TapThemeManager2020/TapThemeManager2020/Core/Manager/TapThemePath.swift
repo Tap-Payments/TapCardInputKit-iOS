@@ -30,17 +30,19 @@ import Foundation
     /**
     - The method for rettrning the path of a JSON file
     - Parameter fileName: The name of the JSON file that has the needed theme
+    - Parameter bundle:   The bundle that we will search for the json file in. Default is the main bundle
     */
-    public static func themeJsonPath(fileName: String) -> String? {
-        return themeFilePath(fileName: fileName, ofType: "json")
+    public static func themeJsonPath(fileName: String,in bundle:Bundle = Bundle.main) -> String? {
+        return themeFilePath(fileName: fileName, ofType: "json", in: bundle)
     }
     
     /**
     - The method for calcilating the path of a given file
     - Parameter fileName: The name of the file
     - Parameter type:     The type of the file
+    - Parameter bundle:   The bundle that we will search for the json file in. Default is the main bundle
     */
-    private static func themeFilePath(fileName: String, ofType type: String) -> String? {
-        return Bundle.main.path(forResource: fileName, ofType: type)
+    private static func themeFilePath(fileName: String, ofType type: String,in bundle:Bundle = Bundle.main) -> String? {
+        return bundle.path(forResource: fileName, ofType: type)
     }
 }

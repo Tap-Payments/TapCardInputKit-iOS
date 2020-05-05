@@ -35,13 +35,11 @@
 		E8159E64243DCB7E0021B880 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5D243DCB7E0021B880 /* discover.png */; };
 		E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E65243DD4040021B880 /* CardNameTextField.swift */; };
 		E8159E68243E3A890021B880 /* Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* Theme.json */; };
-		E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E69243E3C030021B880 /* DefaultLightTheme.json */; };
 		E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C796B24482A6700CECC81 /* FlurryLogger.swift */; };
 		E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */; };
 		E87161282444474A00B139D0 /* ExampleCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */; };
 		E871612A24447DFB00B139D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E871612924447DFB00B139D0 /* GoogleService-Info.plist */; };
 		E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911CFA243ED95F00398252 /* TapCardTextField.swift */; };
-		E8911CFF243F450A00398252 /* DefaultDarkTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8911CFE243F450A00398252 /* DefaultDarkTheme.json */; };
 		E8911D012440485F00398252 /* TapCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D002440485F00398252 /* TapCardInput.swift */; };
 		E8911D05244049B200398252 /* CardInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D04244049B200398252 /* CardInputMode.swift */; };
 		E8911D072440674500398252 /* TapCardBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D062440674500398252 /* TapCardBarButton.swift */; };
@@ -123,13 +121,11 @@
 		E8159E5D243DCB7E0021B880 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
 		E8159E65243DD4040021B880 /* CardNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		E8159E67243E3A890021B880 /* Theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Theme.json; sourceTree = "<group>"; };
-		E8159E69243E3C030021B880 /* DefaultLightTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultLightTheme.json; sourceTree = "<group>"; };
 		E83C796B24482A6700CECC81 /* FlurryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlurryLogger.swift; sourceTree = "<group>"; };
 		E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputSelectionTableViewController.swift; sourceTree = "<group>"; };
 		E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardInputViewController.swift; sourceTree = "<group>"; };
 		E871612924447DFB00B139D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8911CFA243ED95F00398252 /* TapCardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardTextField.swift; sourceTree = "<group>"; };
-		E8911CFE243F450A00398252 /* DefaultDarkTheme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultDarkTheme.json; sourceTree = "<group>"; };
 		E8911D002440485F00398252 /* TapCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardInput.swift; sourceTree = "<group>"; };
 		E8911D04244049B200398252 /* CardInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputMode.swift; sourceTree = "<group>"; };
 		E8911D062440674500398252 /* TapCardBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardBarButton.swift; sourceTree = "<group>"; };
@@ -309,8 +305,6 @@
 				E8159E53243DCA3F0021B880 /* card.png */,
 				E8159E27243DAB3F0021B880 /* bank.png */,
 				E8BC5E0D244D9C17007E3916 /* scanIcon.png */,
-				E8159E69243E3C030021B880 /* DefaultLightTheme.json */,
-				E8911CFE243F450A00398252 /* DefaultDarkTheme.json */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -432,7 +426,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8159E5F243DCB7E0021B880 /* diners-club.png in Resources */,
-				E8159E6A243E3C030021B880 /* DefaultLightTheme.json in Resources */,
 				E8159E5E243DCB7E0021B880 /* jcb.png in Resources */,
 				E8159E28243DAB3F0021B880 /* bank.png in Resources */,
 				E8159E64243DCB7E0021B880 /* discover.png in Resources */,
@@ -442,7 +435,6 @@
 				E8159E61243DCB7E0021B880 /* mastercard.png in Resources */,
 				E8BC5E0E244D9C17007E3916 /* scanIcon.png in Resources */,
 				E8159E62243DCB7E0021B880 /* visa.png in Resources */,
-				E8911CFF243F450A00398252 /* DefaultDarkTheme.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

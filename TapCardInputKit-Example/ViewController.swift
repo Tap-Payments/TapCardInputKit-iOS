@@ -8,6 +8,7 @@
 
 import UIKit
 import SheetyColors
+import TapThemeManager2020
 
 class ViewController: UIViewController {
     
@@ -234,10 +235,10 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate {
                 fullDict["saveCardOption"] = saveCardOptionAttributesDict
                 themeDict["fullCard"] = fullDict
                 
+                TapThemeManager.setDefaultTapTheme(lightModeDictTheme: themeDict, darkModeDictTheme: themeDict)
                 
                 if let example:ExampleCardInputViewController = storyboard?.instantiateViewController(withIdentifier: "ExampleCardInputViewController") as? ExampleCardInputViewController {
                     example.isInline = isInline
-                    example.themeDictionaty = themeDict
                     self.navigationController?.pushViewController(example, animated: true)
                 }
                 

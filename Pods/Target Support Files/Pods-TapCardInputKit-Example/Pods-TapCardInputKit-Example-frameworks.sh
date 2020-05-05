@@ -171,7 +171,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MOLH/MOLH.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapAdditionsKit/TapAdditionsKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TapCardValidator/TapCardValidator.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapFontsKit/TapFontsKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapSwiftFixes/TapSwiftFixes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TapThemeManager2020/TapThemeManager2020.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -185,7 +188,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MOLH/MOLH.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapAdditionsKit/TapAdditionsKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TapCardValidator/TapCardValidator.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapFontsKit/TapFontsKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TapSwiftFixes/TapSwiftFixes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TapThemeManager2020/TapThemeManager2020.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

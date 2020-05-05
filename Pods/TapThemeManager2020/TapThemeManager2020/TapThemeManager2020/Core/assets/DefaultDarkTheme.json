@@ -75,5 +75,60 @@
           "switchThumbColor": "#000000",
           "switchOnThumbColor": "#FFFFFF"
       }
+  },
+  "recentCards": {
+      "backGroundColor": "#000000",
+      "collectionView": {
+          "spaceBetweenCells":7,
+          "backgroundColor": "#00000000",
+          "height": 43,
+          "borderColor": "#0066FF",
+          "cornerRadius": 8,
+          "borderWidth": 0
+      },
+      "headerView": {
+          "buttons": {
+              "textColor": "#FFFFFF",
+              "font": "15",
+              "backGroundColor": "#00000000"
+          },
+          "backGroundColor": "#00000000"
+      },
+      "chipUI": {
+          "commonAttributes": {
+              "backgroundColor": "#0000004C",
+              "glowingBackgroundColor": "#000000",
+              "borderColor": "#FFFFFF",
+              "cornerRadius":8,
+              "borderWidth": 1,
+              "itemSpacing": 5,
+              "chipHeight": 40,
+              "shadow":{
+                  "color": "#00000014",
+                  "radius": 3,
+                  "offsetWidth": 0,
+                  "offsetHeight": 0,
+                  "opacity": 1
+              },
+              "glowingShadow":{
+                  "color": "#2ace00",
+                  "radius": 3,
+                  "offsetWidth": 0,
+                  "offsetHeight": 0,
+                  "opacity": 1
+              },
+              "widthMargin": 7
+          },
+          "rightAccessory": {
+              "width": 32
+          },
+          "leftAccessory": {
+              "width": 32
+          },
+          "contentLabel": {
+              "textColor": "#FFFFFF",
+              "textFont": "15"
+          }
+      }
   }
 }

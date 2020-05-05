@@ -75,5 +75,60 @@
           "switchThumbColor": "#FFFFFF",
           "switchOnThumbColor": "#2ACE00"
       }
+  },
+  "recentCards": {
+      "backGroundColor": "#e9e9e9",
+      "collectionView": {
+          "spaceBetweenCells":7,
+          "backgroundColor": "#FFFFFF00",
+          "height": 90,
+          "borderColor": "#0066FF",
+          "cornerRadius": 8,
+          "borderWidth": 0
+      },
+      "headerView": {
+          "buttons": {
+              "textColor": "#535353",
+              "font": "15",
+              "backGroundColor": "#00000000"
+          },
+          "backGroundColor": "#00000000"
+      },
+      "chipUI": {
+          "commonAttributes": {
+              "backgroundColor": "#FFFFFF4C",
+              "glowingBackgroundColor": "#FFFFFF",
+              "borderColor": "#0066FF",
+              "cornerRadius": 8,
+              "borderWidth": 0,
+              "itemSpacing": 5,
+              "chipHeight": 40,
+              "shadow":{
+                  "color": "#00000014",
+                  "radius": 3,
+                  "offsetWidth": 0,
+                  "offsetHeight": 0,
+                  "opacity": 1
+              },
+              "glowingShadow":{
+                  "color": "#2ACE00",
+                  "radius": 3,
+                  "offsetWidth": 0,
+                  "offsetHeight": 0,
+                  "opacity": 1
+              },
+              "widthMargin": 7
+          },
+          "rightAccessory": {
+              "width": 32
+          },
+          "leftAccessory": {
+              "width": 32
+          },
+          "contentLabel": {
+              "textColor": "#000000",
+              "textFont": "15"
+          }
+      }
   }
 }

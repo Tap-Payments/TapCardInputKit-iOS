@@ -1,0 +1,6 @@
+framework module TapFontsKit {
+  umbrella header "TapFontsKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

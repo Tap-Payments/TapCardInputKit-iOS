@@ -44,7 +44,7 @@ class ExampleCardInputViewController: UIViewController {
         self.view.layoutIfNeeded()
         
         cardInput.delegate = self
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput), withDictionaryTheme: themeDictionaty)
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput))
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {

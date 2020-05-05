@@ -10,7 +10,9 @@
         "Common": {
             "next": "Next",
             "previous": "Previous",
-            "done": "Done"
+            "done": "Done",
+            "recent": "Recent",
+            "edit": "Edit"
         }
     },
     "ar": {
@@ -24,7 +26,9 @@
         "Common": {
             "next": "التالي",
             "previous": "السابق",
-            "done": "تم"
+            "done": "تم",
+            "recent": "كروت سابقة",
+            "edit": "تعديل"
         }
     }
 }

@@ -70,10 +70,6 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var saveSwitch:UISwitch = UISwitch()
     /// Defines the order of the fields they are shown in, this is important to implement the navigation (nexxt and previous) between fields from the keyboard itself
     internal lazy var fields:[TapCardTextField] = [cardNumber,cardExpiry,cardCVV,cardName]
-    /// States if the view is using the default TAP theme or a custom one
-    internal lazy var applyingDefaultTheme:Bool = true
-    /// The current theme being applied
-    internal var themingDictionary:NSDictionary?
     /// This defines in which path should we look into the theme based on the card input mode
     internal var themePath:String = "inlineCard"
     /// The item spacing between different fields inside the stack view
@@ -116,43 +112,7 @@ internal protocol TapCardInputCommonProtocol {
         super.init(coder:coder)
         self.backgroundColor = .clear
     }
-    
-    /**
-     Call this method when you  need to setup the view with a custom theme dictionary. Setup method is reponsible for laying out the view,  adding subviews and applying the given theme
-     - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
-     - Parameter withDictionaryTheme: Defines the theme needed to be applied as a dictionary
-     */
-    @objc public func setup(for cardInputMode:CardInputMode,withDictionaryTheme:NSDictionary?) {
-        
-        // Set default values
-        applyingDefaultTheme = true
-        self.cardInputMode = cardInputMode
-        
-        if let nonNullThemeDict = withDictionaryTheme {
-            // If the given dictionary is a valid theme, then we apply this given theme
-            applyTheme(with: nonNullThemeDict)
-        }
-        // After applying the theme, we need now to actually setup the views
-        setupViews()
-    }
-    
-    /**
-     Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the given theme
-     - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
-     - Parameter withJsonTheme: Defines the theme needed to be applied as a json file file name
-     */
-    @objc public func setup(for cardInputMode:CardInputMode,withJsonTheme:String) {
-        // Set default values
-        applyingDefaultTheme = true
-        self.cardInputMode = cardInputMode
-        applyTheme(with: withJsonTheme)
-        
-        let theme:[String:String] = ["defaultTheme":"false","themeJSON":withJsonTheme,"cardInputMode":"\(cardInputMode)"]
-        FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:theme)
-        // After applying the theme, we need now to actually setup the views
-        setupViews()
-    }
-    
+
     /**
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
@@ -160,7 +120,6 @@ internal protocol TapCardInputCommonProtocol {
      */
     @objc public func setup(for cardInputMode:CardInputMode) {
         
-        applyingDefaultTheme = true
         self.cardInputMode = cardInputMode
         // After applying the theme, we need now to actually setup the views
         FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
@@ -182,77 +141,10 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-    /**
-     Internal helper method to apply  a theme from a given dictionary
-     - Parameter dictionaryTheme: Defines the theme needed to be applied as a dictionary
-     */
-    internal func applyTheme(with dictionaryTheme:NSDictionary)
-    {
-        applyingDefaultTheme = false
-        TapThemeManager.setTapTheme(themeDict: dictionaryTheme)
-        themingDictionary = TapThemeManager.currentTheme
-        var theme:[String:String] = ["defaultTheme":"false","cardInputMode":"\(cardInputMode)"]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: themingDictionary!, options: [.prettyPrinted]) {
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                theme["theme"] = jsonString
-            }
-        }
-        FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:theme)
-    }
-    
-    /**
-     Internal helper method to apply  a theme from a given json file name
-     - Parameter dictionaryTheme: Defines the theme needed to be applied as a json file file name
-     */
-    internal func applyTheme(with jsonTheme:String)
-    {
-        applyingDefaultTheme = false
-        TapThemeManager.setTapTheme(jsonName: jsonTheme)
-        themingDictionary = TapThemeManager.currentTheme
-        var theme:[String:String] = ["defaultTheme":"false","cardInputMode":"\(cardInputMode)"]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: themingDictionary!, options: [.prettyPrinted]) {
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                theme["theme"] = jsonString
-            }
-        }
-    }
-    
-    
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        // In here we do listen to the trait collection change event :), this leads to changing the theme based on dark or light mode activated by the user at run time.
-        guard applyingDefaultTheme else {
-            // We will do nothing, if the view is using a customised given theme as it should be handled by the caller.
-            return
-        }
-        // If the view is set to use the default theme, hence, we change the theme based on the dark or light mode is activated
-        applyDefaultTheme()
+        TapThemeManager.changeThemeDisplay(for: self.traitCollection.userInterfaceStyle)
         matchThemeAttributes()
-    }
-    
-    
-    /// Internal helper method to apply the default theme
-    internal func applyDefaultTheme() {
-        // Check if the file exists
-        let bundle:Bundle = Bundle(for: type(of: self))
-        // Based on the current display mode, we decide which default theme file we will use
-        let themeFile:String = (self.traitCollection.userInterfaceStyle == .dark) ? "DefaultDarkTheme" : "DefaultLightTheme"
-        // Defensive code to make sure all is loaded correctly
-        guard let jsonPath = bundle.path(forResource: themeFile, ofType: "json") else {
-            print("TapThemeManager WARNING: Can't find json 'DefaultTheme'")
-            return
-        }
-        // Check if the file is correctly parsable
-        guard
-            let data = try? Data(contentsOf: URL(fileURLWithPath: jsonPath)),
-            let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed),
-            let jsonDict = json as? NSDictionary else {
-                print("TapThemeManager WARNING: Can't read json 'DefaultTheme' at: \(jsonPath)")
-                return
-        }
-        // Apply the loaded default theme
-        applyTheme(with: jsonDict)
-        applyingDefaultTheme = true
     }
     
     /// Helper method to natch the text, error and palceholder colors from the theme to all the cards fields
@@ -648,9 +540,6 @@ extension TapCardInput:TapCardInputCommonProtocol {
     
     /// This method is the brain controller of showing the views, as it taks the process for adding subview, laying them out and applying the theme
     internal func setupViews() {
-        
-        // Apply the default theme if needed
-        if applyingDefaultTheme { applyDefaultTheme() }
         
         // Match the theme attributes to the right views
         matchThemeAttributes()

@@ -8,6 +8,7 @@
 
 import UIKit
 import MOLH
+import TapThemeManager2020
 
 class CardInputSelectionTableViewController: UITableViewController {
 
@@ -61,7 +62,7 @@ class CardInputSelectionTableViewController: UITableViewController {
     
     
     func showDefaultInput(isInline:Bool, lang:String = "en") {
-        
+        TapThemeManager.setDefaultTapTheme()
         if let example:ExampleCardInputViewController = storyboard?.instantiateViewController(withIdentifier: "ExampleCardInputViewController") as? ExampleCardInputViewController {
             example.isInline = isInline
             example.lang = lang
