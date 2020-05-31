@@ -13,6 +13,8 @@ import RxCocoa
 /// Represnts the card number text field
 class CardNumberTextField:TapCardTextField {
     
+    
+    internal let disposeBag:DisposeBag = .init()
     /**
      Method that is used to setup the field by providing the needed info and the obersvers for the events
      - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
@@ -34,7 +36,72 @@ class CardNumberTextField:TapCardTextField {
         self.keyboardType = .phonePad
         
         // Listen to the event of text change
-        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
+        
+        let textChangeObservable = self.rx.text
+            .map{ text -> String in text ?? ""}
+            .share()
+            
+        let validCardNumberInput:Observable<Bool> =
+            textChangeObservable.distinctUntilChanged()
+                .map { $0.digitsWithSpaces() == $0 && CardValidator.validate(cardNumber:   $0.onlyDigits()).validationState != .invalid }
+        
+        
+        let textInput = Observable.zip(textChangeObservable, validCardNumberInput).distinctUntilChanged {
+            let (textOne,_) = $0, (textTwo,_) = $1
+            return textTwo == textOne
+        }
+        
+        // Deal withconfigutations based on validity
+        
+        // Set the text field colour based on the valid status
+        validCardNumberInput.map{ $0 ? self.normalTextColor : self.errorTextColor }
+            .distinctUntilChanged()
+            .subscribe(onNext: { self.textColor = $0 }).disposed(by: disposeBag)
+        
+        
+        // Set the text field text based on valid, if valid set the spacing , if invalid remove invalid charachters
+        validCardNumberInput
+            .map{ valid -> String in
+                guard let text = self.text else { return "" }
+                return valid ? text.cardFormat(with: CardValidator.cardSpacing(cardNumber: text)) : text.digitsWithSpaces()
+            }
+            .asDriver(onErrorJustReturn: "")
+            .drive(self.rx.text).disposed(by: disposeBag)
+       
+        // Whenever the status is valid, detect the brand otherwise, keep it nil
+        validCardNumberInput.map { _ in CardValidator.validate(cardNumber: (self.text ?? "").onlyDigits()).cardBrand }.distinctUntilChanged().bind(to: TapCardInput.tapCardInputcardBrandSubject).disposed(by: disposeBag)
+        
+        
+        // Update the global card number whenver the input is valid
+        validCardNumberInput.filter{ $0 }.subscribe(onNext: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+        /*validCardNumberInput.filter{ (valid,text) in !valid }
+            .subscribe(onNext: { [weak self] (_, text) in
+                self?.textColor =  self?.errorTextColor
+                self?.text = text
+            }).disposed(by: disposeBag)
+        
+        validCardNumberInput.filter{ (valid,text) in valid }
+            .distinctUntilChanged({ (inputOne, inputTwo) -> Bool in
+                let (_,textOne) = inputOne
+                let (_,textTwo) = inputTwo
+                return textOne == textTwo
+            })
+        .subscribe(onNext: { [weak self] (_, text) in
+            self?.textColor =  self?.normalTextColor
+            self?.text = text
+        }).disposed(by: disposeBag)*/
+            
+            /*textChangeObservable
+            .distinctUntilChanged()
+            .map{ text -> String in
+                let newTapCard = TapCardInput.tapCardInputCardSubject.value
+                newTapCard.tapCardNumber = text
+                TapCardInput.tapCardInputCardSubject.accept(newTapCard)
+                return text.cardFormat(with: CardValidator.cardSpacing(cardNumber: text))
+            }
+            .distinctUntilChanged()
+            .bind(to: self.rx.text)
+            .disposed(by: disposeBag)*/
         
         self.delegate = self
     }
@@ -94,21 +161,7 @@ extension CardNumberTextField:UITextFieldDelegate {
         // add their new text to the existing text
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
         // Check if the new string is a valid one to allow writing it to the card number field
-        return changeText(with: updatedText)
-    }
-    
-    /**
-     This method does the logic required when a text change event is fired for the text field
-     - Parameter textField: The text field that has its text changed
-     */
-    @objc func didChangeText(textField:UITextField) {
-        // For the card number we need to apply the formatting of every four digits scheme before assigning the text
-        let spacing = CardValidator.cardSpacing(cardNumber: textField.text!.onlyDigits())
-        print("SPACING : \(spacing)")
-        textField.text = textField.text!.cardFormat(with: spacing)
-        let newTapCard = TapCardInput.tapCardInputCardSubject.value
-        newTapCard.tapCardNumber = textField.text!.onlyDigits()
-        TapCardInput.tapCardInputCardSubject.accept(newTapCard)
+        return true //changeText(with: updatedText)
     }
     
     /**
@@ -137,7 +190,7 @@ extension CardNumberTextField:UITextFieldDelegate {
         if setTextAfterValidation {
             // If the caller wants us to write the text after validating it, then we do so here
             self.text = updatedText
-            didChangeText(textField:self)
+            //didChangeText(textField:self)
         }
         
         return shouldUpdate
