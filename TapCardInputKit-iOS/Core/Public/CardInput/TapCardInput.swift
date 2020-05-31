@@ -151,7 +151,7 @@ internal protocol TapCardInputCommonProtocol {
     @objc public func setCardData(tapCard:TapCard) {
         // Match the tapCard attributes to the different card fields
         cardName.text = tapCard.tapCardName ?? ""
-        let _ = cardNumber.changeText(with: tapCard.tapCardNumber ?? "", setTextAfterValidation: true)
+        let _ = cardNumber.text = tapCard.tapCardNumber
         let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
         cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
         FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
