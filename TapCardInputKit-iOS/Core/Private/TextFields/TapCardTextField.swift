@@ -146,7 +146,7 @@ extension String {
     - Returns: A lowercase string that has only alphabet from the provided string
     */
     func alphabetOnly() -> String {
-        return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz ".contains($0) }
+        return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz '-.".contains($0) }
     }
     
     /**

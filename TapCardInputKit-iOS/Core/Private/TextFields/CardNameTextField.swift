@@ -10,22 +10,23 @@ import struct UIKit.CGFloat
 import struct UIKit.CGRect
 import class UIKit.UITextField
 import protocol UIKit.UITextFieldDelegate
+import class CommonDataModelsKit_iOS.TapCard
+import RxCocoa
+import RxSwift
 
 /// Represnts the card name text field
 class CardNameTextField:TapCardTextField {
     
-    /// This is the block that will fire an event when a the card name has changed
-    var cardNameChanged: ((String) -> ())? =  nil
+    let disposeBag:DisposeBag = .init()
+    let isValidSubject:PublishRelay<Bool> = .init()
     
     /**
     Method that is used to setup the field by providing the needed info and the obersvers for the events
     - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
     - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
     - Parameter placeholder: The placeholder to show in this field. Default is ""
-    - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
-    - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
     */
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "") {
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
@@ -35,13 +36,27 @@ class CardNameTextField:TapCardTextField {
         self.fillBiggestAvailableSpace = true
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
-        // Assign the observers and the blocks
-        self.editingStatusChanged = editingStatusChanged
-        self.cardNameChanged = cardNameChanged
-        // Listen to the event of text change
-        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         
-        self.delegate = self
+        self.rx.text.map{ $0 ?? ""}
+            .distinctUntilChanged()
+            .map{ [weak self] _ in self?.isValid() ?? false }.bind(to: isValidSubject).disposed(by: disposeBag)
+        
+        isValidSubject.map{ [weak self] in $0 ? self?.normalTextColor : self?.errorTextColor }
+            .map{ $0 ?? UIColor.black }.distinctUntilChanged()
+            .subscribe(onNext: { [weak self] (newColor) in
+                self?.textColor = newColor
+            }).disposed(by: disposeBag)
+        
+        isValidSubject.filter{ $0 }.map{ [weak self] _ in self?.text?.uppercased() ?? ""}
+            .distinctUntilChanged().subscribe(onNext: { cardName in
+                let tapCard:TapCard = TapCardInput.tapCardInputCardSubject.value
+                tapCard.tapCardName = cardName
+                TapCardInput.tapCardInputCardSubject.accept(tapCard)
+            }).disposed(by: disposeBag)
+        
+        self.rx.text.map{ ($0 ?? "").alphabetOnly().uppercased() }
+            .map{ $0.count >= 26 ? $0.substring(to: 26) : $0}.asDriver(onErrorJustReturn: "")
+            .drive(self.rx.text).disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -77,43 +92,4 @@ extension CardNameTextField: CardInputTextFieldProtocol {
         
         return textFieldStatus() == .Valid
      }
-}
-
-extension CardNameTextField:UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let nonNullEditingBlock = editingStatusChanged {
-            // If the editing changed block is assigned, we need to fire this event as the editing now started for the field
-            nonNullEditingBlock(true)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if let nonNullEditingBlock = editingStatusChanged {
-            // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
-            nonNullEditingBlock(false)
-        }
-    }
-    /**
-        This method does the logic required when a text change event is fired for the text field
-        - Parameter textField: The text field that has its text changed
-        */
-    @objc func didChangeText(textField:UITextField) {
-        if let nonNullBlock = cardNameChanged {
-            // If the card name changed block is assigned, we need to fire this event
-            textField.text = textField.text?.uppercased()
-            nonNullBlock(textField.text!)
-        }
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       // get the current text, or use an empty string if that failed
-        let currentText = textField.text ?? ""
-        // attempt to read the range they are trying to change, or exit if we can't
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        // add their new text to the existing text
-        let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
-        self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
-        return updatedText.alphabetOnly() == updatedText.lowercased() && updatedText.count <= 26
-    }
 }

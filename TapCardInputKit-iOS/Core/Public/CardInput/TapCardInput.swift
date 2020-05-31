@@ -135,7 +135,7 @@ internal protocol TapCardInputCommonProtocol {
         setupViews()
         
         TapCardInput.tapCardInputCardSubject.subscribe(onNext: { [weak self] (tapCard) in
-            self?.cardDatachanged()
+            self?.cardDatachanged(tapCard: tapCard)
         }).disposed(by: disposeBag)
         
         // If a card brand is detected we need to pudate the card icon image and update the allowed length of the CVV
@@ -266,16 +266,7 @@ internal protocol TapCardInputCommonProtocol {
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number")
         
         // Setup the card name field with the needed data and listeners
-        cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
-            // We will glow the shadow if needed
-            self?.updateShadow()
-            // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
-            self?.updateWidths(for: self?.cardName)
-            },cardNameChanged: { [weak self] (cardName) in
-                // If the card name changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardName = cardName
-                self?.cardDatachanged()
-        })
+        cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name")
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(placeholder: "MM/YY",editingStatusChanged: {[weak self] (isEditing) in
@@ -290,7 +281,7 @@ internal protocol TapCardInputCommonProtocol {
                 if self?.cardExpiry.isValid() ?? false {
                     self?.cardCVV.becomeFirstResponder()
                 }
-                self?.cardDatachanged()
+                //self?.cardDatachanged()
         })
         
         // Setup the card cvv field with the needed data and listeners
@@ -382,7 +373,7 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     /// The method that holds the logic needed to do when any of the card fields changed
-    internal func cardDatachanged() {
+    internal func cardDatachanged(tapCard:TapCard) {
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
