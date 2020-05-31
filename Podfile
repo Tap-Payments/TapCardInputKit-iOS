@@ -24,4 +24,6 @@ target 'TapCardInputKit-iOS' do
   pod 'LocalisationManagerKit-iOS'
   pod 'Flurry-iOS-SDK/FlurrySDK'
   pod 'MOLH'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end

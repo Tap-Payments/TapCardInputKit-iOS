@@ -7,36 +7,25 @@
 //
 
 import TapCardValidator
+import RxSwift
+import RxCocoa
+
 /// Represnts the card number text field
 class CardNumberTextField:TapCardTextField {
-   
-    /**
-     This is the block that will fire an event when a card brand is detected
-     - Parameter CardBrand: The detected card brand
-     */
-    var cardBrandDetected: ((CardBrand?) -> ())? =  nil
-    /**
-    This is the block that will fire an event when a the card number has changed
-    */
-    var cardNumberChanged: ((String) -> ())? =  nil
-    
     
     /**
      Method that is used to setup the field by providing the needed info and the obersvers for the events
      - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
      - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
      - Parameter placeholder: The placeholder to show in this field. Default is ""
-     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
      - Parameter cardBrandDetected: Observer to listen to the event when a card brand is detected based on user input till the moment
-     - Parameter cardNumberChanged: Observer to listen to the event when a the card number is changed by user input till the moment
      */
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil,cardBrandDetected: ((CardBrand?) -> ())? =  nil,cardNumberChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "") {
         
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
         self.fillBiggestAvailableSpace = false
-        self.cardNumberChanged = cardNumberChanged
         
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
@@ -46,10 +35,6 @@ class CardNumberTextField:TapCardTextField {
         
         // Listen to the event of text change
         self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
-
-        // Assign the observers and the blocks
-        self.editingStatusChanged = editingStatusChanged
-        self.cardBrandDetected = cardBrandDetected
         
         self.delegate = self
     }
@@ -101,20 +86,6 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
 
 extension CardNumberTextField:UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // If the editing changed block is assigned, we need to fire this event as the editing now started for the field
-        if let nonNullEditingBlock = editingStatusChanged {
-            nonNullEditingBlock(true)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
-        if let nonNullEditingBlock = editingStatusChanged {
-            nonNullEditingBlock(false)
-        }
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
        // get the current text, or use an empty string if that failed
         let currentText = textField.text ?? ""
@@ -135,10 +106,9 @@ extension CardNumberTextField:UITextFieldDelegate {
         let spacing = CardValidator.cardSpacing(cardNumber: textField.text!.onlyDigits())
         print("SPACING : \(spacing)")
         textField.text = textField.text!.cardFormat(with: spacing)
-        if let nonNullBlock = cardNumberChanged {
-            // If the card number changed block is assigned, we need to fire this event
-            nonNullBlock(textField.text!.onlyDigits())
-        }
+        let newTapCard = TapCardInput.tapCardInputCardSubject.value
+        newTapCard.tapCardNumber = textField.text!.onlyDigits()
+        TapCardInput.tapCardInputCardSubject.accept(newTapCard)
     }
     
     /**
@@ -153,12 +123,8 @@ extension CardNumberTextField:UITextFieldDelegate {
         let filteredText:String = updatedText.digitsWithSpaces()
         // Validae the state of the number by trimming all non numeric charachters
         let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
-        
-        
-        if let nonNullCardBrandBlock = cardBrandDetected {
-            // If there is a detected brand and the card brand deteced block is assigned, we need to fire this event
-            nonNullCardBrandBlock(validation.cardBrand)
-        }
+        // If there is a detected brand and the card brand deteced block is assigned, we need to fire this event
+        TapCardInput.tapCardInputcardBrandSubject.accept(validation.cardBrand)
         
         // The text is only valid and allowed to be written if it does contain only digits and spaces & the validation kit is not stating it is an invalid card number format
         let shouldUpdate:Bool = (updatedText == filteredText && validation.validationState != .invalid)

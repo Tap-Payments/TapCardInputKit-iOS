@@ -12,6 +12,8 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
 import TapCardValidator
 import LocalisationManagerKit_iOS
 import MOLH
+import RxSwift
+import RxCocoa
 
 /// Internal protocl for all card text fields to implement to consolidate the logic and make sure all needed logic is implemented
 internal protocol TapCardInputCommonProtocol {
@@ -77,6 +79,13 @@ internal protocol TapCardInputCommonProtocol {
     /// The left and right padding around the input card
     internal var inputLeftRightMargin:CGFloat = 15
     
+    internal static let tapCardInputCardSubject:BehaviorRelay<TapCard> = .init(value: .init())
+    /**
+     This is the block that will fire an event when a card brand is detected
+     - Parameter CardBrand: The detected card brand
+     */
+    internal static let tapCardInputcardBrandSubject:PublishRelay<CardBrand?> = .init()
+    internal let disposeBag:DisposeBag = .init()
     
     internal var computedSpace:CGFloat{
         get{
@@ -124,6 +133,15 @@ internal protocol TapCardInputCommonProtocol {
         // After applying the theme, we need now to actually setup the views
         FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         setupViews()
+        
+        TapCardInput.tapCardInputCardSubject.subscribe(onNext: { [weak self] (tapCard) in
+            self?.cardDatachanged()
+        }).disposed(by: disposeBag)
+        
+        // If a card brand is detected we need to pudate the card icon image and update the allowed length of the CVV
+        TapCardInput.tapCardInputcardBrandSubject.subscribe(onNext: { [weak self] (newCardBrand) in
+            self?.cardBrandDetected(with:newCardBrand)
+        }).disposed(by: disposeBag)
     }
     
     /**
@@ -245,19 +263,16 @@ internal protocol TapCardInputCommonProtocol {
         
         
         // Setup the card number field with the needed data and listeners
-        cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
+        cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number")
+        
+        Observable.from([cardNumber.rx.controlEvent(.editingDidBegin),cardNumber.rx.controlEvent(.editingDidEnd)])
+            .merge()
+            .subscribe(onNext: { [weak self] in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardNumber)
-            },cardBrandDetected: { [weak self] (brand) in
-                // If a card brand is detected we need to pudate the card icon image and update the allowed length of the CVV
-                self?.cardBrandDetected(with:brand)
-            },cardNumberChanged: { [weak self] (cardNumber) in
-                // If the card number changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardNumber = cardNumber
-                self?.cardDatachanged()
-        })
+        }).disposed(by: disposeBag)
         
         // Setup the card name field with the needed data and listeners
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
