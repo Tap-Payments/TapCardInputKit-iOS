@@ -46,10 +46,12 @@ class CardNumberTextField:TapCardTextField {
             textChangeObservable.distinctUntilChanged()
                 .map { $0.digitsWithSpaces() == $0 && CardValidator.validate(cardNumber:   $0.onlyDigits()).validationState != .invalid }
         
-        // Deal withconfigutations based on validity
+        // Deal with configutations based on validity
         
-        // Set the text field colour based on the valid status
-        validCardNumberInput.map{ $0 ? self.normalTextColor : self.errorTextColor }
+        // Set the text field colour based on the valid status or if the user ended up editing we need to check if the card is valid. While typing we consider incomplpete as ok but it is invalid if ended typing
+        
+        Observable.from([validCardNumberInput,self.rx.controlEvent(.editingDidEnd).map{ self.isValid() }]).merge()
+            .map{ $0 ? self.normalTextColor : self.errorTextColor }
             .distinctUntilChanged()
             .subscribe(onNext: { self.textColor = $0 }).disposed(by: disposeBag)
         
