@@ -10,8 +10,13 @@ import struct UIKit.CGFloat
 import struct UIKit.CGRect
 import class UIKit.UITextField
 import protocol UIKit.UITextFieldDelegate
+import RxCocoa
+import RxSwift
+
 /// Represnts the card cvv text field
 class CardCVVTextField:TapCardTextField {
+    let disposeBag:DisposeBag = .init()
+    let textColorSubject:PublishRelay<UIColor> = .init()
     
     /// This is the block that will fire an event when a the card cvv has changed
     var cardCVVChanged: ((String) -> ())? =  nil
@@ -33,10 +38,9 @@ class CardCVVTextField:TapCardTextField {
     - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
     - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
     - Parameter placeholder: The placeholder to show in this field. Default is ""
-    - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
     - Parameter cardCVVChanged: Observer to listen to the event when a the card cvv is changed by user input till the moment
     */
-    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardCVVChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "",cardCVVChanged: ((String) -> ())? =  nil) {
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign and save the passed attributes
@@ -47,9 +51,22 @@ class CardCVVTextField:TapCardTextField {
         self.cardCVVChanged = cardCVVChanged
         // Listen to the event of text change
         self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
-        // Assign the observers and the blocks
-        self.editingStatusChanged = editingStatusChanged
+
         self.delegate = self
+        
+        textColorSubject.distinctUntilChanged().subscribe(onNext: { [weak self] (newColor) in
+            self?.textColor = newColor
+        }).disposed(by: disposeBag)
+        
+        
+        // Set the text color bbased on validaty and editing status. When we end editing it has to be valid otherwise it will be errored out. But, when the user is still editing we show it as normal colour
+        Observable.from(
+            [self.rx.controlEvent(.editingDidBegin).map{ self.normalTextColor },
+             self.rx.controlEvent(.editingDidEnd).map{ self.isValid() ? self.normalTextColor : self.errorTextColor }])
+            .merge().bind(to: textColorSubject).disposed(by: disposeBag)
+        
+        //self.rx.controlEvent(.editingDidBegin).
+        
     }
     
     required init?(coder: NSCoder) {
@@ -100,21 +117,6 @@ extension CardCVVTextField:CardInputTextFieldProtocol {
 
 extension CardCVVTextField:UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // If the editing changed block is assigned, we need to fire this event as the editing now started for the field
-        if let nonNullEditingBlock = editingStatusChanged {
-            nonNullEditingBlock(true)
-        }
-        self.textColor = normalTextColor
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-         // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
-        if let nonNullEditingBlock = editingStatusChanged {
-            nonNullEditingBlock(false)
-        }
-        self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
-    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // attempt to read the range they are trying to change, or exit if we can't

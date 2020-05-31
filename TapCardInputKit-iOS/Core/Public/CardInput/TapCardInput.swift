@@ -265,15 +265,6 @@ internal protocol TapCardInputCommonProtocol {
         // Setup the card number field with the needed data and listeners
         cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number")
         
-        Observable.from([cardNumber.rx.controlEvent(.editingDidBegin),cardNumber.rx.controlEvent(.editingDidEnd)])
-            .merge()
-            .subscribe(onNext: { [weak self] in
-            // We will glow the shadow if needed
-            self?.updateShadow()
-            // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
-            self?.updateWidths(for: self?.cardNumber)
-        }).disposed(by: disposeBag)
-        
         // Setup the card name field with the needed data and listeners
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
             // We will glow the shadow if needed
@@ -303,16 +294,25 @@ internal protocol TapCardInputCommonProtocol {
         })
         
         // Setup the card cvv field with the needed data and listeners
-        cardCVV.setup(placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
-            // We will glow the shadow if needed
-            self?.updateShadow()
-            // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
-            self?.updateWidths(for: self?.cardCVV)
-            },cardCVVChanged: {  [weak self] (cardCVV) in
+        cardCVV.setup(placeholder: "CVV",cardCVVChanged: {  [weak self] (cardCVV) in
                 // If the card cvv changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
                 self?.tapCard.tapCardCVV = cardCVV
                 self?.cardDatachanged()
         })
+        
+        
+        fields.forEach { field in
+            
+            Observable.from([field.rx.controlEvent(.editingDidBegin),field.rx.controlEvent(.editingDidEnd)])
+                .merge()
+                .subscribe(onNext: { [weak self] in
+                // We will glow the shadow if needed
+                self?.updateShadow()
+                // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
+                self?.updateWidths(for: field)
+            }).disposed(by: disposeBag)
+            
+        }
         
         saveSwitch.addTarget(self, action: #selector(saveCardSwitchChanged), for: .valueChanged)
         
