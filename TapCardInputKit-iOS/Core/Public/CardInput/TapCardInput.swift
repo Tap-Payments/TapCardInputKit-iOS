@@ -152,7 +152,7 @@ internal protocol TapCardInputCommonProtocol {
         // Match the tapCard attributes to the different card fields
         cardName.text = tapCard.tapCardName ?? ""
         let _ = cardNumber.text = tapCard.tapCardNumber
-        let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
+        let _ = cardCVV.text = tapCard.tapCardCVV
         cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
         FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         
@@ -294,11 +294,7 @@ internal protocol TapCardInputCommonProtocol {
         })
         
         // Setup the card cvv field with the needed data and listeners
-        cardCVV.setup(placeholder: "CVV",cardCVVChanged: {  [weak self] (cardCVV) in
-                // If the card cvv changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardCVV = cardCVV
-                self?.cardDatachanged()
-        })
+        cardCVV.setup(placeholder: "CVV")
         
         
         fields.forEach { field in

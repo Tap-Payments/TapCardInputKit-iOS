@@ -10,16 +10,14 @@ import struct UIKit.CGFloat
 import struct UIKit.CGRect
 import class UIKit.UITextField
 import protocol UIKit.UITextFieldDelegate
+import class CommonDataModelsKit_iOS.TapCard
 import RxCocoa
 import RxSwift
 
 /// Represnts the card cvv text field
 class CardCVVTextField:TapCardTextField {
     let disposeBag:DisposeBag = .init()
-    let textColorSubject:PublishRelay<UIColor> = .init()
-    
-    /// This is the block that will fire an event when a the card cvv has changed
-    var cardCVVChanged: ((String) -> ())? =  nil
+    let isValidSubject:PublishRelay<Bool> = .init()
     
     /// Defines the length of the cvv length allowed based on the brand detected
     var cvvLength:Int = 3 {
@@ -38,9 +36,8 @@ class CardCVVTextField:TapCardTextField {
     - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
     - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
     - Parameter placeholder: The placeholder to show in this field. Default is ""
-    - Parameter cardCVVChanged: Observer to listen to the event when a the card cvv is changed by user input till the moment
     */
-    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "",cardCVVChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "") {
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign and save the passed attributes
@@ -48,22 +45,32 @@ class CardCVVTextField:TapCardTextField {
         self.keyboardType = .phonePad
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
-        self.cardCVVChanged = cardCVVChanged
-        // Listen to the event of text change
-        self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
-
-        self.delegate = self
         
-        textColorSubject.distinctUntilChanged().subscribe(onNext: { [weak self] (newColor) in
-            self?.textColor = newColor
-        }).disposed(by: disposeBag)
+        isValidSubject.distinctUntilChanged().map{ $0 ? self.normalTextColor : self.errorTextColor}
+            .subscribe(onNext: { [weak self] (newColor) in
+                self?.textColor = newColor
+            }).disposed(by: disposeBag)
         
+        // Uodare rge global card CVV for any valid input
+        isValidSubject.filter{ $0 }.map{ [weak self] _ in self?.text ?? "" }.filter{ $0 != ""}.distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                let tapCard:TapCard = TapCardInput.tapCardInputCardSubject.value
+                tapCard.tapCardCVV = self?.text
+                TapCardInput.tapCardInputCardSubject.accept(tapCard)
+            }).disposed(by: disposeBag)
         
         // Set the text color bbased on validaty and editing status. When we end editing it has to be valid otherwise it will be errored out. But, when the user is still editing we show it as normal colour
         Observable.from(
-            [self.rx.controlEvent(.editingDidBegin).map{ self.normalTextColor },
-             self.rx.controlEvent(.editingDidEnd).map{ self.isValid() ? self.normalTextColor : self.errorTextColor }])
-            .merge().bind(to: textColorSubject).disposed(by: disposeBag)
+            [self.rx.controlEvent(.editingDidBegin).map{ true },
+             self.rx.controlEvent(.editingDidEnd).map{ self.isValid() },
+             self.rx.text.map{ _ in self.isValid() }])
+            .merge().bind(to: isValidSubject).disposed(by: disposeBag)
+        
+        // Apply needed formatting and validation to the text the user is writing
+        self.rx.text.map{ $0 ?? ""}
+            .map{ $0.onlyDigits() }
+            .map{ $0.count >= self.cvvLength ? $0.substring(to: self.cvvLength) : $0 }
+            .asDriver(onErrorJustReturn: "").drive(self.rx.text).disposed(by: disposeBag)
         
         //self.rx.controlEvent(.editingDidBegin).
         
@@ -87,8 +94,10 @@ extension CardCVVTextField:CardInputTextFieldProtocol {
     }
     
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
-        // Chevk if we can get the texxt from the text field first
+        // Chevk if we can get the text from the text field first
         guard let text:String = self.text else{ return .Invalid }
+        // Check first if its only digits, shouldn't happend but defensive code
+        guard text.onlyDigits() == text else { return .Invalid }
         // The card number field is considered valid only if it matches the length of the allowed CVV for the current card brand
         
         if text.count < 3 {
@@ -115,60 +124,6 @@ extension CardCVVTextField:CardInputTextFieldProtocol {
     }
 }
 
-extension CardCVVTextField:UITextFieldDelegate {
-    
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // attempt to read the range they are trying to change, or exit if we can't
-       guard let currentText = textField.text as NSString? else {
-           return false
-       }
-        // add their new text to the existing text
-        let updatedText = currentText.replacingCharacters(in: range, with: string)
-        // Apply and valiodate the new text before writing it
-        let _ = changeText(with: updatedText, setTextAfterValidation: true)
-        return false
-    }
-    
-    /**
-    This method does the logic required when a text change event is fired for the text field
-    - Parameter textField: The text field that has its text changed
-    */
-    @objc func didChangeText(textField:UITextField) {
-        if let nonNullBlock = cardCVVChanged {
-            // For the card cvv we send back the cvv entered by the user
-            nonNullBlock(textField.text!.onlyDigits())
-        }
-    }
-    
-    /**
-        This method does the logic required to check if a given text is allowed to be written to the card cvv field or not
-        - Parameter updatedText: The text we want to validate and write to the card cvv text field
-        - Parameter setTextAfterValidation: States if the caller wants to write the text if is correcly validated
-        - Returns: True if the text is valid and can be written to the card cvv field and false otherwise
-        */
-    internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
-        
-        // First of all we need to make sure that the text is only numeric
-        let filteredText = updatedText.onlyDigits()
-        
-        
-        if updatedText.count > cvvLength ||  filteredText != updatedText {
-            // If the tetx has non numeric or longer than the allowed max cvv length then it is false
-            return false
-        }else {
-            if setTextAfterValidation {
-                // If the caller wants us to write the text after validating it, then we do so here
-                self.text = updatedText
-            }
-            // Fire the event of text changed block
-            didChangeText(textField: self)
-            self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
-        }
-        
-        return true
-    }
-}
 
 internal extension String {
 
