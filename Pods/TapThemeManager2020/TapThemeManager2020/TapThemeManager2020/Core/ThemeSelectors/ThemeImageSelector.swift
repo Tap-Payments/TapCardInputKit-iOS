@@ -12,8 +12,8 @@ import class UIKit.UIImage
 @objc public final class ThemeImageSelector: ThemeSelector {
     
     /// Init with the UIImage value from a theme file
-    public convenience init(keyPath: String) {
-        self.init(value: { TapThemeManager.imageValue(for: keyPath) })
+    public convenience init(keyPath: String,from bundle:Bundle? = nil) {
+        self.init(value: { TapThemeManager.imageValue(for: keyPath,from: bundle) })
     }
     
     public convenience init(keyPath: String, map: @escaping (Any?) -> UIImage?) {

@@ -7,12 +7,24 @@
             "cardExpiryPlaceHolder": "MM/YY",
             "cardSaveLabel": "For faster and more secure checkout,\nsave your card"
         },
+        "TapMerchantSection": {
+            "paymentFor" : "PAYMENT FOR"
+        },
+        "HorizontalHeaders": {
+            "GatewayHeader":{
+                "leftTitle": "SELECT",
+                "rightTitle": "EDIT"
+            }
+        },
         "Common": {
             "next": "Next",
             "previous": "Previous",
             "done": "Done",
             "recent": "Recent",
-            "edit": "Edit"
+            "edit": "Edit",
+            "close": "Close",
+            "items": "Items",
+            "item": "Item"
         }
     },
     "ar": {
@@ -23,12 +35,24 @@
             "cardExpiryPlaceHolder": "شش/سس",
             "cardSaveLabel": "لشراء أسرع و أكثر أماناً،\nإحفظ البطاقة"
         },
+        "TapMerchantSection": {
+            "paymentFor" : "سأدفع لـ"
+        },
+        "HorizontalHeaders": {
+            "GatewayHeader":{
+                "leftTitle": "إختر",
+                "rightTitle": "تعديل"
+            }
+        },
         "Common": {
             "next": "التالي",
             "previous": "السابق",
             "done": "تم",
             "recent": "كروت سابقة",
-            "edit": "تعديل"
+            "edit": "تعديل",
+            "close": "غلق",
+            "items": "منتجات",
+            "item": "منتج"
         }
     }
 }

@@ -25,7 +25,6 @@
 		E8159E45243DB2500021B880 /* Pods_TapCardInputKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A959C3405CA8B486C298AD4 /* Pods_TapCardInputKit_iOS.framework */; };
 		E8159E46243DB2500021B880 /* Pods_TapCardInputKit_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A959C3405CA8B486C298AD4 /* Pods_TapCardInputKit_iOS.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E8159E48243DB2940021B880 /* Pods_TapCardInputKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA5C2C26FA06A448F2EAA78 /* Pods_TapCardInputKit_Example.framework */; };
-		E8159E54243DCA400021B880 /* card.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E53243DCA3F0021B880 /* card.png */; };
 		E8159E5E243DCB7E0021B880 /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E57243DCB7E0021B880 /* jcb.png */; };
 		E8159E5F243DCB7E0021B880 /* diners-club.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E58243DCB7E0021B880 /* diners-club.png */; };
 		E8159E60243DCB7E0021B880 /* american-express.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E59243DCB7E0021B880 /* american-express.png */; };
@@ -35,6 +34,11 @@
 		E8159E64243DCB7E0021B880 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5D243DCB7E0021B880 /* discover.png */; };
 		E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E65243DD4040021B880 /* CardNameTextField.swift */; };
 		E8159E68243E3A890021B880 /* Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* Theme.json */; };
+		E832E5EC24B07EA100E2241B /* clearFormIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E832E5EB24B07EA100E2241B /* clearFormIcon.png */; };
+		E832E5F024B1093A00E2241B /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E832E5ED24B1093A00E2241B /* card@2x.png */; };
+		E832E5F124B1093A00E2241B /* card@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E832E5EE24B1093A00E2241B /* card@3x.png */; };
+		E832E5F224B1093A00E2241B /* card.png in Resources */ = {isa = PBXBuildFile; fileRef = E832E5EF24B1093A00E2241B /* card.png */; };
+		E832E5F324B10A8400E2241B /* card.png in Resources */ = {isa = PBXBuildFile; fileRef = E832E5EF24B1093A00E2241B /* card.png */; };
 		E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C796B24482A6700CECC81 /* FlurryLogger.swift */; };
 		E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */; };
 		E87161282444474A00B139D0 /* ExampleCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */; };
@@ -111,7 +115,6 @@
 		E8159E27243DAB3F0021B880 /* bank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bank.png; sourceTree = "<group>"; };
 		E8159E4A243DB31A0021B880 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8159E4D243DB34C0021B880 /* TapCardValidator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TapCardValidator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8159E53243DCA3F0021B880 /* card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card.png; sourceTree = "<group>"; };
 		E8159E57243DCB7E0021B880 /* jcb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jcb.png; sourceTree = "<group>"; };
 		E8159E58243DCB7E0021B880 /* diners-club.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diners-club.png"; sourceTree = "<group>"; };
 		E8159E59243DCB7E0021B880 /* american-express.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "american-express.png"; sourceTree = "<group>"; };
@@ -121,6 +124,10 @@
 		E8159E5D243DCB7E0021B880 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
 		E8159E65243DD4040021B880 /* CardNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		E8159E67243E3A890021B880 /* Theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Theme.json; sourceTree = "<group>"; };
+		E832E5EB24B07EA100E2241B /* clearFormIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearFormIcon.png; sourceTree = "<group>"; };
+		E832E5ED24B1093A00E2241B /* card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card@2x.png"; sourceTree = "<group>"; };
+		E832E5EE24B1093A00E2241B /* card@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card@3x.png"; sourceTree = "<group>"; };
+		E832E5EF24B1093A00E2241B /* card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = card.png; sourceTree = "<group>"; };
 		E83C796B24482A6700CECC81 /* FlurryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlurryLogger.swift; sourceTree = "<group>"; };
 		E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputSelectionTableViewController.swift; sourceTree = "<group>"; };
 		E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardInputViewController.swift; sourceTree = "<group>"; };
@@ -295,6 +302,7 @@
 		E8159E29243DAB430021B880 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				E832E5EB24B07EA100E2241B /* clearFormIcon.png */,
 				E8159E5B243DCB7E0021B880 /* visa.png */,
 				E8159E5C243DCB7E0021B880 /* unionpay.png */,
 				E8159E5A243DCB7E0021B880 /* mastercard.png */,
@@ -302,7 +310,9 @@
 				E8159E5D243DCB7E0021B880 /* discover.png */,
 				E8159E58243DCB7E0021B880 /* diners-club.png */,
 				E8159E59243DCB7E0021B880 /* american-express.png */,
-				E8159E53243DCA3F0021B880 /* card.png */,
+				E832E5EF24B1093A00E2241B /* card.png */,
+				E832E5ED24B1093A00E2241B /* card@2x.png */,
+				E832E5EE24B1093A00E2241B /* card@3x.png */,
 				E8159E27243DAB3F0021B880 /* bank.png */,
 				E8BC5E0D244D9C17007E3916 /* scanIcon.png */,
 			);
@@ -426,15 +436,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8159E5F243DCB7E0021B880 /* diners-club.png in Resources */,
+				E832E5F224B1093A00E2241B /* card.png in Resources */,
 				E8159E5E243DCB7E0021B880 /* jcb.png in Resources */,
 				E8159E28243DAB3F0021B880 /* bank.png in Resources */,
 				E8159E64243DCB7E0021B880 /* discover.png in Resources */,
 				E8159E63243DCB7E0021B880 /* unionpay.png in Resources */,
+				E832E5F024B1093A00E2241B /* card@2x.png in Resources */,
 				E8159E60243DCB7E0021B880 /* american-express.png in Resources */,
-				E8159E54243DCA400021B880 /* card.png in Resources */,
 				E8159E61243DCB7E0021B880 /* mastercard.png in Resources */,
+				E832E5EC24B07EA100E2241B /* clearFormIcon.png in Resources */,
 				E8BC5E0E244D9C17007E3916 /* scanIcon.png in Resources */,
 				E8159E62243DCB7E0021B880 /* visa.png in Resources */,
+				E832E5F124B1093A00E2241B /* card@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +457,7 @@
 			files = (
 				E8159E03243C99DD0021B880 /* LaunchScreen.storyboard in Resources */,
 				E871612A24447DFB00B139D0 /* GoogleService-Info.plist in Resources */,
+				E832E5F324B10A8400E2241B /* card.png in Resources */,
 				E8BC5E0C244D7365007E3916 /* CustomTapCardInputKitLocalisation.json in Resources */,
 				E8B8CB562441F0990060E0F3 /* bank.png in Resources */,
 				E8159E68243E3A890021B880 /* Theme.json in Resources */,

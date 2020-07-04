@@ -337,7 +337,7 @@ internal protocol TapCardInputCommonProtocol {
             if cardInputMode == .FullCardInput {
                 self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
             }else {
-                self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
+                //self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
                 self.scanButton.isUserInteractionEnabled = true
             }
             
@@ -376,6 +376,7 @@ internal protocol TapCardInputCommonProtocol {
     
     /// The method that holds the logic needed to do when any of the card fields changed
     internal func cardDatachanged() {
+        adjustScanButton()
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
@@ -390,6 +391,30 @@ internal protocol TapCardInputCommonProtocol {
             nonNullDelegate.scanCardClicked()
         }
         FlurryLogger.logEvent(with: "Tap_Card_Input_Scan_Clicked")
+    }
+    
+    
+    @objc internal func clearButtonClicked() {
+        fields.forEach{
+            $0.text = ""
+            updateWidths(for: $0)
+        }
+        cardDatachanged()
+    }
+    
+    
+    internal func adjustScanButton() {
+        scanButton.removeTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
+        scanButton.removeTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
+
+        
+        if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
+            self.scanButton.setImage(UIImage(named: "clearFormIcon.png", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            self.scanButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
+        }else {
+            self.scanButton.setImage(UIImage(named: "scanIcon.png", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
+        }
     }
 }
 

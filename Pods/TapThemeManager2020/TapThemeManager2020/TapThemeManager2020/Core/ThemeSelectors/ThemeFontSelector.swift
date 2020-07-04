@@ -25,6 +25,10 @@ import class UIKit.UIFont
         self.init(value: { TapThemeManager.fontValue(for: value) })
     }
     
+    public required convenience init(stringLiteral value: String,shouldLocalise:Bool = true) {
+        self.init(value: { TapThemeManager.fontValue(for: value,shouldLocalise: shouldLocalise) })
+    }
+    
     public required convenience init(arrayLiteral elements: UIFont...) {
         self.init(value: { TapThemeManager.element(for: elements) })
     }

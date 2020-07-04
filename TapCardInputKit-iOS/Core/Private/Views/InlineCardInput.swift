@@ -46,7 +46,7 @@ extension TapCardInput {
         
         // Defines the constrints for the card icon image vie
         icon.snp.remakeConstraints { (make) in
-            make.width.equalTo(32)
+            make.width.equalTo(24)
             //make.height.equalTo(32)
         }
         
@@ -191,7 +191,6 @@ extension TapCardInput {
                         make.width.greaterThanOrEqualTo(nonNullProtocolImplemented.calculatedWidth())
                     }
                 })
-                
                 self?.layoutIfNeeded()
                 
             }) { (done) in

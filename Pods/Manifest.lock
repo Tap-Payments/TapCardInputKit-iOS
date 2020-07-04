@@ -1,50 +1,47 @@
 PODS:
   - Capable/Colors (1.1.4)
-  - CommonDataModelsKit-iOS (1.0.6)
-  - Firebase/Analytics (6.23.0):
+  - CommonDataModelsKit-iOS (1.0.16)
+  - Firebase/Analytics (6.27.0):
     - Firebase/Core
-  - Firebase/Core (6.23.0):
+  - Firebase/Core (6.27.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.4.2)
-  - Firebase/CoreOnly (6.23.0):
-    - FirebaseCore (= 6.6.7)
-  - FirebaseAnalytics (6.4.2):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.2)
-    - GoogleAppMeasurement (= 6.4.2)
+    - FirebaseAnalytics (= 6.6.1)
+  - Firebase/CoreOnly (6.27.0):
+    - FirebaseCore (= 6.8.0)
+  - FirebaseAnalytics (6.6.1):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.4)
+    - GoogleAppMeasurement (= 6.6.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - FirebaseCore (6.6.7):
-    - FirebaseCoreDiagnostics (~> 1.2)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - nanopb (~> 1.30905.0)
+  - FirebaseCore (6.8.0):
+    - FirebaseCoreDiagnostics (~> 1.3)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.2.4):
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 3.0)
+  - FirebaseCoreDiagnostics (1.4.0):
+    - GoogleDataTransportCCTSupport (~> 3.1)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
-    - nanopb (~> 0.3.901)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseInstallations (1.2.0):
-    - FirebaseCore (~> 6.6)
+    - nanopb (~> 1.30905.0)
+  - FirebaseInstallations (1.4.0):
+    - FirebaseCore (~> 6.8)
     - GoogleUtilities/Environment (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.6)
     - PromisesObjC (~> 1.2)
-  - Flurry-iOS-SDK/FlurrySDK (10.3.1)
-  - GoogleAppMeasurement (6.4.2):
+  - Flurry-iOS-SDK/FlurrySDK (10.3.3)
+  - GoogleAppMeasurement (6.6.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - GoogleDataTransport (6.0.0)
-  - GoogleDataTransportCCTSupport (3.0.0):
-    - GoogleDataTransport (~> 6.0)
-    - nanopb (~> 0.3.901)
+    - nanopb (~> 1.30905.0)
+  - GoogleDataTransport (6.2.1)
+  - GoogleDataTransportCCTSupport (3.2.0):
+    - GoogleDataTransport (~> 6.1)
+    - nanopb (~> 1.30905.0)
   - GoogleUtilities/AppDelegateSwizzler (6.6.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -65,27 +62,31 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - LocalisationManagerKit-iOS (1.0.0)
-  - MOLH (1.3)
-  - nanopb (0.3.9011):
-    - nanopb/decode (= 0.3.9011)
-    - nanopb/encode (= 0.3.9011)
-  - nanopb/decode (0.3.9011)
-  - nanopb/encode (0.3.9011)
-  - PromisesObjC (1.2.8)
+  - MOLH (1.4.1)
+  - nanopb (1.30905.0):
+    - nanopb/decode (= 1.30905.0)
+    - nanopb/encode (= 1.30905.0)
+  - nanopb/decode (1.30905.0)
+  - nanopb/encode (1.30905.0)
+  - PromisesObjC (1.2.9)
   - SheetyColors (1.2.0):
     - Capable/Colors (~> 1.1)
   - SnapKit (5.0.1)
-  - TapAdditionsKit/Foundation/Bundle (1.3.6)
-  - TapAdditionsKit/Foundation/Locale (1.3.6)
+  - SwiftLint (0.39.2)
   - TapCardValidator (1.2.6)
-  - TapFontsKit (1.0.6):
-    - TapAdditionsKit/Foundation/Bundle (>= 1.3.3)
-    - TapAdditionsKit/Foundation/Locale (>= 1.3.3)
-    - TapSwiftFixes/Threading (>= 1.0.9)
+  - TapFontKit-iOS (0.0.3):
+    - SwiftLint
+    - TapSwiftFixes
+  - TapSwiftFixes (1.0.9):
+    - TapSwiftFixes/CoreGraphics (= 1.0.9)
+    - TapSwiftFixes/Exceptions (= 1.0.9)
+    - TapSwiftFixes/Threading (= 1.0.9)
+  - TapSwiftFixes/CoreGraphics (1.0.9)
+  - TapSwiftFixes/Exceptions (1.0.9)
   - TapSwiftFixes/Threading (1.0.9)
-  - TapThemeManager2020 (1.0.4):
+  - TapThemeManager2020 (1.0.22):
     - LocalisationManagerKit-iOS
-    - TapFontsKit
+    - TapFontKit-iOS
 
 DEPENDENCIES:
   - CommonDataModelsKit-iOS
@@ -106,7 +107,6 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstallations
     - Flurry-iOS-SDK
     - GoogleAppMeasurement
@@ -119,38 +119,37 @@ SPEC REPOS:
     - PromisesObjC
     - SheetyColors
     - SnapKit
-    - TapAdditionsKit
+    - SwiftLint
     - TapCardValidator
-    - TapFontsKit
+    - TapFontKit-iOS
     - TapSwiftFixes
     - TapThemeManager2020
 
 SPEC CHECKSUMS:
   Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
-  CommonDataModelsKit-iOS: d815248f87571b1c86e7209165f632d1b4ea0096
-  Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
-  FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
-  FirebaseCore: a2788a0d5f6c1dff17b8f79b4a73654a8d4bfdbd
-  FirebaseCoreDiagnostics: b59c024493a409f8aecba02c99928d0d8431d159
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
-  Flurry-iOS-SDK: 2cc5b4f494db71d90a8bd195ba7ebb7cdebf3535
-  GoogleAppMeasurement: 2253e99c1f22638cf234c059144660c338ad76c3
-  GoogleDataTransport: 061fe7d9b476710e3cd8ea51e8e07d8b67c2b420
-  GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
+  CommonDataModelsKit-iOS: db179a18d63b200358e49cb3598090f9b19231df
+  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
+  FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
+  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
+  FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
+  FirebaseInstallations: 293f567159b6d66d1c990f13bb868066096c94ec
+  Flurry-iOS-SDK: 74038865f22ab9f587877b6a01b79e1b3bd86e01
+  GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
+  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
+  GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   LocalisationManagerKit-iOS: fe6a1f2e07d7bf73335675517d2f261f33124274
-  MOLH: a31ef0b87351074d81253606a96b290f9eca161a
-  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  MOLH: 9ea6c0390f5963b2df9827ae64035fbc8598b092
+  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   SheetyColors: 8dc64a666415be8a81df3c5d44b9088d6f8bee2e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  TapAdditionsKit: 136b2174e775b105f8fd17eac6a4da2951e0f05b
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
-  TapFontsKit: 81106c9d97fb0e839444bfaea47c8ad17d8896e5
+  TapFontKit-iOS: 2810f6f66ad8a1fa9a2afc0e3cbaf6ecd5dc9d1f
   TapSwiftFixes: db2aeb21942dd81ee051a31ed319dab0d03547a2
-  TapThemeManager2020: 5f29998f4da1322d2a62486bedefad178348638b
+  TapThemeManager2020: 56fd0aa2a884f8392ef0f326a9a37362e5564735
 
 PODFILE CHECKSUM: 4c5506fb484002ee910173851666af339ce5b79c
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

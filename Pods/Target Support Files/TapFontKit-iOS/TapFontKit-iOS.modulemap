@@ -1,0 +1,6 @@
+framework module TapFontKit_iOS {
+  umbrella header "TapFontKit-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

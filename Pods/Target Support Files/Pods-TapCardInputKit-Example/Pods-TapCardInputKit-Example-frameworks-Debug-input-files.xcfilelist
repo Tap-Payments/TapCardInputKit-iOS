@@ -9,8 +9,7 @@ ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
 ${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework
 ${BUILT_PRODUCTS_DIR}/MOLH/MOLH.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
-${BUILT_PRODUCTS_DIR}/TapAdditionsKit/TapAdditionsKit.framework
 ${BUILT_PRODUCTS_DIR}/TapCardValidator/TapCardValidator.framework
-${BUILT_PRODUCTS_DIR}/TapFontsKit/TapFontsKit.framework
+${BUILT_PRODUCTS_DIR}/TapFontKit-iOS/TapFontKit_iOS.framework
 ${BUILT_PRODUCTS_DIR}/TapSwiftFixes/TapSwiftFixes.framework
 ${BUILT_PRODUCTS_DIR}/TapThemeManager2020/TapThemeManager2020.framework

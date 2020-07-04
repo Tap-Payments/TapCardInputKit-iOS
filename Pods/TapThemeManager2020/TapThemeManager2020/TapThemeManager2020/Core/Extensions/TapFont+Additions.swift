@@ -5,17 +5,17 @@
 //  Copyright © 2019 Tap Payments. All rights reserved.
 //
 
-import enum TapFontsKit.TapFont
+import enum TapFontKit_iOS.TapFont
 
 // MARK: - Decodable
-extension TapFont: Decodable {
+extension TapFontKit_iOS.TapFont: Decodable {
 	
 	public init(from decoder: Decoder) throws {
 		
 		let container = try decoder.singleValueContainer()
 		let stringValue = try container.decode(String.self)
-		
-		guard let result = TapFont.mappingTable[stringValue] else {
+        
+        guard let result = TapFontKit_iOS.TapFont.mappingTable[stringValue] else {
 			
 			fatalError("Unknown font: \(stringValue)")
 		}
@@ -24,7 +24,7 @@ extension TapFont: Decodable {
 	
 	// MARK: - Private -
 	
-	private static let mappingTable: [String: TapFont] = [
+	fileprivate static let mappingTable: [String: TapFont] = [
 		
 		"helvetica-neue-thin": 			.helveticaNeueThin,
 		"helvetica-neue-light": 		.helveticaNeueLight,
