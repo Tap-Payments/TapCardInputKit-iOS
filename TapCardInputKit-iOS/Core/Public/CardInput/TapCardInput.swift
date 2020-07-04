@@ -106,6 +106,8 @@ internal protocol TapCardInputCommonProtocol {
     @objc public lazy var showSaveCardOption:Bool = false
     /// States if the parent controller wants to show a scanning option or not
     @objc public lazy var showScanningOption:Bool = true
+    /// States if the parent controller wants to show a card brand icon or not
+    @objc public lazy var showCardBrandIcon:Bool = false
     /// The delegate that wants to hear from the view on new data and events
     @objc public  var delegate:TapCardInputProtocol?
     
@@ -118,11 +120,13 @@ internal protocol TapCardInputCommonProtocol {
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
      - Parameter showCardName: States if the parent controller wants to show card number or not, default is false
+     - Parameter showCardBrandIcon: States if the parent controller wants to show a card brand icon or not
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false) {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
+        self.showCardBrandIcon = showCardBrandIcon
         // After applying the theme, we need now to actually setup the views
         FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         setupViews()
@@ -320,12 +324,9 @@ internal protocol TapCardInputCommonProtocol {
     */
     internal func cardBrandDetected(with brand:CardBrand?) {
         if let nonNullBrand = brand {
-            // Set the new icon based on the detected card brand
-            if cardInputMode == .FullCardInput {
+            if showCardBrandIcon {
+                // Set the new icon based on the detected card brand
                 self.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil)
-            }else {
-                self.scanButton.setImage(UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
-                self.scanButton.isUserInteractionEnabled = false
             }
             // Update the cvv allowed length based on the detected card brand
             self.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
