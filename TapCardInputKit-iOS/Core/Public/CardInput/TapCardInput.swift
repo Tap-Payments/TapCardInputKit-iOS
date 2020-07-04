@@ -484,7 +484,7 @@ extension TapCardInput {
         // Based on the card input mode, we define the ordering of the card fields
         switch cardInputMode {
         case .InlineCardInput:
-            fields = [cardNumber,cardExpiry,cardCVV,cardName]
+            fields = [cardNumber,cardExpiry,cardCVV]
         case .FullCardInput:
             fields = [cardNumber,cardExpiry,cardCVV,cardName]
         }
