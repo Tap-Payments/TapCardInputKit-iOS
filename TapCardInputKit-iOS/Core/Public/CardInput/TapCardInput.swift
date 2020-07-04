@@ -100,7 +100,8 @@ internal protocol TapCardInputCommonProtocol {
             }
         }
     }
-    //lazy var showCardName:Bool = true
+    /// States if the parent controller wants to show card number or not
+    @objc public lazy var showCardName:Bool = false
     /// States if the parent controller wants to show save card option, only works wth full mode
     @objc public lazy var showSaveCardOption:Bool = false
     /// States if the parent controller wants to show a scanning option or not
@@ -116,11 +117,12 @@ internal protocol TapCardInputCommonProtocol {
     /**
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
-     - Parameter showSaveCard: Defines if the FULL mode should show save card option or not
+     - Parameter showCardName: States if the parent controller wants to show card number or not, default is false
      */
-    @objc public func setup(for cardInputMode:CardInputMode) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false) {
         
         self.cardInputMode = cardInputMode
+        self.showCardName = showCardName
         // After applying the theme, we need now to actually setup the views
         FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         setupViews()
@@ -133,6 +135,7 @@ internal protocol TapCardInputCommonProtocol {
     @objc public func setCardData(tapCard:TapCard) {
         // Match the tapCard attributes to the different card fields
         cardName.text = tapCard.tapCardName ?? ""
+        
         let _ = cardNumber.changeText(with: tapCard.tapCardNumber ?? "", setTextAfterValidation: true)
         let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
         cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
@@ -482,12 +485,12 @@ extension TapCardInput {
     internal func addToolBarButtons() {
         
         // Based on the card input mode, we define the ordering of the card fields
-        switch cardInputMode {
+        /*switch cardInputMode {
         case .InlineCardInput:
-            fields = [cardNumber,cardExpiry,cardCVV]
+            fields = [cardNumber,cardExpiry,cardCVV,cardName]
         case .FullCardInput:
             fields = [cardNumber,cardExpiry,cardCVV,cardName]
-        }
+        }*/
         
         // For each field, we add the appropriate navigation buttons
         for (index, cardField) in fields.enumerated() {
@@ -556,9 +559,9 @@ extension TapCardInput:TapCardInputCommonProtocol {
         // Finally, we implement the keybaord (next and previousu) navigation logic for the different card fields
         addToolBarButtons()
         
-        /*if !showCardName {
+        if !showCardName {
          removeCardName()
-         }*/
+        }
         
         
     }
