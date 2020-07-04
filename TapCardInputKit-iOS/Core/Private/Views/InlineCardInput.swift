@@ -37,11 +37,19 @@ extension TapCardInput {
             make.trailing.equalTo(inputLeftRightMargin)
         }
         
-        // Defines the constrints for the card icon image vie
+        // Defines the constrints for the scan card button
         scanButton.snp.remakeConstraints { (make) in
             make.width.equalTo(32)
             //make.height.equalTo(32)
         }
+
+        
+        // Defines the constrints for the card icon image vie
+        icon.snp.remakeConstraints { (make) in
+            make.width.equalTo(32)
+            //make.height.equalTo(32)
+        }
+        
         
         // Defines the constrints for the card number field
         cardNumber.snp.remakeConstraints { (make) in
@@ -97,10 +105,12 @@ extension TapCardInput {
         scrollView.addSubview(stackView)
         
         // Add the card fields to the stack view in order
-        stackView.addArrangedSubview(scanButton)
+        stackView.addArrangedSubview(icon)
+        
         fields.forEach { (field) in
             stackView.addArrangedSubview(field)
         }
+        stackView.addArrangedSubview(scanButton)
     }
     
     
