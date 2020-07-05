@@ -382,6 +382,17 @@ internal protocol TapCardInputCommonProtocol {
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
         }
         FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
+        adjustExpiryCvv()
+    }
+    
+    
+    internal func adjustExpiryCvv() {
+        guard cardInputMode == .InlineCardInput else { return }
+        
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.cardCVV.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
+            self?.cardExpiry.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
+        })
     }
     
     /// The method that holds the logic needed to do when any of the scan button is clicked
@@ -595,8 +606,6 @@ extension TapCardInput:TapCardInputCommonProtocol {
         if !showCardName {
          removeCardName()
         }
-        
-        
     }
     
     /// The method that layouts the subviews properly by creating the correct layout constraints

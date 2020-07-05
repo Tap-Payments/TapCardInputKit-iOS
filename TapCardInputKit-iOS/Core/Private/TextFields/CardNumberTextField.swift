@@ -69,7 +69,7 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
     
     func calculatedWidth() -> CGFloat {
         // Calculate the width of the field based on it is active status, if it is activbe we calculaye the width needed to show the max visible charachters and if it is inactive we calculate width based on minimum visible characters
-        return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
+        return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing || !self.isValid()) ? maxVisibleChars : minVisibleChars))
     }
     
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {

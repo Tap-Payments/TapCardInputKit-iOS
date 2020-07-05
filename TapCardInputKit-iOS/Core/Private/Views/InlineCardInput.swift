@@ -61,7 +61,7 @@ extension TapCardInput {
         // Defines the constrints for the card number field
         cardNumber.snp.remakeConstraints { (make) in
             // We set the card number width to the mimimum width based on its min visible characters attribute
-            make.width.equalTo(50)
+            make.width.equalTo(cardNumber.calculatedWidth())
             make.height.equalToSuperview()
             make.leading.equalTo(icon.snp.trailing).offset(10)
         }
@@ -122,6 +122,8 @@ extension TapCardInput {
             addSubview(field)
         }
         cardCVV.alignment = .right
+        cardExpiry.alpha = 0
+        cardCVV.alpha = 0
         // Add other fields not inside the scrolling areas
         addSubview(icon)
         addSubview(scanButton)
