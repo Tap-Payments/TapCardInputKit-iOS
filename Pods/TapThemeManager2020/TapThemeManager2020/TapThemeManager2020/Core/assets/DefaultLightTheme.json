@@ -15,15 +15,17 @@
             "white80":"#ffffffcc",
             "vibrantGreen" : "#2ace00",
             "vibrantGreenTwo" : "#00d300",
-            "paleLilac":"#e4e4e5"
+            "paleLilac":"#e4e4e5",
+            "clear":"#00000000",
+            "brownGreyTwo":"#b2b2b2"
         }
     },
     "inlineCard": {
         "commonAttributes": {
             "backgroundColor": "white",
-            "borderColor": "#0066FF",
+            "borderColor": "clear",
             "cornerRadius": 0,
-            "borderWidth": 1,
+            "borderWidth": 0,
             "itemSpacing": 5,
             "shadow":{
                 "color": "#2ACE00",
@@ -43,10 +45,10 @@
             "width": 32
         },
         "textFields": {
-            "textColor": "black",
+            "textColor": "greyishBrown",
             "errorTextColor": "#FF0000",
             "font": "15",
-            "placeHolderColor" : "#00000055"
+            "placeHolderColor" : "brownGreyTwo"
         },
         "saveCardOption": {
             "labelTextColor": "black",
@@ -320,6 +322,7 @@
         "backgroundColor": "white",
         "separatorColor": "veryLightPinkTwo",
         "item":{
+            "descriptionBackgroundColor" : "white",
             "backgroundColor": "white",
             "titleLabelFont" : "Roboto-Regular,14",
             "titleLabelColor" : "greyishBrown",
@@ -333,6 +336,34 @@
                 "backgroundColor": "paleLilac",
                 "countLabelFont" : "Roboto-Regular,9",
                 "countLabelColor" : "greyishBrown",
+            }
+        }
+    },
+    "cardPhoneList":
+    {
+        "backgroundColor": "whiteTwo",
+        "maxWidth":60,
+        "insets":16,
+        "underline":{
+            "unselected": {
+                "backgroundColor" : "brownGrey"
+            },
+            "selected": {
+                "backgroundColor" : "vibrantGreen"
+            }
+        },
+        "icon":{
+            "selected": {
+                "backgroundColor" : "clear",
+                "alpha": 1
+            },
+            "otherSegmentSelected": {
+                "backgroundColor" : "clear",
+                "alpha": 0.5
+            },
+            "unselected": {
+                "backgroundColor" : "clear",
+                "alpha": 1
             }
         }
     }

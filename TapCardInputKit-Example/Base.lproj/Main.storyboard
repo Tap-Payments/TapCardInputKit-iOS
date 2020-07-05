@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IhC-w1-lq4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IhC-w1-lq4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -159,7 +159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-Rw-9W5" customClass="TapCardInput" customModule="TapCardInputKit_iOS">
-                                <rect key="frame" x="20" y="149" width="374" height="250"/>
+                                <rect key="frame" x="0.0" y="149" width="414" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="Gba-ma-Y3J"/>
@@ -191,7 +191,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="lzd-Rw-9W5" secondAttribute="trailing" constant="20" id="1Sn-Kw-QYb"/>
+                            <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="lzd-Rw-9W5" secondAttribute="trailing" id="1Sn-Kw-QYb"/>
                             <constraint firstItem="lqP-O8-Avo" firstAttribute="centerX" secondItem="DLB-7K-lnn" secondAttribute="centerX" id="3gs-tA-0gI"/>
                             <constraint firstItem="lzd-Rw-9W5" firstAttribute="top" secondItem="lqP-O8-Avo" secondAttribute="bottom" constant="20" id="Ac4-Tk-RlM"/>
                             <constraint firstItem="HMM-35-cnB" firstAttribute="top" secondItem="kOy-Nm-RH1" secondAttribute="bottom" constant="8" id="Fia-by-BHv"/>
@@ -200,7 +200,7 @@
                             <constraint firstItem="kOy-Nm-RH1" firstAttribute="centerX" secondItem="DLB-7K-lnn" secondAttribute="centerX" id="WmW-2A-Wyv"/>
                             <constraint firstItem="kOy-Nm-RH1" firstAttribute="top" secondItem="lzd-Rw-9W5" secondAttribute="bottom" constant="20" id="YEl-2B-zDn"/>
                             <constraint firstItem="lqP-O8-Avo" firstAttribute="top" secondItem="X6Z-FE-XzH" secondAttribute="top" constant="10" id="ZWw-yj-1Xm"/>
-                            <constraint firstItem="lzd-Rw-9W5" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="20" id="bOl-X5-FVy"/>
+                            <constraint firstItem="lzd-Rw-9W5" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" id="bOl-X5-FVy"/>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kOy-Nm-RH1" secondAttribute="trailing" id="cYl-aX-gbq"/>
                             <constraint firstItem="HMM-35-cnB" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="8" id="zCn-z9-0qB"/>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="HMM-35-cnB" secondAttribute="trailing" constant="8" id="zu4-Ry-kQA"/>
@@ -240,6 +240,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ARJ-8l-7vJ"/>
+        <segue reference="yhK-UM-F4D"/>
     </inferredMetricsTieBreakers>
 </document>

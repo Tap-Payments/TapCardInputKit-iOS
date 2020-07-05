@@ -39,8 +39,8 @@ class ExampleCardInputViewController: UIViewController {
         super.viewWillAppear(animated)
         
         expandedHeightConstraint.constant = isInline ? 45 : 190
-        leftConstraint.constant = isInline ? 20 : -2
-        rightConstraint.constant = isInline ? 20 : -2
+        leftConstraint.constant = isInline ? 0 : -2
+        rightConstraint.constant = isInline ? 0 : -2
         
         self.view.layoutIfNeeded()
         

@@ -21,6 +21,25 @@ extension TapCardInput {
      This method does the logic of developing the correct layout constraint for all the sub views to make suer it looks as the provided UI
      */
     internal func setupInlineConstraints() {
+        
+        // Defines the constrints for the card icon image vie
+        icon.snp.remakeConstraints { (make) in
+            make.width.equalTo(24)
+            make.leading.equalToSuperview().offset(26)
+            make.height.equalTo(24)
+            make.centerY.equalToSuperview()
+        }
+        
+        
+        // Defines the constrints for the scan card button
+        scanButton.snp.remakeConstraints { (make) in
+            make.width.equalTo(24)
+            make.trailing.equalToSuperview().offset(-26)
+            make.height.equalTo(24)
+            make.centerY.equalToSuperview()
+        }
+
+        
         // The holder scroll view should full the super view. this will ve used to scroll horizontally to show all the fields
         scrollView.snp.remakeConstraints { (make) in
             make.top.equalToSuperview()
@@ -33,21 +52,8 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.leading.equalTo(inputLeftRightMargin)
-            make.trailing.equalTo(inputLeftRightMargin)
-        }
-        
-        // Defines the constrints for the scan card button
-        scanButton.snp.remakeConstraints { (make) in
-            make.width.equalTo(32)
-            //make.height.equalTo(32)
-        }
-
-        
-        // Defines the constrints for the card icon image vie
-        icon.snp.remakeConstraints { (make) in
-            make.width.equalTo(24)
-            //make.height.equalTo(32)
+            make.leading.equalTo(icon.snp.trailing).offset(10)
+            make.trailing.equalTo(scanButton.snp.leading).offset(-15)
         }
         
         
@@ -105,12 +111,13 @@ extension TapCardInput {
         scrollView.addSubview(stackView)
         
         // Add the card fields to the stack view in order
-        stackView.addArrangedSubview(icon)
-        
         fields.forEach { (field) in
             stackView.addArrangedSubview(field)
         }
-        stackView.addArrangedSubview(scanButton)
+        
+        // Add other fields not inside the scrolling areas
+        addSubview(icon)
+        addSubview(scanButton)
     }
     
     
