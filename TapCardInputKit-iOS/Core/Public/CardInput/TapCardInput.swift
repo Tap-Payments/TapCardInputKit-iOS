@@ -279,7 +279,7 @@ internal protocol TapCardInputCommonProtocol {
         })
         
         // Setup the card expiry field with the needed data and listeners
-        cardExpiry.setup(placeholder: "MM/YY",editingStatusChanged: {[weak self] (isEditing) in
+        cardExpiry.setup(with: 5, placeholder: "",editingStatusChanged: {[weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -395,6 +395,13 @@ internal protocol TapCardInputCommonProtocol {
     
     
     @objc internal func clearButtonClicked() {
+        
+        tapCard.tapCardCVV = nil
+        tapCard.tapCardNumber = nil
+        tapCard.tapCardExpiryYear = nil
+        tapCard.tapCardExpiryMonth = nil
+        tapCard.tapCardName = nil
+        
         fields.forEach{
             $0.text = ""
             updateWidths(for: $0)
@@ -406,7 +413,7 @@ internal protocol TapCardInputCommonProtocol {
     internal func adjustScanButton() {
         scanButton.removeTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         scanButton.removeTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
-
+        
         
         if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
             self.scanButton.setImage(UIImage(named: "clearFormIcon.png", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)

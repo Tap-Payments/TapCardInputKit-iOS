@@ -47,7 +47,7 @@
         "textFields": {
             "textColor": "greyishBrown",
             "errorTextColor": "#FF0000",
-            "font": "15",
+            "font" : "Roboto-Light,17",
             "placeHolderColor" : "brownGreyTwo"
         },
         "saveCardOption": {

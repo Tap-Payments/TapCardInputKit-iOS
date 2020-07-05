@@ -66,7 +66,7 @@ extension CardCVVTextField:CardInputTextFieldProtocol {
     
     func calculatedWidth() -> CGFloat {
         
-        return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
+        return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: self.isEditing ? maxVisibleChars : minVisibleChars))
     }
     
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {

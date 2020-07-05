@@ -12,6 +12,7 @@ import struct UIKit.UIEdgeInsets
 import struct UIKit.CGFloat
 import struct UIKit.CGPoint
 import struct UIKit.CGRect
+import TapCardValidator
 
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {
@@ -40,7 +41,7 @@ extension TapCardInput {
         }
 
         
-        // The holder scroll view should full the super view. this will ve used to scroll horizontally to show all the fields
+        /*// The holder scroll view should full the super view. this will ve used to scroll horizontally to show all the fields
         scrollView.snp.remakeConstraints { (make) in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -54,41 +55,46 @@ extension TapCardInput {
             make.bottom.equalToSuperview()
             make.leading.equalTo(icon.snp.trailing).offset(10)
             make.trailing.equalTo(scanButton.snp.leading).offset(-15)
-        }
+        }*/
         
         
         // Defines the constrints for the card number field
         cardNumber.snp.remakeConstraints { (make) in
             // We set the card number width to the mimimum width based on its min visible characters attribute
-            make.width.greaterThanOrEqualTo(cardNumber.calculatedWidth())
-            make.height.equalTo(stackView)
+            make.width.equalTo(50)
+            make.height.equalToSuperview()
+            make.leading.equalTo(icon.snp.trailing).offset(10)
         }
         
-        // Defines the constrints for the card name field
+        /*// Defines the constrints for the card name field
         cardName.snp.remakeConstraints { (make) in
            // We set the card name width to the mimimum width based on its min visible characters attribute
-            make.width.greaterThanOrEqualTo(cardName.calculatedWidth())
+            make.width.equalTo(cardName.calculatedWidth())
             make.height.equalTo(stackView)
-        }
+        }*/
         
         // Defines the constrints for the card expiry field
         cardExpiry.snp.remakeConstraints { (make) in
             // We set the card expiry width to the mimimum width based on its min visible characters attribute
-            make.width.greaterThanOrEqualTo(cardExpiry.calculatedWidth())
-            make.height.equalTo(stackView)
+            make.width.equalTo(cardExpiry.calculatedWidth())
+            make.height.equalToSuperview()
+            make.center.equalToSuperview()
+            //make.leading.greaterThanOrEqualTo(cardNumber.snp.trailing).offset(23)
         }
         
         // Defines the constrints for the card cvv field
         cardCVV.snp.remakeConstraints { (make) in
             // We set the card cvv width to the mimimum width based on its min visible characters attribute
-            make.width.greaterThanOrEqualTo(cardCVV.calculatedWidth())
-            make.height.equalTo(stackView)
+            make.width.equalTo(cardCVV.calculatedWidth())
+            make.height.equalToSuperview()
+            make.trailing.equalTo(scanButton.snp.leading).offset(-0)
+            //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
         }
         
         
         layoutIfNeeded()
         
-        calculateAutoMinWidths()
+       // calculateAutoMinWidths()
         
     }
     
@@ -100,7 +106,7 @@ extension TapCardInput {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.alwaysBounceVertical = false
-        self.addSubview(scrollView)
+        //self.addSubview(scrollView)
         
         // Set the stack view attribtes
         stackView.axis = .horizontal
@@ -108,13 +114,14 @@ extension TapCardInput {
         stackView.backgroundColor = .clear
         stackView.spacing = computedSpace
         stackView.distribution = .fillProportionally
-        scrollView.addSubview(stackView)
+        //scrollView.addSubview(stackView)
         
         // Add the card fields to the stack view in order
         fields.forEach { (field) in
-            stackView.addArrangedSubview(field)
+            //stackView.addArrangedSubview(field)
+            addSubview(field)
         }
-        
+        cardCVV.alignment = .right
         // Add other fields not inside the scrolling areas
         addSubview(icon)
         addSubview(scanButton)
@@ -192,34 +199,22 @@ extension TapCardInput {
         if let nonNullView:TapCardTextField = subView as? TapCardTextField {
             //scrollView.layoutIfNeeded()
             layoutIfNeeded()
+            
+            guard nonNullView == cardNumber else { return }
+            
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
                 nonNullView.snp.updateConstraints( { make in
                     if let nonNullProtocolImplemented:CardInputTextFieldProtocol = nonNullView as? CardInputTextFieldProtocol {
-                        make.width.greaterThanOrEqualTo(nonNullProtocolImplemented.calculatedWidth())
+                        make.width.equalTo(nonNullProtocolImplemented.calculatedWidth())
                     }
+                    self?.cardExpiry.alpha = nonNullView.isEditing ? 0 : 1
+                    self?.cardCVV.alpha = nonNullView.isEditing ? 0 : 1
+                    let correctNumberText:String = nonNullView.isEditing ? (self?.tapCard.tapCardNumber ?? "") : String(self?.tapCard.tapCardNumber?.suffix(4) ?? "")
+                    let spacing = CardValidator.cardSpacing(cardNumber: correctNumberText.onlyDigits())
+                    nonNullView.text = correctNumberText.cardFormat(with: spacing)
                 })
                 self?.layoutIfNeeded()
-                
-            }) { (done) in
-                if nonNullView.isEditing {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
-                        var point = nonNullView.frame.origin
-                        if self?.sharedLocalisationManager.localisationLocale == "ar" && nonNullView == self?.cardNumber {
-                            point.x = (self?.scrollView.contentOffset.x)!
-                            point.x += (self?.icon.frame.width ?? 0)
-                            point.x += (self?.computedSpace ?? 0)
-                            point.x += (self?.inputLeftRightMargin ?? 0)
-                            self?.scrollView.setContentOffset(point, animated: true)
-                            self?.scrollView.layoutIfNeeded()
-                        }else {
-                            point.x = point.x - 5
-                            if self?.scrollView.contentOffset.x ?? 0 > point.x {
-                                self?.scrollView.setContentOffset(point, animated: true)
-                            }
-                        }
-                    }
-                }
-            }
+            })
         }
     }
     

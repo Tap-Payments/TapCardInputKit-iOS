@@ -45,8 +45,8 @@
         "textFields": {
             "textColor": "white",
             "errorTextColor": "#FF0000",
-            "font": "15",
-            "placeHolderColor" : "whiteAA"
+            "font" : "Roboto-Light,17",
+            "placeHolderColor" : "white"
         },
         "saveCardOption": {
             "labelTextColor": "white",
