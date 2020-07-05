@@ -8,6 +8,7 @@ target 'TapCardInputKit-Example' do
   pod 'SheetyColors'
   pod 'Firebase/Analytics'
   pod 'LocalisationManagerKit-iOS'
+  pod 'TapCardValidator'
   # Pods for TapCardInputKit-Example
 
 end

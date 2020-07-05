@@ -34,6 +34,7 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
     func cardDataChanged(tapCard:TapCard)
+    func brandDetected(for cardBrand:CardBrand,with validation:CardValidationState)
     /// This method will be called once the user clicks on Scan button
     func scanCardClicked()
     /**
@@ -145,6 +146,11 @@ internal protocol TapCardInputCommonProtocol {
         cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
         FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         
+    }
+    
+    
+    public func cardBrandWithStatus() -> (CardBrand?,CardValidationState) {
+        return cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
     }
     
     
@@ -264,6 +270,9 @@ internal protocol TapCardInputCommonProtocol {
                 // If the card number changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
                 self?.tapCard.tapCardNumber = cardNumber
                 self?.cardDatachanged()
+                if self?.cardInputMode == .InlineCardInput, self?.cardNumber.isValid() ?? false {
+                    self?.cardExpiry.becomeFirstResponder()
+                }
         })
         
         // Setup the card name field with the needed data and listeners
@@ -380,6 +389,8 @@ internal protocol TapCardInputCommonProtocol {
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
+            let (detectedBrand, detectionValidation) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .zain, with: detectionValidation)
         }
         FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         adjustExpiryCvv()
@@ -601,7 +612,9 @@ extension TapCardInput:TapCardInputCommonProtocol {
         setupConstraints()
         
         // Finally, we implement the keybaord (next and previousu) navigation logic for the different card fields
-        addToolBarButtons()
+        if cardInputMode != .InlineCardInput {
+            addToolBarButtons()
+        }
         
         if !showCardName {
          removeCardName()

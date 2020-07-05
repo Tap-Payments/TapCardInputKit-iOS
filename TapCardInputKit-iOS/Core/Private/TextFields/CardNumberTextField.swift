@@ -176,6 +176,13 @@ extension CardNumberTextField:UITextFieldDelegate {
         
         return shouldUpdate
     }
+    
+    
+    internal func cardBrand(for cardNumber:String) -> (CardBrand?,CardValidationState) {
+        
+        let validation = CardValidator.validate(cardNumber: cardNumber.onlyDigits())
+        return (validation.cardBrand,validation.validationState)
+    }
 }
 
 

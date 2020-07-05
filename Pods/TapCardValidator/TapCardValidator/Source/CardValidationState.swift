@@ -6,7 +6,7 @@
 //
 
 /// Card Validation State.
-public enum CardValidationState {
+@objc public enum CardValidationState:Int {
 
     case invalid
     case incomplete

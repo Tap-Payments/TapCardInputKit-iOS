@@ -204,17 +204,20 @@ extension TapCardInput {
             
             guard nonNullView == cardNumber else { return }
             
+            nonNullView.snp.updateConstraints( { [weak self] make in
+                if let nonNullProtocolImplemented:CardInputTextFieldProtocol = nonNullView as? CardInputTextFieldProtocol {
+                    make.width.equalTo(nonNullProtocolImplemented.calculatedWidth())
+                    self?.updateConstraints()
+                }
+            })
+            
+            let correctNumberText:String = nonNullView.isEditing ? (tapCard.tapCardNumber ?? "") : String(tapCard.tapCardNumber?.suffix(4) ?? "")
+            let spacing = CardValidator.cardSpacing(cardNumber: correctNumberText.onlyDigits())
+            nonNullView.text = correctNumberText.cardFormat(with: spacing)
+            
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                nonNullView.snp.updateConstraints( { make in
-                    if let nonNullProtocolImplemented:CardInputTextFieldProtocol = nonNullView as? CardInputTextFieldProtocol {
-                        make.width.equalTo(nonNullProtocolImplemented.calculatedWidth())
-                    }
-                    self?.cardExpiry.alpha = nonNullView.isEditing ? 0 : 1
-                    self?.cardCVV.alpha = nonNullView.isEditing ? 0 : 1
-                    let correctNumberText:String = nonNullView.isEditing ? (self?.tapCard.tapCardNumber ?? "") : String(self?.tapCard.tapCardNumber?.suffix(4) ?? "")
-                    let spacing = CardValidator.cardSpacing(cardNumber: correctNumberText.onlyDigits())
-                    nonNullView.text = correctNumberText.cardFormat(with: spacing)
-                })
+                self?.cardExpiry.alpha = nonNullView.isEditing ? 0 : 1
+                self?.cardCVV.alpha = nonNullView.isEditing ? 0 : 1
                 self?.layoutIfNeeded()
             })
         }

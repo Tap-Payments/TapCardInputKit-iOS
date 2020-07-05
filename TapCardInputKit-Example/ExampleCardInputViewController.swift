@@ -10,6 +10,7 @@ import UIKit
 import TapCardInputKit_iOS
 import CommonDataModelsKit_iOS
 import LocalisationManagerKit_iOS
+import TapCardValidator
 
 class ExampleCardInputViewController: UIViewController {
 
@@ -62,6 +63,11 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
+    
+    func brandDetected(for cardBrand: CardBrand, with validation: CardValidationState) {
+        resultTextView.text = "Brand detected for : \(cardBrand) with status of : \(validation)\n\(resultTextView.text ?? "")\n";
+    }
+    
     
     func saveCardChanged(enabled: Bool) {
         resultTextView.text = "SAVE CARD isENABLED : \(enabled)\n\(resultTextView.text ?? "")\n";
