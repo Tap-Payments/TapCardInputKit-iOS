@@ -124,8 +124,9 @@ import class LocalisationManagerKit_iOS.TapLocalisationManager
         guard let parsedImageName = stringValue(for: keyPath) else { return nil }
         // Check if the user passed the Bundle of assets we need to get the image from
         if let bundle = bundle {
-            guard let image =  UIImage(named: parsedImageName, in: bundle, compatibleWith: nil) else { return nil }
-            return image
+            if let image =  UIImage(named: parsedImageName, in: bundle, compatibleWith: nil) {
+                return image
+            }
         }
         // Incase we will add afterwards reading from different paths other than the Main Bundle
         if let filePath = TapThemePath.themeURL?.appendingPathComponent(parsedImageName).path {

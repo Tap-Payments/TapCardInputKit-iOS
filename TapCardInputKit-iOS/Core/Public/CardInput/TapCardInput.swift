@@ -248,14 +248,14 @@ internal protocol TapCardInputCommonProtocol {
         self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
         self.inputLeftRightMargin = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.widthMargin")?.floatValue ?? 0)
         // The default card brand icon
-        icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
+        icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
         icon.contentMode = .scaleAspectFit
         
         // Defines an action handler to the scan button
         self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         scanButton.setTitle("", for: .normal)
         // Defines scan button icon
-        scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
+        scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
         scanButton.imageView?.contentMode = .scaleAspectFit
         
         saveSwitch.tap_theme_tintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.switchTintColor")
@@ -340,7 +340,7 @@ internal protocol TapCardInputCommonProtocol {
             // Meaning, we have an icon to set, we check if it is not invalid we show the icon otherwise, the palceholder icon
             let validationStatus = self.cardNumber.textFieldStatus(cardNumber: cardNumber)
             if validationStatus == .Invalid {
-                icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
+                icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
             }else {
                 let options = ImageLoadingOptions(
                     transition: .fadeIn(duration: 0.2)
@@ -375,7 +375,7 @@ internal protocol TapCardInputCommonProtocol {
         }else {
             // At any problem as fall back we set the default values again
             if cardInputMode == .FullCardInput {
-                self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image")
+                self.icon.image = TapThemeManager.imageValue(for: "\(self.themePath).iconImage.image",from: Bundle(for: type(of: self)))
             }else {
                 //self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image"), for: .normal)
                 self.scanButton.isUserInteractionEnabled = true

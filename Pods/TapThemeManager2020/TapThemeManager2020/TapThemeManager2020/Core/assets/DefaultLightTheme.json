@@ -46,7 +46,7 @@
         },
         "textFields": {
             "textColor": "greyishBrown",
-            "errorTextColor": "greyishBrown",
+            "errorTextColor": "#FF0000",
             "font" : "Roboto-Light,17",
             "placeHolderColor" : "brownGreyTwo"
         },

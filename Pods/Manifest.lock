@@ -85,7 +85,7 @@ PODS:
   - TapSwiftFixes/CoreGraphics (1.0.9)
   - TapSwiftFixes/Exceptions (1.0.9)
   - TapSwiftFixes/Threading (1.0.9)
-  - TapThemeManager2020 (1.0.25):
+  - TapThemeManager2020 (1.0.26):
     - LocalisationManagerKit-iOS
     - TapFontKit-iOS
 
@@ -152,7 +152,7 @@ SPEC CHECKSUMS:
   TapCardVlidatorKit-iOS: 4165d2d1e020b94ff2ab28903ba30ee4ed39679b
   TapFontKit-iOS: 2810f6f66ad8a1fa9a2afc0e3cbaf6ecd5dc9d1f
   TapSwiftFixes: db2aeb21942dd81ee051a31ed319dab0d03547a2
-  TapThemeManager2020: 1de741916fb15589c1f479c41745b2181725336f
+  TapThemeManager2020: 77f3dfccd108e14300d52f62de250975399ab012
 
 PODFILE CHECKSUM: 69abab78807651a5b13b7f3ca3be7aa1a0dfd9c1
 
