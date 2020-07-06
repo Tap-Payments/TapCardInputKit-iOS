@@ -46,7 +46,7 @@ class ExampleCardInputViewController: UIViewController {
         self.view.layoutIfNeeded()
         
         cardInput.delegate = self
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput))
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),allowedCardBrands: [CardBrand.visa.rawValue],cardIconUrl: "https://img.icons8.com/color/2x/visa.png")
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {

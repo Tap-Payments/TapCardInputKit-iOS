@@ -68,6 +68,7 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - Nuke (9.1.1)
   - PromisesObjC (1.2.9)
   - SheetyColors (1.2.0):
     - Capable/Colors (~> 1.1)
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - Flurry-iOS-SDK/FlurrySDK
   - LocalisationManagerKit-iOS
   - MOLH
+  - Nuke
   - SheetyColors
   - SnapKit
   - TapCardVlidatorKit-iOS
@@ -116,6 +118,7 @@ SPEC REPOS:
     - LocalisationManagerKit-iOS
     - MOLH
     - nanopb
+    - Nuke
     - PromisesObjC
     - SheetyColors
     - SnapKit
@@ -141,6 +144,7 @@ SPEC CHECKSUMS:
   LocalisationManagerKit-iOS: fe6a1f2e07d7bf73335675517d2f261f33124274
   MOLH: 9ea6c0390f5963b2df9827ae64035fbc8598b092
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   SheetyColors: 8dc64a666415be8a81df3c5d44b9088d6f8bee2e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -150,6 +154,6 @@ SPEC CHECKSUMS:
   TapSwiftFixes: db2aeb21942dd81ee051a31ed319dab0d03547a2
   TapThemeManager2020: 1de741916fb15589c1f479c41745b2181725336f
 
-PODFILE CHECKSUM: e94b19b1ce743bc062f1606822daca2fb52dbb04
+PODFILE CHECKSUM: 69abab78807651a5b13b7f3ca3be7aa1a0dfd9c1
 
 COCOAPODS: 1.9.3

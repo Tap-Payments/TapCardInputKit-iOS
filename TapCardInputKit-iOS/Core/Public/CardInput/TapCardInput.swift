@@ -12,6 +12,7 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
 import TapCardVlidatorKit_iOS
 import LocalisationManagerKit_iOS
 import MOLH
+import Nuke
 
 /// Internal protocl for all card text fields to implement to consolidate the logic and make sure all needed logic is implemented
 internal protocol TapCardInputCommonProtocol {
@@ -112,11 +113,13 @@ internal protocol TapCardInputCommonProtocol {
     /// The delegate that wants to hear from the view on new data and events
     @objc public var delegate:TapCardInputProtocol?
     /// States if the parent controller wants to allow set of cards only
-    public var allowedCardBrands:[CardBrand] = [] {
+    @objc public var allowedCardBrands:[Int] = [] {
         didSet {
             cardNumber.allowedBrands = allowedCardBrands
         }
     }
+    /// States if the parent controller wants to show a card image instead of placeholder when valid
+    @objc public var cardIconUrl:String?
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)
@@ -129,13 +132,17 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter showCardName: States if the parent controller wants to show card number or not, default is false
      - Parameter showCardBrandIcon: States if the parent controller wants to show a card brand icon or not
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil) {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
         self.showCardBrandIcon = showCardBrandIcon
         // After applying the theme, we need now to actually setup the views
         FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
+        self.cardIconUrl = cardIconUrl
+        defer {
+            self.allowedCardBrands = allowedCardBrands
+        }
         setupViews()
     }
     
@@ -279,6 +286,7 @@ internal protocol TapCardInputCommonProtocol {
                 if self?.cardInputMode == .InlineCardInput, self?.cardNumber.isValid() ?? false {
                     self?.cardExpiry.becomeFirstResponder()
                 }
+                self?.handleOneBrandIcon(with: cardNumber)
         })
         
         // Setup the card name field with the needed data and listeners
@@ -322,8 +330,25 @@ internal protocol TapCardInputCommonProtocol {
         })
         
         saveSwitch.addTarget(self, action: #selector(saveCardSwitchChanged), for: .valueChanged)
-        
+        handleOneBrandIcon()
         localize()
+    }
+    
+    
+    internal func handleOneBrandIcon(with cardNumber:String = "") {
+        if let iconString:String = cardIconUrl, let iconURL:URL = URL(string: iconString) {
+            // Meaning, we have an icon to set, we check if it is not invalid we show the icon otherwise, the palceholder icon
+            let validationStatus = self.cardNumber.textFieldStatus(cardNumber: cardNumber)
+            if validationStatus == .Invalid {
+                icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image")
+            }else {
+                let options = ImageLoadingOptions(
+                    transition: .fadeIn(duration: 0.2)
+                )
+                // Time to load the image iconf rom the given URL
+                Nuke.loadImage(with: iconURL,options:options, into: icon)
+            }
+        }
     }
     
     @objc func saveCardSwitchChanged(_ sender:Any) {
