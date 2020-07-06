@@ -89,6 +89,10 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
             return .Invalid
         }
         
+        if nonNullCardNumber == "" {
+            return .Invalid
+        }
+        
         let validationState = definedCard.validationState
         switch validationState {
         case .incomplete:

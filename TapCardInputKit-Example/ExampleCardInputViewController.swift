@@ -63,8 +63,7 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
-    
-    func brandDetected(for cardBrand: CardBrand, with validation: CardValidationState) {
+    func brandDetected(for cardBrand: CardBrand, with validation: CrardInputTextFieldStatusEnum) {
         resultTextView.text = "Brand detected for : \(cardBrand) with status of : \(validation)\n\(resultTextView.text ?? "")\n";
     }
     

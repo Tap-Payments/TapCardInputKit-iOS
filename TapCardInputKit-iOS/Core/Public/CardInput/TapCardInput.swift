@@ -121,6 +121,10 @@ internal protocol TapCardInputCommonProtocol {
     /// States if the parent controller wants to show a card image instead of placeholder when valid
     @objc public var cardIconUrl:String?
     
+    // Mark:- Init methods
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     required init?(coder: NSCoder) {
         super.init(coder:coder)
         self.backgroundColor = .clear
@@ -424,8 +428,8 @@ internal protocol TapCardInputCommonProtocol {
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
-            let (detectedBrand, detectionValidation) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
-            nonNullDelegate.brandDetected(for: detectedBrand ?? .zain, with: cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber))
+            let (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber))
         }
         FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         adjustExpiryCvv()

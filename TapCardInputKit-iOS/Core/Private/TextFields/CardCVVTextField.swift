@@ -29,13 +29,13 @@ class CardCVVTextField:TapCardTextField {
     
     
     /**
-    Method that is used to setup the field by providing the needed info and the obersvers for the events
-    - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
-    - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
-    - Parameter placeholder: The placeholder to show in this field. Default is ""
-    - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
-    - Parameter cardCVVChanged: Observer to listen to the event when a the card cvv is changed by user input till the moment
-    */
+     Method that is used to setup the field by providing the needed info and the obersvers for the events
+     - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
+     - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
+     - Parameter placeholder: The placeholder to show in this field. Default is ""
+     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
+     - Parameter cardCVVChanged: Observer to listen to the event when a the card cvv is changed by user input till the moment
+     */
     func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardCVVChanged: ((String) -> ())? =  nil) {
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
@@ -50,6 +50,7 @@ class CardCVVTextField:TapCardTextField {
         // Assign the observers and the blocks
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
+        self.isSecureTextEntry = true
     }
     
     required init?(coder: NSCoder) {
@@ -109,7 +110,7 @@ extension CardCVVTextField:UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-         // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
+        // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(false)
         }
@@ -118,9 +119,9 @@ extension CardCVVTextField:UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // attempt to read the range they are trying to change, or exit if we can't
-       guard let currentText = textField.text as NSString? else {
-           return false
-       }
+        guard let currentText = textField.text as NSString? else {
+            return false
+        }
         // add their new text to the existing text
         let updatedText = currentText.replacingCharacters(in: range, with: string)
         // Apply and valiodate the new text before writing it
@@ -129,9 +130,9 @@ extension CardCVVTextField:UITextFieldDelegate {
     }
     
     /**
-    This method does the logic required when a text change event is fired for the text field
-    - Parameter textField: The text field that has its text changed
-    */
+     This method does the logic required when a text change event is fired for the text field
+     - Parameter textField: The text field that has its text changed
+     */
     @objc func didChangeText(textField:UITextField) {
         if let nonNullBlock = cardCVVChanged {
             // For the card cvv we send back the cvv entered by the user
@@ -140,11 +141,11 @@ extension CardCVVTextField:UITextFieldDelegate {
     }
     
     /**
-        This method does the logic required to check if a given text is allowed to be written to the card cvv field or not
-        - Parameter updatedText: The text we want to validate and write to the card cvv text field
-        - Parameter setTextAfterValidation: States if the caller wants to write the text if is correcly validated
-        - Returns: True if the text is valid and can be written to the card cvv field and false otherwise
-        */
+     This method does the logic required to check if a given text is allowed to be written to the card cvv field or not
+     - Parameter updatedText: The text we want to validate and write to the card cvv text field
+     - Parameter setTextAfterValidation: States if the caller wants to write the text if is correcly validated
+     - Returns: True if the text is valid and can be written to the card cvv field and false otherwise
+     */
     internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
         
         // First of all we need to make sure that the text is only numeric
@@ -169,7 +170,7 @@ extension CardCVVTextField:UITextFieldDelegate {
 }
 
 internal extension String {
-
+    
     /**
      Method to calculate  the index to start of when taking a substring
      - Parameter from: The starting position ew need to start with
@@ -177,7 +178,7 @@ internal extension String {
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
     }
-
+    
     /**
      Extension to get a substring from a string starting from a given position
      - Parameter from: The index you want to start taking the substrin from
@@ -187,17 +188,17 @@ internal extension String {
         let fromIndex = index(from: from)
         return String(self[fromIndex...])
     }
-
+    
     /**
-    Extension to get a substring from a string starting from 0 till a given position
-    - Parameter from: The index you want to end taking the substrin to
-    - Returns: The substring of the given string starting from 0 to the given index
-    */
+     Extension to get a substring from a string starting from 0 till a given position
+     - Parameter from: The index you want to end taking the substrin to
+     - Returns: The substring of the given string starting from 0 to the given index
+     */
     func substring(to: Int) -> String {
         let toIndex = index(from: to)
         return String(self[..<toIndex])
     }
-
+    
     func substring(with r: Range<Int>) -> String {
         let startIndex = index(from: r.lowerBound)
         let endIndex = index(from: r.upperBound)
