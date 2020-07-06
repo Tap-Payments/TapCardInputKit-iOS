@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TapCardInputKit-iOS"
-  spec.version      = "1.0.2"
+  spec.version      = "1.0.3"
   spec.summary      = "Easy on the shelf card input view provided by TapCardInputKit-iOS."
 
   # This description is used to generate tags and improve search results.
@@ -133,10 +133,11 @@ Pod::Spec.new do |spec|
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   spec.dependency "SnapKit"
-  spec.dependency "TapCardValidator"
+  spec.dependency "TapCardVlidatorKit-iOS"
   spec.dependency "TapThemeManager2020"
   spec.dependency "CommonDataModelsKit-iOS"
   spec.dependency "LocalisationManagerKit-iOS"
   spec.dependency "Flurry-iOS-SDK/FlurrySDK"
   spec.dependency "MOLH"
+  spec.dependency "Nuke"
 end
