@@ -110,7 +110,13 @@ internal protocol TapCardInputCommonProtocol {
     /// States if the parent controller wants to show a card brand icon or not
     @objc public lazy var showCardBrandIcon:Bool = false
     /// The delegate that wants to hear from the view on new data and events
-    @objc public  var delegate:TapCardInputProtocol?
+    @objc public var delegate:TapCardInputProtocol?
+    /// States if the parent controller wants to allow set of cards only
+    public var allowedCardBrands:[CardBrand] = [] {
+        didSet {
+            cardNumber.allowedBrands = allowedCardBrands
+        }
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder:coder)

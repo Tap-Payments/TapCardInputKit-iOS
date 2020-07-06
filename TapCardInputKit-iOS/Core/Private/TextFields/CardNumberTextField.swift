@@ -20,6 +20,7 @@ class CardNumberTextField:TapCardTextField {
     */
     var cardNumberChanged: ((String) -> ())? =  nil
     
+    var allowedBrands:[CardBrand] = []
     
     /**
      Method that is used to setup the field by providing the needed info and the obersvers for the events
@@ -82,7 +83,13 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
             nonNullCardNumber = cardNumber!
         }
         // We use the Valoidation kit to get the status of the number
-        let validationState = CardValidator.validate(cardNumber: nonNullCardNumber).validationState
+        let definedCard = CardValidator.validate(cardNumber: nonNullCardNumber)
+        if let definedBrand = definedCard.cardBrand,
+            allowedBrands.count > 0, !allowedBrands.contains(definedBrand){
+            return .Invalid
+        }
+        
+        let validationState = definedCard.validationState
         switch validationState {
             case .incomplete:
                 return .Incomplete
