@@ -14,7 +14,7 @@ import class UIKit.UIColor
 import class UIKit.UIFont
 import enum UIKit.NSTextAlignment
 import protocol UIKit.UITextFieldDelegate
-import enum TapCardValidator.CardBrand
+import enum TapCardVlidatorKit_iOS.CardBrand
 /// Protocol defines the common method needed to be implemented by all the card text fields, this is used to make sure all subclasses have the needed common logic
 @objc internal protocol CardInputTextFieldProtocol {
     /// This method will what is the status of the textfield

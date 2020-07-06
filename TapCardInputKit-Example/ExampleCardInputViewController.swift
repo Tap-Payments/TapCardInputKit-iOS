@@ -10,7 +10,7 @@ import UIKit
 import TapCardInputKit_iOS
 import CommonDataModelsKit_iOS
 import LocalisationManagerKit_iOS
-import TapCardValidator
+import TapCardVlidatorKit_iOS
 
 class ExampleCardInputViewController: UIViewController {
 

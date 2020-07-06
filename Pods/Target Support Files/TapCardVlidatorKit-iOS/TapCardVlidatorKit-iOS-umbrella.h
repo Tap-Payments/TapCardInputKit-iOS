@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double TapCardValidatorVersionNumber;
-FOUNDATION_EXPORT const unsigned char TapCardValidatorVersionString[];
+FOUNDATION_EXPORT double TapCardVlidatorKit_iOSVersionNumber;
+FOUNDATION_EXPORT const unsigned char TapCardVlidatorKit_iOSVersionString[];
 

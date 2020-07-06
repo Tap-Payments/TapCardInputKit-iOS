@@ -144,7 +144,7 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
-		<key>TapCardValidator.xcscheme</key>
+		<key>TapCardVlidatorKit-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

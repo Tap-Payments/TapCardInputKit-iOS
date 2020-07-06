@@ -16,6 +16,11 @@
                 "rightTitle": "EDIT"
             }
         },
+        "ItemList": {
+            "showDesc": "Show Description",
+            "hideDesc": "Hide Description",
+            "Discount": "Discount"
+        },
         "Common": {
             "next": "Next",
             "previous": "Previous",
@@ -29,7 +34,7 @@
     },
     "ar": {
         "TapCardInputKit": {
-            "cardNumberPlaceHolder": "رقم البطاقة",
+            "cardNumberPlaceHolder": "0000 0000 0000 0000",
             "cardNamePlaceHolder": "صاحب البطاقة",
             "cardCVVPlaceHolder": "الرمز الأمني",
             "cardExpiryPlaceHolder": "شش/سس",
@@ -43,6 +48,11 @@
                 "leftTitle": "إختر",
                 "rightTitle": "تعديل"
             }
+        },
+        "ItemList": {
+            "showDesc": "إظهار الوصف",
+            "hideDesc": "إخفاء الوصف",
+            "Discount": "خصم"
         },
         "Common": {
             "next": "التالي",

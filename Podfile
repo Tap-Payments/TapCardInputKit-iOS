@@ -8,7 +8,7 @@ target 'TapCardInputKit-Example' do
   pod 'SheetyColors'
   pod 'Firebase/Analytics'
   pod 'LocalisationManagerKit-iOS'
-  pod 'TapCardValidator'
+  pod 'TapCardVlidatorKit-iOS'
   # Pods for TapCardInputKit-Example
 
 end
@@ -19,7 +19,7 @@ target 'TapCardInputKit-iOS' do
 
   # Pods for TapCardInputKit-iOS
   pod 'SnapKit'
-  pod 'TapCardValidator'
+  pod 'TapCardVlidatorKit-iOS'
   pod 'TapThemeManager2020'
   pod 'CommonDataModelsKit-iOS'
   pod 'LocalisationManagerKit-iOS'

@@ -12,7 +12,7 @@ import struct UIKit.UIEdgeInsets
 import struct UIKit.CGFloat
 import struct UIKit.CGPoint
 import struct UIKit.CGRect
-import TapCardValidator
+import TapCardVlidatorKit_iOS
 
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {

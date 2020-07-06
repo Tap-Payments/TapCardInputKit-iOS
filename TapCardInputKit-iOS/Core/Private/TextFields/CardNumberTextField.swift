@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import TapCardValidator
+import TapCardVlidatorKit_iOS
 /// Represnts the card number text field
 class CardNumberTextField:TapCardTextField {
    

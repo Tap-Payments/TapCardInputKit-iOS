@@ -1,6 +1,6 @@
 PODS:
   - Capable/Colors (1.1.4)
-  - CommonDataModelsKit-iOS (1.0.16)
+  - CommonDataModelsKit-iOS (1.0.18)
   - Firebase/Analytics (6.27.0):
     - Firebase/Core
   - Firebase/Core (6.27.0):
@@ -73,7 +73,7 @@ PODS:
     - Capable/Colors (~> 1.1)
   - SnapKit (5.0.1)
   - SwiftLint (0.39.2)
-  - TapCardValidator (1.2.6)
+  - TapCardVlidatorKit-iOS (1.0.1)
   - TapFontKit-iOS (0.0.3):
     - SwiftLint
     - TapSwiftFixes
@@ -84,7 +84,7 @@ PODS:
   - TapSwiftFixes/CoreGraphics (1.0.9)
   - TapSwiftFixes/Exceptions (1.0.9)
   - TapSwiftFixes/Threading (1.0.9)
-  - TapThemeManager2020 (1.0.22):
+  - TapThemeManager2020 (1.0.25):
     - LocalisationManagerKit-iOS
     - TapFontKit-iOS
 
@@ -96,7 +96,7 @@ DEPENDENCIES:
   - MOLH
   - SheetyColors
   - SnapKit
-  - TapCardValidator
+  - TapCardVlidatorKit-iOS
   - TapThemeManager2020
 
 SPEC REPOS:
@@ -120,14 +120,14 @@ SPEC REPOS:
     - SheetyColors
     - SnapKit
     - SwiftLint
-    - TapCardValidator
+    - TapCardVlidatorKit-iOS
     - TapFontKit-iOS
     - TapSwiftFixes
     - TapThemeManager2020
 
 SPEC CHECKSUMS:
   Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
-  CommonDataModelsKit-iOS: db179a18d63b200358e49cb3598090f9b19231df
+  CommonDataModelsKit-iOS: 1f7a206074129800354c96b34f9f5e5e6d93048d
   Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
   FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
   FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
@@ -145,11 +145,11 @@ SPEC CHECKSUMS:
   SheetyColors: 8dc64a666415be8a81df3c5d44b9088d6f8bee2e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
-  TapCardValidator: 8d43b6e8a1a78276c03116a5b625041adeffeb0d
+  TapCardVlidatorKit-iOS: 4165d2d1e020b94ff2ab28903ba30ee4ed39679b
   TapFontKit-iOS: 2810f6f66ad8a1fa9a2afc0e3cbaf6ecd5dc9d1f
   TapSwiftFixes: db2aeb21942dd81ee051a31ed319dab0d03547a2
-  TapThemeManager2020: 56fd0aa2a884f8392ef0f326a9a37362e5564735
+  TapThemeManager2020: 1de741916fb15589c1f479c41745b2181725336f
 
-PODFILE CHECKSUM: dd80e237b3e0b6b2ca959824f9f92a1308009f2b
+PODFILE CHECKSUM: e94b19b1ce743bc062f1606822daca2fb52dbb04
 
 COCOAPODS: 1.9.3

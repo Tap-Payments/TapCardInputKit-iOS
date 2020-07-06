@@ -9,7 +9,7 @@ import SnapKit
 import TapThemeManager2020
 import class CommonDataModelsKit_iOS.TapCard
 import class CommonDataModelsKit_iOS.TapCommonConstants
-import TapCardValidator
+import TapCardVlidatorKit_iOS
 import LocalisationManagerKit_iOS
 import MOLH
 
