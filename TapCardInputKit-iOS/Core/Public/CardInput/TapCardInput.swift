@@ -35,7 +35,7 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
     func cardDataChanged(tapCard:TapCard)
-    func brandDetected(for cardBrand:CardBrand,with validation:CardValidationState)
+    func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
     /// This method will be called once the user clicks on Scan button
     func scanCardClicked()
     /**
@@ -125,7 +125,7 @@ internal protocol TapCardInputCommonProtocol {
         super.init(coder:coder)
         self.backgroundColor = .clear
     }
-
+    
     /**
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
@@ -221,7 +221,7 @@ internal protocol TapCardInputCommonProtocol {
                 field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
             }
             
-           saveLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            saveLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
             MOLH.setLanguageTo(sharedLocalisationManager.localisationLocale ?? "en")
         }
         
@@ -358,10 +358,14 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     
+    @objc public func reset() {
+        clearButtonClicked()
+    }
+    
     /**
      The method that holds the logic needed to do when a card brand is detected
-    - Parameter brand: The detected card brand
-    */
+     - Parameter brand: The detected card brand
+     */
     internal func cardBrandDetected(with brand:CardBrand?) {
         if let nonNullBrand = brand {
             if showCardBrandIcon {
@@ -421,7 +425,7 @@ internal protocol TapCardInputCommonProtocol {
             // If there is a delegate then we call the related method
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
             let (detectedBrand, detectionValidation) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
-            nonNullDelegate.brandDetected(for: detectedBrand ?? .zain, with: detectionValidation)
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .zain, with: cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber))
         }
         FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         adjustExpiryCvv()
@@ -469,10 +473,10 @@ internal protocol TapCardInputCommonProtocol {
         
         
         if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
-            self.scanButton.setImage(UIImage(named: "clearFormIcon.png", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).clearImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         }else {
-            self.scanButton.setImage(UIImage(named: "scanIcon.png", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         }
     }
@@ -481,8 +485,8 @@ internal protocol TapCardInputCommonProtocol {
 
 extension TapCardInput {
     /**
-        Method that adds navigation buttons on the keyboard for a given field. Helps in easing going from one field to another while typing instead of the need to click on each field by itself
-    - Parameter field  The current textfield we are adding the buttons to its keyboard
+     Method that adds navigation buttons on the keyboard for a given field. Helps in easing going from one field to another while typing instead of the need to click on each field by itself
+     - Parameter field  The current textfield we are adding the buttons to its keyboard
      - Parameter previous: Defines if we shall add a previous button
      - Parameter next: Defines if we shall add a next button
      - Parameter done: Defines if we shall add a done button
@@ -540,9 +544,9 @@ extension TapCardInput {
     }
     
     /**
-    The action handler when the next button in the toolbar of the keyboard is clicked
-    - Parameter sender: The bar button item that was clicked
-    */
+     The action handler when the next button in the toolbar of the keyboard is clicked
+     - Parameter sender: The bar button item that was clicked
+     */
     @objc internal func nextAction(sender:TapCardBarButton) {
         if let field = sender.cardField,
             let currentFieldIndex = fields.firstIndex(of: field) {
@@ -554,9 +558,9 @@ extension TapCardInput {
     }
     
     /**
-    The action handler when the previous button in the toolbar of the keyboard is clicked
-    - Parameter sender: The bar button item that was clicked
-    */
+     The action handler when the previous button in the toolbar of the keyboard is clicked
+     - Parameter sender: The bar button item that was clicked
+     */
     @objc internal func previousAction(sender:TapCardBarButton) {
         if let field = sender.cardField,
             let currentFieldIndex = fields.firstIndex(of: field) {
@@ -572,11 +576,11 @@ extension TapCardInput {
         
         // Based on the card input mode, we define the ordering of the card fields
         /*switch cardInputMode {
-        case .InlineCardInput:
-            fields = [cardNumber,cardExpiry,cardCVV,cardName]
-        case .FullCardInput:
-            fields = [cardNumber,cardExpiry,cardCVV,cardName]
-        }*/
+         case .InlineCardInput:
+         fields = [cardNumber,cardExpiry,cardCVV,cardName]
+         case .FullCardInput:
+         fields = [cardNumber,cardExpiry,cardCVV,cardName]
+         }*/
         
         // For each field, we add the appropriate navigation buttons
         for (index, cardField) in fields.enumerated() {
@@ -648,7 +652,7 @@ extension TapCardInput:TapCardInputCommonProtocol {
         }
         
         if !showCardName {
-         removeCardName()
+            removeCardName()
         }
     }
     
