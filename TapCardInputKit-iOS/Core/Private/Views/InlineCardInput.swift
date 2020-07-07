@@ -224,17 +224,24 @@ extension TapCardInput {
         
         let cvvPlaceHolder:UIImage =  TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self)))!
         var newImage:UIImage? = nil
-        if !(cardExpiry.isEditing || cardNumber.isEditing) && cardCVV.isEditing {
-            lastShownIcon = (icon.image != cvvPlaceHolder) ? icon.image : lastShownIcon
-            newImage = cvvPlaceHolder
-        }else if let nonNullImage = lastShownIcon, nonNullImage != icon.image {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+            
+            guard let nonNullSelf = self else { return }
+            if !(nonNullSelf.cardExpiry.isEditing || nonNullSelf.cardNumber.isEditing) && nonNullSelf.cardCVV.isEditing {
+                nonNullSelf.lastShownIcon = (nonNullSelf.icon.image != cvvPlaceHolder) ? nonNullSelf.icon.image : nonNullSelf.lastShownIcon
+                newImage = cvvPlaceHolder
+            }else if let nonNullImage = nonNullSelf.lastShownIcon, nonNullSelf.lastShownIcon != nonNullSelf.icon.image {
                 newImage = nonNullImage
+            }
+            
+            guard let nonNullNewImage:UIImage = newImage, nonNullNewImage != self?.icon.image else { return }
+            nonNullSelf.icon.layer.removeAllAnimations()
+            UIView.transition(with: nonNullSelf.icon, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
+                self?.icon.image = nonNullNewImage
+            })
         }
         
-        guard let nonNullNewImage:UIImage = newImage else { return }
-        UIView.transition(with: icon, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
-            self?.icon.image = nonNullNewImage
-        })
     }
     
 }
