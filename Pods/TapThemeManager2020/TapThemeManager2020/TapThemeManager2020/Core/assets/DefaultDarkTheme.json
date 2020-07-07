@@ -27,11 +27,11 @@
             "itemSpacing": 5,
             "cvvPlaceHolder": "CvvPlaceholder",
             "shadow":{
-                "color": "white",
-                "radius": 3,
+                "color": "clear",
+                "radius":0,
                 "offsetWidth": 0,
                 "offsetHeight": 0,
-                "opacity": 1
+                "opacity": 0
             },
             "widthMargin": 7
         },
@@ -41,6 +41,10 @@
         },
         "scanImage": {
             "image": "scanIcon",
+            "width": 32
+        },
+        "clearImage": {
+            "image": "clearFormIcon",
             "width": 32
         },
         "textFields": {
