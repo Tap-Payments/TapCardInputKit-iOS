@@ -196,27 +196,7 @@ extension TapCardInput {
             //scrollView.layoutIfNeeded()
             layoutIfNeeded()
             
-            var showCVVIcon:Bool = false
-            
-            if (cardExpiry.isEditing || cardNumber.isEditing) {
-                showCVVIcon = false
-            }else if !(cardExpiry.isEditing || cardNumber.isEditing) && cardCVV.isEditing {
-                showCVVIcon = true
-            }
-            
-            
-            let cvvPlaceHolder:UIImage =  TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self)))!
-            
-            if showCVVIcon {
-                if icon.image != cvvPlaceHolder {
-                    lastShownIcon = icon.image
-                }
-                icon.image = cvvPlaceHolder
-            }else {
-                if let nonNullImage = lastShownIcon {
-                    icon.image = nonNullImage
-                }
-            }
+            performCvvAnimation()
             
             guard nonNullView == cardNumber else { return }
             
@@ -237,6 +217,24 @@ extension TapCardInput {
                 self?.layoutIfNeeded()
             })
         }
+    }
+    
+    
+    internal func performCvvAnimation() {
+        
+        let cvvPlaceHolder:UIImage =  TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self)))!
+        var newImage:UIImage? = nil
+        if !(cardExpiry.isEditing || cardNumber.isEditing) && cardCVV.isEditing {
+            lastShownIcon = (icon.image != cvvPlaceHolder) ? icon.image : lastShownIcon
+            newImage = cvvPlaceHolder
+        }else if let nonNullImage = lastShownIcon, nonNullImage != icon.image {
+                newImage = nonNullImage
+        }
+        
+        guard let nonNullNewImage:UIImage = newImage else { return }
+        UIView.transition(with: icon, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
+            self?.icon.image = nonNullNewImage
+        })
     }
     
 }
