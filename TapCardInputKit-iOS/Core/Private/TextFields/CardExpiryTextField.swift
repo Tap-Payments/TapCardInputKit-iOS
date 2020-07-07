@@ -122,6 +122,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(true)
         }
+        print("Expiry # TRUE")
         self.textColor = normalTextColor 
     }
     
@@ -130,6 +131,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
             // If the editing changed block is assigned, we need to fire this event as the editing now ended for the field
             nonNullEditingBlock(false)
         }
+        print("Expiry # FALSE")
         // When editing the field is done, we need to decide which tetx color shall we show based on the validity of the user's input
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         

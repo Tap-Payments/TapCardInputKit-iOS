@@ -117,6 +117,8 @@ extension CardNumberTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(true)
         }
+        
+        print("Number # TRUE")
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
@@ -124,6 +126,7 @@ extension CardNumberTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(false)
         }
+        print("Number # FALSE")
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

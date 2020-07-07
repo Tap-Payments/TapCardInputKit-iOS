@@ -6,14 +6,8 @@
 //  Copyright © 2020 Tap Payments. All rights reserved.
 //
 
-import class UIKit.UIStackView
-import class UIKit.UIView
-import struct UIKit.UIEdgeInsets
-import struct UIKit.CGFloat
-import struct UIKit.CGPoint
-import struct UIKit.CGRect
 import TapCardVlidatorKit_iOS
-
+import TapThemeManager2020
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {
     
@@ -202,6 +196,28 @@ extension TapCardInput {
             //scrollView.layoutIfNeeded()
             layoutIfNeeded()
             
+            var showCVVIcon:Bool = false
+            
+            if (cardExpiry.isEditing || cardNumber.isEditing) {
+                showCVVIcon = false
+            }else if !(cardExpiry.isEditing || cardNumber.isEditing) && cardCVV.isEditing {
+                showCVVIcon = true
+            }
+            
+            
+            let cvvPlaceHolder:UIImage =  TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self)))!
+            
+            if showCVVIcon {
+                if icon.image != cvvPlaceHolder {
+                    lastShownIcon = icon.image
+                }
+                icon.image = cvvPlaceHolder
+            }else {
+                if let nonNullImage = lastShownIcon {
+                    icon.image = nonNullImage
+                }
+            }
+            
             guard nonNullView == cardNumber else { return }
             
             nonNullView.snp.updateConstraints( { [weak self] make in
@@ -216,8 +232,8 @@ extension TapCardInput {
             nonNullView.text = correctNumberText.cardFormat(with: spacing)
             
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                self?.cardExpiry.alpha = nonNullView.isEditing ? 0 : 1
-                self?.cardCVV.alpha = nonNullView.isEditing ? 0 : 1
+                self?.cardExpiry.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
+                self?.cardCVV.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
                 self?.layoutIfNeeded()
             })
         }

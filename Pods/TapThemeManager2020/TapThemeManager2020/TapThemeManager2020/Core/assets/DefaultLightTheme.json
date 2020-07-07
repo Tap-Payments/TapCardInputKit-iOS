@@ -27,6 +27,7 @@
             "cornerRadius": 0,
             "borderWidth": 0,
             "itemSpacing": 5,
+            "cvvPlaceHolder": "CvvPlaceholder",
             "shadow":{
                 "color": "#2ACE00",
                 "radius": 3,
@@ -66,6 +67,7 @@
             "borderWidth": 0,
             "itemSpacing": 0,
             "separatorColor": "#0000001E",
+            "cvvPlaceHolder": "CvvPlaceholder",
             "shadow":{
                 "color": "#2ACE00",
                 "radius": 3,

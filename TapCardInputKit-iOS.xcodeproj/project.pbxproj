@@ -42,6 +42,9 @@
 		E8911D05244049B200398252 /* CardInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D04244049B200398252 /* CardInputMode.swift */; };
 		E8911D072440674500398252 /* TapCardBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D062440674500398252 /* TapCardBarButton.swift */; };
 		E8911D0924407DB100398252 /* FullCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8911D0824407DB100398252 /* FullCardInput.swift */; };
+		E897498524B44A9F00399C4B /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5B243DCB7E0021B880 /* visa.png */; };
+		E897498624B44A9F00399C4B /* unionpay.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5C243DCB7E0021B880 /* unionpay.png */; };
+		E897498A24B44F4C00399C4B /* CvvPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E897498924B44F4C00399C4B /* CvvPlaceholder.png */; };
 		E8BC5E0C244D7365007E3916 /* CustomTapCardInputKitLocalisation.json in Resources */ = {isa = PBXBuildFile; fileRef = E8BC5E0B244D7365007E3916 /* CustomTapCardInputKitLocalisation.json */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +126,7 @@
 		E8911D04244049B200398252 /* CardInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputMode.swift; sourceTree = "<group>"; };
 		E8911D062440674500398252 /* TapCardBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapCardBarButton.swift; sourceTree = "<group>"; };
 		E8911D0824407DB100398252 /* FullCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardInput.swift; sourceTree = "<group>"; };
+		E897498924B44F4C00399C4B /* CvvPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CvvPlaceholder.png; sourceTree = "<group>"; };
 		E8BC5E0B244D7365007E3916 /* CustomTapCardInputKitLocalisation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomTapCardInputKitLocalisation.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +298,7 @@
 				E8159E5D243DCB7E0021B880 /* discover.png */,
 				E8159E58243DCB7E0021B880 /* diners-club.png */,
 				E8159E59243DCB7E0021B880 /* american-express.png */,
+				E897498924B44F4C00399C4B /* CvvPlaceholder.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				E8159E64243DCB7E0021B880 /* discover.png in Resources */,
 				E8159E63243DCB7E0021B880 /* unionpay.png in Resources */,
 				E8159E60243DCB7E0021B880 /* american-express.png in Resources */,
+				E897498A24B44F4C00399C4B /* CvvPlaceholder.png in Resources */,
 				E8159E61243DCB7E0021B880 /* mastercard.png in Resources */,
 				E8159E62243DCB7E0021B880 /* visa.png in Resources */,
 			);
@@ -430,7 +436,9 @@
 			files = (
 				E8159E03243C99DD0021B880 /* LaunchScreen.storyboard in Resources */,
 				E871612A24447DFB00B139D0 /* GoogleService-Info.plist in Resources */,
+				E897498624B44A9F00399C4B /* unionpay.png in Resources */,
 				E8BC5E0C244D7365007E3916 /* CustomTapCardInputKitLocalisation.json in Resources */,
+				E897498524B44A9F00399C4B /* visa.png in Resources */,
 				E8159E68243E3A890021B880 /* Theme.json in Resources */,
 				E8159E00243C99DD0021B880 /* Assets.xcassets in Resources */,
 				E8159DFE243C99DC0021B880 /* Main.storyboard in Resources */,

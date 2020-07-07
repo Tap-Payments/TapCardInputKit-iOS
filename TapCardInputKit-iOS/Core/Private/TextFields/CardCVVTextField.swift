@@ -106,6 +106,7 @@ extension CardCVVTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(true)
         }
+        print("CVV # TRUE")
         self.textColor = normalTextColor
     }
     
@@ -114,6 +115,7 @@ extension CardCVVTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(false)
         }
+        print("CVV # FALSE")
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
     }
     

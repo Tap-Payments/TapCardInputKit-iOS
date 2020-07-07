@@ -56,6 +56,8 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var stackView = UIStackView()
     /// The card brand image icon
     internal lazy var icon = UIImageView()
+    /// The card brand last image icon, will be used to show it back after the CVV animation
+    internal lazy var lastShownIcon:UIImage? = nil
     /// The scan button
     internal lazy var scanButton = UIButton()
     /// The text field to enter the card number
