@@ -295,6 +295,8 @@ extension TapPhoneInput: UITextFieldDelegate {
         countryCodeTextField.text = phoneNumberTextField.text == "" ? "" : countryCodePlaceHolder
         clearButton.alpha = phoneNumberTextField.text == "" ? 0 : 1
         
+        let detectedBrand:DefinedCardBrand = CardValidator.validate(cardNumber: phoneNumberTextField.text, preferredBrands: CardBrand.allCases.filter{ $0.brandSegmentIdentifier == "telecom" })
+        print("TELECOM : 00\(detectedBrand.cardBrand) : \(detectedBrand.validationState)")
         guard let delegate = delegate else { return }
         delegate.phoneNumberChanged?(phoneNumber: phoneNumberTextField.text ?? "")
         
