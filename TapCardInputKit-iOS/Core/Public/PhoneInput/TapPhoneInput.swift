@@ -208,6 +208,7 @@ extension TapPhoneInput {
         self.layer.shadowOpacity = 0//Float(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
         self.layer.masksToBounds = false
         self.clearButton.setImage(TapThemeManager.imageValue(for: "\(themePath).clearImage.image",from: Bundle(for: type(of: self))), for: .normal)
+        self.clearButton.alpha = phoneNumberTextField.text == "" ? 0 : 1
         
         // The default card brand icon
         icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
