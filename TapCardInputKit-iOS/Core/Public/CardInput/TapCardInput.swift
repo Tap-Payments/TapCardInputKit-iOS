@@ -35,6 +35,11 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
     func cardDataChanged(tapCard:TapCard)
+    /**
+    This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
+    - Parameter cardBrand: The detected card brand
+    - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
+    */
     func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
     /// This method will be called once the user clicks on Scan button
     func scanCardClicked()
@@ -139,6 +144,8 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
      - Parameter showCardName: States if the parent controller wants to show card number or not, default is false
      - Parameter showCardBrandIcon: States if the parent controller wants to show a card brand icon or not
+     - Parameter allowedCardBrands: States if the parent controller wants to allow set of cards only
+     - Parameter cardIconUrl: States if the parent controller wants to show a card image instead of placeholder when valid
      */
     @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil) {
         

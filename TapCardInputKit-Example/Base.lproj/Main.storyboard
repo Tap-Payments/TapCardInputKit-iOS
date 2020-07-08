@@ -70,6 +70,26 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="I3U-au-05S" style="IBUITableViewCellStyleDefault" id="bWD-V1-3eE">
+                                        <rect key="frame" x="0.0" y="158.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bWD-V1-3eE" id="qaC-40-jkn">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Phone Inpuy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I3U-au-05S">
+                                                    <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bGx-33-cha" kind="showDetail" id="L4W-l6-FSU"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -238,8 +258,62 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
+        <!--Inline Input-->
+        <scene sceneID="jYE-eb-mSe">
+            <objects>
+                <viewController storyboardIdentifier="PhoneInputViewController" id="bGx-33-cha" customClass="PhoneInputViewController" customModule="TapCardInputKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wvm-qt-JWP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kq-MC-8ST" customClass="TapPhoneInput" customModule="TapCardInputKit_iOS">
+                                <rect key="frame" x="0.0" y="20" width="414" height="45"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="3oU-r7-XOm"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fYP-rB-pRd">
+                                <rect key="frame" x="8" y="134" width="398" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Below are the callbacks from the tap card input view up ☝" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SJ-JR-Bex">
+                                <rect key="frame" x="25" y="85" width="364" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Zvf-SX-fR0" firstAttribute="bottom" secondItem="fYP-rB-pRd" secondAttribute="bottom" constant="8" id="69H-WL-MYX"/>
+                            <constraint firstItem="Zvf-SX-fR0" firstAttribute="trailing" secondItem="4Kq-MC-8ST" secondAttribute="trailing" id="75S-ET-vZt"/>
+                            <constraint firstItem="4Kq-MC-8ST" firstAttribute="top" secondItem="Zvf-SX-fR0" secondAttribute="top" constant="20" id="EfM-s6-qJb"/>
+                            <constraint firstItem="6SJ-JR-Bex" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zvf-SX-fR0" secondAttribute="leading" id="FQr-DV-djm"/>
+                            <constraint firstItem="6SJ-JR-Bex" firstAttribute="centerX" secondItem="wvm-qt-JWP" secondAttribute="centerX" id="YZi-FV-JyM"/>
+                            <constraint firstItem="Zvf-SX-fR0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6SJ-JR-Bex" secondAttribute="trailing" id="dje-E4-Enh"/>
+                            <constraint firstItem="6SJ-JR-Bex" firstAttribute="top" secondItem="4Kq-MC-8ST" secondAttribute="bottom" constant="20" id="gtH-A8-HLl"/>
+                            <constraint firstItem="fYP-rB-pRd" firstAttribute="leading" secondItem="Zvf-SX-fR0" secondAttribute="leading" constant="8" id="hii-Zs-atQ"/>
+                            <constraint firstItem="Zvf-SX-fR0" firstAttribute="trailing" secondItem="fYP-rB-pRd" secondAttribute="trailing" constant="8" id="liE-sf-rs1"/>
+                            <constraint firstItem="fYP-rB-pRd" firstAttribute="top" secondItem="6SJ-JR-Bex" secondAttribute="bottom" constant="8" id="xtY-NB-ijM"/>
+                            <constraint firstItem="4Kq-MC-8ST" firstAttribute="leading" secondItem="Zvf-SX-fR0" secondAttribute="leading" id="zV0-rA-yNt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zvf-SX-fR0"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Inline Input" id="Jjt-yj-YyI"/>
+                    <connections>
+                        <outlet property="phoneInputView" destination="4Kq-MC-8ST" id="bev-1e-k0Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZy-sk-pCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="907"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yhK-UM-F4D"/>
+        <segue reference="ARJ-8l-7vJ"/>
     </inferredMetricsTieBreakers>
 </document>

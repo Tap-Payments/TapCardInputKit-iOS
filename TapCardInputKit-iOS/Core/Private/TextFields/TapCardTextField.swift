@@ -101,22 +101,7 @@ extension TapCardTextField {
         if self.autoMinCalculatedWidth > 0 && !textfield.isEditing {
             return self.autoMinCalculatedWidth
         }
-        return textWidth(font: textfield.font, text: text)
-    }
-    
-    /**
-    This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
-     - Parameter font: The font you will use to show the given text
-     - Parameter text: The text you want to calculate the width needed to show them
-    - Returns: The width of the textfield to show now in pixeld
-    */
-    func textWidth(font: UIFont?, text: String) -> CGFloat {
-        guard let font = font else { return 0 }
-        let myText = text as NSString
-        
-        let rect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        let labelSize = myText.boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        return ceil(labelSize.width)
+        return textfield.textWidth(text: text)
     }
     
     func generateFillingValueForWidth(with count:Int, filling:String = "M") -> String {
@@ -194,4 +179,21 @@ extension String {
         return result
     }
     
+}
+
+
+extension UITextField {
+    /**
+     This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
+     - Parameter text: The text you want to calculate the width needed to show them
+     - Returns: The width of the textfield to show now in pixeld
+     */
+    func textWidth(text: String) -> CGFloat {
+        guard let font = self.font else { return 0 }
+        let myText = text as NSString
+        
+        let rect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        let labelSize = myText.boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(labelSize.width)
+    }
 }

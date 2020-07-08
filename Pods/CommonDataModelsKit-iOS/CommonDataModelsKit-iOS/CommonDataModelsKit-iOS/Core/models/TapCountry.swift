@@ -1,6 +1,8 @@
 import Foundation
 /// Represents a model for the country object
-@objcMembers public class TapCountry : Codable {
+@objc public class TapCountry : NSObject,Codable {
+    
+    
     /// Arabic name
 	public let nameAR : String?
     /// English name
@@ -25,6 +27,14 @@ import Foundation
 		code = try values.decodeIfPresent(String.self, forKey: .code)
 		phoneLength = try values.decodeIfPresent(Int.self, forKey: .phoneLength)
 	}
+    
+    
+    @objc public init(nameAR: String?, nameEN: String?, code: String?, phoneLength: Int = 0) {
+        self.nameAR = nameAR
+        self.nameEN = nameEN
+        self.code = code
+        self.phoneLength = phoneLength
+    }
     
     
     

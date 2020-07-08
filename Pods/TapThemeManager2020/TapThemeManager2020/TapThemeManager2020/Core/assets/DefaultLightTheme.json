@@ -17,7 +17,8 @@
             "vibrantGreenTwo" : "#00d300",
             "paleLilac":"#e4e4e5",
             "clear":"#00000000",
-            "brownGreyTwo":"#b2b2b2"
+            "brownGreyTwo":"#b2b2b2",
+            "brownGreyThree":"#ababab"
         }
     },
     "inlineCard": {
@@ -70,7 +71,6 @@
             "cornerRadius": 0,
             "borderWidth": 0,
             "itemSpacing": 5,
-            "cvvPlaceHolder": "CvvPlaceholder",
             "shadow":{
                 "color": "clear",
                 "radius": 0,

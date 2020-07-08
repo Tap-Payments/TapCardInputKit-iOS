@@ -11,11 +11,14 @@
             "whiteTwo": "#f4f4f4",
             "deepSkyBlue": "#007aff",
             "white30":"#ffffff4D",
-            "lightPeriwinkle": "d9d9da",
+            "lightPeriwinkle": "#d9d9da",
             "white80":"#ffffffcc",
             "vibrantGreen" : "#2ace00",
             "vibrantGreenTwo" : "#00d300",
-            "paleLilac":"#e4e4e5"
+            "paleLilac":"#e4e4e5",
+            "clear":"#00000000",
+            "brownGreyTwo":"#b2b2b2",
+            "brownGreyThree":"#ababab"
         }
     },
     "inlineCard": {
@@ -371,6 +374,34 @@
                 "backgroundColor": "paleLilac",
                 "countLabelFont" : "Roboto-Regular,9",
                 "countLabelColor" : "greyishBrown",
+            }
+        }
+    },
+    "cardPhoneList":
+    {
+        "backgroundColor": "whiteTwo",
+        "maxWidth":60,
+        "insets":16,
+        "underline":{
+            "unselected": {
+                "backgroundColor" : "brownGrey"
+            },
+            "selected": {
+                "backgroundColor" : "vibrantGreen"
+            }
+        },
+        "icon":{
+            "selected": {
+                "backgroundColor" : "clear",
+                "alpha": 1
+            },
+            "otherSegmentSelected": {
+                "backgroundColor" : "clear",
+                "alpha": 0.5
+            },
+            "unselected": {
+                "backgroundColor" : "clear",
+                "alpha": 1
             }
         }
     }
