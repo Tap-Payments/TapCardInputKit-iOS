@@ -143,6 +143,14 @@ import TapCardVlidatorKit_iOS
         
         phoneNumberTextField.delegate = self
         
+        clearButton.addTarget(self, action: #selector(clearPhoneInput), for: .touchUpInside)
+    }
+    
+    
+    @objc public func clearPhoneInput() {
+        
+        fields.forEach { $0.text = "" }
+        
     }
     
     /// Set the place holders values with the theme color
@@ -284,9 +292,9 @@ extension TapPhoneInput: UITextFieldDelegate {
         let countryCodePlaceHolder:String = tapCountry?.code ?? "965"
         
         countryCodeTextField.text = phoneNumberTextField.text == "" ? "" : countryCodePlaceHolder
+        clearButton.alpha = phoneNumberTextField.text == "" ? 0 : 1
         
         guard let delegate = delegate else { return }
-        
         delegate.phoneNumberChanged?(phoneNumber: phoneNumberTextField.text ?? "")
         
     }
