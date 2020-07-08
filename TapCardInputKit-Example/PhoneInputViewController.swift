@@ -10,6 +10,7 @@ import UIKit
 import CommonDataModelsKit_iOS
 import TapCardInputKit_iOS
 import TapThemeManager2020
+import TapCardVlidatorKit_iOS
 
 class PhoneInputViewController: UIViewController {
 
@@ -30,6 +31,9 @@ class PhoneInputViewController: UIViewController {
 
 extension PhoneInputViewController:TapPhoneInputProtocol {
     func phoneNumberChanged(phoneNumber: String) {
+        print(phoneNumber)
+    }
+    func brandDetected(for phoneBrand: CardBrand, with validation: CrardInputTextFieldStatusEnum) {
         
     }
 }

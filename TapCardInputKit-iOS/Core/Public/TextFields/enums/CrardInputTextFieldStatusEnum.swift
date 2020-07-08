@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TapCardVlidatorKit_iOS
 
 /// This defines the status of the card textfield
 @objc public enum CrardInputTextFieldStatusEnum:Int,CaseIterable {
@@ -19,4 +20,17 @@ import Foundation
     case Incomplete
     /// This textfield is being edited now
     case isEditing
+    
+    
+    
+    init(status:CardValidationState) {
+        switch status {
+        case .incomplete:
+            self = .Incomplete
+        case .invalid:
+            self = .Invalid
+        case .valid:
+            self = .Valid
+        }
+    }
 }

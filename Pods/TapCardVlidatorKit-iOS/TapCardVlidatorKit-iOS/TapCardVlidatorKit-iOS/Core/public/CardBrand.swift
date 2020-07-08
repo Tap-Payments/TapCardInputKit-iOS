@@ -6,7 +6,7 @@
 //
 
 /// Card Brand.
-@objc public enum CardBrand: Int,CaseIterable {
+@objc public enum CardBrand: Int {
 
     case aiywaLoyalty
     case americanExpress
