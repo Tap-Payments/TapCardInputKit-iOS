@@ -632,7 +632,7 @@ extension TapCardInput:TapCardInputCommonProtocol {
         case .FullCardInput:
             themePath = "fullCard"
         case .PhoneInput:
-            themePath = "inlineCard"
+            themePath = "phoneCard"
         }
         // We then call the logic required to apply different parts of the theme in success
         setTextColors()
