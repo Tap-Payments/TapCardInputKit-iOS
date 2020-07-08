@@ -46,6 +46,7 @@
 		E897498624B44A9F00399C4B /* unionpay.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E5C243DCB7E0021B880 /* unionpay.png */; };
 		E897498A24B44F4C00399C4B /* CvvPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E897498924B44F4C00399C4B /* CvvPlaceholder.png */; };
 		E8BC5E0C244D7365007E3916 /* CustomTapCardInputKitLocalisation.json in Resources */ = {isa = PBXBuildFile; fileRef = E8BC5E0B244D7365007E3916 /* CustomTapCardInputKitLocalisation.json */; };
+		E8BE3FA524B5AD3000F15C41 /* PhoneCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE3FA424B5AD3000F15C41 /* PhoneCodeTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		E8911D0824407DB100398252 /* FullCardInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardInput.swift; sourceTree = "<group>"; };
 		E897498924B44F4C00399C4B /* CvvPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CvvPlaceholder.png; sourceTree = "<group>"; };
 		E8BC5E0B244D7365007E3916 /* CustomTapCardInputKitLocalisation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomTapCardInputKitLocalisation.json; sourceTree = "<group>"; };
+		E8BE3FA424B5AD3000F15C41 /* PhoneCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 				E8159E22243DA4C60021B880 /* CardCVVTextField.swift */,
 				E8159E65243DD4040021B880 /* CardNameTextField.swift */,
 				E8911CFA243ED95F00398252 /* TapCardTextField.swift */,
+				E8BE3FA424B5AD3000F15C41 /* PhoneCodeTextField.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				E8911D012440485F00398252 /* TapCardInput.swift in Sources */,
 				E8911CFB243ED95F00398252 /* TapCardTextField.swift in Sources */,
 				E8159E1F243D888F0021B880 /* CardNumberTextField.swift in Sources */,
+				E8BE3FA524B5AD3000F15C41 /* PhoneCodeTextField.swift in Sources */,
 				E8159E26243DA7790021B880 /* InlineCardInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
