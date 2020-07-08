@@ -101,6 +101,8 @@ internal protocol TapCardInputCommonProtocol {
                 themePath = "inlineCard"
             case .FullCardInput:
                 themePath = "fullCard"
+            case .PhoneInput:
+                themePath = "phoneCard"
             }
         }
     }
@@ -629,6 +631,8 @@ extension TapCardInput:TapCardInputCommonProtocol {
             themePath = "inlineCard"
         case .FullCardInput:
             themePath = "fullCard"
+        case .PhoneInput:
+            themePath = "inlineCard"
         }
         // We then call the logic required to apply different parts of the theme in success
         setTextColors()
