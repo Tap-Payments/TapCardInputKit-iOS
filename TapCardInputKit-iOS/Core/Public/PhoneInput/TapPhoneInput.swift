@@ -285,7 +285,9 @@ extension TapPhoneInput: UITextFieldDelegate {
         
         countryCodeTextField.text = phoneNumberTextField.text == "" ? "" : countryCodePlaceHolder
         
-        delegate?.phoneNumberChanged(phoneNumber: phoneNumberTextField.text ?? "")
+        guard let delegate = delegate else { return }
+        
+        delegate.phoneNumberChanged?(phoneNumber: phoneNumberTextField.text ?? "")
         
     }
     
