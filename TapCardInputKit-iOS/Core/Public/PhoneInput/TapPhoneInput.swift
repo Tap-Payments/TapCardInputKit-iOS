@@ -24,7 +24,7 @@ import TapCardVlidatorKit_iOS
      - Parameter cardBrand: The detected phone brand
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
      */
-    @objc optional func brandDetected(for phoneBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
+    @objc optional func phoneBrandDetected(for phoneBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
 }
 
 
@@ -150,6 +150,7 @@ import TapCardVlidatorKit_iOS
     @objc public func clearPhoneInput() {
         
         fields.forEach { $0.text = "" }
+        didChangeText(textField: phoneNumberTextField)
         
     }
     
@@ -300,7 +301,7 @@ extension TapPhoneInput: UITextFieldDelegate {
         print(String(reflecting:detectedBrand.validationState))
         guard let delegate = delegate else { return }
         delegate.phoneNumberChanged?(phoneNumber: phoneNumberTextField.text ?? "")
-        delegate.brandDetected?(for: detectedBrand.cardBrand ?? .unknown, with: .init(status: detectedBrand.validationState))
+        delegate.phoneBrandDetected?(for: detectedBrand.cardBrand ?? .unknown, with: .init(status: detectedBrand.validationState))
         
     }
     
