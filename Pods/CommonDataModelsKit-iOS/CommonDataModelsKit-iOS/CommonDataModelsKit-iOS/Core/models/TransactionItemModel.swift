@@ -13,7 +13,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 import Foundation
 /// Struct to hold info about an item in a transaction
-public struct TransactionItemModel : Codable {
+@objcMembers public class TransactionItemModel : Codable {
     /// The displayed title of the item
 	public let title : String?
     /// The displayed description of the item
@@ -34,7 +34,7 @@ public struct TransactionItemModel : Codable {
 		case quantity = "quantity"
 	}
 
-    public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		description = try values.decodeIfPresent(String.self, forKey: .description)

@@ -20,9 +20,9 @@
 		E8159E23243DA4C60021B880 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E22243DA4C60021B880 /* CardCVVTextField.swift */; };
 		E8159E26243DA7790021B880 /* InlineCardInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E25243DA7790021B880 /* InlineCardInput.swift */; };
 		E8159E41243DB1F80021B880 /* TapCardInputKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8159DE5243C99BF0021B880 /* TapCardInputKit_iOS.framework */; };
-		E8159E42243DB1F80021B880 /* TapCardInputKit_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8159DE5243C99BF0021B880 /* TapCardInputKit_iOS.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E8159E42243DB1F80021B880 /* TapCardInputKit_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8159DE5243C99BF0021B880 /* TapCardInputKit_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E8159E45243DB2500021B880 /* Pods_TapCardInputKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A959C3405CA8B486C298AD4 /* Pods_TapCardInputKit_iOS.framework */; };
-		E8159E46243DB2500021B880 /* Pods_TapCardInputKit_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A959C3405CA8B486C298AD4 /* Pods_TapCardInputKit_iOS.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E8159E46243DB2500021B880 /* Pods_TapCardInputKit_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A959C3405CA8B486C298AD4 /* Pods_TapCardInputKit_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E8159E48243DB2940021B880 /* Pods_TapCardInputKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA5C2C26FA06A448F2EAA78 /* Pods_TapCardInputKit_Example.framework */; };
 		E8159E5E243DCB7E0021B880 /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E57243DCB7E0021B880 /* jcb.png */; };
 		E8159E5F243DCB7E0021B880 /* diners-club.png in Resources */ = {isa = PBXBuildFile; fileRef = E8159E58243DCB7E0021B880 /* diners-club.png */; };
@@ -383,7 +383,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Tap Payments";
 				TargetAttributes = {
 					E8159DE4243C99BF0021B880 = {

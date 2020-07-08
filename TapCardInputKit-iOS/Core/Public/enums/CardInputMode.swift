@@ -15,5 +15,6 @@ import Foundation
     case InlineCardInput = 0
     /// This when you want show full multline card input
     case FullCardInput = 1
-    
+    /// This when you want show a phone number input
+    case PhoneInput = 2
 }

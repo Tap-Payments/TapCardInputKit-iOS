@@ -8,7 +8,7 @@
 
 import Foundation
 /// Presents the interface for common constants
-public class TapCommonConstants {
+@objcMembers public class TapCommonConstants {
     
     /**
      Compute the common localisation file path shared as the default file to be used inside all KITS
