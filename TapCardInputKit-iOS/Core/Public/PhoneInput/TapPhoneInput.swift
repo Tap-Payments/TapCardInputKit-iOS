@@ -137,8 +137,10 @@ import TapCardVlidatorKit_iOS
         // Set the correct font type and colors
         adjustFieldsTextFonts()
         
+        // Set the keyboard type for the fields
         fields.forEach { $0.keyboardType = .numberPad }
         
+        // Country code text field is not selectable at the moment
         countryCodeTextField.isUserInteractionEnabled = false
         
         phoneNumberTextField.delegate = self
@@ -147,6 +149,7 @@ import TapCardVlidatorKit_iOS
     }
     
     
+    /// Handles the logic of clearing and reseting the component
     @objc public func clearPhoneInput() {
         
         fields.forEach { $0.text = "" }
@@ -166,7 +169,7 @@ import TapCardVlidatorKit_iOS
         phoneNumberTextField.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
     }
     
-    
+    /// Sets the correct text fonts and colors to the associated textfields
     internal func adjustFieldsTextFonts() {
         fields.forEach {
             $0.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
@@ -293,12 +296,15 @@ extension TapPhoneInput: UITextFieldDelegate {
         // The country code should reflect the same state of the phone field, i the phone field is showing laceholder then country code will do
         let countryCodePlaceHolder:String = tapCountry?.code ?? "965"
         
+        // We set the country code text field based on the new text of the phone field. They wether show data ot placeholders
         countryCodeTextField.text = phoneNumberTextField.text == "" ? "" : countryCodePlaceHolder
         clearButton.alpha = phoneNumberTextField.text == "" ? 0 : 1
         
+        // Now we need to validate the phone number to know under which telecom operator it is
+        // So we validate it using the telecom brands we have available
         let detectedBrand:DefinedCardBrand = CardValidator.validate(cardNumber: phoneNumberTextField.text, preferredBrands: CardBrand.allCases.filter{ $0.brandSegmentIdentifier == "telecom" })
-        print(String(reflecting:detectedBrand.cardBrand))
-        print(String(reflecting:detectedBrand.validationState))
+        
+        // Inform the delegat that the number is changed and a brand is detected if any
         guard let delegate = delegate else { return }
         delegate.phoneNumberChanged?(phoneNumber: phoneNumberTextField.text ?? "")
         delegate.phoneBrandDetected?(for: detectedBrand.cardBrand ?? .unknown, with: .init(status: detectedBrand.validationState))
