@@ -36,10 +36,10 @@ internal protocol TapCardInputCommonProtocol {
      */
     func cardDataChanged(tapCard:TapCard)
     /**
-    This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
-    - Parameter cardBrand: The detected card brand
-    - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
-    */
+     This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
+     - Parameter cardBrand: The detected card brand
+     - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
+     */
     func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
     /// This method will be called once the user clicks on Scan button
     func scanCardClicked()
@@ -176,10 +176,7 @@ internal protocol TapCardInputCommonProtocol {
         
     }
     
-    /**
-     Tells the caller the current detcted brand and its validation state
-     - Returns: (CardBrand,CardValidationState) tuble indicating the brand etected and its state based on the latets chnanges of the card field
-     */
+    
     public func cardBrandWithStatus() -> (CardBrand?,CardValidationState) {
         return cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
     }
@@ -301,11 +298,9 @@ internal protocol TapCardInputCommonProtocol {
                 // If the card number changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
                 self?.tapCard.tapCardNumber = cardNumber
                 self?.cardDatachanged()
-                // If the card nuber is inline and VALID, then we need to move to the next field in a row
                 if self?.cardInputMode == .InlineCardInput, self?.cardNumber.isValid() ?? false {
                     self?.cardExpiry.becomeFirstResponder()
                 }
-                // As per the design, in the case we have one brand only supported we need to show it instead of the card placeholdder
                 self?.handleOneBrandIcon(with: cardNumber)
         })
         
@@ -355,15 +350,11 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-    /**
-     Handles the logic to determine if we need to show the detected card brand icon or the card placeholder. If there is only one supported card brand, then it will be shown here
-     - Parameter cardNumber: The card number we need to validate and detect its brand
-     */
     internal func handleOneBrandIcon(with cardNumber:String = "") {
         if let iconString:String = cardIconUrl, let iconURL:URL = URL(string: iconString) {
             // Meaning, we have an icon to set, we check if it is not invalid we show the icon otherwise, the palceholder icon
             let validationStatus = self.cardNumber.textFieldStatus(cardNumber: cardNumber)
-            if validationStatus == .Invalid {
+            if validationStatus == .Invalid && cardNumber != "" {
                 icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
             }else {
                 let options = ImageLoadingOptions(
@@ -382,7 +373,6 @@ internal protocol TapCardInputCommonProtocol {
         }
     }
     
-    /// A function to handle reseting and clearing all data inside the form
     @objc public func reset() {
         clearButtonClicked()
     }
@@ -475,40 +465,32 @@ internal protocol TapCardInputCommonProtocol {
         FlurryLogger.logEvent(with: "Tap_Card_Input_Scan_Clicked")
     }
     
-    /// Handles the logic for clearing and reseting al the data inside the card form
+    
     @objc internal func clearButtonClicked() {
         
-        // First, clear up the tap card model
         tapCard.tapCardCVV = nil
         tapCard.tapCardNumber = nil
         tapCard.tapCardExpiryYear = nil
         tapCard.tapCardExpiryMonth = nil
         tapCard.tapCardName = nil
         
-        // Second, clear all the textfields
         fields.forEach{
             $0.text = ""
             updateWidths(for: $0)
         }
-        
-        // Finally, execute whatever actions after changing the fields text
         cardDatachanged()
     }
     
     
-    /// Handles the icon and the action related to the trailing button, switching between SCAN and CLEAR buttons
     internal func adjustScanButton() {
-        // Clear all taget actions
         scanButton.removeTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         scanButton.removeTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         
         
         if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
-            // If there is a field that has data, then we show the clear button
             self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).clearImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         }else {
-            // Otherwise, it is the initial case, we show the scanning button
             self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         }

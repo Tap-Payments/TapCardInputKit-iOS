@@ -83,7 +83,7 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
             nonNullCardNumber = cardNumber!
         }
         // We use the Valoidation kit to get the status of the number
-        let definedCard = CardValidator.validate(cardNumber: nonNullCardNumber)
+        let definedCard = CardValidator.validate(cardNumber: nonNullCardNumber,preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
         if let definedBrand = definedCard.cardBrand,
             allowedBrands.count > 0, !allowedBrands.contains(definedBrand.rawValue){
             return .Invalid
@@ -166,7 +166,7 @@ extension CardNumberTextField:UITextFieldDelegate {
         // In card number we only allow digits and spaces. The spaces will come from the formatting we are applying
         let filteredText:String = updatedText.digitsWithSpaces()
         // Validae the state of the number by trimming all non numeric charachters
-        let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits())
+        let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits(),preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
         
         
         if let nonNullCardBrandBlock = cardBrandDetected {
@@ -193,7 +193,7 @@ extension CardNumberTextField:UITextFieldDelegate {
     
     
     internal func cardBrand(for cardNumber:String) -> (CardBrand?,CardValidationState) {
-        let validation = CardValidator.validate(cardNumber: cardNumber.onlyDigits())
+        let validation = CardValidator.validate(cardNumber: cardNumber.onlyDigits(),preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
         return (validation.cardBrand,validation.validationState)
     }
 }
