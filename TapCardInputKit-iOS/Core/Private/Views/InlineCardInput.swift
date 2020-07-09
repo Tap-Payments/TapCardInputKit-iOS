@@ -33,24 +33,6 @@ extension TapCardInput {
             make.height.equalTo(24)
             make.centerY.equalToSuperview()
         }
-
-        
-        /*// The holder scroll view should full the super view. this will ve used to scroll horizontally to show all the fields
-        scrollView.snp.remakeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        
-        // The horizontal stack view will be used to layout the card fields horizontaly. It will be filling the scroll view with a padding on both sides
-        stackView.snp.remakeConstraints { (make) in
-            make.height.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.leading.equalTo(icon.snp.trailing).offset(10)
-            make.trailing.equalTo(scanButton.snp.leading).offset(-15)
-        }*/
-        
         
         // Defines the constrints for the card number field
         cardNumber.snp.remakeConstraints { (make) in
@@ -59,13 +41,6 @@ extension TapCardInput {
             make.height.equalToSuperview()
             make.leading.equalTo(icon.snp.trailing).offset(10)
         }
-        
-        /*// Defines the constrints for the card name field
-        cardName.snp.remakeConstraints { (make) in
-           // We set the card name width to the mimimum width based on its min visible characters attribute
-            make.width.equalTo(cardName.calculatedWidth())
-            make.height.equalTo(stackView)
-        }*/
         
         // Defines the constrints for the card expiry field
         cardExpiry.snp.remakeConstraints { (make) in
@@ -87,8 +62,6 @@ extension TapCardInput {
         
         
         layoutIfNeeded()
-        
-       // calculateAutoMinWidths()
         
     }
     
@@ -200,6 +173,9 @@ extension TapCardInput {
             
             guard nonNullView == cardNumber else { return }
             
+            // Determine the widths and the visibilot of the text fields based on the logic:
+            // if there is a valid caard number we show all the fields.
+            // If the card number is not focused, we show only the last four digits
             nonNullView.snp.updateConstraints( { [weak self] make in
                 if let nonNullProtocolImplemented:CardInputTextFieldProtocol = nonNullView as? CardInputTextFieldProtocol {
                     make.width.equalTo(nonNullProtocolImplemented.calculatedWidth())
@@ -211,6 +187,7 @@ extension TapCardInput {
             let spacing = CardValidator.cardSpacing(cardNumber: correctNumberText.onlyDigits())
             nonNullView.text = correctNumberText.cardFormat(with: spacing)
             
+            // Set the visibilog of cvv and expirty based on the validty of the card number
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
                 self?.cardExpiry.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
                 self?.cardCVV.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
@@ -219,15 +196,17 @@ extension TapCardInput {
         }
     }
     
-    
+    /// Method to perform the flipping animation for the card icon when the CVV is focused
     internal func performCvvAnimation() {
         
+        // Fetch the cvv icon from the the theme file
         let cvvPlaceHolder:UIImage =  TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self)))!
         var newImage:UIImage? = nil
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             
             guard let nonNullSelf = self else { return }
+            // Determine whether we need to show the card cvv icon ot the original icon
             if !(nonNullSelf.cardExpiry.isEditing || nonNullSelf.cardNumber.isEditing) && nonNullSelf.cardCVV.isEditing {
                 nonNullSelf.lastShownIcon = (nonNullSelf.icon.image != cvvPlaceHolder) ? nonNullSelf.icon.image : nonNullSelf.lastShownIcon
                 newImage = cvvPlaceHolder
@@ -235,6 +214,7 @@ extension TapCardInput {
                 newImage = nonNullImage
             }
             
+            // Perfom the icon change with flipping animation
             guard let nonNullNewImage:UIImage = newImage, nonNullNewImage != self?.icon.image else { return }
             nonNullSelf.icon.layer.removeAllAnimations()
             UIView.transition(with: nonNullSelf.icon, duration: 0.2, options: .transitionFlipFromLeft, animations: { [weak self] in
