@@ -58,6 +58,25 @@ class ExampleCardInputViewController: UIViewController {
             cardInput.localize()
         }
     }
+    @IBAction func fillTemplateCardClicked(_ sender: Any) {
+        let alertController:UIAlertController = .init(title: "Which type?", message: "Choose a state", preferredStyle: .actionSheet)
+        let valid:UIAlertAction = .init(title: "Valid card", style: .destructive) { [weak self] (_) in
+            let card:TapCard = .init(tapCardNumber: "4242424242424242", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
+            self?.cardInput.setCardData(tapCard: card)
+        }
+        let inValid:UIAlertAction = .init(title: "Invalid card", style: .default) { [weak self] (_) in
+            let card:TapCard = .init(tapCardNumber: "4242424242424211", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
+            self?.cardInput.setCardData(tapCard: card)
+        }
+        let cancel:UIAlertAction = .init(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(valid)
+        alertController.addAction(inValid)
+        alertController.addAction(cancel)
+        
+        
+        present(alertController, animated: true, completion: nil)
+    }
     
 }
 

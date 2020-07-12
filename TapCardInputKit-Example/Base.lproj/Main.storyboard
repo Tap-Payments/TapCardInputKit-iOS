@@ -185,19 +185,21 @@
                                     <constraint firstAttribute="height" constant="250" id="Gba-ma-Y3J"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5k-Ce-yi0">
+                                <rect key="frame" x="148" y="407" width="118" height="30"/>
+                                <state key="normal" title="Fill template card"/>
+                                <connections>
+                                    <action selector="fillTemplateCardClicked:" destination="WVr-bh-eOb" eventType="touchUpInside" id="Ot7-A9-A9V"/>
+                                    <action selector="fillTemplateCardClicked:" destination="upW-wx-o6K" eventType="touchUpInside" id="uTh-0A-WHO"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HMM-35-cnB">
-                                <rect key="frame" x="8" y="468" width="398" height="386"/>
+                                <rect key="frame" x="8" y="494" width="398" height="360"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Below are the callbacks from the tap card input view up ☝" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-Nm-RH1">
-                                <rect key="frame" x="25" y="419" width="364" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lqP-O8-Avo">
                                 <rect key="frame" x="142.5" y="98" width="129" height="32"/>
                                 <segments>
@@ -208,6 +210,12 @@
                                     <action selector="languageChanged:" destination="WVr-bh-eOb" eventType="valueChanged" id="HeT-Rm-nBV"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Below are the callbacks from the tap card input view up ☝" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-Nm-RH1">
+                                <rect key="frame" x="25" y="445" width="364" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -218,10 +226,12 @@
                             <constraint firstItem="kOy-Nm-RH1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X6Z-FE-XzH" secondAttribute="leading" id="NGL-sk-h01"/>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="bottom" secondItem="HMM-35-cnB" secondAttribute="bottom" constant="8" id="NPu-f5-D4e"/>
                             <constraint firstItem="kOy-Nm-RH1" firstAttribute="centerX" secondItem="DLB-7K-lnn" secondAttribute="centerX" id="WmW-2A-Wyv"/>
-                            <constraint firstItem="kOy-Nm-RH1" firstAttribute="top" secondItem="lzd-Rw-9W5" secondAttribute="bottom" constant="20" id="YEl-2B-zDn"/>
                             <constraint firstItem="lqP-O8-Avo" firstAttribute="top" secondItem="X6Z-FE-XzH" secondAttribute="top" constant="10" id="ZWw-yj-1Xm"/>
                             <constraint firstItem="lzd-Rw-9W5" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" id="bOl-X5-FVy"/>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kOy-Nm-RH1" secondAttribute="trailing" id="cYl-aX-gbq"/>
+                            <constraint firstItem="h5k-Ce-yi0" firstAttribute="centerX" secondItem="DLB-7K-lnn" secondAttribute="centerX" id="mTD-lE-HKD"/>
+                            <constraint firstItem="kOy-Nm-RH1" firstAttribute="top" secondItem="h5k-Ce-yi0" secondAttribute="bottom" constant="8" id="v16-cR-zQX"/>
+                            <constraint firstItem="h5k-Ce-yi0" firstAttribute="top" secondItem="lzd-Rw-9W5" secondAttribute="bottom" constant="8" id="wkq-ES-Xqa"/>
                             <constraint firstItem="HMM-35-cnB" firstAttribute="leading" secondItem="X6Z-FE-XzH" secondAttribute="leading" constant="8" id="zCn-z9-0qB"/>
                             <constraint firstItem="X6Z-FE-XzH" firstAttribute="trailing" secondItem="HMM-35-cnB" secondAttribute="trailing" constant="8" id="zu4-Ry-kQA"/>
                         </constraints>
@@ -309,6 +319,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZy-sk-pCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="upW-wx-o6K" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="993" y="907"/>
         </scene>

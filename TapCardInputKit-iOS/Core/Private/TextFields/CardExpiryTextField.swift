@@ -180,7 +180,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
     - Parameter month: The month part of the date
      - Parameter year: The year part of the date
     */
-    internal func changeText(with month:String?, year:String?) {
+    internal func changeText(with month:String?, year:String?) -> Bool {
         
         if let nonNullMonth = formatMonthPart(with: month),
             let nonNullYear = formatYearPart(with: year) {
@@ -189,6 +189,8 @@ extension CardExpiryTextField:UITextFieldDelegate {
         }
         // Afterall, we need to color the text based on the validty of the field
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
+        
+        return self.isValid()
     }
     
     /**

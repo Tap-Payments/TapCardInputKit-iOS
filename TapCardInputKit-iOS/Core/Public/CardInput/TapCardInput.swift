@@ -167,11 +167,42 @@ internal protocol TapCardInputCommonProtocol {
      */
     @objc public func setCardData(tapCard:TapCard) {
         // Match the tapCard attributes to the different card fields
-        cardName.text = tapCard.tapCardName ?? ""
         
-        let _ = cardNumber.changeText(with: tapCard.tapCardNumber ?? "", setTextAfterValidation: true)
-        let _ = cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true)
-        cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear)
+        // First then, we check if there is a card number provided
+        guard let providedCardNumber:String = tapCard.tapCardNumber, providedCardNumber != "" else { return }
+        
+        // If there is a card number, first thing to do now is to clear the fields
+        clearButtonClicked()
+        
+        // Then we set the card number and check if it is valid or not
+        guard cardNumber.changeText(with: providedCardNumber, setTextAfterValidation: true) else {
+            cardNumber.becomeFirstResponder()
+            return
+        }
+        
+        cardNumber.resignFirstResponder()
+        updateWidths(for: cardNumber)
+        
+        // Then we set the card expiry and check if it is valid or not
+        guard cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear) else {
+            cardExpiry.text = ""
+            cardExpiry.becomeFirstResponder()
+            return
+        }
+        
+        cardExpiry.resignFirstResponder()
+        updateWidths(for: cardExpiry)
+        
+        // Then check if the usder provided a correct cvv
+        guard cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true) else {
+            cardCVV.text = ""
+            cardCVV.becomeFirstResponder()
+            return
+        }
+        
+        cardCVV.resignFirstResponder()
+        updateWidths(for: cardCVV)
+        
         FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         
     }
