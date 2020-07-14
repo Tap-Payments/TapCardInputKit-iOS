@@ -9,7 +9,7 @@
 import Foundation
 ///This is a representable and easy representation currency codes
 @objc public enum TapCurrencyCode: Int, RawRepresentable, CaseIterable {
-    
+    case undefined
     /// United Arab Emirates dirham currency code
     case AED
     /// Afghan afghani currency code
@@ -1320,6 +1320,8 @@ import Foundation
             return "ZMW"
         case .ZWL:
             return "ZWL"
+        case .undefined:
+            return ""
         }
     }
     

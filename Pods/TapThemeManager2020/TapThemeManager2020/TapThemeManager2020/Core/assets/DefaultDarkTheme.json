@@ -18,7 +18,14 @@
             "paleLilac":"#e4e4e5",
             "clear":"#00000000",
             "brownGreyTwo":"#b2b2b2",
-            "brownGreyThree":"#ababab"
+            "brownGreyThree":"#ababab",
+            "orange":"#ea611c",
+            "apricot30":"#ffbe604C",
+            "reddishOrange20":"#ea672433",
+            "cherryRed":"#e12131",
+            "cherryRed10":"#e1213119",
+            "cherryRed20":"#e12132",
+            "deepSkyBlue15":"#007aff26"
         }
     },
     "inlineCard": {
@@ -44,6 +51,7 @@
         },
         "scanImage": {
             "image": "scanIcon",
+            "selected": "selectedScan",
             "width": 32
         },
         "clearImage": {
@@ -403,6 +411,37 @@
                 "backgroundColor" : "clear",
                 "alpha": 1
             }
+        }
+    },
+    "Hints":
+    {
+        "Warning":
+        {
+            "textFont": "Roboto-Light,12",
+            "textColor": "orange",
+            "backgroundColor": "apricot30",
+            "borderColor": "reddishOrange20"
+        },
+        "Error":
+        {
+            "textFont": "Roboto-Light,12",
+            "textColor": "cherryRed",
+            "backgroundColor": "cherryRed10",
+            "borderColor": "cherryRed20"
+        },
+        "Default":
+        {
+            "textFont": "Roboto-Light,12",
+            "textColor": "greyishBrown",
+            "backgroundColor": "whiteTwo",
+            "borderColor": "clear"
+        },
+        "Scanned":
+        {
+            "textFont": "Roboto-Light,12",
+            "textColor": "deepSkyBlue",
+            "backgroundColor": "deepSkyBlue15",
+            "borderColor": "clear"
         }
     }
 }

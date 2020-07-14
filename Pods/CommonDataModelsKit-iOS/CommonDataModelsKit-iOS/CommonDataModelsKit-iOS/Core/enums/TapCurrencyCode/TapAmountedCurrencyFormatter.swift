@@ -26,7 +26,7 @@ public protocol TapAmountedCurrencyFormatterProtocol {
 }
 /// Tap Currency formatter responsible for formatting a given number to its correct market representation of the selected currency with many options
 
-@objcMembers public class TapAmountedCurrencyFormatter: TapAmountedCurrencyFormatterProtocol {
+@objcMembers public class TapAmountedCurrencyFormatter:NSObject, TapAmountedCurrencyFormatterProtocol {
     
     public var localizeCurrencySymbol: Bool = false
     
@@ -240,6 +240,7 @@ public protocol TapAmountedCurrencyFormatterProtocol {
     ///
     /// - Parameter handler: configuration handler callback.
     public init(_ handler: InitHandler? = nil) {
+        super.init()
         numberFormatter = NumberFormatter()
         numberFormatter.alwaysShowsDecimalSeparator = false
         numberFormatter.numberStyle = .currency

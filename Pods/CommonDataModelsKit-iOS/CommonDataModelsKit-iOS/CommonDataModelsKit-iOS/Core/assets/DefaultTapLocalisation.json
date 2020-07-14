@@ -21,6 +21,26 @@
             "hideDesc": "Hide Description",
             "Discount": "Discount"
         },
+        "Hints":
+        {
+            "Warning":
+            {
+                "missingExpiryCVV": "Expiry date & CVV number are missing.",
+                "missingCVV": "CVV number is missing."
+            },
+            "Error":
+            {
+                "wrongCardNumber": "Card number is invalid"
+            },
+            "Default":
+            {
+                "scan": "Ready to scan."
+            },
+            "Scanned":
+            {
+                "successFullScan" : "Your card has been scanned successfully."
+            }
+        },
         "Common": {
             "next": "Next",
             "previous": "Previous",
@@ -53,6 +73,26 @@
             "showDesc": "إظهار الوصف",
             "hideDesc": "إخفاء الوصف",
             "Discount": "خصم"
+        },
+        "Hints":
+        {
+            "Warning":
+            {
+                "missingExpiryCVV": "تاريخ الإنتهاء و الرمز الأمني مطلوبين",
+                "missingCVV": "الرمز الأمني مطلوب"
+            },
+            "Error":
+            {
+                "wrongCardNumber": "رقم غير صحيح"
+            },
+            "Default":
+            {
+                "scan": "جاهز للتصوير"
+            },
+            "Scanned":
+            {
+                "successFullScan" : "تم  تصوير الكارت بنجاح"
+            }
         },
         "Common": {
             "next": "التالي",
