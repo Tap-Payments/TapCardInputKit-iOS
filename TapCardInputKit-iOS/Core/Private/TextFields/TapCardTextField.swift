@@ -27,7 +27,7 @@ import enum TapCardVlidatorKit_iOS.CardBrand
 
 /// This is the super class for all the tap card fields. This will help in providing a single interface for any caller to deal with this class only to access all common attributes and methods rather than talking to each card field type alone
 internal class TapCardTextField: UITextField {
-
+    
     /// The number of chars the textfield, the field will shrink to when another field is focused
     var minVisibleChars: Int = 0
     /// This is the maximum chars of the textfield, the field will expand to it when is focused
@@ -44,7 +44,7 @@ internal class TapCardTextField: UITextField {
     var placeHolderTextColor: UIColor = .black {
         didSet{
             self.attributedPlaceholder = NSAttributedString(string: self.attributedPlaceholder?.string ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
-
+            
         }
     }
     
@@ -71,10 +71,11 @@ internal class TapCardTextField: UITextField {
     var errorTextColor: UIColor = .red
     /// This is a block to tell the subscriber that the editing stats had been changed, whether editing TRUE or end editing FALSE
     var editingStatusChanged:((Bool)->())?
-    
+    /// This is a block to tell the subscriber that any change happened to the text
+    var textChanged:((String)->())?
     /// This defines if the field should fill in the remaining space width wise in the inline mode
     var fillBiggestAvailableSpace:Bool = false
-
+    
 }
 
 
@@ -92,11 +93,11 @@ extension TapCardTextField {
     }
     
     /**
-    This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
+     This is the method that willc ompute in pixels the width of the textfield, taking in consideration the status of the field (editing or not) and the min max chars of the textfield
      - Parameter textField: The textfield you need to check its width
      - Parameter text: The text you want to calculate the width needed to show them
-    - Returns: The width of the textfield to show now in pixeld
-    */
+     - Returns: The width of the textfield to show now in pixeld
+     */
     func textWidth(textfield: UITextField, text: String) -> CGFloat {
         // Check if the minimimuum width auto calclated exists first
         if self.autoMinCalculatedWidth > 0 && !textfield.isEditing {
@@ -120,17 +121,17 @@ extension String {
     }
     
     /**
-    Returns all the charachters that are only digits and spaces
-    - Returns: A string that has only digits and spaces from the provided string
-    */
+     Returns all the charachters that are only digits and spaces
+     - Returns: A string that has only digits and spaces from the provided string
+     */
     func digitsWithSpaces() -> String {
         return self.filter { "0123456789 ".contains($0) }
     }
     
     /**
-    Returns all the charachters that are only alphabet
-    - Returns: A lowercase string that has only alphabet from the provided string
-    */
+     Returns all the charachters that are only alphabet
+     - Returns: A lowercase string that has only alphabet from the provided string
+     */
     func alphabetOnly() -> String {
         return self.lowercased().filter { "abcdefghijklmnopqrstuvwxyz ".contains($0) }
     }
@@ -143,7 +144,7 @@ extension String {
     public func cardFormat(with spaces:[Int]) -> String {
         // Create a regexx template that will decide where to put the spaces afterwards
         let regex: NSRegularExpression
-
+        
         do {
             var pattern = ""
             var first = true

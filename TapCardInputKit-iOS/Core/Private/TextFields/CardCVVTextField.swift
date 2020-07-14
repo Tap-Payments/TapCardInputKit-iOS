@@ -140,6 +140,9 @@ extension CardCVVTextField:UITextFieldDelegate {
             // For the card cvv we send back the cvv entered by the user
             nonNullBlock(textField.text!.onlyDigits())
         }
+        if let nonNullTextChangeBlock = textChanged {
+            nonNullTextChangeBlock(self.text ?? "")
+        }
     }
     
     /**
@@ -166,7 +169,9 @@ extension CardCVVTextField:UITextFieldDelegate {
             didChangeText(textField: self)
             self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         }
-        
+        if let nonNullTextChangeBlock = textChanged {
+            nonNullTextChangeBlock(self.text ?? "")
+        }
         return true
     }
 }

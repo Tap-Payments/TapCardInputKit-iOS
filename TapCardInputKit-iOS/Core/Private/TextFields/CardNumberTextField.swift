@@ -153,6 +153,9 @@ extension CardNumberTextField:UITextFieldDelegate {
             // If the card number changed block is assigned, we need to fire this event
             nonNullBlock(textField.text!.onlyDigits())
         }
+        if let nonNullTextChangeBlock = textChanged {
+            nonNullTextChangeBlock(self.text ?? "")
+        }
     }
     
     /**
@@ -187,7 +190,9 @@ extension CardNumberTextField:UITextFieldDelegate {
             self.text = updatedText
             didChangeText(textField:self)
         }
-        
+        if let nonNullTextChangeBlock = textChanged {
+            nonNullTextChangeBlock(self.text ?? "")
+        }
         return shouldUpdate
     }
     
