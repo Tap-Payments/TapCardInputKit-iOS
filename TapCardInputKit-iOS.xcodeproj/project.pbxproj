@@ -34,6 +34,8 @@
 		E8159E66243DD4040021B880 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8159E65243DD4040021B880 /* CardNameTextField.swift */; };
 		E8159E68243E3A890021B880 /* Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = E8159E67243E3A890021B880 /* Theme.json */; };
 		E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C796B24482A6700CECC81 /* FlurryLogger.swift */; };
+		E8437F8324BEDEF30059F1B8 /* TapEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8437F8224BEDEF30059F1B8 /* TapEmailInput.swift */; };
+		E8437F8524BEE3420059F1B8 /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8437F8424BEE3420059F1B8 /* EmailInputViewController.swift */; };
 		E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */; };
 		E87161282444474A00B139D0 /* ExampleCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */; };
 		E871612A24447DFB00B139D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E871612924447DFB00B139D0 /* GoogleService-Info.plist */; };
@@ -120,6 +122,8 @@
 		E8159E65243DD4040021B880 /* CardNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		E8159E67243E3A890021B880 /* Theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Theme.json; sourceTree = "<group>"; };
 		E83C796B24482A6700CECC81 /* FlurryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlurryLogger.swift; sourceTree = "<group>"; };
+		E8437F8224BEDEF30059F1B8 /* TapEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapEmailInput.swift; sourceTree = "<group>"; };
+		E8437F8424BEE3420059F1B8 /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
 		E87161252444468600B139D0 /* CardInputSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInputSelectionTableViewController.swift; sourceTree = "<group>"; };
 		E87161272444474A00B139D0 /* ExampleCardInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardInputViewController.swift; sourceTree = "<group>"; };
 		E871612924447DFB00B139D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				E871612924447DFB00B139D0 /* GoogleService-Info.plist */,
 				E8BC5E0B244D7365007E3916 /* CustomTapCardInputKitLocalisation.json */,
 				E8BE3FA924B5DA6400F15C41 /* PhoneInputViewController.swift */,
+				E8437F8424BEE3420059F1B8 /* EmailInputViewController.swift */,
 			);
 			path = "TapCardInputKit-Example";
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 		E8159E13243D83F60021B880 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				E8437F8124BEDEE40059F1B8 /* EmailInput */,
 				E8BE3FA624B5B3B200F15C41 /* PhoneInput */,
 				E8911D032440499D00398252 /* enums */,
 				E8159E24243DA75F0021B880 /* CardInput */,
@@ -307,6 +313,14 @@
 				E897498924B44F4C00399C4B /* CvvPlaceholder.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		E8437F8124BEDEE40059F1B8 /* EmailInput */ = {
+			isa = PBXGroup;
+			children = (
+				E8437F8224BEDEF30059F1B8 /* TapEmailInput.swift */,
+			);
+			path = EmailInput;
 			sourceTree = "<group>";
 		};
 		E8911D022440498E00398252 /* Views */ = {
@@ -537,6 +551,7 @@
 				E8159E23243DA4C60021B880 /* CardCVVTextField.swift in Sources */,
 				E8BE3FA824B5B3C700F15C41 /* TapPhoneInput.swift in Sources */,
 				E83C796C24482A6700CECC81 /* FlurryLogger.swift in Sources */,
+				E8437F8324BEDEF30059F1B8 /* TapEmailInput.swift in Sources */,
 				E8159E19243D85A50021B880 /* CrardInputTextFieldStatusEnum.swift in Sources */,
 				E8911D072440674500398252 /* TapCardBarButton.swift in Sources */,
 				E8911D012440485F00398252 /* TapCardInput.swift in Sources */,
@@ -554,6 +569,7 @@
 				E8159DFB243C99DC0021B880 /* ViewController.swift in Sources */,
 				E8BE3FAA24B5DA6400F15C41 /* PhoneInputViewController.swift in Sources */,
 				E87161262444468600B139D0 /* CardInputSelectionTableViewController.swift in Sources */,
+				E8437F8524BEE3420059F1B8 /* EmailInputViewController.swift in Sources */,
 				E8159DF7243C99DC0021B880 /* AppDelegate.swift in Sources */,
 				E8159DF9243C99DC0021B880 /* SceneDelegate.swift in Sources */,
 			);

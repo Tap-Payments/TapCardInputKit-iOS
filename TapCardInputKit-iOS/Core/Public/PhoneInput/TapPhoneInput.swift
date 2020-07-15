@@ -25,6 +25,9 @@ import TapCardVlidatorKit_iOS
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
      */
     @objc optional func phoneBrandDetected(for phoneBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
+    
+     /// This method will be called whenever the user clicked on the country code
+    @objc optional func countryCodeClicked()
 }
 
 
@@ -112,7 +115,7 @@ import TapCardVlidatorKit_iOS
         
         countryCodeTextField.snp.remakeConstraints {(make) in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(icon.snp.trailing).offset(18)
+            make.leading.equalToSuperview().offset(65)
             make.width.equalTo(countryCodeTextField.textWidth(text: "\(tapCountry?.code ?? "999")9"))
             make.height.equalToSuperview()
         }
@@ -138,12 +141,10 @@ import TapCardVlidatorKit_iOS
         adjustFieldsTextFonts()
         
         // Set the keyboard type for the fields
-        fields.forEach { $0.keyboardType = .numberPad }
-        
-        // Country code text field is not selectable at the moment
-        countryCodeTextField.isUserInteractionEnabled = false
-        
-        phoneNumberTextField.delegate = self
+        fields.forEach {
+            $0.keyboardType = .numberPad
+            $0.delegate = self
+        }
         
         clearButton.addTarget(self, action: #selector(clearPhoneInput), for: .touchUpInside)
     }
@@ -273,6 +274,19 @@ extension TapPhoneInput {
 }
 
 extension TapPhoneInput: UITextFieldDelegate {
+    
+    
+    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
+        
+        guard textField != countryCodeTextField else {
+            // Report back that the country code is clicked
+            delegate?.countryCodeClicked?()
+            phoneNumberTextField.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // get the current text, or use an empty string if that failed

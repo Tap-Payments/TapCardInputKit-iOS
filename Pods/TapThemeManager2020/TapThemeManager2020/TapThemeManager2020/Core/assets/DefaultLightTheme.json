@@ -103,6 +103,37 @@
             "placeHolderColor" : "brownGreyThree"
         }
     },
+    "emailCard": {
+        "commonAttributes": {
+            "backgroundColor": "white",
+            "borderColor": "clear",
+            "cornerRadius": 0,
+            "borderWidth": 0,
+            "itemSpacing": 5,
+            "shadow":{
+                "color": "clear",
+                "radius": 0,
+                "offsetWidth": 0,
+                "offsetHeight": 0,
+                "opacity": 0
+            },
+            "widthMargin": 7
+        },
+        "iconImage": {
+            "image": "mailFormIcon",
+            "width": 32
+        },
+        "clearImage": {
+            "image": "clearFormIcon",
+            "width": 32
+        },
+        "textFields": {
+            "textColor": "greyishBrown",
+            "errorTextColor": "#FF0000",
+            "font" : "Roboto-Light,17",
+            "placeHolderColor" : "brownGreyThree"
+        }
+    },
     "fullCard": {
         "commonAttributes": {
             "backgroundColor": "white",

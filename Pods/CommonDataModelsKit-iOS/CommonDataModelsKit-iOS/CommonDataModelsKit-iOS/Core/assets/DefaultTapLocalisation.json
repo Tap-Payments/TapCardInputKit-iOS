@@ -5,7 +5,8 @@
             "cardNamePlaceHolder": "Holder name",
             "cardCVVPlaceHolder": "CVV",
             "cardExpiryPlaceHolder": "MM/YY",
-            "cardSaveLabel": "For faster and more secure checkout,\nsave your card"
+            "cardSaveLabel": "For faster and more secure checkout,\nsave your card",
+            "emailPlaceHolder": "email@email.com"
         },
         "TapMerchantSection": {
             "paymentFor" : "PAYMENT FOR"
@@ -49,7 +50,9 @@
             "edit": "Edit",
             "close": "Close",
             "items": "Items",
-            "item": "Item"
+            "item": "Item",
+            "email": "email",
+            "phone": "phone"
         }
     },
     "ar": {
@@ -58,7 +61,8 @@
             "cardNamePlaceHolder": "صاحب البطاقة",
             "cardCVVPlaceHolder": "الرمز الأمني",
             "cardExpiryPlaceHolder": "شش/سس",
-            "cardSaveLabel": "لشراء أسرع و أكثر أماناً،\nإحفظ البطاقة"
+            "cardSaveLabel": "لشراء أسرع و أكثر أماناً،\nإحفظ البطاقة",
+            "emailPlaceHolder": "email@email.com"
         },
         "TapMerchantSection": {
             "paymentFor" : "سأدفع لـ"
@@ -102,7 +106,9 @@
             "edit": "تعديل",
             "close": "غلق",
             "items": "منتجات",
-            "item": "منتج"
+            "item": "منتج",
+            "email": "البريد",
+            "phone": "الهاتف"
         }
     }
 }

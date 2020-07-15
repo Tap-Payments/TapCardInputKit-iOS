@@ -36,4 +36,8 @@ extension PhoneInputViewController:TapPhoneInputProtocol {
     func brandDetected(for phoneBrand: CardBrand, with validation: CrardInputTextFieldStatusEnum) {
         
     }
+    
+    func countryCodeClicked() {
+        print("COUNTRY CODE CLICKED")
+    }
 }
