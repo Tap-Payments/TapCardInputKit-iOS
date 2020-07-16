@@ -26,8 +26,11 @@ import TapCardVlidatorKit_iOS
      */
     @objc optional func phoneBrandDetected(for phoneBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
     
-     /// This method will be called whenever the user clicked on the country code
+    /// This method will be called whenever the user clicked on the country code
     @objc optional func countryCodeClicked()
+    
+    /// This method will be called whenever the user hits return on the phone text
+    @objc optional func phoneReturned(with phone:String)
 }
 
 
@@ -80,7 +83,11 @@ import TapCardVlidatorKit_iOS
     }
     
     
-    
+    @objc public func validationStatus() -> CrardInputTextFieldStatusEnum {
+        // Now we need to validate the phone entered matching country length
+        let validationStatus:Bool = tapCountry?.phoneLength ?? -1 == phoneNumberTextField.text?.count
+        return (validationStatus) ? .Valid : .Invalid
+    }
     
     
     /// This method is the brain controller of showing the views, as it taks the process for adding subview, laying them out and applying the theme
@@ -235,6 +242,9 @@ extension TapPhoneInput {
         applyTheme()
     }
     
+    @objc public func focus() {
+        phoneNumberTextField.becomeFirstResponder()
+    }
     
     /// Method that glows or the dims the card input view based on the shadow theme provided and if any of the fields is active
     internal func  updateShadow() {
@@ -284,6 +294,15 @@ extension TapPhoneInput: UITextFieldDelegate {
             phoneNumberTextField.resignFirstResponder()
             return false
         }
+        
+        return true
+    }
+    
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard textField == phoneNumberTextField else { return true }
+        
+        delegate?.phoneReturned?(with: phoneNumberTextField.text ?? "")
         
         return true
     }

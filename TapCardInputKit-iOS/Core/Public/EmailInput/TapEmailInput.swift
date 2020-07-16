@@ -20,6 +20,9 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
      */
     @objc optional func emailChanged(email:String,with validation:CrardInputTextFieldStatusEnum)
+    
+    /// This method will be called whenever the user hits return on the email text
+    @objc optional func emailReturned(with email:String)
 }
 
 
@@ -45,6 +48,7 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
     /// A delegate listener to listen to the events fired from the phone input form fields
     @objc public var delegate:TapEmailInputProtocol?
     
+    
     // Mark:- Init methods
     @objc public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,14 +59,21 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
     }
     
     
-     ///Call this method when you  need to setup the view
+    ///Call this method when you  need to setup the view
     @objc public func setup() {
         setupViews()
     }
     
+    @objc public func focus() {
+        emailTextField.becomeFirstResponder()
+    }
     
-    
-    
+    @objc public func validationStatus() -> CrardInputTextFieldStatusEnum {
+        // Now we need to validate the email entered
+        // So we validate it using the telecom brands we have available
+        let validationStatus:Bool = emailTextField.text?.isValidEmail() ?? false
+        return (validationStatus) ? .Valid : .Invalid
+    }
     
     /// This method is the brain controller of showing the views, as it taks the process for adding subview, laying them out and applying the theme
     internal func setupViews() {
@@ -117,12 +128,14 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
         
         emailTextField.delegate = self
         
-        clearButton.addTarget(self, action: #selector(clearPhoneInput), for: .touchUpInside)
+        emailTextField.returnKeyType = .next
+        
+        clearButton.addTarget(self, action: #selector(clearEmailInput), for: .touchUpInside)
     }
     
     
     /// Handles the logic of clearing and reseting the component
-    @objc public func clearPhoneInput() {
+    @objc public func clearEmailInput() {
         
         emailTextField.text = ""
         didChangeText(textField: emailTextField)
@@ -253,13 +266,22 @@ extension TapEmailInput: UITextFieldDelegate {
     }
     
     
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard textField == emailTextField else { return true }
+        
+        delegate?.emailReturned?(with: emailTextField.text ?? "")
+        
+        return true
+    }
+    
+    
     /**
      This method does the logic required when a text change event is fired for the text field
      - Parameter textField: The text field that has its text changed
      */
     @objc func didChangeText(textField:UITextField) {
         guard textField == emailTextField else { return }
-
+        
         clearButton.alpha = emailTextField.text == "" ? 0 : 1
         
         // Now we need to validate the email entered
