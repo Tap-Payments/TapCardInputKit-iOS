@@ -64,6 +64,15 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
         setupViews()
     }
     
+    /**
+     Gets the email in the email field
+     - Returns: The typed email or an empty string
+     */
+    @objc public func email() -> String {
+        return emailTextField.text ?? ""
+    }
+    
+    /// Focuses the keyboard for the email input
     @objc public func focus() {
         emailTextField.becomeFirstResponder()
     }
