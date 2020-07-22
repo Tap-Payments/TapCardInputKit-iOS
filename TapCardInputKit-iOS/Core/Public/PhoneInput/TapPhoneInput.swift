@@ -151,6 +151,7 @@ import TapCardVlidatorKit_iOS
         fields.forEach {
             $0.keyboardType = .numberPad
             $0.delegate = self
+            $0.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
         }
         
         clearButton.addTarget(self, action: #selector(clearPhoneInput), for: .touchUpInside)
