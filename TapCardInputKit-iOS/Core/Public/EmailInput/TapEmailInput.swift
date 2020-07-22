@@ -43,7 +43,7 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
     internal var textFieldsplaceHolderColor:UIColor {
         return TapThemeManager.colorValue(for: "\(themePath).textFields.placeHolderColor") ?? .green
     }
-    internal let sharedLocalisationManager:TapLocalisationManager = .init()
+    internal let sharedLocalisationManager:TapLocalisationManager = .shared
     
     /// A delegate listener to listen to the events fired from the phone input form fields
     @objc public var delegate:TapEmailInputProtocol?
