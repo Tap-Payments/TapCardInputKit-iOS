@@ -8,6 +8,8 @@
 
 import TapCardVlidatorKit_iOS
 import TapThemeManager2020
+import LocalisationManagerKit_iOS
+
 /// This extension provides the methods needed to setupu the views in the case of inline card input mode
 extension TapCardInput {
     
@@ -40,6 +42,7 @@ extension TapCardInput {
             make.width.equalTo(cardNumber.calculatedWidth())
             make.height.equalToSuperview()
             make.leading.equalTo(icon.snp.trailing).offset(10)
+            make.centerY.equalTo(icon.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? 4 : 0)
         }
         
         // Defines the constrints for the card expiry field
@@ -47,7 +50,8 @@ extension TapCardInput {
             // We set the card expiry width to the mimimum width based on its min visible characters attribute
             make.width.equalTo(cardExpiry.calculatedWidth())
             make.height.equalToSuperview()
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(cardNumber.snp.centerY)
             //make.leading.greaterThanOrEqualTo(cardNumber.snp.trailing).offset(23)
         }
         
@@ -57,6 +61,7 @@ extension TapCardInput {
             make.width.equalTo(cardCVV.calculatedWidth())
             make.height.equalToSuperview()
             make.trailing.equalTo(scanButton.snp.leading).offset(-0)
+            make.centerY.equalTo(cardNumber.snp.centerY)
             //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
         }
         

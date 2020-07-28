@@ -121,14 +121,14 @@ import TapCardVlidatorKit_iOS
         }
         
         countryCodeTextField.snp.remakeConstraints {(make) in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(icon.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? 4 : 0)
             make.leading.equalToSuperview().offset(65)
             make.width.equalTo(countryCodeTextField.textWidth(text: "\(tapCountry?.code ?? "999")9"))
             make.height.equalToSuperview()
         }
         
         phoneNumberTextField.snp.remakeConstraints {(make) in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(countryCodeTextField.snp.centerY)
             make.leading.equalTo(countryCodeTextField.snp.trailing)
             make.trailing.equalTo(clearButton.snp.leading).offset(10)
             make.height.equalToSuperview()

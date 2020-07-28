@@ -115,7 +115,7 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
         }
         
         emailTextField.snp.remakeConstraints {(make) in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(icon.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? 4 : 0)
             make.leading.equalToSuperview().offset(65)
             make.trailing.equalTo(clearButton.snp.leading).offset(10)
             make.height.equalToSuperview()
