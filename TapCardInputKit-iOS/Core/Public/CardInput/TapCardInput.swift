@@ -447,7 +447,7 @@ internal protocol TapCardInputCommonProtocol {
             }
             // Update the cvv allowed length based on the detected card brand
             self.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
-            let brandName:String = "\(nonNullBrand)"
+            //let brandName:String = "\(nonNullBrand)"
             //FlurryLogger.logEvent(with: "Tap_Card_Input_Brand_Detected", timed:false , params:["brandName":brandName])
         }else {
             // At any problem as fall back we set the default values again
