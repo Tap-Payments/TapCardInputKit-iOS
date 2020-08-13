@@ -159,7 +159,12 @@ public extension TapThemeManager {
         }
         
         // We decide which theme object to user based on the current userInterfaceStyle
-        (UIView().traitCollection.userInterfaceStyle == .dark) ? self.setTapTheme(themeDict: darkJSONDict) : self.setTapTheme(themeDict: lightJSONDict)
+        if #available(iOS 12.0, *) {
+            (UIView().traitCollection.userInterfaceStyle == .dark) ? self.setTapTheme(themeDict: darkJSONDict) : self.setTapTheme(themeDict: lightJSONDict)
+        } else {
+            // Fallback on earlier versions
+            self.setTapTheme(themeDict: lightJSONDict)
+        }
     }
     
     /// This is the method that is used to apply the default Tap provided theme
@@ -173,6 +178,7 @@ public extension TapThemeManager {
      Call this method when a change in userInterfaceStyle has been detected to apply the correct theme object accordingly
      - Parameter mode: The new value of the userInterfaceStyle
      */
+    @available(iOS 12.0, *)
     @objc class func changeThemeDisplay(for mode:UIUserInterfaceStyle) {
         // Check if we are not already applying the correct theme for theh new display mode, this will prevent duplication setting the same theme muultiple times when different views are active and firing this method
         if ( lightModeTheme == self.currentTheme && mode == .light ) ||

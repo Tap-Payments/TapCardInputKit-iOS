@@ -23,7 +23,6 @@ target 'TapCardInputKit-iOS' do
   pod 'TapThemeManager2020'
   pod 'CommonDataModelsKit-iOS'
   pod 'LocalisationManagerKit-iOS'
-  pod 'Flurry-iOS-SDK/FlurrySDK'
   pod 'MOLH'
   pod 'Nuke'
 end

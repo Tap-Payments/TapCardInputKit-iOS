@@ -115,11 +115,11 @@ public class FontProvider {
             .circeLight:             .arabicHelveticaNeueLight,
             .circeRegular:             .arabicHelveticaNeueRegular,
             .circeBold:             .arabicHelveticaNeueBold,
-            .robotoThin:     .arabicHelveticaNeueLight,
-            .robotoLight:     .arabicHelveticaNeueLight,
-            .robotoMedium:     .arabicHelveticaNeueRegular,
-            .robotoRegular:    .arabicHelveticaNeueRegular,
-            .robotoBold:     .arabicHelveticaNeueBold,
+            .robotoThin:     .arabicTajwalRegular,
+            .robotoLight:     .arabicTajwalRegular,
+            .robotoMedium:     .arabicTajwalBold,
+            .robotoRegular:    .arabicTajwalMedium,
+            .robotoBold:     .arabicTajwalBlack
         ]
     }()
     
@@ -143,7 +143,12 @@ public class FontProvider {
             .circeBold,
             .arabicHelveticaNeueLight,
             .arabicHelveticaNeueRegular,
-            .arabicHelveticaNeueBold
+            .arabicHelveticaNeueBold,
+            .arabicTajwalLight,
+            .arabicTajwalRegular,
+            .arabicTajwalMedium,
+            .arabicTajwalBold,
+            .arabicTajwalBlack
         ]
         
         

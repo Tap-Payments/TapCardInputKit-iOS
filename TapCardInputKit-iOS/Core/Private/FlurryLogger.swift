@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Flurry_iOS_SDK
+/*import Flurry_iOS_SDK
 
 /// This class is a singleton class responsible for dealing with Flurry SDK
 internal class FlurryLogger {
@@ -60,3 +60,4 @@ internal extension Dictionary {
         }
     }
 }
+*/

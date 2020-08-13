@@ -32,6 +32,13 @@ public enum TapFont {
     case arabicHelveticaNeueRegular
     case arabicHelveticaNeueBold
     
+    
+    case arabicTajwalLight
+    case arabicTajwalRegular
+    case arabicTajwalMedium
+    case arabicTajwalBold
+    case arabicTajwalBlack
+    
     case system(String)
     
     // MARK: - Public -
@@ -96,6 +103,18 @@ public enum TapFont {
             return .arabicHelveticaNeueRegular
         case "HelveticaNeueLTW20-Bold".lowercased():
             return .arabicHelveticaNeueBold
+            
+        case "Tajawal-Light".lowercased():
+            return .arabicTajwalLight
+        case "Tajawal-Regular".lowercased():
+            return .arabicTajwalRegular
+        case "Tajawal-Medium".lowercased():
+            return .arabicTajwalMedium
+        case "Tajawal-Bold".lowercased():
+            return .arabicTajwalBold
+        case "Tajawal-Black".lowercased():
+            return .arabicTajwalBlack
+            
         default:
             return .robotoRegular
         }
@@ -130,6 +149,12 @@ public enum TapFont {
         case .arabicHelveticaNeueLight:     return "HelveticaNeueLTW20-Light"
         case .arabicHelveticaNeueRegular:    return "HelveticaNeueLTW20-Roman"
         case .arabicHelveticaNeueBold:         return "HelveticaNeueLTW20-Bold"
+            
+        case .arabicTajwalLight:     return "Tajawal-Light"
+        case .arabicTajwalRegular:    return "Tajawal-Regular"
+        case .arabicTajwalMedium:    return "Tajawal-Medium"
+        case .arabicTajwalBold:         return "Tajawal-Bold"
+        case .arabicTajwalBlack:         return "Tajawal-Black"
             
         default:
             

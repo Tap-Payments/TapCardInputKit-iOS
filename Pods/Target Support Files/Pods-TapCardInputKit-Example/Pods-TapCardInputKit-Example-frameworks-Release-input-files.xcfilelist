@@ -7,7 +7,6 @@ ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/SheetyColors/SheetyColors.framework
 ${BUILT_PRODUCTS_DIR}/TapCardVlidatorKit-iOS/TapCardVlidatorKit_iOS.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
-${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework
 ${BUILT_PRODUCTS_DIR}/MOLH/MOLH.framework
 ${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
