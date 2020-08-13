@@ -137,7 +137,6 @@ Pod::Spec.new do |spec|
   spec.dependency "TapThemeManager2020"
   spec.dependency "CommonDataModelsKit-iOS"
   spec.dependency "LocalisationManagerKit-iOS"
-  spec.dependency "Flurry-iOS-SDK/FlurrySDK"
   spec.dependency "MOLH"
   spec.dependency "Nuke"
 end
