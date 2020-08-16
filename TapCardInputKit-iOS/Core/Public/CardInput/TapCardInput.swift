@@ -191,7 +191,7 @@ internal protocol TapCardInputCommonProtocol {
         // Then we set the card expiry and check if it is valid or not
         guard cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear) else {
             cardExpiry.text = ""
-            cardExpiry.resignFirstResponder()
+            cardExpiry.becomeFirstResponder()
             return
         }
         
@@ -201,12 +201,21 @@ internal protocol TapCardInputCommonProtocol {
         // Then check if the usder provided a correct cvv
         guard cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true) else {
             cardCVV.text = ""
-            cardCVV.resignFirstResponder()
+            cardCVV.becomeFirstResponder()
             return
         }
         
         cardCVV.resignFirstResponder()
         updateWidths(for: cardCVV)
+        
+        
+        if !cardNumber.isValid(cardNumber: providedCardNumber) {
+            cardNumber.becomeFirstResponder()
+        }else if !cardExpiry.isValid() {
+            cardExpiry.becomeFirstResponder()
+        }else if !cardCVV.isValid() {
+            cardCVV.becomeFirstResponder()
+        }
         
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         
@@ -522,6 +531,11 @@ internal protocol TapCardInputCommonProtocol {
         }
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Scan_Clicked")
         self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.selected",from: Bundle(for: type(of: self))), for: .normal)
+    }
+    
+    /// The method that holds the logic needed to do when any of the scan button is clicked
+    @objc public func scannerClosed() {
+        adjustScanButton()
     }
     
     
