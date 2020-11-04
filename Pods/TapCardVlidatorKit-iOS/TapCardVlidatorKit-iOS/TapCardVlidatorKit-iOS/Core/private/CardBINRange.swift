@@ -7,139 +7,139 @@
 
 /// Card BIN range.
 internal final class CardBINRange {
-
+    
     // MARK: - Public -
     // MARK: Properties
-
+    
     /// Lower card number prefix.
     internal private(set) var lowerRange: String
-
+    
     /// Higher card number prefix.
     internal private(set) var higherRange: String
-
+    
     /// Required card number length.
     internal private(set) var cardNumberLengths: [Int]
     
     /// Required card number length.
     internal private(set) var cardNumberSpaces: [Int]
-
+    
     /// Card brand.
     internal private(set) var cardBrand: CardBrand
-
+    
     // MARK: Methods
-
+    
     internal static func mostSpecific(for number: String) -> CardBINRange {
-
+        
         return self.mostSpecific(for: number, preferredBrands: nil)
     }
-
+    
     internal static func mostSpecific(for number: String, preferredBrands: [CardBrand]?) -> CardBINRange {
-
+        
         let nonnullPreferredBrands = preferredBrands ?? []
-
+        
         let preferredBrandsAreNotEmpty = nonnullPreferredBrands.count > 0
-
+        
         let validationClosure: (CardBINRange) -> Bool = { (range) -> Bool in
-
+            
             if preferredBrandsAreNotEmpty {
-
+                
                 if !nonnullPreferredBrands.contains(range.cardBrand) {
-
+                    
                     return false
                 }
             }
-
+            
             return range.matches(number)
         }
-
+        
         let possibleRanges = self.allRanges.filter(validationClosure)
         guard possibleRanges.count > 0 else {
-
+            
             return self.generalRange
         }
-
+        
         let sortByPreferabilityClosure: (CardBINRange, CardBINRange) -> Bool = { (range1, range2) -> Bool in
-
+            
             return (nonnullPreferredBrands.firstIndex(of: range1.cardBrand) ?? 0) <= (nonnullPreferredBrands.firstIndex(of: range2.cardBrand) ?? 0)
         }
-
+        
         let numberLength = number.count
         let possibleRangesWithMostCloseRangeLengthFromLeft = possibleRanges.filter { $0.lowerRange.count <= numberLength }
         if possibleRangesWithMostCloseRangeLengthFromLeft.count > 0 {
-
+            
             let sortedByLengthPossibleRanges = possibleRangesWithMostCloseRangeLengthFromLeft.sorted { $0.lowerRange.count > $1.lowerRange.count }
             let maxLength = sortedByLengthPossibleRanges[0].lowerRange.count
-
+            
             let allMaxLengthRanges = sortedByLengthPossibleRanges.filter { $0.lowerRange.count == maxLength }
             let sortedMaxLengthRanges = allMaxLengthRanges.sorted(by: sortByPreferabilityClosure)
-
+            
             return sortedMaxLengthRanges[0]
         }
-
+        
         let possibleRangesWithMostCloseRangeLengthFromRight = possibleRanges.filter { $0.lowerRange.count > numberLength }
         if possibleRangesWithMostCloseRangeLengthFromRight.count > 0 {
-
+            
             let sortedByLengthPossibleRanges = possibleRangesWithMostCloseRangeLengthFromRight.sorted { $0.lowerRange.count < $1.lowerRange.count }
             let minLength = sortedByLengthPossibleRanges[0].lowerRange.count
-
+            
             let allMinLengthRanges = sortedByLengthPossibleRanges.filter { $0.lowerRange.count == minLength }
             let sortedMinLengthRanges = allMinLengthRanges.sorted(by: sortByPreferabilityClosure)
-
+            
             return sortedMinLengthRanges[0]
         }
-
+        
         return self.generalRange
     }
-
+    
     internal static func brand(for number: String) -> CardBrand {
-
+        
         let brands = self.possibleBrands(for: number)
         if brands.count == 1 {
-
+            
             return brands.first!
         }
         else {
-
+            
             return .unknown
         }
     }
-
+    
     internal static func possibleBrands(for number: String) -> Set<CardBrand> {
-
+        
         let binRanges = self.binRanges(for: number)
         var possibleBrands: Set<CardBrand> = Set<CardBrand>(binRanges.map { $0.cardBrand })
-
+        
         possibleBrands.remove(.unknown)
         return possibleBrands
     }
-
+    
     internal static func ranges(for brand: CardBrand? = nil) -> [CardBINRange] {
-
+        
         guard let nonnullBrand = brand else { return self.allRanges }
-
+        
         return self.allRanges.filter { $0.cardBrand == nonnullBrand }
     }
-
+    
     // MARK: - Private -
-
+    
     private struct Constants {
-
+        
         fileprivate static let defaultPad = "0"
         fileprivate static let emptyString = ""
-
+        
         @available(*, unavailable) private init() {}
     }
-
+    
     // MARK: Properties
-
+    
     private static let allRanges = [
-
+        
         CardBINRange(lowRange: "34"    , highRange: "34"    , lengths: [15]                            , brand: .americanExpress, cardNumberSpaces:[4,6,5]),
         CardBINRange(lowRange: "37"    , highRange: "37"    , lengths: [15]                            , brand: .americanExpress, cardNumberSpaces:[4,6,5]),
-
+        
         CardBINRange(lowRange: "62"    , highRange: "62"    , lengths: [16, 17, 18]                     , brand: .unionPay),
         CardBINRange(lowRange: "62"    , highRange: "62"    , lengths: [19]                             , brand: .unionPay, cardNumberSpaces:[3,16]),
-
+        
         CardBINRange(lowRange: "2014"  , highRange: "2014"  , lengths: [15]                            , brand: .dinersClub, cardNumberSpaces:[4,7,4]),
         CardBINRange(lowRange: "2149"  , highRange: "2149"  , lengths: [15]                            , brand: .dinersClub, cardNumberSpaces:[4,7,4]),
         CardBINRange(lowRange: "300"   , highRange: "305"   , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
@@ -147,7 +147,7 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "36"    , highRange: "36"    , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
         CardBINRange(lowRange: "38"    , highRange: "39"    , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
         CardBINRange(lowRange: "54"    , highRange: "55"    , lengths: [16]                            , brand: .dinersClub),
-
+        
         CardBINRange(lowRange: "60110" , highRange: "60110" , lengths: [16]                            , brand: .discover),
         CardBINRange(lowRange: "60112" , highRange: "60114" , lengths: [16]                            , brand: .discover),
         CardBINRange(lowRange: "601174", highRange: "601174", lengths: [16]                            , brand: .discover),
@@ -156,15 +156,15 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "622126", highRange: "622925", lengths: [16]                            , brand: .discover),
         CardBINRange(lowRange: "622126", highRange: "622925", lengths: [19]                            , brand: .discover, cardNumberSpaces:[4,4,4,7]),
         CardBINRange(lowRange: "644"   , highRange: "659"   , lengths: [16]                            , brand: .discover),
-
+        
         CardBINRange(lowRange: "636"   , highRange: "636"   , lengths: [16, 17, 18, 19]                , brand: .interPayment),
-
+        
         CardBINRange(lowRange: "637"   , highRange: "639"   , lengths: [16]                            , brand: .instaPayment),
-
+        
         CardBINRange(lowRange: "1800"  , highRange: "1800"  , lengths: [16, 17, 18, 19]                , brand: .jcb),
         CardBINRange(lowRange: "2131"  , highRange: "2131"  , lengths: [16, 17, 18, 19]                , brand: .jcb),
         CardBINRange(lowRange: "3528"  , highRange: "3589"  , lengths: [16, 17, 18, 19]                , brand: .jcb),
-
+        
         CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [12, 14, 16, 17, 18]            , brand: .maestro),
         CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [13]                            , brand: .maestro, cardNumberSpaces:[4,4,5]),
         CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [15]                            , brand: .maestro, cardNumberSpaces:[4,6,5]),
@@ -177,16 +177,16 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [13]                            , brand: .maestro, cardNumberSpaces:[4,4,5]),
         CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [15]                            , brand: .maestro, cardNumberSpaces:[4,6,5]),
         CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [19]                            , brand: .maestro, cardNumberSpaces:[4,4,4,4,3]),
-
+        
         CardBINRange(lowRange: "5019"  , highRange: "5019"  , lengths: [16]                            , brand: .dankort),
         CardBINRange(lowRange: "4175"  , highRange: "4175"  , lengths: [16]                            , brand: .dankort),
         CardBINRange(lowRange: "4571"  , highRange: "4571"  , lengths: [16]                            , brand: .dankort),
-
+        
         CardBINRange(lowRange: "2200"  , highRange: "2204"  , lengths: [16]                            , brand: .nspkMir),
-
+        
         CardBINRange(lowRange: "51"    , highRange: "55"    , lengths: [16]                            , brand: .masterCard),
         CardBINRange(lowRange: "2221"  , highRange: "2720"  , lengths: [16]                            , brand: .masterCard),
-
+        
         CardBINRange(lowRange: "4"     , highRange: "4"     , lengths: [16]                            , brand: .visa),
         CardBINRange(lowRange: "413600", highRange: "413600", lengths: [13]                            , brand: .visa),
         CardBINRange(lowRange: "444509", highRange: "444509", lengths: [13]                            , brand: .visa),
@@ -206,67 +206,71 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "492937", highRange: "492937", lengths: [13]                            , brand: .visa),
         CardBINRange(lowRange: "492939", highRange: "492939", lengths: [13]                            , brand: .visa),
         CardBINRange(lowRange: "492960", highRange: "492960", lengths: [13]                            , brand: .visa),
-
+        
         CardBINRange(lowRange: "1"     , highRange: "1"     , lengths: [15]                            , brand: .uatp),
-
+        
         CardBINRange(lowRange: "506099", highRange: "506198", lengths: [16, 19]                        , brand: .verve),
         CardBINRange(lowRange: "650002", highRange: "650027", lengths: [16, 19]                        , brand: .verve),
-
+        
         CardBINRange(lowRange: "5392"  , highRange: "5392"  , lengths: [16]                            , brand: .cardGuard),
         
         CardBINRange(lowRange: "9"  , highRange: "9"  , lengths: [8]                                   , brand: .zain),
         CardBINRange(lowRange: "5"  , highRange: "5"  , lengths: [8]                                   , brand: .viva),
-        CardBINRange(lowRange: "6"  , highRange: "6"  , lengths: [8]                                   , brand: .wataniya)
+        CardBINRange(lowRange: "6"  , highRange: "6"  , lengths: [8]                                   , brand: .wataniya),
+        
+        CardBINRange(lowRange: "12"  , highRange: "12"  , lengths: [9]                                   , brand: .orange),
+        CardBINRange(lowRange: "15"  , highRange: "15"  , lengths: [9]                                   , brand: .etisalat),
+        CardBINRange(lowRange: "10"  , highRange: "10"  , lengths: [9]                                   , brand: .vodafone)
     ]
-
+    
     private static let generalRange = CardBINRange(lowRange: Constants.emptyString, highRange: Constants.emptyString, lengths: [16], brand: .unknown)
-
+    
     // MARK: Methods
-
+    
     private init(lowRange: String, highRange: String, lengths: [Int], brand: CardBrand, cardNumberSpaces:[Int] = [4,4,4,4]) {
-
+        
         self.lowerRange = lowRange
         self.higherRange = highRange
         self.cardNumberLengths = lengths
         self.cardBrand = brand
         self.cardNumberSpaces = cardNumberSpaces
     }
-
+    
     private func matches(_ number: String) -> Bool {
-
+        
         let lowLength = min(number.count, self.lowerRange.count)
         let highLength = min(number.count, self.higherRange.count)
-
+        
         guard let numberLow = Int(number.padding(toLength: lowLength, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
         guard let numberHigh = Int(number.padding(toLength: highLength, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
-
+        
         guard let selfLow = Int(self.lowerRange.padding(toLength: lowLength, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
         guard let selfHigh = Int(self.higherRange.padding(toLength: highLength, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
-
+        
         return selfLow <= numberLow && selfHigh >= numberHigh
     }
-
+    
     private func matchesMostSpecific(_ number: String) -> Bool {
-
+        
         guard let low = Int(number.padding(toLength: self.lowerRange.count, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
         guard let high = Int(number.padding(toLength: self.higherRange.count, withPad: Constants.defaultPad, startingAt: 0)) else { return false }
-
+        
         guard let selfLow = Int(self.lowerRange), let selfHigh = Int(self.higherRange) else { return false }
-
+        
         return selfLow <= low && selfHigh >= high
     }
-
+    
     private static func binRanges(for number: String) -> [CardBINRange] {
-
+        
         return self.allRanges.filter { $0.matches(number) }
     }
 }
 
 // MARK: - Equatable
 extension CardBINRange: Equatable {
-
+    
     internal static func == (lhs: CardBINRange, rhs: CardBINRange) -> Bool {
-
+        
         return lhs.lowerRange == rhs.lowerRange && lhs.higherRange == rhs.higherRange && lhs.cardNumberLengths == rhs.cardNumberLengths && lhs.cardBrand == rhs.cardBrand
     }
 }

@@ -5,9 +5,7 @@
 //  Copyright © 2019 Tap Payments. All rights reserved.
 //
 
-import struct     CoreGraphics.CGBase.CGFloat
-import class     CoreGraphics.CGDataProvider.CGDataProvider
-import class     CoreGraphics.CGFont.CGFont
+import CoreGraphics
 import func     CoreText.CTFontManager.CTFontManagerRegisterGraphicsFont
 import func     TapSwiftFixes.synchronized
 import class    UIKit.UIFont.UIFont

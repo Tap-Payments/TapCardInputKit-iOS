@@ -9,7 +9,7 @@
 import Foundation
 
 @objc public enum CardBrand: Int,CaseIterable {
-
+    
     case aiywaLoyalty
     case americanExpress
     case benefit
@@ -35,19 +35,22 @@ import Foundation
     case unionPay
     case verve
     case visa
-	case visaElectron
+    case visaElectron
     case viva
     case wataniya
     case zain
-
+    case orange
+    case etisalat
+    case vodafone
+    
     case unknown
-
+    
     // MARK: - Private -
-
+    
     private struct RawValues {
-
+        
         fileprivate static let table: [CardBrand: [String]] = [
-
+            
             .aiywaLoyalty       : RawValues.aiywaLoyalty,
             .americanExpress    : RawValues.americanExpress,
             .benefit            : RawValues.benefit,
@@ -73,12 +76,15 @@ import Foundation
             .unionPay           : RawValues.unionPay,
             .verve              : RawValues.verve,
             .visa               : RawValues.visa,
-			.visaElectron		: RawValues.visaElectron,
+            .visaElectron        : RawValues.visaElectron,
             .viva               : RawValues.viva,
             .wataniya           : RawValues.wataniya,
-            .zain               : RawValues.zain
+            .zain               : RawValues.zain,
+            .orange             : RawValues.orange,
+            .etisalat           : RawValues.etisalat,
+            .vodafone           : RawValues.vodafone
         ]
-
+        
         private static let aiywaLoyalty     = ["Aiywa Loyalty"]
         private static let americanExpress  = ["AMERICAN_EXPRESS", "AMEX"]
         private static let benefit          = ["BENEFIT"]
@@ -104,11 +110,14 @@ import Foundation
         private static let unionPay         = ["UNION_PAY", "UNIONPAY"]
         private static let verve            = ["VERVE"]
         private static let visa             = ["VISA"]
-		private static let visaElectron		= ["VISA_ELECTRON"]
+        private static let visaElectron        = ["VISA_ELECTRON"]
         private static let viva             = ["Viva PAY"]
         private static let wataniya         = ["Wataniya PAY"]
         private static let zain             = ["Zain PAY"]
-
+        private static let orange           = ["ORANGE PAY"]
+        private static let etisalat         = ["ETISALAT PAY"]
+        private static let vodafone         = ["VODAFONE PAY"]
+        
         @available(*, unavailable) private init() {}
     }
     
@@ -116,7 +125,7 @@ import Foundation
     public var brandSegmentIdentifier:String {
         get {
             switch self {
-            case .zain,.viva,.wataniya:
+            case .zain,.viva,.wataniya,.vodafone,.etisalat,.orange:
                 return "telecom"
             default:
                 return "cards"
@@ -127,14 +136,14 @@ import Foundation
 
 // MARK: - Encodable
 extension CardBrand: Encodable {
-
+    
     public func encode(to encoder: Encoder) throws {
-
+        
         guard let value = RawValues.table[self]?.first else {
-
+            
             fatalError("Unknown card brand.")
         }
-
+        
         var container = encoder.singleValueContainer()
         try container.encode(value)
     }
@@ -142,20 +151,20 @@ extension CardBrand: Encodable {
 
 // MARK: - Decodable
 extension CardBrand: Decodable {
-
+    
     public init(from decoder: Decoder) throws {
-
+        
         let container = try decoder.singleValueContainer()
         let value = try container.decode(String.self)
-
+        
         for (brand, rawValues) in RawValues.table {
-
+            
             guard rawValues.contains(value) else { continue }
-
+            
             self = brand
             return
         }
-
+        
         self = .unknown
     }
 }
