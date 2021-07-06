@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2020 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -19,7 +19,7 @@ import AppKit.NSImage
 public /* final */ class ImageTask: Hashable, CustomStringConvertible {
     /// An identifier that uniquely identifies the task within a given pipeline. Only
     /// unique within that pipeline.
-    public let taskId: Int
+    public let taskId: Int64
 
     let isDataTask: Bool
 
@@ -49,30 +49,29 @@ public /* final */ class ImageTask: Hashable, CustomStringConvertible {
     }
     private(set) var _progress: Progress?
 
-    var isCancelled: Bool {
-        lock?.lock()
-        defer { lock?.unlock() }
-        return _isCancelled
+    var isCancelled: Bool { _isCancelled.pointee == 1 }
+    private let _isCancelled: UnsafeMutablePointer<Int32>
+
+    deinit {
+        self._isCancelled.deallocate()
+        #if TRACK_ALLOCATIONS
+        Allocations.decrement("ImageTask")
+        #endif
     }
-    private(set) var _isCancelled = false
-    private let lock: NSLock?
 
-    let queue: DispatchQueue?
-
-    /// A completion handler to be called when task finishes or fails.
-    public typealias Completion = (_ result: Result<ImageResponse, ImagePipeline.Error>) -> Void
-
-    /// A progress handler to be called periodically during the lifetime of a task.
-    public typealias ProgressHandler = (_ intermediateResponse: ImageResponse?, _ completedUnitCount: Int64, _ totalUnitCount: Int64) -> Void
-
-    init(taskId: Int, request: ImageRequest, isMainThreadConfined: Bool = false, isDataTask: Bool, queue: DispatchQueue?) {
+    init(taskId: Int64, request: ImageRequest, isDataTask: Bool) {
         self.taskId = taskId
         self.request = request
         self._priority = request.priority
         self.priority = request.priority
         self.isDataTask = isDataTask
-        self.queue = queue
-        lock = isMainThreadConfined ? nil : NSLock()
+
+        self._isCancelled = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
+        self._isCancelled.initialize(to: 0)
+
+        #if TRACK_ALLOCATIONS
+        Allocations.increment("ImageTask")
+        #endif
     }
 
     /// Marks task as being cancelled.
@@ -81,19 +80,7 @@ public /* final */ class ImageTask: Hashable, CustomStringConvertible {
     /// unless there is an equivalent outstanding task running (see
     /// `ImagePipeline.Configuration.isDeduplicationEnabled` for more info).
     public func cancel() {
-        if let lock = lock {
-            lock.lock()
-            defer { lock.unlock() }
-            _cancel()
-        } else {
-            assert(Thread.isMainThread, "Must be cancelled only from the main thread")
-            _cancel()
-        }
-    }
-
-    private func _cancel() {
-        if !_isCancelled {
-            _isCancelled = true
+        if OSAtomicCompareAndSwap32Barrier(0, 1, _isCancelled) {
             pipeline?.imageTaskCancelCalled(self)
         }
     }

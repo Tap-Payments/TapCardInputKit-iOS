@@ -1,14 +1,17 @@
 PODS:
   - Capable/Colors (1.1.4)
-  - CommonDataModelsKit-iOS (1.0.31)
+  - CommonDataModelsKit-iOS (1.0.39):
+    - TapAdditionsKitV2
   - LocalisationManagerKit-iOS (1.0.2)
-  - MOLH (1.4.1)
-  - Nuke (9.1.2)
-  - SheetyColors (1.2.0):
+  - MOLH (1.4.3)
+  - Nuke (9.5.0)
+  - SheetyColors (1.2.1):
     - Capable/Colors (~> 1.1)
   - SnapKit (5.0.1)
+  - TapAdditionsKitV2 (0.0.8):
+    - TapSwiftFixesV2
   - TapCardVlidatorKit-iOS (1.0.11)
-  - TapFontKit-iOS (0.0.6):
+  - TapFontKit-iOS (0.0.8):
     - TapSwiftFixes
   - TapSwiftFixes (1.0.9):
     - TapSwiftFixes/CoreGraphics (= 1.0.9)
@@ -17,7 +20,14 @@ PODS:
   - TapSwiftFixes/CoreGraphics (1.0.9)
   - TapSwiftFixes/Exceptions (1.0.9)
   - TapSwiftFixes/Threading (1.0.9)
-  - TapThemeManager2020 (1.0.43):
+  - TapSwiftFixesV2 (1.0.0):
+    - TapSwiftFixesV2/CoreGraphics (= 1.0.0)
+    - TapSwiftFixesV2/Exceptions (= 1.0.0)
+    - TapSwiftFixesV2/Threading (= 1.0.0)
+  - TapSwiftFixesV2/CoreGraphics (1.0.0)
+  - TapSwiftFixesV2/Exceptions (1.0.0)
+  - TapSwiftFixesV2/Threading (1.0.0)
+  - TapThemeManager2020 (1.0.46):
     - LocalisationManagerKit-iOS
     - TapFontKit-iOS
 
@@ -40,24 +50,28 @@ SPEC REPOS:
     - Nuke
     - SheetyColors
     - SnapKit
+    - TapAdditionsKitV2
     - TapCardVlidatorKit-iOS
     - TapFontKit-iOS
     - TapSwiftFixes
+    - TapSwiftFixesV2
     - TapThemeManager2020
 
 SPEC CHECKSUMS:
   Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
-  CommonDataModelsKit-iOS: 4b1a33cd07686bcd8117f1f1ebe18373bda16af5
+  CommonDataModelsKit-iOS: 68cbbeb6deba089aefe4be1fd1613354b2c0e7a9
   LocalisationManagerKit-iOS: cd702915c67faba899d4613d44ceb00cefccec6e
-  MOLH: 9ea6c0390f5963b2df9827ae64035fbc8598b092
-  Nuke: dd2e6be6a34c042a7861e190632781d11f253026
-  SheetyColors: 8dc64a666415be8a81df3c5d44b9088d6f8bee2e
+  MOLH: e45827d200aeb1310641090fd8cd03ad2b42ae72
+  Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
+  SheetyColors: a0273d30ec5ee02536bb43960ba36d58619ae719
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  TapAdditionsKitV2: ba369802e9575c3475ce6d5af228cf60c68edfc9
   TapCardVlidatorKit-iOS: ebdd38a2bef618f9eb09dc909d7bd6fcfdfd56c2
-  TapFontKit-iOS: 0c6ce54ee313299b7d5cc7adf18ac5ed84f61f91
+  TapFontKit-iOS: 2cd57d5eb22d2b85872039d317ce4d96e9efbb2e
   TapSwiftFixes: db2aeb21942dd81ee051a31ed319dab0d03547a2
-  TapThemeManager2020: 220c39eb0170fc28e96bb11e941ec44781ecb601
+  TapSwiftFixesV2: a8623a7273c6790b9754ec7e272e96fce7d3a800
+  TapThemeManager2020: 3a642e05b2868f613ffb0623725ea5a6a0fa71c5
 
 PODFILE CHECKSUM: 7366cfc63c08764b71c0255c3b130107f2e29126
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

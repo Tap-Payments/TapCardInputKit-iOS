@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2020 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -27,7 +27,17 @@ public typealias PlatformImage = NSImage
 @objc public protocol Nuke_ImageDisplaying {
     /// Display a given image.
     @objc func nuke_display(image: PlatformImage?)
+
+    #if os(macOS)
+    @objc var layer: CALayer? { get }
+    #endif
 }
+
+#if os(macOS)
+public extension Nuke_ImageDisplaying {
+    var layer: CALayer? { nil }
+}
+#endif
 
 #if os(iOS) || os(tvOS)
 import UIKit
@@ -42,8 +52,9 @@ extension UIImageView: Nuke_ImageDisplaying {
 }
 #elseif os(macOS)
 import Cocoa
-/// An `NSView` that implements `ImageDisplaying` protocol.
-public typealias ImageDisplayingView = NSView & Nuke_ImageDisplaying
+/// An `NSObject` that implements `ImageDisplaying`  and `Animating` protocols.
+/// Can support `NSView` and `NSCell`. The latter can return nil for layer.
+public typealias ImageDisplayingView = NSObject & Nuke_ImageDisplaying
 
 extension NSImageView: Nuke_ImageDisplaying {
     /// Displays an image.
@@ -54,7 +65,7 @@ extension NSImageView: Nuke_ImageDisplaying {
 #elseif os(watchOS)
 import WatchKit
 
-/// An `NSView` that implements `ImageDisplaying` protocol.
+/// A `WKInterfaceObject` that implements `ImageDisplaying` protocol.
 public typealias ImageDisplayingView = WKInterfaceObject & Nuke_ImageDisplaying
 
 extension WKInterfaceImage: Nuke_ImageDisplaying {
@@ -67,33 +78,12 @@ extension WKInterfaceImage: Nuke_ImageDisplaying {
 
 // MARK: - ImageView Extensions
 
-/// Loads an image with the given URL and displays it in the view.
-///
-/// Before loading a new image, the view is prepared for reuse by canceling any
-/// outstanding requests and removing a previously displayed image.
-///
-/// If the image is stored in the memory cache, it is displayed immediately with
-/// no animations. If not, the image is loaded using an image pipeline. When the
-/// image is loading, the provided `placeholder` is displayed. When the request
-/// completes the loaded image is displayed (or `failureImage` in case of an error)
-/// with the selected animation.
-///
-/// - parameter options: `ImageLoadingOptions.shared` by default.
-/// - parameter view: Nuke keeps a weak reference to the view. If the view is deallocated
-/// the associated request automatically gets canceled.
-/// - parameter progress: A closure to be called periodically on the main thread
-/// when the progress is updated. `nil` by default.
-/// - parameter completion: A closure to be called on the main thread when the
-/// request is finished. Gets called synchronously if the response was found in
-/// the memory cache. `nil` by default.
-/// - returns: An image task or `nil` if the image was found in the memory cache.
 @discardableResult
-public func loadImage(with url: URL,
+public func loadImage(with request: ImageRequestConvertible,
                       options: ImageLoadingOptions = ImageLoadingOptions.shared,
                       into view: ImageDisplayingView,
-                      progress: ImageTask.ProgressHandler? = nil,
-                      completion: ImageTask.Completion? = nil) -> ImageTask? {
-    loadImage(with: ImageRequest(url: url), options: options, into: view, progress: progress, completion: completion)
+                      completion: @escaping (_ result: Result<ImageResponse, ImagePipeline.Error>) -> Void) -> ImageTask? {
+    loadImage(with: request, options: options, into: view, progress: nil, completion: completion)
 }
 
 /// Loads an image with the given request and displays it in the view.
@@ -117,14 +107,14 @@ public func loadImage(with url: URL,
 /// the memory cache. `nil` by default.
 /// - returns: An image task or `nil` if the image was found in the memory cache.
 @discardableResult
-public func loadImage(with request: ImageRequest,
+public func loadImage(with request: ImageRequestConvertible,
                       options: ImageLoadingOptions = ImageLoadingOptions.shared,
                       into view: ImageDisplayingView,
-                      progress: ImageTask.ProgressHandler? = nil,
-                      completion: ImageTask.Completion? = nil) -> ImageTask? {
+                      progress: ((_ intermediateResponse: ImageResponse?, _ completedUnitCount: Int64, _ totalUnitCount: Int64) -> Void)? = nil,
+                      completion: ((_ result: Result<ImageResponse, ImagePipeline.Error>) -> Void)? = nil) -> ImageTask? {
     assert(Thread.isMainThread)
     let controller = ImageViewController.controller(for: view)
-    return controller.loadImage(with: request, options: options, progress: progress, completion: completion)
+    return controller.loadImage(with: request.asImageRequest(), options: options, progress: progress, completion: completion)
 }
 
 /// Cancels an outstanding request associated with the view.
@@ -360,11 +350,10 @@ private final class ImageViewController {
 
     // MARK: - Loading Images
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func loadImage(with request: ImageRequest,
                    options: ImageLoadingOptions,
-                   progress progressHandler: ImageTask.ProgressHandler? = nil,
-                   completion: ImageTask.Completion? = nil) -> ImageTask? {
+                   progress progressHandler: ((_ intermediateResponse: ImageResponse?, _ completedUnitCount: Int64, _ totalUnitCount: Int64) -> Void)? = nil,
+                   completion: ((_ result: Result<ImageResponse, ImagePipeline.Error>) -> Void)? = nil) -> ImageTask? {
         cancelOutstandingTask()
 
         guard let imageView = imageView else {
@@ -375,7 +364,8 @@ private final class ImageViewController {
             #if os(iOS) || os(tvOS)
             imageView.layer.removeAllAnimations()
             #elseif os(macOS)
-            imageView.layer?.removeAllAnimations()
+            let layer = (imageView as? NSView)?.layer ?? imageView.layer
+            layer?.removeAllAnimations()
             #endif
         }
 
@@ -407,27 +397,15 @@ private final class ImageViewController {
             imageView.nuke_display(image: nil) // Remove previously displayed images (if any)
         }
 
-        // Uses a special internal API (`isMainThreadConfined`) for performance
-        // reasons, it attributes for about than 20% performance improvement.
-        task = pipeline.loadImage(with: request, isMainThreadConfined: true, queue: .main) { [weak self] task, event in
-            switch event {
-            case .progress:
-                progressHandler?(nil, task.completedUnitCount, task.totalUnitCount)
-            case let .value(response, isCompleted):
-                if isCompleted {
-                    self?.handle(result: .success(response), fromMemCache: false, options: options)
-                    completion?(.success(response))
-                } else {
-                    if options.isProgressiveRenderingEnabled {
-                        self?.handle(partialImage: response, options: options)
-                    }
-                    progressHandler?(response, task.completedUnitCount, task.totalUnitCount)
-                }
-            case let .error(error):
-                self?.handle(result: .failure(error), fromMemCache: false, options: options)
-                completion?(.failure(error))
+        task = pipeline.loadImage(with: request, queue: .main, progress: { [weak self] response, completedCount, totalCount in
+            if let response = response, options.isProgressiveRenderingEnabled {
+                self?.handle(partialImage: response, options: options)
             }
-        }
+            progressHandler?(response, completedCount, totalCount)
+        }, completion: { [weak self] result in
+            self?.handle(result: result, fromMemCache: false, options: options)
+            completion?(result)
+        })
         return task
     }
 

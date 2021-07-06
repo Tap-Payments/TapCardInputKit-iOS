@@ -20,6 +20,11 @@ class CardNumberTextField:TapCardTextField {
      */
     var cardNumberChanged: ((String) -> ())? =  nil
     
+    /**
+     This method will be called whenever the user tries to enter new digits inside the card number, then we need to the delegate to tell us if we can complete the card number.
+     */
+    var shouldAllowChange: ((String) -> (Bool))? =  nil
+    
     var allowedBrands:[Int] = []
     
     /**
@@ -30,14 +35,16 @@ class CardNumberTextField:TapCardTextField {
      - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
      - Parameter cardBrandDetected: Observer to listen to the event when a card brand is detected based on user input till the moment
      - Parameter cardNumberChanged: Observer to listen to the event when a the card number is changed by user input till the moment
+     - Parameter shouldAllowChange: This method will be called whenever the user tries to enter new digits inside the card number, then we need to the delegate to tell us if we can complete the card number.
      */
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil,cardBrandDetected: ((CardBrand?) -> ())? =  nil,cardNumberChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil,cardBrandDetected: ((CardBrand?) -> ())? =  nil,cardNumberChanged: ((String) -> ())? =  nil, shouldAllowChange: ((String) -> (Bool))? =  nil) {
         
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
         self.fillBiggestAvailableSpace = false
         self.cardNumberChanged = cardNumberChanged
+        self.shouldAllowChange = shouldAllowChange
         
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
@@ -85,7 +92,7 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
         // We use the Valoidation kit to get the status of the number
         let definedCard = CardValidator.validate(cardNumber: nonNullCardNumber,preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
         if let definedBrand = definedCard.cardBrand,
-            allowedBrands.count > 0, !allowedBrands.contains(definedBrand.rawValue){
+           allowedBrands.count > 0, !allowedBrands.contains(definedBrand.rawValue){
             return .Invalid
         }
         
@@ -111,6 +118,13 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
 }
 
 extension CardNumberTextField:UITextFieldDelegate {
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // If the editing changed block is assigned, we need to fire this event as the editing now started for the field
@@ -166,6 +180,9 @@ extension CardNumberTextField:UITextFieldDelegate {
      */
     internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
         
+        // Let us first make sure the delegate doesn't have an issue with the text
+        guard shouldAllowChange?(updatedText.onlyDigits()) ?? true else { return false }
+        
         // In card number we only allow digits and spaces. The spaces will come from the formatting we are applying
         let filteredText:String = updatedText.digitsWithSpaces()
         // Validae the state of the number by trimming all non numeric charachters
@@ -198,6 +215,7 @@ extension CardNumberTextField:UITextFieldDelegate {
     
     
     internal func cardBrand(for cardNumber:String) -> (CardBrand?,CardValidationState) {
+        // OSAA VALIDATE HERE
         let validation = CardValidator.validate(cardNumber: cardNumber.onlyDigits(),preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
         return (validation.cardBrand,validation.validationState)
     }

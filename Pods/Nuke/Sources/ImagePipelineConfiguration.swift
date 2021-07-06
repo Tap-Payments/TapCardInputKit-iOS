@@ -1,8 +1,9 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2020 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
+import os
 
 // MARK: - ImagePipeline.Configuration
 
@@ -11,7 +12,19 @@ extension ImagePipeline {
         // MARK: - Dependencies
 
         /// Image cache used by the pipeline.
-        public var imageCache: ImageCaching?
+        public var imageCache: ImageCaching? {
+            // This exists simply to ensure we don't init ImageCache.shared if the
+            // user provides their own instance.
+            get {
+                isCustomImageCacheProvided ? customImageCache : ImageCache.shared
+            }
+            set {
+                customImageCache = newValue
+                isCustomImageCacheProvided = true
+            }
+        }
+        private var customImageCache: ImageCaching?
+        private var isCustomImageCacheProvided = false
 
         /// Data loader used by the pipeline.
         public var dataLoader: DataLoading
@@ -152,16 +165,20 @@ extension ImagePipeline {
         /// metrics in `os_signpost` Instrument. For more information see
         /// https://developer.apple.com/documentation/os/logging and
         /// https://developer.apple.com/videos/play/wwdc2018/405/.
-        public static var isSignpostLoggingEnabled = false
+        public static var isSignpostLoggingEnabled = false {
+            didSet {
+                log = isSignpostLoggingEnabled ?
+                    OSLog(subsystem: "com.github.kean.Nuke.ImagePipeline", category: "Image Loading") :
+                    .disabled
+            }
+        }
+
+        static var isFastTrackDecodingEnabled = true
 
         // MARK: - Initializer
 
-        /// Creates a default configuration.
-        /// - parameter dataLoader: `DataLoader()` by default.
-        /// - parameter imageCache: `ImageCache.shared` by default.
-        public init(dataLoader: DataLoading = DataLoader(), imageCache: ImageCaching? = ImageCache.shared) {
+        public init(dataLoader: DataLoading = DataLoader()) {
             self.dataLoader = dataLoader
-            self.imageCache = imageCache
 
             self.dataLoadingQueue.maxConcurrentOperationCount = 6
             self.dataCachingQueue.maxConcurrentOperationCount = 2
@@ -172,6 +189,15 @@ extension ImagePipeline {
             self.imageDecompressingQueue.maxConcurrentOperationCount = 2
             #endif
         }
+
+        /// Creates a default configuration.
+        /// - parameter dataLoader: `DataLoader()` by default.
+        /// - parameter imageCache: `ImageCache.shared` by default.
+        public init(dataLoader: DataLoading = DataLoader(), imageCache: ImageCaching?) {
+            self.init(dataLoader: dataLoader)
+            self.customImageCache = imageCache
+            self.isCustomImageCacheProvided = true
+        } // This init is going to be removed in the future
     }
 
     public enum DataCacheItem {

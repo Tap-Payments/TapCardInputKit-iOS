@@ -11,28 +11,12 @@ import class     UIKit.UIFont.UIFont
 /// Font name enum
 public enum TapFont {
     
-    case helveticaNeueThin
-    case helveticaNeueLight
-    case helveticaNeueMedium
-    case helveticaNeueRegular
-    case helveticaNeueBold
-    
     case robotoThin
     case robotoLight
     case robotoMedium
     case robotoRegular
     case robotoBold
-    
-    case circeExtraLight
-    case circeLight
-    case circeRegular
-    case circeBold
-    
-    case arabicHelveticaNeueLight
-    case arabicHelveticaNeueRegular
-    case arabicHelveticaNeueBold
-    
-    
+  
     case arabicTajwalLight
     case arabicTajwalRegular
     case arabicTajwalMedium
@@ -66,17 +50,7 @@ public enum TapFont {
     public static func TapFont(from fontName:String) -> TapFont {
         
         switch fontName.lowercased() {
-        case "HelveticaNeue-Thin".lowercased():
-            return .helveticaNeueThin
-        case "HelveticaNeue-Light".lowercased():
-            return .helveticaNeueLight
-        case "HelveticaNeue-Medium".lowercased():
-            return .helveticaNeueMedium
-        case "HelveticaNeue".lowercased():
-            return .helveticaNeueRegular
-        case "HelveticaNeue-Bold".lowercased():
-            return .helveticaNeueBold
-            
+        
         case "Roboto-Thin".lowercased():
             return .robotoThin
         case "Roboto-Light".lowercased():
@@ -87,23 +61,7 @@ public enum TapFont {
             return .robotoRegular
         case "Roboto-Bold".lowercased():
             return .robotoBold
-            
-        case "Circe-ExtraLight".lowercased():
-            return .circeExtraLight
-        case "Circe-Light".lowercased():
-            return .circeLight
-        case "Circe-Regular".lowercased():
-            return .circeRegular
-        case "Circe-Bold".lowercased():
-            return .circeBold
-            
-        case "HelveticaNeueLTW20-Light".lowercased():
-            return .arabicHelveticaNeueLight
-        case "HelveticaNeueLTW20-Roman".lowercased():
-            return .arabicHelveticaNeueRegular
-        case "HelveticaNeueLTW20-Bold".lowercased():
-            return .arabicHelveticaNeueBold
-            
+         
         case "Tajawal-Light".lowercased():
             return .arabicTajwalLight
         case "Tajawal-Regular".lowercased():
@@ -128,28 +86,13 @@ public enum TapFont {
     internal var fileName: String {
         
         switch self {
-            
-        case .helveticaNeueThin:     return "HelveticaNeue-Thin"
-        case .helveticaNeueLight:     return "HelveticaNeue-Light"
-        case .helveticaNeueMedium:     return "HelveticaNeue-Medium"
-        case .helveticaNeueRegular:    return "HelveticaNeue"
-        case .helveticaNeueBold:     return "HelveticaNeue-Bold"
-            
+        
         case .robotoThin: return "Roboto-Thin"
         case .robotoLight: return "Roboto-Light"
         case .robotoMedium: return "Roboto-Medium"
         case .robotoRegular: return "Roboto-Regular"
         case .robotoBold: return "Roboto-Bold"
-            
-        case .circeExtraLight:    return "Circe-ExtraLight"
-        case .circeLight:         return "Circe-Light"
-        case .circeRegular:     return "Circe-Regular"
-        case .circeBold:         return "Circe-Bold"
-            
-        case .arabicHelveticaNeueLight:     return "HelveticaNeueLTW20-Light"
-        case .arabicHelveticaNeueRegular:    return "HelveticaNeueLTW20-Roman"
-        case .arabicHelveticaNeueBold:         return "HelveticaNeueLTW20-Bold"
-            
+        
         case .arabicTajwalLight:     return "Tajawal-Light"
         case .arabicTajwalRegular:    return "Tajawal-Regular"
         case .arabicTajwalMedium:    return "Tajawal-Medium"

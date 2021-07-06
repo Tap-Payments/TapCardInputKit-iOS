@@ -46,7 +46,7 @@ class ExampleCardInputViewController: UIViewController {
         self.view.layoutIfNeeded()
         
         cardInput.delegate = self
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),allowedCardBrands: [CardBrand.visa.rawValue],cardIconUrl: "https://img.icons8.com/color/2x/visa.png")
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),allowedCardBrands: [CardBrand.visa.rawValue,CardBrand.mada.rawValue],cardIconUrl: "https://img.icons8.com/color/2x/visa.png")
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
@@ -62,11 +62,11 @@ class ExampleCardInputViewController: UIViewController {
         let alertController:UIAlertController = .init(title: "Which type?", message: "Choose a state", preferredStyle: .actionSheet)
         let valid:UIAlertAction = .init(title: "Valid card", style: .destructive) { [weak self] (_) in
             let card:TapCard = .init(tapCardNumber: "4242424242424242", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
-            self?.cardInput.setCardData(tapCard: card)
+            self?.cardInput.setCardData(tapCard: card, then: false)
         }
         let inValid:UIAlertAction = .init(title: "Invalid card", style: .default) { [weak self] (_) in
             let card:TapCard = .init(tapCardNumber: "4242424242424211", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
-            self?.cardInput.setCardData(tapCard: card)
+            self?.cardInput.setCardData(tapCard: card, then: false)
         }
         let cancel:UIAlertAction = .init(title: "Cancel", style: .cancel)
         
@@ -82,6 +82,10 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
+    func shouldAllowChange(with cardNumber: String) -> Bool {
+        return true
+    }
+    
     func dataChanged(tapCard: TapCard) {
         
     }

@@ -1,21 +1,29 @@
 <br/>
 
-<p align="left"><img src="https://cloud.githubusercontent.com/assets/1567433/13918338/f8670eea-ef7f-11e5-814d-f15bdfd6b2c0.png" height="180"/></p>
+<!-- <p align="left"><img src="https://cloud.githubusercontent.com/assets/1567433/13918338/f8670eea-ef7f-11e5-814d-f15bdfd6b2c0.png" height="180"/></p> -->
+
+<img src="https://user-images.githubusercontent.com/1567433/106092470-5c360000-60fc-11eb-8a41-28229fbf0512.png">
 
 # Powerful Image Loading System
 
 <p align="left">
 <img src="https://img.shields.io/cocoapods/v/Nuke.svg?label=version">
 <img src="https://img.shields.io/badge/platforms-iOS%2C%20macOS%2C%20watchOS%2C%20tvOS-lightgrey.svg">
-<img src="https://img.shields.io/badge/test%20coverage-100%25-brightgreen.svg">
-<a href="https://travis-ci.org/kean/Nuke"><img src="https://img.shields.io/travis/kean/Nuke/master.svg"></a>
+<img src="https://github.com/kean/Nuke/workflows/Nuke%20CI/badge.svg">
 </p>
 
-> Upgrading from the previous version? Use a [**Migration Guide**](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Migrations).
+> Upgrading from the previous version? Use a [**Migration Guide**](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Migrations).
 
-Nuke provides a simple and efficient way to download and display images in your app. Behind its clear and concise API is an advanced architecture which enables its unique features and offers virtually unlimited possibilities for customization. The primary Nuke feature is [performance](https://kean.github.io/post/nuke-9).
+Nuke provides a simple and efficient way to download and display images in your app. Behind its clear and concise API is an advanced architecture which enables its unique features and offers virtually unlimited possibilities for customization. The primary Nuke feature is [performance](https://kean.blog/post/nuke-9). Nuke is trusted by $1B+ apps.
 
 > **Fast LRU memory and disk cache** · **SwiftUI** · **Smart background decompression** · **Image processing** · **Elegant builder API** · **Resumable downloads** · **Intelligent deduplication** · **Request prioritization** · **Low data mode** · **Prefetching** · **Rate limiting** · **Progressive JPEG, HEIF, WebP, SVG, GIF** · **Alamofire** · **Combine** · **Reactive extensions**
+
+<br/>
+
+## Sponsors
+[![Stream](https://i.imgur.com/oU7XYkk.png)](https://getstream.io/?utm_source=github&utm_medium=nuke&utm_campaign=sponsorship)
+
+Nuke is proudly sponsored by [Stream](https://getstream.io/?utm_source=github&utm_medium=nuke&utm_campaign=sponsorship), the leading provider in enterprise grade [Feed](https://getstream.io/activity-feeds/?utm_source=github&utm_medium=nuke&utm_campaign=sponsorship) & [Chat](https://getstream.io/chat/?utm_source=github&utm_medium=nuke&utm_campaign=sponsorship) APIs. [Try the iOS Chat Tutorial](https://getstream.io/tutorials/ios-chat/?utm_source=github&utm_medium=nuke&utm_campaign=sponsorship).
 
 <br/>
 
@@ -23,21 +31,22 @@ Nuke provides a simple and efficient way to download and display images in your 
 
 Nuke is easy to learn and use. Here is an overview of its APIs and features:
 
-- **Image View Extensions** ‣ [UI Extensions](#image-view-extensions) · [Table View](#in-a-table-view) · [Placeholders, Transitions](#placeholders-transitions-content-modes) · [`ImageRequest`](#imagerequest)
+- **Image View Extensions** ‣ [UI Extensions](#image-view-extensions) · [Table View](#in-a-table-view) · [Placeholders, Transitions](#placeholders-transitions-content-modes-tint-colors) · [`ImageRequest`](#imagerequest)
 - **Image Processing** ‣ [`Resize`](#resize) · [`Circle`](#circle) · [`RoundedCorners`](#roundedcorners) · [`GaussianBlur`](#gaussianblur) · [`CoreImage`](#coreimagefilter) · [Custom Processors](#custom-processors)
 - **Image Pipeline** ‣ [Load Image](#image-pipeline) · [`ImageTask`](#imagetask) · [Customize Image Pipeline](#customize-image-pipeline) · [Default Pipeline](#default-image-pipeline)
-- **Caching** ‣ [LRU Memory Cache](#lru-memory-cache) · [HTTP Disk Cache](#http-disk-cache) · [Aggressive LRU Disk Cache](#aggressive-lru-disk-cache)
-- **Advanced Features** ‣ [Preheat Images](#image-preheating) · [Progressive Decoding](#progressive-decoding)
+- **Caching** ‣ [LRU Memory Cache](#lru-memory-cache) · [HTTP Disk Cache](#http-disk-cache) · [Aggressive LRU Disk Cache](#aggressive-lru-disk-cache) · [Reloading Images](#reloading-images)
+- **Advanced Features** ‣ [Prefetching Images](#image-prefetching) · [Progressive Decoding](#progressive-decoding)
 - [**Extensions**](#h_plugins) ‣ [FetchImage](#fetch-image) · [Builder](#builder) · [Combine](#combine) · [RxNuke](#rxnuke) · [And More](#h_plugins) 
 
-To learn more see a full [**API Reference**](https://kean-org.github.io/docs/nuke/reference/9.0.0/index.html), and check out the demo project included in the repo. When you are ready to install, follow the [**Installation Guide**](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/installation-guide.md). See [**Requirements**](#h_requirements) for a list of supported platforms. If you encounter any issues, please refer to [**FAQ**](https://github.com/kean/Nuke/blob/master/Documentation/Guides/faq.md) or [**Troubleshooting Guide**](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/troubleshooting.md). 
+To learn more see a full [**API Reference**](https://kean-org.github.io/docs/nuke/reference/9.5.0/), and check out the [demo project](https://github.com/kean/NukeDemo). When you are ready to install, follow the [**Installation Guide**](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/installation-guide.md). See [**Requirements**](#h_requirements) for a list of supported platforms. If you encounter any issues, please refer to [**FAQ**](https://github.com/kean/Nuke/blob/master/Documentation/Guides/faq.md) or [**Troubleshooting Guide**](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/troubleshooting.md).
 
 <img src="https://img.shields.io/badge/supports-Swift%20Package%20Manager%2C%20CocoaPods%2C%20Carthage-green.svg">
 
 To learn more about the pipeline and the supported formats, see the dedicated guides.
 
-- [**Image Formats**](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md) ‣ [Progressive JPEG](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md#progressive-jpeg) · [HEIF](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md#heif) · [GIF](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md#gif) · [SVG](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md#svg) · [WebP](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-formats.md#webp) 
-- [**Image Pipeline**](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md) ‣ [Data Loading](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#data-loading-and-caching) · [Resumable Downloads](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#resumable-downloads) · [Memory Cache](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#memory-cache) · [Deduplication](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#deduplication) · [Decompression](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#decompression) · [Performance](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md#performance)
+- [**Image Formats**](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md) ‣ [Progressive JPEG](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md#progressive-jpeg) · [HEIF](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md#heif) · [GIF](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md#gif) · [SVG](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md#svg) · [WebP](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-formats.md#webp)
+- [**Guides**](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides) ‣ [Image Pipeline](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-pipeline.md) · [Performance](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/performance-guide.md) · [Third-Party Libraries](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/third-party-libraries.md)
+- [**Articles**](https://kean.blog) ‣ [Performance](https://kean.blog/post/nuke-9) · [Concurrency](https://kean.blog/post/concurrency) · [Caching](https://kean.blog/post/image-caching) · [Prefetching](https://kean.blog/post/image-preheating)
 
 If you'd like to contribute to Nuke see [**Contributing**](#h_contribute).
 
@@ -55,7 +64,7 @@ Nuke.loadImage(with: url, into: imageView)
 
 Nuke will check if the image exists in the memory cache, and if it does, will instantly display it. If not, the image data will be loaded, decoded, processed, and decompressed in the background.
 
-> See [Image Pipeline Guide](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md) to learn how images are downloaded and processed.
+> See [Image Pipeline Guide](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-pipeline.md) to learn how images are downloaded and processed.
 
 ### In a Table View
 
@@ -105,6 +114,7 @@ Please keep in mind that the built-in extensions for image views are designed to
 let request = ImageRequest(
     url: URL(string: "http://..."),
     processors: [ImageProcessors.Resize(size: imageView.bounds.size)],
+    cachePolicy: .reloadIgnoringCacheData,
     priority: .high
 )
 ```
@@ -132,7 +142,7 @@ let request = ImageRequest(
 
 Nuke features a powerful and efficient image processing infrastructure with multiple built-in processors which you can find in `ImageProcessors` namespace, e.g. `ImageProcessors.Resize`.
 
-> This and other screenshots are from the demo project included in the repo.
+> This and other screenshots are from the [demo project](https://github.com/kean/NukeDemo).
 
 ### `Resize`
 
@@ -205,7 +215,7 @@ public protocol ImageProcessing {
 }
 ```
 
-In addition to `var identfier: String`, you can implement `var hashableIdentifier: AnyHashable` to be used by the memory cache where string manipulations would be too slow. By default, this method returns the `identifier` string. A common approach is to make your processor `Hashable` and return `self` from `hashableIdentifier`.
+In addition to `var identifier: String`, you can implement `var hashableIdentifier: AnyHashable` to be used by the memory cache where string manipulations would be too slow. By default, this method returns the `identifier` string. A common approach is to make your processor `Hashable` and return `self` from `hashableIdentifier`.
 
 <br/>
 
@@ -242,7 +252,7 @@ task.priority = .high
 
 If you want to build a system that fits your specific needs, you won't be disappointed. There are a _lot of things_ to tweak. You can set custom data loaders and caches, configure image encoders and decoders, change the number of concurrent operations for each individual stage, disable and enable features like deduplication and rate limiting, and more.
 
-> To learn more see the inline documentation for `ImagePipeline.Configuration` and [Image Pipeline Guide](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/image-pipeline.md).
+> To learn more see the inline documentation for `ImagePipeline.Configuration` and [Image Pipeline Guide](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/image-pipeline.md).
 
 <img align="right" src="https://user-images.githubusercontent.com/1567433/59148462-94f60280-8a09-11e9-906a-6c7209b8f8c8.png" width="360"/>
 
@@ -367,7 +377,7 @@ ImageCache.shared.removeAll()
 
 ### HTTP Disk Cache
 
-Unprocessed image data is stored with `URLCache`.
+By default, unprocessed image data is stored using `URLCache`.
 
 ```swift
 // Configure cache
@@ -399,36 +409,58 @@ By default, the pipeline stores only the original image data. To store downloade
 
 > To save disk space see `ImageEncoders.ImageIO` and  `ImageEncoder.isHEIFPreferred` option for HEIF support.
 
+### Reloading Images
+
+There are two options available. You can remove an image from all cache layers:
+
+```swift
+let request = ImageRequest(url: url)
+pipeline.removeCachedImage(for: request)
+```
+
+Another option is to keep the image in cache, but instruct the pipeline to ignore the cached data:
+
+```swift
+let request = ImageRequest(url: url, cachePolicy: .reloadIgnoringCacheData)
+Nuke.loadImage(with: request, into: imageView)
+```
+
+> If you are manually constucting a `URLRequest`, make sure to update the respective cache policy.
+
 <br/>
 
 # Advanced Features
 
-### Image Preheating
+### Image Prefetching
 
 Prefetching images in advance can dramatically improve your app's user experience.
 
 ```swift
-// Make sure to keep a strong reference to preheater.
-let preheater = ImagePreheater()
+// Make sure to keep a strong reference to the prefetcher.
+let prefetcher = ImagePrefetcher()
 
-preheater.startPreheating(with: urls)
+prefetcher.startPrefetching(with: urls)
 
-// Cancels all of the preheating tasks created for the given requests.
-preheater.stopPreheating(with: urls)
+// Cancels all of the prefetching tasks. You don't need to balance the number of
+// `start` and `stop` requests. If you have multiple screens with prefetching,
+// create multiple `ImagePrefetcher` instances.
+prefetcher.stopPrefetching(with: urls)
 ```
 
-> To learn more about other performance optimizations you can do, see [Performance Guide](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/performance-guide.md).
+> To learn more about other performance optimizations you can do, see [Performance Guide](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/performance-guide.md).
 
 Keep in mind that prefetching takes up users' data and puts extra pressure on CPU and memory. To reduce the CPU and memory usage, you have an option to choose only the disk cache as a prefetching destination:
 
 ```swift
-// The preheater with `.diskCache` destination will skip image data decoding
+// The prefetcher with `.diskCache` destination will skip image data decoding
 // entirely to reduce CPU and memory usage. It will still load the image data
 // and store it in disk caches to be used later.
-let preheater = ImagePreheater(destination: .diskCache)
+let prefetcher = ImagePrefetcher(destination: .diskCache)
 ```
 
-> On iOS, you can use [prefetching APIs](https://developer.apple.com/reference/uikit/uitableviewdatasourceprefetching) in combination with `ImagePreheater` to automate the process.
+When the user leaves the screen, you can either continue/stop prefetching, or you can pause it using `prefetcher.isPaused` property. The prefetching will finish outstanding tasks (by default, there are only 2 at a time), and pause the rest.
+
+> On iOS, you can use [prefetching APIs](https://developer.apple.com/reference/uikit/uitableviewdatasourceprefetching) in combination with `ImagePrefetcher` to automate the process. To learn more about prefetching, see the [dedicated guide](https://kean.blog/post/image-preheating). 
 
 ### Progressive Decoding
 
@@ -487,7 +519,7 @@ There is a variety of extensions available for Nuke:
 <a name="fetch-image"></a>
 ### [`FetchImage`](https://github.com/kean/FetchImage)
 
-[`FetchImage`](https://github.com/kean/FetchImage) is a Swift package that makes it easy to download images using Nuke and display them in SwiftUI apps. For more info, see the [introductory post](https://kean.github.io/post/introducing-fetch-image). 
+[`FetchImage`](https://github.com/kean/FetchImage) is a Swift package that makes it easy to download images using Nuke and display them in SwiftUI apps. For more info, see the [introductory post](https://kean.blog/post/introducing-fetch-image). 
 
 > **Note**: This is an API preview, it might change in the future.
 
@@ -571,7 +603,7 @@ Observable.concat(pipeline.loadImage(with: lowResUrl).orEmpty,
 | Nuke 9.0      | Swift 5.1       | Xcode 11.0      | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
 | Nuke 8.0      | Swift 5.0       | Xcode 10.2      | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0  |
 
-See [Installation Guide](https://github.com/kean/Nuke/blob/9.1.0/Documentation/Guides/installation-guide.md#h_requirements) for information about the older versions.
+See [Installation Guide](https://github.com/kean/Nuke/blob/9.5.0/Documentation/Guides/installation-guide.md#h_requirements) for information about the older versions.
 
 # License
 

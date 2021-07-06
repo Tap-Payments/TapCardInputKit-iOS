@@ -248,7 +248,7 @@
     "tapDragHandler": {
         "image" : "tapHandlerImage",
         "width" : 75,
-        "height" : 2,
+        "height" : 4,
         "corner" : 2,
         "backgroundColor": "white",
         "cancelButton": {
@@ -265,7 +265,8 @@
         "merchantLogoPlaceHolderColor" : "black",
         "merchantLogoPlaceHolderFont" : "Roboto-Regular,16",
         "merchantLogoPlaceHolderLabelColor" : "white",
-        "backgroundColor" : "white"
+        "backgroundColor" : "white",
+        "closeCheckoutIcon": "closeCheckoutIcon"
     },
     "amountSectionView": {
         "originalAmountLabelFont" : "Roboto-Regular,20",
@@ -326,6 +327,7 @@
             },
             "gatewayChip": {
                 "backgroundColor" : "white",
+                "logoutIcon": "logoutIcon",
                 "selected": {
                     "shadow": {
                         "color" : "vibrantGreenTwo",

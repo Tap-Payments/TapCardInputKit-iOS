@@ -4,7 +4,7 @@
 //
 //  Copyright © 2019 Tap Payments. All rights reserved.
 //
-
+/*
 import enum TapFontKit_iOS.TapFont
 
 // MARK: - Decodable
@@ -39,4 +39,4 @@ extension TapFontKit_iOS.TapFont: Decodable {
 		"helvetica-neue-regular-ar":	.arabicHelveticaNeueRegular,
 		"helvetica-neue-bold-ar": 		.arabicHelveticaNeueBold,
 	]
-}
+}*/

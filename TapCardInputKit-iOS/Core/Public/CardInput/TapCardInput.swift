@@ -53,6 +53,13 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
     func dataChanged(tapCard:TapCard)
+    
+    /**
+     This method will be called whenever the user tries to enter new digits inside the card number, then we need to the delegate to tell us if we can complete the card number.
+     - Parameter with cardNumber: The card number after changes.
+     - Returns: True if the entered card number till now less than 6 digits or the prefix matches the allowed types (credit or debit)
+     */
+    func shouldAllowChange(with cardNumber:String) -> Bool
 }
 
 /// This represents the custom view for card input provided by Tap
@@ -169,15 +176,19 @@ internal protocol TapCardInputCommonProtocol {
     /**
      Call this method when you  need to fill in the text fields with data.
      - Parameter tapCard: The TapCard that holds the data needed to be filled into the textfields
+     - Parameter then focusCardNumber: Indicate whether we need to focus the card number after setting the card data
+     - Parameter shouldRemoveCurrentCard: Indicate If there is a card number, first thing to do now is to clear the fields
      */
-    @objc public func setCardData(tapCard:TapCard) {
+    @objc public func setCardData(tapCard:TapCard,then focusCardNumber:Bool,shouldRemoveCurrentCard:Bool = true) {
         // Match the tapCard attributes to the different card fields
         
         // First then, we check if there is a card number provided
         guard let providedCardNumber:String = tapCard.tapCardNumber, providedCardNumber != "" else { return }
         
-        // If there is a card number, first thing to do now is to clear the fields
-        clearButtonClicked()
+        if shouldRemoveCurrentCard {
+            // If there is a card number, first thing to do now is to clear the fields
+            clearButtonClicked()
+        }
         
         // Then we set the card number and check if it is valid or not
         guard cardNumber.changeText(with: providedCardNumber, setTextAfterValidation: true) else {
@@ -185,13 +196,19 @@ internal protocol TapCardInputCommonProtocol {
             return
         }
         
-        cardNumber.resignFirstResponder()
+        if focusCardNumber {
+            cardNumber.becomeFirstResponder()
+        }else {
+            cardNumber.resignFirstResponder()
+        }
         updateWidths(for: cardNumber)
         
         // Then we set the card expiry and check if it is valid or not
         guard cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear) else {
             cardExpiry.text = ""
-            cardExpiry.becomeFirstResponder()
+            if !focusCardNumber {
+                cardExpiry.becomeFirstResponder()
+            }
             return
         }
         
@@ -201,15 +218,18 @@ internal protocol TapCardInputCommonProtocol {
         // Then check if the usder provided a correct cvv
         guard cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true) else {
             cardCVV.text = ""
-            cardCVV.becomeFirstResponder()
+            if !focusCardNumber {
+                cardCVV.becomeFirstResponder()
+            }
             return
         }
         
         cardCVV.resignFirstResponder()
         updateWidths(for: cardCVV)
         
-        
-        if !cardNumber.isValid(cardNumber: providedCardNumber) {
+        if focusCardNumber {
+            cardNumber.becomeFirstResponder()
+        }else if !cardNumber.isValid(cardNumber: providedCardNumber) {
             cardNumber.becomeFirstResponder()
         }else if !cardExpiry.isValid() {
             cardExpiry.becomeFirstResponder()
@@ -236,7 +256,6 @@ internal protocol TapCardInputCommonProtocol {
     public func fieldsValidationStatuses() -> (Bool,Bool,Bool) {
         return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid())
     }
-    
     
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -345,25 +364,28 @@ internal protocol TapCardInputCommonProtocol {
     /// The method is responsible for configuring and setup the card text fields
     internal func configureViews() {
         
-        
         // Setup the card number field with the needed data and listeners
-        cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number", editingStatusChanged: { [weak self] (isEditing) in
+        cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number") { [weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardNumber)
-            },cardBrandDetected: { [weak self] (brand) in
-                // If a card brand is detected we need to pudate the card icon image and update the allowed length of the CVV
-                self?.cardBrandDetected(with:brand)
-            },cardNumberChanged: { [weak self] (cardNumber) in
-                // If the card number changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardNumber = cardNumber
-                self?.cardDatachanged()
-                if self?.cardInputMode == .InlineCardInput, self?.cardNumber.isValid() ?? false {
+        } cardBrandDetected: { [weak self] (brand) in
+            // If a card brand is detected we need to pudate the card icon image and update the allowed length of the CVV
+            self?.cardBrandDetected(with:brand)
+        } cardNumberChanged: { [weak self] (cardNumber) in
+            // If the card number changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
+            self?.tapCard.tapCardNumber = cardNumber
+            self?.cardDatachanged()
+            if self?.cardInputMode == .InlineCardInput, self?.cardNumber.isValid() ?? false {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                     self?.cardExpiry.becomeFirstResponder()
                 }
-                self?.handleOneBrandIcon(with: cardNumber)
-        })
+            }
+            self?.handleOneBrandIcon(with: cardNumber)
+        } shouldAllowChange: { [weak self] (updatedCardNumber) -> (Bool) in
+            return self?.delegate?.shouldAllowChange(with: updatedCardNumber) ?? true
+        }
         
         // Setup the card name field with the needed data and listeners
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
@@ -371,10 +393,10 @@ internal protocol TapCardInputCommonProtocol {
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardName)
-            },cardNameChanged: { [weak self] (cardName) in
-                // If the card name changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardName = cardName
-                self?.cardDatachanged()
+        },cardNameChanged: { [weak self] (cardName) in
+            // If the card name changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
+            self?.tapCard.tapCardName = cardName
+            self?.cardDatachanged()
         })
         
         // Setup the card expiry field with the needed data and listeners
@@ -383,14 +405,14 @@ internal protocol TapCardInputCommonProtocol {
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardExpiry)
-            }, cardExpiryChanged: {  [weak self] (cardMonth,cardYear) in
-                // If the card expiry changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardExpiryMonth = cardMonth
-                self?.tapCard.tapCardExpiryYear = cardYear
-                if self?.cardExpiry.isValid() ?? false {
-                    self?.cardCVV.becomeFirstResponder()
-                }
-                self?.cardDatachanged()
+        }, cardExpiryChanged: {  [weak self] (cardMonth,cardYear) in
+            // If the card expiry changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
+            self?.tapCard.tapCardExpiryMonth = cardMonth
+            self?.tapCard.tapCardExpiryYear = cardYear
+            if self?.cardExpiry.isValid() ?? false {
+                self?.cardCVV.becomeFirstResponder()
+            }
+            self?.cardDatachanged()
         })
         
         // Setup the card cvv field with the needed data and listeners
@@ -399,13 +421,13 @@ internal protocol TapCardInputCommonProtocol {
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
             self?.updateWidths(for: self?.cardCVV)
-            },cardCVVChanged: {  [weak self] (cardCVV) in
-                // If the card cvv changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
-                self?.tapCard.tapCardCVV = cardCVV
-                self?.cardDatachanged()
-                if self?.cardCVV.isValid() ?? false {
-                    self?.cardCVV.resignFirstResponder()
-                }
+        },cardCVVChanged: {  [weak self] (cardCVV) in
+            // If the card cvv changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
+            self?.tapCard.tapCardCVV = cardCVV
+            self?.cardDatachanged()
+            if self?.cardCVV.isValid() ?? false {
+                self?.cardCVV.resignFirstResponder()
+            }
         })
         
         fields.forEach{ $0.textChanged = { [weak self] _ in self?.delegate?.dataChanged(tapCard: self!.tapCard) }}
@@ -638,7 +660,7 @@ extension TapCardInput {
      */
     @objc internal func nextAction(sender:TapCardBarButton) {
         if let field = sender.cardField,
-            let currentFieldIndex = fields.firstIndex(of: field) {
+           let currentFieldIndex = fields.firstIndex(of: field) {
             // Defensive code to make sure all good, and the textfield is being passed with the clicked button and there is NEXT field in the row that we can navigate to
             
             // If all good, then the next field is now active
@@ -652,7 +674,7 @@ extension TapCardInput {
      */
     @objc internal func previousAction(sender:TapCardBarButton) {
         if let field = sender.cardField,
-            let currentFieldIndex = fields.firstIndex(of: field) {
+           let currentFieldIndex = fields.firstIndex(of: field) {
             // Defensive code to make sure all good, and the textfield is being passed with the clicked button and there is previous field in the row that we can navigate to
             
             // If all good, then the previous field is now active

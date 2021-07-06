@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2020 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -17,6 +17,9 @@ public protocol DataCaching {
     /// - note: The implementation must return immediately and store data
     /// asynchronously.
     func storeData(_ data: Data, for key: String)
+
+    /// Removes data for the given key.
+    func removeData(for key: String)
 }
 
 // MARK: - DataCache
@@ -51,10 +54,10 @@ public final class DataCache: DataCaching {
     /// A cache key.
     public typealias Key = String
 
-    /// The maximum number of items. `1000` by default.
+    /// The maximum number of items. `Int.max` by default.
     ///
     /// Changes tos `countLimit` will take effect when the next LRU sweep is run.
-    public var countLimit: Int = 1000
+    var deprecatedCountLimit: Int = Int.max
 
     /// Size limit in bytes. `100 Mb` by default.
     ///
@@ -91,7 +94,7 @@ public final class DataCache: DataCaching {
     var flushInterval: DispatchTimeInterval = .seconds(2)
 
     /// A queue which is used for disk I/O.
-    public let queue = DispatchQueue(label: "com.github.kean.Nuke.DataCache.WriteQueue", target: .global(qos: .utility))
+    public let queue = DispatchQueue(label: "com.github.kean.Nuke.DataCache.WriteQueue", qos: .utility)
 
     /// A function which generates a filename for the given key. A good candidate
     /// for a filename generator is a _cryptographic_ hash function like SHA1.
@@ -121,6 +124,16 @@ public final class DataCache: DataCaching {
         self.path = path
         self.filenameGenerator = filenameGenerator
         try self.didInit()
+
+        #if TRACK_ALLOCATIONS
+        Allocations.increment("DataCache")
+        #endif
+    }
+
+    deinit {
+        #if TRACK_ALLOCATIONS
+        Allocations.decrement("ImageCache")
+        #endif
     }
 
     /// A `FilenameGenerator` implementation which uses SHA1 hash function to
@@ -138,8 +151,7 @@ public final class DataCache: DataCaching {
 
     // MARK: DataCaching
 
-    /// Retrieves data for the given key. The completion will be called
-    /// syncrhonously if there is no cached data for the given key.
+    /// Retrieves data for the given key.
     public func cachedData(for key: Key) -> Data? {
         lock.lock()
         if let change = staging.change(for: key) {
@@ -348,12 +360,13 @@ public final class DataCache: DataCaching {
         }
         var size = items.reduce(0) { $0 + ($1.meta.totalFileAllocatedSize ?? 0) }
         var count = items.count
-        let sizeLimit = self.sizeLimit / Int(1 / trimRatio)
-        let countLimit = self.countLimit / Int(1 / trimRatio)
 
-        guard size > sizeLimit || count > countLimit else {
+        guard size > sizeLimit || count > deprecatedCountLimit else {
             return // All good, no need to perform any work.
         }
+
+        let sizeLimit = Int(Double(self.sizeLimit) * trimRatio)
+        let countLimit = Int(Double(self.deprecatedCountLimit) * trimRatio)
 
         // Most recently accessed items first
         let past = Date.distantPast

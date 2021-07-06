@@ -39,7 +39,7 @@ public class FontProvider {
         
         if languageIdentifier == "ar" {
             
-            fontName = self.arabicFontNames[originalName] ?? .arabicHelveticaNeueRegular
+            fontName = self.arabicFontNames[originalName] ?? .arabicTajwalRegular
         }
         else {
             
@@ -103,16 +103,6 @@ public class FontProvider {
     private static var arabicFontNames: [TapFont: TapFont] = {
         
         return [
-            
-            .helveticaNeueThin:     .arabicHelveticaNeueLight,
-            .helveticaNeueLight:     .arabicHelveticaNeueLight,
-            .helveticaNeueMedium:     .arabicHelveticaNeueRegular,
-            .helveticaNeueRegular:    .arabicHelveticaNeueRegular,
-            .helveticaNeueBold:     .arabicHelveticaNeueBold,
-            .circeExtraLight:         .arabicHelveticaNeueLight,
-            .circeLight:             .arabicHelveticaNeueLight,
-            .circeRegular:             .arabicHelveticaNeueRegular,
-            .circeBold:             .arabicHelveticaNeueBold,
             .robotoThin:     .arabicTajwalRegular,
             .robotoLight:     .arabicTajwalRegular,
             .robotoMedium:     .arabicTajwalBold,
@@ -124,24 +114,11 @@ public class FontProvider {
     private static var loadedFonts: Set<TapFont> = {
         
         let fonts: [TapFont] = [
-            
-            .helveticaNeueThin,
-            .helveticaNeueLight,
-            .helveticaNeueMedium,
-            .helveticaNeueRegular,
-            .helveticaNeueBold,
             .robotoThin,
             .robotoLight,
             .robotoMedium,
             .robotoRegular,
             .robotoBold,
-            .circeExtraLight,
-            .circeLight,
-            .circeRegular,
-            .circeBold,
-            .arabicHelveticaNeueLight,
-            .arabicHelveticaNeueRegular,
-            .arabicHelveticaNeueBold,
             .arabicTajwalLight,
             .arabicTajwalRegular,
             .arabicTajwalMedium,

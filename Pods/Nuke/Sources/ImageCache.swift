@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2020 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 #if !os(macOS)
@@ -15,6 +15,13 @@ import Cocoa
 public protocol ImageCaching: AnyObject {
     /// Access the image cached for the given request.
     subscript(request: ImageRequest) -> ImageContainer? { get set }
+}
+
+public extension ImageCaching {
+    subscript(url: URL) -> ImageContainer? {
+        get { self[ImageRequest(url: url)] }
+        set { self[ImageRequest(url: url)] = newValue }
+    }
 }
 
 /// Memory cache with LRU cleanup policy (least recently used are removed first).
@@ -62,12 +69,22 @@ public final class ImageCache: ImageCaching {
     /// Shared `Cache` instance.
     public static let shared = ImageCache()
 
+    deinit {
+        #if TRACK_ALLOCATIONS
+        Allocations.decrement("ImageCache")
+        #endif
+    }
+
     /// Initializes `Cache`.
     /// - parameter costLimit: Default value representes a number of bytes and is
     /// calculated based on the amount of the phisical memory available on the device.
     /// - parameter countLimit: `Int.max` by default.
     public init(costLimit: Int = ImageCache.defaultCostLimit(), countLimit: Int = Int.max) {
         impl = Cache(costLimit: costLimit, countLimit: countLimit)
+
+        #if TRACK_ALLOCATIONS
+        Allocations.increment("ImageCache")
+        #endif
     }
 
     /// Returns a recommended cost limit which is computed based on the amount
@@ -150,7 +167,7 @@ final class Cache<Key: Hashable, Value> {
     var ttl: TimeInterval = 0
 
     var totalCount: Int {
-        return map.count
+        map.count
     }
 
     init(costLimit: Int, countLimit: Int) {
@@ -168,12 +185,17 @@ final class Cache<Key: Hashable, Value> {
                            name: UIApplication.didEnterBackgroundNotification,
                            object: nil)
         #endif
+
+        #if TRACK_ALLOCATIONS
+        Allocations.increment("Cache")
+        #endif
     }
 
     deinit {
-        self.memoryPressure.cancel()
-        #if os(iOS) || os(tvOS)
-        NotificationCenter.default.removeObserver(self)
+        memoryPressure.cancel()
+
+        #if TRACK_ALLOCATIONS
+        Allocations.decrement("Cache")
         #endif
     }
 
