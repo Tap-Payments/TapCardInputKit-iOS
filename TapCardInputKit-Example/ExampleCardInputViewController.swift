@@ -31,6 +31,8 @@ class ExampleCardInputViewController: UIViewController {
         cardInput.translatesAutoresizingMaskIntoConstraints = false
         cardInput.showSaveCardOption = true
         cardInput.showScanningOption = true
+        cardInput.showCardBrandIcon = false
+        
         sharedLocalisationManager.localisationLocale = lang
         //sharedLocalisationManager.localisationFilePath = URL(fileURLWithPath: Bundle.main.path(forResource: "CustomTapCardInputKitLocalisation", ofType: "json")!)
         self.title = isInline ? "Inline Input" : "Expanded Input"
@@ -39,14 +41,17 @@ class ExampleCardInputViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        expandedHeightConstraint.constant = isInline ? 45 : 190
+        expandedHeightConstraint.constant = isInline ? 90 : 190
         leftConstraint.constant = isInline ? 0 : -2
         rightConstraint.constant = isInline ? 0 : -2
         
         self.view.layoutIfNeeded()
         
         cardInput.delegate = self
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),allowedCardBrands: [CardBrand.visa.rawValue,CardBrand.mada.rawValue],cardIconUrl: "https://img.icons8.com/color/2x/visa.png")
+        
+        let cardBrands:[Int] = CardBrand.allCases.map{ $0.rawValue }
+        
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),showCardName:true, showCardBrandIcon: true, allowedCardBrands: cardBrands)
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
@@ -82,6 +87,7 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
+    
     func shouldAllowChange(with cardNumber: String) -> Bool {
         return true
     }
@@ -101,6 +107,7 @@ extension ExampleCardInputViewController: TapCardInputProtocol {
     
    
     func cardDataChanged(tapCard: TapCard) {
+        
         resultTextView.text = "Card Number : \(tapCard.tapCardNumber ?? "")\nCard Name : \(tapCard.tapCardName ?? "")\nCard Expiry : \(tapCard.tapCardExpiryMonth ?? "")/\(tapCard.tapCardExpiryYear ?? "")\nCard CVV : \(tapCard.tapCardCVV ?? "")\n\(resultTextView.text ?? "")\n"
     }
     

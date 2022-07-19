@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2021 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2022 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -77,7 +77,8 @@ final class ResumableDataStorage {
         lock.lock(); defer { lock.unlock() }
 
         if registeredPipelines.isEmpty {
-            cache = Cache(costLimit: 32 * 1024 * 1024, countLimit: 100)
+            // 32 MB
+            cache = Cache(costLimit: 32000000, countLimit: 100)
         }
         registeredPipelines.insert(pipeline.id)
     }
@@ -122,11 +123,11 @@ final class ResumableDataStorage {
         let url: String
 
         init?(request: ImageRequest, pipeline: ImagePipeline) {
-            guard let url = request.urlString else {
+            guard let imageId = request.imageId else {
                 return nil
             }
             self.pipelineId = pipeline.id
-            self.url = url
+            self.url = imageId
         }
     }
 }

@@ -25,14 +25,14 @@ class CardNameTextField:TapCardTextField {
     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
     - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
     */
-    func setup(with minVisibleChars: Int = 4, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil) {
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
         // Card number should have a default keyboard
         self.keyboardType = .default
         // This indicates that this field should fill in the remaining width in the case of the inline mode
-        self.fillBiggestAvailableSpace = true
+        self.fillBiggestAvailableSpace = false
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign the observers and the blocks
@@ -60,7 +60,7 @@ extension CardNameTextField: CardInputTextFieldProtocol {
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
          if let text = self.text {
             // Make sure it is valid where there is a text and the text contains only alphabets
-            if text.alphabetOnly() == text.lowercased() && (text.count >= 2 && text.count <= 26) {
+            if text.alphabetOnly() == text.lowercased() && (text.count > 2 && text.count <= 26) {
                  return .Valid
              }
          }
@@ -113,7 +113,13 @@ extension CardNameTextField:UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         // add their new text to the existing text
         let updatedText:String = currentText.replacingCharacters(in: stringRange, with: string)
+        // Check first if it is allowed to change the string
+        if updatedText.alphabetOnly() == updatedText.lowercased() && updatedText.count <= 26 {
+            // Then set the text
+            self.text = updatedText.uppercased()
+        }
+        // Validate it
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
-        return updatedText.alphabetOnly() == updatedText.lowercased() && updatedText.count <= 26
+        return false
     }
 }

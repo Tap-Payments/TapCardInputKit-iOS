@@ -16,6 +16,11 @@ import Foundation
     @objc public var localisationFilePath:URL?
     /// Please set the locale you want the localiser to use
     @objc public var localisationLocale:String?
+    /// An enum to define the source of the provided custom localisation file whether local or remote based
+    @objc public var localisationType:TapLocalisationType = .LocalJsonFile
+    
+    /// The localisation data whether fetched from a given local or remote localisation cusom json file
+    internal var localisationData:[String:Any]? = nil
     
     /**
      This method returns the localised value for a given key
@@ -58,6 +63,81 @@ import Foundation
     
     
     
+    /**
+     Configures the localisation manager with custom localisation data
+     - Parameter filePath: The url to the file that contains the custom localisation data whether remote or a local path
+     - Parameter localisationType: Defines whether the passed file is a local or remote based one
+     - Returns: True if the file was located and has valid json format, false otherwise
+     */
+    @objc public func configureLocalisation(with filePath:URL, from localisationType:TapLocalisationType) -> Bool {
+        switch localisationType {
+        case .LocalJsonFile:
+            return fetchLocalLocalisationData(with: filePath)
+        case .RemoteJsonFile:
+            return fetchRemoteLocalisationData(filePath: filePath)
+        }
+    }
+    
+    /**
+     Fetches the localisation data from a local json custom file
+     - Parameter filePath:The localisation json file path you want the localiser to fetch values from
+     - Returns: True if successfuly the file was located and converted into a JSON format, false otherwise
+     */
+    internal func fetchLocalLocalisationData(with filePath:URL) -> Bool {
+        // Try to fetch the localised value from the givn file
+        do {
+            // Check if the localisation file provided exists and readable
+            let data = try Data(contentsOf: filePath)
+            if let json:[String:Any] = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String : Any] {
+                localisationData = json
+                localisationFilePath = filePath
+                localisationType = .LocalJsonFile
+                return true
+            }
+        } catch  {}
+        return false
+    }
+    
+    
+    /**
+     Fetches the localisation data from a remote json custom file
+     - Parameter filePath:The localisation json file path you want the localiser to fetch values from
+     - Returns: True if successfuly the file was located and converted into a JSON format, false otherwise
+     */
+    internal func fetchRemoteLocalisationData(filePath:URL) -> Bool {
+        var result:Bool = false
+        // Validate the url
+        guard validateJsonRemoteURL(remoteURL: filePath) else {
+            return result
+        }
+        
+        // Then let us load the data
+        // Make it a sync call
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let task = URLSession.shared.dataTask(with: filePath) {[weak self] (data, response, error) in
+            // Check the data is loaded properly, no errors, and the data is a parsable json format
+            if let nonNullData = data,
+               let nonNullJsonDictionary = try? JSONSerialization.jsonObject(with: nonNullData, options: .allowFragments) as? [String:Any] {
+                // All good
+                result = true
+                // Store the data for further access
+                self?.localisationData = nonNullJsonDictionary
+                self?.localisationFilePath = filePath
+                self?.localisationType = .RemoteJsonFile
+                semaphore.signal()
+            }else{
+                // Something happened
+                semaphore.signal()
+            }
+        }
+        
+        task.resume()
+        semaphore.wait()
+        
+        return result
+    }
+    
     
     
     /**
@@ -82,24 +162,60 @@ import Foundation
         return nil
     }
     
+    
+    /**
+     Decides if the given URL is a valid url and is pointing to a json file
+     - Parameter remoteURL : The url to be checked
+     - Returns: True if the remoteURL is a valid URL and points to a Json file, false otherwise
+     */
+    internal func validateJsonRemoteURL(remoteURL: URL) -> Bool {
+        // Validate the given string to be a valid URL and of a json file
+        guard remoteURL.absoluteString.isValidURL,
+              remoteURL.absoluteString.hasSuffix("json") else {
+                  return false
+              }
+        return true
+    }
+    
+    
     internal func validConfiguration() -> Bool {
         // Check if the user filled the needed values first
-        if let nonNullLocalisationPath = localisationFilePath,
-            let nonNullLocale = localisationLocale {
-            
-            do {
-                // Check if the localisation file provided exists and readable
-                let data = try Data(contentsOf: nonNullLocalisationPath)
-                if let json:[String:Any] = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String : Any] {
-                    // Check if the JSON file has the stated locale
-                    if let _ = json[keyPath:KeyPath(nonNullLocale)] as? [String:Any] {
-                        return true
-                    }
-                }
-            } catch  {}
+        
+        // User provided a valid source to fetch json data from
+        if let nonNullLocalisationData = localisationData,
+           // The user provided a locale
+           let nonNullLocale = localisationLocale,
+           // The parsed localisation data has an entry for the selected locale
+           let _ = nonNullLocalisationData[keyPath:KeyPath(nonNullLocale)] as? [String:Any] {
+            return true
         }
         return false
     }
 }
 
 
+/// An enum to define the source of the provided custom localisation file whether local or remote based
+@objc public enum TapLocalisationType : Int {
+    /// The custom localisation file is an embedded json file
+    case LocalJsonFile
+    /// The custom localisation file is a remote  json file
+    case RemoteJsonFile
+}
+
+
+
+
+
+fileprivate extension String {
+    /// Decides if the given string is a valid URL format
+    var isValidURL: Bool {
+        // Define a charachter set that defines all availble charachters in a link
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+            // it is a link, if the match covers the whole string
+            return match.range.length == self.utf16.count && !self.isEmpty
+        } else {
+            return false
+        }
+    }
+}

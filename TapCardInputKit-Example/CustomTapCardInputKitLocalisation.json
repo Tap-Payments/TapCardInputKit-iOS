@@ -2,7 +2,7 @@
     "en": {
         "TapCardInputKit": {
             "cardNumberPlaceHolder": "Card number",
-            "cardNamePlaceHolder": "Holder name",
+            "cardNamePlaceHolder": "Card Holder name",
             "cardCVVPlaceHolder": "CVV",
             "cardExpiryPlaceHolder": "MM/YY",
             "cardSaveLabel": "For faster and more secure checkout,\nsave your card"

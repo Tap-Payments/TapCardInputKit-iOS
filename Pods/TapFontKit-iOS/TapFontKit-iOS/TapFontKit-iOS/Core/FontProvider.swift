@@ -7,7 +7,7 @@
 
 import CoreGraphics
 import func     CoreText.CTFontManager.CTFontManagerRegisterGraphicsFont
-import func     TapSwiftFixes.synchronized
+import func     TapSwiftFixesV2.synchronized
 import class    UIKit.UIFont.UIFont
 import Foundation
 

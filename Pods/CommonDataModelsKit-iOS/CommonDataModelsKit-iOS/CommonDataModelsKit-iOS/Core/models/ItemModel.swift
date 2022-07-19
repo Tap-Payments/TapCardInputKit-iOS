@@ -17,7 +17,7 @@ import Foundation
 @objcMembers public class ItemModel : NSObject, Codable {
     
     /// The title of the item
-    public let title : String?
+    public var title : String?
     /// A description of the item
     public let itemDescription : String?
     /// The raw original price in the original currency

@@ -251,10 +251,10 @@ internal protocol TapCardInputCommonProtocol {
     
     /**
      Decides if each field is a valid one or not
-     - Returns: tuble of (card number valid or not, card expiry valid or not, card cvv is valid or not)
+     - Returns: tuble of (card number valid or not, card expiry valid or not, card cvv is valid or not, card name is valid or not)
      */
-    public func fieldsValidationStatuses() -> (Bool,Bool,Bool) {
-        return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid())
+    public func fieldsValidationStatuses() -> (Bool,Bool,Bool, Bool) {
+        return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid(), (cardName.isValid() || showCardName))
     }
     
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -388,7 +388,7 @@ internal protocol TapCardInputCommonProtocol {
         }
         
         // Setup the card name field with the needed data and listeners
-        cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Holder Name", editingStatusChanged: { [weak self] (isEditing) in
+        cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Holder Name", editingStatusChanged: { [weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -397,6 +397,7 @@ internal protocol TapCardInputCommonProtocol {
             // If the card name changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
             self?.tapCard.tapCardName = cardName
             self?.cardDatachanged()
+            //self?.cardName.resignFirstResponder()
         })
         
         // Setup the card expiry field with the needed data and listeners
@@ -426,7 +427,14 @@ internal protocol TapCardInputCommonProtocol {
             self?.tapCard.tapCardCVV = cardCVV
             self?.cardDatachanged()
             if self?.cardCVV.isValid() ?? false {
-                self?.cardCVV.resignFirstResponder()
+                // Check if there is a name to collect
+                if self?.showCardName ?? false {
+                    // Then we need to move to filling the card name
+                    self?.cardName.becomeFirstResponder()
+                }else{
+                    // We finished collecting the names, let us hide the keyboard :)
+                    self?.cardCVV.resignFirstResponder()
+                }
             }
         })
         
@@ -774,7 +782,9 @@ extension TapCardInput:TapCardInputCommonProtocol {
         // Based on the card mode we choose which layout constraints we will apply
         switch cardInputMode {
         case .InlineCardInput:
-            setupInlineConstraints()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) { [weak self] in
+                self?.setupInlineConstraints()
+            }
         case .FullCardInput:
             setupFullConstraints()
         default:

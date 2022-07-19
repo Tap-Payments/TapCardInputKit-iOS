@@ -4,11 +4,11 @@
 //
 //  Copyright © 2018 Tap Payments. All rights reserved.
 //
-
 /// Card validator.
 public final class CardValidator {
     
     // MARK: - Public -
+    public static var favoriteCardBrand:CardBrandWithSchemes? = nil
     // MARK: Methods
     
     /// Validates card number.
@@ -47,9 +47,22 @@ public final class CardValidator {
             cardBrand = binRange.cardBrand
         }
         
+        // Make sure the card brand is known
         guard cardBrand != .unknown else { return DefinedCardBrand(.invalid, nil) }
         
-        if binRange.cardNumberLengths.contains(number.count) {
+        // Make sure if there is a forced brand to validate against, the fetched scheme is supported by the favortie brand
+        if let favoriteBrand:CardBrandWithSchemes = favoriteCardBrand {
+            // Make sure the selected whether it is the favorite brand or one of its supported schemes
+            guard favoriteBrand.allSupportedSchemes.contains(cardBrand) else { return DefinedCardBrand(.invalid, nil) }
+            if preferredBrands?.contains(favoriteBrand.cardBrand) ?? false {
+                cardBrand = favoriteBrand.cardBrand
+            }
+        }
+        
+        if number.count > binRange.cardNumberLengths.max()! {
+            
+            return DefinedCardBrand(.invalid, cardBrand)
+        }else if binRange.cardNumberLengths.contains(number.count) {
             
             // Based on the brand type, we decide which validating route we will take
             if cardBrand.brandSegmentIdentifier == "cards" {
@@ -60,19 +73,15 @@ public final class CardValidator {
                 }
                 else {
                     
-                    return DefinedCardBrand(.invalid, cardBrand)
+                    return DefinedCardBrand(.incomplete, cardBrand)
                 }
             }else if cardBrand.brandSegmentIdentifier == "telecom" {
                 // Telecom is considered valid if starts with the range and have the correct length
                 return DefinedCardBrand(.valid, cardBrand)
             }else{
                 // Default case
-                return DefinedCardBrand(.invalid, cardBrand)
+                return DefinedCardBrand(.incomplete, cardBrand)
             }
-        }
-        else if number.count > binRange.cardNumberLengths.max()! {
-            
-            return DefinedCardBrand(.invalid, cardBrand)
         }
         else {
             
@@ -199,7 +208,7 @@ public final class CardValidator {
             let odd = index % 2 == 1
             
             switch (odd, digit) {
-                
+            
             case (true, 9):
                 
                 sum += 9

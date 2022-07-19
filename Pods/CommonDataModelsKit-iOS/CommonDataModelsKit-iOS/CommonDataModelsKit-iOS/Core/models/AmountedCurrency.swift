@@ -12,16 +12,16 @@
     // MARK: Properties
     
     /// Currency.
-    public let currency: TapCurrencyCode
+    public var currency: TapCurrencyCode
     
     /// Amount.
-    public let amount: Double
+    public var amount: Double
     
     /// Currency symbol.
-    public let currencySymbol: String
+    public var currencySymbol: String
     
     /// Currency flag icon url.
-    public let flag: String
+    public var flag: String
     
     /// Conversion factor to transaction currency from baclend
     public var rate: Double?

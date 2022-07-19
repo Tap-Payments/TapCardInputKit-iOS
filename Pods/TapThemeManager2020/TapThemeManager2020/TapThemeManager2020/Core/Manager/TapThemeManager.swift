@@ -77,9 +77,79 @@ public extension TapThemeManager {
             print("TapThemeManager WARNING: Can't find json '\(jsonName)'")
             return
         }
-       
+        
         // All good, now change the theme :)
         self.setTapTheme(themeDict: jsonDict)
+    }
+    
+    
+    /**
+     - The method for setting a theme from a remote url pointing to a theme JSON file
+     - Parameter remoteURL: The URL to load the theme json file from
+     */
+    @objc class func setTapTheme(remoteURL: URL) {
+        // Validate the given string to be a valid URL and of a json file
+        guard validateJsonRemoteURL(remoteURL: remoteURL) else {
+            print("TapThemeManager WARNING: Can't find json from the url '\(remoteURL)'")
+            return
+        }
+        
+        // All good, now let us load the conent of the JSON file first
+        
+        // Check if the loading function did successed in loading a valid parsable json
+        guard let dictTheme = loadRemoteJsonTheme(remoteURL: remoteURL) else {
+            // Use the default
+            print("TapThemeManager WARNING: The json loaded from '\(remoteURL)' is not a valid parsable json text")
+            return
+        }
+        // Set the theme
+        self.setTapTheme(themeDict: dictTheme)
+    }
+    
+    /**
+     Decides if the given URL is a valid url and is pointing to a json file
+     - Parameter remoteURL : The url to be checked
+     - Returns: True if the remoteURL is a valid URL and points to a Json file, false otherwise
+     */
+    internal class func validateJsonRemoteURL(remoteURL: URL) -> Bool {
+        // Validate the given string to be a valid URL and of a json file
+        guard remoteURL.absoluteString.isValidURL,
+              remoteURL.absoluteString.hasSuffix("json") else {
+                  return false
+              }
+        return true
+    }
+    
+    /**
+     Loads the remote json and converts it into a theme dictionaty
+     - Parameter remoteURL : The url to fetch the json theme from
+     - Returns: A valid theme dictionary from the loaded json, will return NULL in any errors happens
+     */
+    internal class func loadRemoteJsonTheme(remoteURL:URL) -> NSDictionary? {
+        // Load the data first
+        
+        // Make it a sync call
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var result:NSMutableDictionary? = nil
+        
+        let task = URLSession.shared.dataTask(with: remoteURL) {(data, response, error) in
+            // Check the data is loaded properly, no errors, and the data is a parsable json format
+            if let nonNullData = data,
+               let nonNullJsonDictionary = try? JSONSerialization.jsonObject(with: nonNullData, options: .allowFragments) as? NSDictionary {
+                // All good
+                result = NSMutableDictionary.init(dictionary: nonNullJsonDictionary ?? [:])
+                semaphore.signal()
+            }else{
+                // Something happened
+                semaphore.signal()
+            }
+        }
+        
+        task.resume()
+        semaphore.wait()
+        
+        return result
     }
     
     /**
@@ -101,7 +171,7 @@ public extension TapThemeManager {
             let jsonDict = json as? NSDictionary else {
                 print("TapThemeManager WARNING: Can't read json '\(jsonName)' at: \(jsonPath)")
                 return nil
-        }
+            }
         return jsonDict
     }
     
@@ -117,10 +187,10 @@ public extension TapThemeManager {
     }
     
     /**
-    - The method is responsible for setting the global theme for the whole app.
-    - Parameter lightModeDictTheme: The dictionary of the the theme we need to apply in the Light display mode
-    - Parameter darkModeDictTheme: The dictionary of the the theme we need to apply in the dark display mode
-    */
+     - The method is responsible for setting the global theme for the whole app from the given dictionaty.
+     - Parameter lightModeDictTheme: The dictionary of the the theme we need to apply in the Light display mode
+     - Parameter darkModeDictTheme: The dictionary of the the theme we need to apply in the dark display mode
+     */
     @objc class func setDefaultTapTheme(lightModeDictTheme:NSDictionary,darkModeDictTheme:NSDictionary) {
         self.lightModeTheme = lightModeDictTheme
         self.darkModeTheme = darkModeDictTheme
@@ -128,20 +198,44 @@ public extension TapThemeManager {
     }
     
     /**
-    - The method is responsible for setting the global theme for the whole app.
-    - Parameter lightModeJSONTheme: The json file of the the theme we need to apply in the Light display mode
-    - Parameter darkModeJSONTheme: The json file of the the theme we need to apply in the dark display mode
-    - Parameter bundle:   The bundle that we will search for the json file in. Default is the main bundle
-    */
+     - The method is responsible for setting the global theme for the whole app from a locally embedded json files.
+     - Parameter lightModeJSONTheme: The json file of the the theme we need to apply in the Light display mode
+     - Parameter darkModeJSONTheme: The json file of the the theme we need to apply in the dark display mode
+     - Parameter bundle:   The bundle that we will search for the json file in. Default is the main bundle
+     */
     @objc class func setDefaultTapTheme(lightModeJSONTheme:String,darkModeJSONTheme:String,in bundle:Bundle = Bundle.main) {
         // Check if the file exists
         guard let lightJSONDict = loadThemeDict(from: lightModeJSONTheme, in: bundle),
               let darkJSONDict = loadThemeDict(from: darkModeJSONTheme, in: bundle) else {
-                print("TapThemeManager WARNING: Can't find json files '\(lightModeJSONTheme)' and '\(darkModeJSONTheme)'")
-                // As a fallback we set the default theme
-                setDefaultTapTheme()
-                return
-        }
+                  print("TapThemeManager WARNING: Can't find json files '\(lightModeJSONTheme)' and '\(darkModeJSONTheme)'")
+                  // As a fallback we set the default theme
+                  setDefaultTapTheme()
+                  return
+              }
+        
+        self.lightModeTheme = lightJSONDict
+        self.darkModeTheme = darkJSONDict
+        applyThemeBasedOnDisplayMode()
+    }
+    
+    
+    /**
+     - The method is responsible for setting the global theme for the whole app from given remote files.
+     - Parameter lightModeURLTheme: The remote json file of the the theme we need to apply in the Light display mode
+     - Parameter darkModeURLTheme: The remote json file of the the theme we need to apply in the dark display mode
+     - Parameter bundle:   The bundle that we will search for the json file in. Default is the main bundle
+     */
+    @objc class func setDefaultTapTheme(lightModeURLTheme:URL?,darkModeURLTheme:URL?) {
+        // Check if the file exists
+        guard let nonNullLightModeURLTheme = lightModeURLTheme,
+              let nonNullDarkModeURLTheme = darkModeURLTheme,
+              let lightJSONDict = loadRemoteJsonTheme(remoteURL: nonNullLightModeURLTheme),
+              let darkJSONDict  = loadRemoteJsonTheme(remoteURL: nonNullDarkModeURLTheme) else {
+                  print("TapThemeManager WARNING: Can't find remote json files '\(lightModeURLTheme?.absoluteString ?? "")' and '\(darkModeURLTheme?.absoluteString ?? "")'")
+                  // As a fallback we set the default theme
+                  setDefaultTapTheme()
+                  return
+              }
         
         self.lightModeTheme = lightJSONDict
         self.darkModeTheme = darkJSONDict
@@ -152,11 +246,11 @@ public extension TapThemeManager {
     internal class func applyThemeBasedOnDisplayMode() {
         // Make sure all theme objects are given and set
         guard let lightJSONDict = self.lightModeTheme,
-        let darkJSONDict = self.darkModeTheme else {
-            // Fallback to use the default theme
-           setDefaultTapTheme()
-           return
-        }
+              let darkJSONDict = self.darkModeTheme else {
+                  // Fallback to use the default theme
+                  setDefaultTapTheme()
+                  return
+              }
         
         // We decide which theme object to user based on the current userInterfaceStyle
         if #available(iOS 12.0, *) {
@@ -188,4 +282,19 @@ public extension TapThemeManager {
         applyThemeBasedOnDisplayMode()
     }
     
+}
+
+
+fileprivate extension String {
+    /// Decides if the given string is a valid URL format
+    var isValidURL: Bool {
+        // Define a charachter set that defines all availble charachters in a link
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+            // it is a link, if the match covers the whole string
+            return match.range.length == self.utf16.count && !self.isEmpty
+        } else {
+            return false
+        }
+    }
 }

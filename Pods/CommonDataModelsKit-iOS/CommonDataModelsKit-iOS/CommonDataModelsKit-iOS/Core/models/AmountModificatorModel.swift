@@ -17,7 +17,7 @@ import Foundation
 @objc open class AmountModificatorModel : NSObject, Codable {
     
     /// The type of the applied discount whether fixed or percentage
-    let type : AmountModificationType?
+    public let type : AmountModificationType?
     /// The value of the discount itself
     public let value : Double?
     /// The minimum fees allowed for this extra fees.

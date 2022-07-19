@@ -9,23 +9,23 @@
 import Foundation
 /** Represents the model for parsing the phone object coming from Tap backend
  {
-    "phone": {
-        "country_code": "965",
-        "number": "00000000"
-    }
+ "phone": {
+ "country_code": "965",
+ "number": "00000000"
+ }
  }
  - tag: TapPhone
  */
 @objc public class TapPhone : NSObject,Codable {
-  
+    
     // MARK: - Public -
     // MARK: Properties
     
     /// ISD number.
-    let isdNumber: String
+    public let isdNumber: String
     
     /// Phone number (digits after country code).
-    let phoneNumber: String
+    public let phoneNumber: String
     
     // MARK: Methods
     

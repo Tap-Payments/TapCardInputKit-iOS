@@ -22,6 +22,8 @@ import Foundation
     case ApplePay = 5
     /// Only device payments. (e.g. Apple pay)
     case Device = 6
+    /// If the user is paying with a saved card
+    case SavedCard = 7
     
     public init(stringValue:String) {
         switch stringValue.lowercased() {
@@ -35,6 +37,8 @@ import Foundation
             self = .ApplePay
         case "device":
             self = .Device
+        case "saved_card":
+            self = .SavedCard
         default:
             self = .All
         }
@@ -59,6 +63,8 @@ import Foundation
             return "apple_pay"
         case .Device:
             return "device"
+        case .SavedCard:
+            return "saved_card"
         default:
             return "all"
         }

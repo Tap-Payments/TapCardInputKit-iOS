@@ -134,18 +134,17 @@ internal final class CardBINRange {
     
     private static let allRanges = [
         
-        CardBINRange(lowRange: "34"    , highRange: "34"    , lengths: [15]                            , brand: .americanExpress, cardNumberSpaces:[4,6,5]),
-        CardBINRange(lowRange: "37"    , highRange: "37"    , lengths: [15]                            , brand: .americanExpress, cardNumberSpaces:[4,6,5]),
+        CardBINRange(lowRange: "34"    , highRange: "34"    , lengths: [15]                            , brand: .americanExpress),
+        CardBINRange(lowRange: "37"    , highRange: "37"    , lengths: [15]                            , brand: .americanExpress),
         
-        CardBINRange(lowRange: "62"    , highRange: "62"    , lengths: [16, 17, 18]                     , brand: .unionPay),
-        CardBINRange(lowRange: "62"    , highRange: "62"    , lengths: [19]                             , brand: .unionPay, cardNumberSpaces:[3,16]),
+        CardBINRange(lowRange: "62"    , highRange: "62"    , lengths: [16, 17, 18, 19]                , brand: .unionPay),
         
-        CardBINRange(lowRange: "2014"  , highRange: "2014"  , lengths: [15]                            , brand: .dinersClub, cardNumberSpaces:[4,7,4]),
-        CardBINRange(lowRange: "2149"  , highRange: "2149"  , lengths: [15]                            , brand: .dinersClub, cardNumberSpaces:[4,7,4]),
-        CardBINRange(lowRange: "300"   , highRange: "305"   , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
-        CardBINRange(lowRange: "3095"  , highRange: "3095"  , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
-        CardBINRange(lowRange: "36"    , highRange: "36"    , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
-        CardBINRange(lowRange: "38"    , highRange: "39"    , lengths: [14]                            , brand: .dinersClub, cardNumberSpaces:[4,6,4]),
+        CardBINRange(lowRange: "2014"  , highRange: "2014"  , lengths: [15]                            , brand: .dinersClub),
+        CardBINRange(lowRange: "2149"  , highRange: "2149"  , lengths: [15]                            , brand: .dinersClub),
+        CardBINRange(lowRange: "300"   , highRange: "305"   , lengths: [14]                            , brand: .dinersClub),
+        CardBINRange(lowRange: "3095"  , highRange: "3095"  , lengths: [14]                            , brand: .dinersClub),
+        CardBINRange(lowRange: "36"    , highRange: "36"    , lengths: [14]                            , brand: .dinersClub),
+        CardBINRange(lowRange: "38"    , highRange: "39"    , lengths: [14]                            , brand: .dinersClub),
         CardBINRange(lowRange: "54"    , highRange: "55"    , lengths: [16]                            , brand: .dinersClub),
         
         CardBINRange(lowRange: "60110" , highRange: "60110" , lengths: [16]                            , brand: .discover),
@@ -153,8 +152,7 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "601174", highRange: "601174", lengths: [16]                            , brand: .discover),
         CardBINRange(lowRange: "601177", highRange: "601179", lengths: [16]                            , brand: .discover),
         CardBINRange(lowRange: "601186", highRange: "601199", lengths: [16]                            , brand: .discover),
-        CardBINRange(lowRange: "622126", highRange: "622925", lengths: [16]                            , brand: .discover),
-        CardBINRange(lowRange: "622126", highRange: "622925", lengths: [19]                            , brand: .discover, cardNumberSpaces:[4,4,4,7]),
+        CardBINRange(lowRange: "622126", highRange: "622925", lengths: [16, 19]                        , brand: .discover),
         CardBINRange(lowRange: "644"   , highRange: "659"   , lengths: [16]                            , brand: .discover),
         
         CardBINRange(lowRange: "636"   , highRange: "636"   , lengths: [16, 17, 18, 19]                , brand: .interPayment),
@@ -165,18 +163,9 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "2131"  , highRange: "2131"  , lengths: [16, 17, 18, 19]                , brand: .jcb),
         CardBINRange(lowRange: "3528"  , highRange: "3589"  , lengths: [16, 17, 18, 19]                , brand: .jcb),
         
-        CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [12, 14, 16, 17, 18]            , brand: .maestro),
-        CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [13]                            , brand: .maestro, cardNumberSpaces:[4,4,5]),
-        CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [15]                            , brand: .maestro, cardNumberSpaces:[4,6,5]),
-        CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [19]                            , brand: .maestro, cardNumberSpaces:[4,4,4,4,3]),
-        CardBINRange(lowRange: "56"    , highRange: "64"    , lengths: [12, 14, 16, 17, 18], brand: .maestro),
-        CardBINRange(lowRange: "56"    , highRange: "64"    , lengths: [13]                            , brand: .maestro, cardNumberSpaces:[4,4,5]),
-        CardBINRange(lowRange: "56"    , highRange: "64"    , lengths: [15]                            , brand: .maestro, cardNumberSpaces:[4,6,5]),
-        CardBINRange(lowRange: "56"    , highRange: "64"    , lengths: [19]                            , brand: .maestro, cardNumberSpaces:[4,4,4,4,3]),
-        CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [12, 14, 16, 17, 18], brand: .maestro),
-        CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [13]                            , brand: .maestro, cardNumberSpaces:[4,4,5]),
-        CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [15]                            , brand: .maestro, cardNumberSpaces:[4,6,5]),
-        CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [19]                            , brand: .maestro, cardNumberSpaces:[4,4,4,4,3]),
+        CardBINRange(lowRange: "50"    , highRange: "50"    , lengths: [12, 13, 14, 15, 16, 17, 18, 19], brand: .masterCard),
+        CardBINRange(lowRange: "56"    , highRange: "64"    , lengths: [12, 13, 14, 15, 16, 17, 18, 19], brand: .masterCard),
+        CardBINRange(lowRange: "66"    , highRange: "69"    , lengths: [12, 13, 14, 15, 16, 17, 18, 19], brand: .masterCard),
         
         CardBINRange(lowRange: "5019"  , highRange: "5019"  , lengths: [16]                            , brand: .dankort),
         CardBINRange(lowRange: "4175"  , highRange: "4175"  , lengths: [16]                            , brand: .dankort),
@@ -212,15 +201,7 @@ internal final class CardBINRange {
         CardBINRange(lowRange: "506099", highRange: "506198", lengths: [16, 19]                        , brand: .verve),
         CardBINRange(lowRange: "650002", highRange: "650027", lengths: [16, 19]                        , brand: .verve),
         
-        CardBINRange(lowRange: "5392"  , highRange: "5392"  , lengths: [16]                            , brand: .cardGuard),
-        
-        CardBINRange(lowRange: "9"  , highRange: "9"  , lengths: [8]                                   , brand: .zain),
-        CardBINRange(lowRange: "5"  , highRange: "5"  , lengths: [8]                                   , brand: .viva),
-        CardBINRange(lowRange: "6"  , highRange: "6"  , lengths: [8]                                   , brand: .wataniya),
-        
-        CardBINRange(lowRange: "12"  , highRange: "12"  , lengths: [9]                                   , brand: .orange),
-        CardBINRange(lowRange: "15"  , highRange: "15"  , lengths: [9]                                   , brand: .etisalat),
-        CardBINRange(lowRange: "10"  , highRange: "10"  , lengths: [9]                                   , brand: .vodafone)
+        CardBINRange(lowRange: "5392"  , highRange: "5392"  , lengths: [16]                            , brand: .cardGuard)
     ]
     
     private static let generalRange = CardBINRange(lowRange: Constants.emptyString, highRange: Constants.emptyString, lengths: [16], brand: .unknown)

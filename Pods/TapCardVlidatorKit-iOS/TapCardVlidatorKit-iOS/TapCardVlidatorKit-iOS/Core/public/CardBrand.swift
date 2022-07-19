@@ -4,7 +4,6 @@
 //
 //  Copyright © 2018 Tap Payments. All rights reserved.
 //
-
 /// Card Brand.
 import Foundation
 
@@ -13,6 +12,7 @@ import Foundation
     case aiywaLoyalty
     case americanExpress
     case benefit
+    case careemPay
     case cardGuard
     case cbk
     case dankort
@@ -42,6 +42,7 @@ import Foundation
     case orange
     case etisalat
     case vodafone
+    case meeza
     
     case unknown
     
@@ -54,6 +55,7 @@ import Foundation
             .aiywaLoyalty       : RawValues.aiywaLoyalty,
             .americanExpress    : RawValues.americanExpress,
             .benefit            : RawValues.benefit,
+            .careemPay          : RawValues.careemPay,
             .cardGuard          : RawValues.cardGuard,
             .cbk                : RawValues.cbk,
             .dankort            : RawValues.dankort,
@@ -76,18 +78,20 @@ import Foundation
             .unionPay           : RawValues.unionPay,
             .verve              : RawValues.verve,
             .visa               : RawValues.visa,
-            .visaElectron        : RawValues.visaElectron,
+            .visaElectron       : RawValues.visaElectron,
             .viva               : RawValues.viva,
             .wataniya           : RawValues.wataniya,
             .zain               : RawValues.zain,
             .orange             : RawValues.orange,
             .etisalat           : RawValues.etisalat,
-            .vodafone           : RawValues.vodafone
+            .vodafone           : RawValues.vodafone,
+            .meeza              : RawValues.meeza
         ]
         
         private static let aiywaLoyalty     = ["Aiywa Loyalty"]
         private static let americanExpress  = ["AMERICAN_EXPRESS", "AMEX"]
         private static let benefit          = ["BENEFIT"]
+        private static let careemPay        = ["Careem Pay"]
         private static let cardGuard        = ["CARDGUARD"]
         private static let cbk              = ["CBK"]
         private static let dankort          = ["DANKORT"]
@@ -103,20 +107,21 @@ import Foundation
         private static let masterCard       = ["MASTERCARD"]
         private static let naps             = ["NAPS"]
         private static let nspkMir          = ["NSPK"]
-        private static let omanNet          = ["OMAN_NET"]
+        private static let omanNet          = ["OMAN_NET","OMANNET"]
         private static let sadad            = ["SADAD_ACCOUNT"]
         private static let tap              = ["TAP"]
         private static let uatp             = ["UATP"]
         private static let unionPay         = ["UNION_PAY", "UNIONPAY"]
         private static let verve            = ["VERVE"]
         private static let visa             = ["VISA"]
-        private static let visaElectron        = ["VISA_ELECTRON"]
+        private static let visaElectron     = ["VISA_ELECTRON"]
         private static let viva             = ["Viva PAY"]
         private static let wataniya         = ["Wataniya PAY"]
         private static let zain             = ["Zain PAY"]
         private static let orange           = ["ORANGE PAY"]
         private static let etisalat         = ["ETISALAT PAY"]
         private static let vodafone         = ["VODAFONE PAY"]
+        private static let meeza            = ["MEEZA"]
         
         @available(*, unavailable) private init() {}
     }
