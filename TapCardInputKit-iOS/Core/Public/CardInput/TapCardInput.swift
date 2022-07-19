@@ -254,7 +254,7 @@ internal protocol TapCardInputCommonProtocol {
      - Returns: tuble of (card number valid or not, card expiry valid or not, card cvv is valid or not, card name is valid or not)
      */
     public func fieldsValidationStatuses() -> (Bool,Bool,Bool, Bool) {
-        return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid(), (cardName.isValid() || showCardName))
+        return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid(), showCardName ? cardName.isValid() : true)
     }
     
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
