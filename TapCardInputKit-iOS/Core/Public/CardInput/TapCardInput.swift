@@ -128,7 +128,11 @@ internal protocol TapCardInputCommonProtocol {
     /// States if the parent controller wants to show save card option, only works wth full mode
     @objc public lazy var showSaveCardOption:Bool = false
     /// States if the parent controller wants to show a scanning option or not
-    @objc public lazy var showScanningOption:Bool = true
+    @objc public lazy var showScanningOption:Bool = true {
+        didSet{
+            adjustScanButton()
+        }
+    }
     /// States if the parent controller wants to show a card brand icon or not
     @objc public lazy var showCardBrandIcon:Bool = false
     /// The delegate that wants to hear from the view on new data and events
@@ -594,9 +598,11 @@ internal protocol TapCardInputCommonProtocol {
         if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
             self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).clearImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
+            self.scanButton.isHidden = false
         }else {
             self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
             self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
+            self.scanButton.isHidden = !self.showScanningOption
         }
     }
 }
