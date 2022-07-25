@@ -2,7 +2,7 @@
     "en": {
         "TapCardInputKit": {
             "cardNumberPlaceHolder": "0000 0000 0000 0000",
-            "cardNamePlaceHolder": "Holder name",
+            "cardNamePlaceHolder": "Card holder name",
             "cardCVVPlaceHolder": "CVV",
             "cardExpiryPlaceHolder": "MM/YY",
             "cardSaveLabel": "For faster and more secure checkout,\nsave your card",
@@ -42,6 +42,7 @@
             {
                 "missingExpiryCVV": "Expiry date & CVV number are missing.",
                 "missingCVV": "CVV number is missing.",
+                "missingName": "Card name should be greater than 3 charachters",
             },
             "Error":
             {
@@ -168,7 +169,8 @@
             "Warning":
             {
                 "missingExpiryCVV": "تاريخ الإنتهاء و الرمز الأمني مطلوبين",
-                "missingCVV": "الرمز الأمني مطلوب"
+                "missingCVV": "الرمز الأمني مطلوب",
+                "missingName": "يجب إدخال ٣ أحرف على الاقل للإسم",
             },
             "Error":
             {

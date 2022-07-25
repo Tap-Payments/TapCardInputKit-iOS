@@ -14,6 +14,9 @@
     /// Currency.
     public var currency: TapCurrencyCode
     
+    /// The decimal digits.
+    public var decimalDigits: Int
+    
     /// Amount.
     public var amount: Double
     
@@ -28,16 +31,17 @@
     
     // MARK: Methods
     
-    @objc public convenience init(_ currency: TapCurrencyCode, _ amount: Double, _ flag: String) {
-        self.init(currency, amount, currency.symbolRawValue, flag)
+    @objc public convenience init(_ currency: TapCurrencyCode, _ amount: Double, _ flag: String, _ decimalDigits: Int = 2) {
+        self.init(currency, amount, currency.symbolRawValue, flag, decimalDigits)
     }
     
-    @objc public init(_ currency: TapCurrencyCode, _ amount: Double, _ currencySymbol: String, _ flag: String) {
+    @objc public init(_ currency: TapCurrencyCode, _ amount: Double, _ currencySymbol: String, _ flag: String, _ decimalDigits: Int = 2) {
         
         self.currency       = currency
         self.amount         = amount
         self.currencySymbol = currencySymbol
-        self.flag = flag
+        self.flag           = flag
+        self.decimalDigits  = decimalDigits
     }
     
     // MARK: - Private -
@@ -49,6 +53,7 @@
         case currencySymbol = "symbol"
         case rate           = "rate"
         case flag           = "flag"
+        case decimalDigits  = "decimal_digit"
     }
     
     public override func isEqual(_ object: Any?) -> Bool {

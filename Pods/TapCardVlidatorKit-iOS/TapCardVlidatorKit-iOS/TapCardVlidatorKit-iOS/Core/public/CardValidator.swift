@@ -62,6 +62,11 @@ public final class CardValidator {
         if number.count > binRange.cardNumberLengths.max()! {
             
             return DefinedCardBrand(.invalid, cardBrand)
+        }else if let preferredBrands = preferredBrands,
+                 preferredBrands.count > 0,
+                 !preferredBrands.contains(cardBrand) {
+            
+            return DefinedCardBrand(.invalid, cardBrand)
         }else if binRange.cardNumberLengths.contains(number.count) {
             
             // Based on the brand type, we decide which validating route we will take
@@ -208,7 +213,7 @@ public final class CardValidator {
             let odd = index % 2 == 1
             
             switch (odd, digit) {
-            
+                
             case (true, 9):
                 
                 sum += 9

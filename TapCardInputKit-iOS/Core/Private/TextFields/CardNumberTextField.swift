@@ -7,6 +7,8 @@
 //
 
 import TapCardVlidatorKit_iOS
+import LocalisationManagerKit_iOS
+import CommonDataModelsKit_iOS
 /// Represnts the card number text field
 class CardNumberTextField:TapCardTextField {
     
@@ -119,6 +121,38 @@ extension CardNumberTextField:CardInputTextFieldProtocol {
 
 extension CardNumberTextField:UITextFieldDelegate {
     
+    /// Adds a DONE button to the card number field so the user can hide the keyboard and see the rest of the fields in case of editing the valid card number
+    func addDoneButtonOnKeyboard()
+    {
+        // The default localisation file location
+        let defaultLocalisationFilePath:URL = TapCommonConstants.pathForDefaultLocalisation()
+        // Assign the localisation values
+        
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        let done: UIBarButtonItem = UIBarButtonItem(title: TapLocalisationManager.shared.localisedValue(for: "Common.done", with: defaultLocalisationFilePath), style: UIBarButtonItem.Style.done, target: self, action: #selector(doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.inputAccessoryView = doneToolbar
+        
+    }
+    
+    
+    /**button action generate following two way both are working great but use any one**/
+    @objc func doneButtonAction()
+    {
+        self.resignFirstResponder()
+    }
+    
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UIResponderStandardEditActions.paste(_:)) {
             return false
@@ -131,7 +165,7 @@ extension CardNumberTextField:UITextFieldDelegate {
         if let nonNullEditingBlock = editingStatusChanged {
             nonNullEditingBlock(true)
         }
-        
+        addDoneButtonOnKeyboard()
         print("Number # TRUE")
     }
     

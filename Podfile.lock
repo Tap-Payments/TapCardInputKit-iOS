@@ -1,6 +1,6 @@
 PODS:
   - Capable/Colors (1.1.4)
-  - CommonDataModelsKit-iOS (1.0.46):
+  - CommonDataModelsKit-iOS (1.0.49):
     - TapAdditionsKitV2
   - LocalisationManagerKit-iOS (1.0.3)
   - MOLH (1.4.3)
@@ -10,7 +10,7 @@ PODS:
   - SnapKit (5.6.0)
   - TapAdditionsKitV2 (0.0.8):
     - TapSwiftFixesV2
-  - TapCardVlidatorKit-iOS (1.0.15)
+  - TapCardVlidatorKit-iOS (1.0.16)
   - TapFontKit-iOS (0.0.9):
     - TapSwiftFixesV2
   - TapSwiftFixesV2 (1.0.0):
@@ -51,14 +51,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
-  CommonDataModelsKit-iOS: 3a5a59f3c133ba1eab328693a4dba5625239d63a
+  CommonDataModelsKit-iOS: f41f93e4a72212d14c67a1dbba990bb1719a48cd
   LocalisationManagerKit-iOS: a779efa4d2eeeed959c07c9d6fd6568df87089a3
   MOLH: e45827d200aeb1310641090fd8cd03ad2b42ae72
   Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
   SheetyColors: a0273d30ec5ee02536bb43960ba36d58619ae719
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   TapAdditionsKitV2: ba369802e9575c3475ce6d5af228cf60c68edfc9
-  TapCardVlidatorKit-iOS: 3cf41059e6496f02ca1c2a78a8cd000d3643cd13
+  TapCardVlidatorKit-iOS: c89d510445a159d9f6967923096115783dcd1cdb
   TapFontKit-iOS: 51ed2ddbe9f2b5ece1cc587ed45af9147e5c6fc1
   TapSwiftFixesV2: a8623a7273c6790b9754ec7e272e96fce7d3a800
   TapThemeManager2020: d27a89804a3e950eae889033dcf40fe3a2cde187
