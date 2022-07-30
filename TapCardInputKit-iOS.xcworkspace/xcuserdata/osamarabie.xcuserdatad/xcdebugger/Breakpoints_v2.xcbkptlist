@@ -3,4 +3,22 @@
    uuid = "69DB4252-F4FF-4F8F-B2BC-6BEC28E3EE19"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F68F303-7563-48D7-814C-AA7936059F22"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TapCardInputKit-iOS/Core/Private/TextFields/CardNameTextField.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "setup(with:maxVisibleChars:placeholder:editingStatusChanged:cardNameChanged:preloadCardHolderName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

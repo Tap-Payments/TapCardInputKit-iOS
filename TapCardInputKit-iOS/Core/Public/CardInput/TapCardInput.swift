@@ -34,32 +34,32 @@ internal protocol TapCardInputCommonProtocol {
      This method will be called whenever the card data in the form has changed. It is being called in a live manner
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
-    func cardDataChanged(tapCard:TapCard)
+    @objc func cardDataChanged(tapCard:TapCard)
     /**
      This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
      - Parameter cardBrand: The detected card brand
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
      */
-    func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
+    @objc func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
     /// This method will be called once the user clicks on Scan button
-    func scanCardClicked()
+    @objc func scanCardClicked()
     /**
      This method will be called whenever the user change the status of the save card option
      - Parameter enabled: Will be true if the switch is enabled and false otherwise
      */
-    func saveCardChanged(enabled:Bool)
+    @objc func saveCardChanged(enabled:Bool)
     /**
      This method will be called whenever any text change occures
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      */
-    func dataChanged(tapCard:TapCard)
+    @objc func dataChanged(tapCard:TapCard)
     
     /**
      This method will be called whenever the user tries to enter new digits inside the card number, then we need to the delegate to tell us if we can complete the card number.
      - Parameter with cardNumber: The card number after changes.
      - Returns: True if the entered card number till now less than 6 digits or the prefix matches the allowed types (credit or debit)
      */
-    func shouldAllowChange(with cardNumber:String) -> Bool
+    @objc func shouldAllowChange(with cardNumber:String) -> Bool
 }
 
 /// This represents the custom view for card input provided by Tap
@@ -108,6 +108,9 @@ internal protocol TapCardInputCommonProtocol {
     internal var tapCard:TapCard = .init()
     /// Configure the localisation Manager
     internal let sharedLocalisationManager = TapLocalisationManager.shared
+    /// A preloading value for the card holder name if needed
+    internal var preloadCardHolderName:String = ""
+    
     // Public
     /// This defines the mode required to show the card input view in whether Full or Inline
     @objc public var cardInputMode:CardInputMode = .FullCardInput {
@@ -162,12 +165,14 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter showCardBrandIcon: States if the parent controller wants to show a card brand icon or not
      - Parameter allowedCardBrands: States if the parent controller wants to allow set of cards only
      - Parameter cardIconUrl: States if the parent controller wants to show a card image instead of placeholder when valid
+     - Parameter preloadCardHolderName: A preloading value for the card holder name if needed
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil, preloadCardHolderName:String = "") {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
         self.showCardBrandIcon = showCardBrandIcon
+        self.preloadCardHolderName = preloadCardHolderName
         // After applying the theme, we need now to actually setup the views
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         self.cardIconUrl = cardIconUrl
@@ -402,7 +407,7 @@ internal protocol TapCardInputCommonProtocol {
             self?.tapCard.tapCardName = cardName
             self?.cardDatachanged()
             //self?.cardName.resignFirstResponder()
-        })
+        }, preloadCardHolderName: preloadCardHolderName)
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(with: 5, placeholder: "",editingStatusChanged: {[weak self] (isEditing) in

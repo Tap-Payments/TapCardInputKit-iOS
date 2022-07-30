@@ -24,8 +24,9 @@ class CardNameTextField:TapCardTextField {
     - Parameter placeholder: The placeholder to show in this field. Default is ""
     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
     - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
+    - Parameter preloadCardHolderName:  A preloading value for the card holder name if needed
     */
-    func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil, preloadCardHolderName:String = "") {
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
@@ -33,6 +34,8 @@ class CardNameTextField:TapCardTextField {
         self.keyboardType = .default
         // This indicates that this field should fill in the remaining width in the case of the inline mode
         self.fillBiggestAvailableSpace = false
+        // Set the initial value if a preloading value was passed
+        self.text = preloadCardHolderName
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign the observers and the blocks
