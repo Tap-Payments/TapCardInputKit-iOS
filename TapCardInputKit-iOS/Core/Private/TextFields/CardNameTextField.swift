@@ -18,15 +18,15 @@ class CardNameTextField:TapCardTextField {
     var cardNameChanged: ((String) -> ())? =  nil
     
     /**
-    Method that is used to setup the field by providing the needed info and the obersvers for the events
-    - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
-    - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
-    - Parameter placeholder: The placeholder to show in this field. Default is ""
-    - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
-    - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
-    - Parameter preloadCardHolderName:  A preloading value for the card holder name if needed
-    - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
-    */
+     Method that is used to setup the field by providing the needed info and the obersvers for the events
+     - Parameter minVisibleChars: Number of mimum charachters to be visible when the field is inactive, in Inline mode. Default is 4
+     - Parameter maxVisibleChars: Number of maximum charachters to be visible when the field is inactive, in Inline mode. Default is 16
+     - Parameter placeholder: The placeholder to show in this field. Default is ""
+     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
+     - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
+     - Parameter preloadCardHolderName:  A preloading value for the card holder name if needed
+     - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
+     */
     func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
@@ -35,8 +35,6 @@ class CardNameTextField:TapCardTextField {
         self.keyboardType = .default
         // This indicates that this field should fill in the remaining width in the case of the inline mode
         self.fillBiggestAvailableSpace = false
-        // Set the initial value if a preloading value was passed and if this value is value
-        self.text = validateCardName(with: preloadCardHolderName) == .Valid ? preloadCardHolderName : ""
         // Enable/Disable the field based on the caller desire
         self.isEnabled = editCardName
         // Set the place holder with the theme color
@@ -48,6 +46,10 @@ class CardNameTextField:TapCardTextField {
         self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         
         self.delegate = self
+        
+        // Set the initial value if a preloading value was passed and if this value is value
+        self.text = validateCardName(with: preloadCardHolderName) == .Valid ? preloadCardHolderName : ""
+        didChangeText(textField: self)
     }
     
     required init?(coder: NSCoder) {
@@ -70,8 +72,8 @@ extension CardNameTextField: CardInputTextFieldProtocol {
             return validateCardName(with: passedCardName)
         }else {
             return validateCardName(with: self.text)
-         }
-     }
+        }
+    }
     
     /**
      Applys the validation of a card name on the given string
@@ -87,17 +89,17 @@ extension CardNameTextField: CardInputTextFieldProtocol {
         }
         return .Invalid
     }
-     
-     func calculatedWidth() -> CGFloat {
-         // Calculate the width of the field based on it is active status, if it is activbe we calculaye the width needed to show the max visible charachters and if it is inactive we calculate width based on minimum visible characters
-         
-         return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
-     }
+    
+    func calculatedWidth() -> CGFloat {
+        // Calculate the width of the field based on it is active status, if it is activbe we calculaye the width needed to show the max visible charachters and if it is inactive we calculate width based on minimum visible characters
+        
+        return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: (self.isEditing) ? maxVisibleChars : minVisibleChars))
+    }
     
     func isValid(cardNumber:String? = nil) -> Bool {
         
         return textFieldStatus() == .Valid
-     }
+    }
 }
 
 extension CardNameTextField:UITextFieldDelegate {
@@ -116,9 +118,9 @@ extension CardNameTextField:UITextFieldDelegate {
         }
     }
     /**
-        This method does the logic required when a text change event is fired for the text field
-        - Parameter textField: The text field that has its text changed
-        */
+     This method does the logic required when a text change event is fired for the text field
+     - Parameter textField: The text field that has its text changed
+     */
     @objc func didChangeText(textField:UITextField) {
         if let nonNullBlock = cardNameChanged {
             // If the card name changed block is assigned, we need to fire this event
@@ -128,7 +130,7 @@ extension CardNameTextField:UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       // get the current text, or use an empty string if that failed
+        // get the current text, or use an empty string if that failed
         let currentText = textField.text ?? ""
         // attempt to read the range they are trying to change, or exit if we can't
         guard let stringRange = Range(range, in: currentText) else { return false }

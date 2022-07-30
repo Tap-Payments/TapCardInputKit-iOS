@@ -412,7 +412,7 @@ internal protocol TapCardInputCommonProtocol {
             self?.cardDatachanged()
             //self?.cardName.resignFirstResponder()
         }, preloadCardHolderName: preloadCardHolderName,
-        editCardName: editCardName)
+                       editCardName: editCardName)
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(with: 5, placeholder: "",editingStatusChanged: {[weak self] (isEditing) in
