@@ -34,8 +34,8 @@ class CardNameTextField:TapCardTextField {
         self.keyboardType = .default
         // This indicates that this field should fill in the remaining width in the case of the inline mode
         self.fillBiggestAvailableSpace = false
-        // Set the initial value if a preloading value was passed
-        self.text = preloadCardHolderName
+        // Set the initial value if a preloading value was passed and if this value is value
+        self.text = validateCardName(with: preloadCardHolderName) == .Valid ? preloadCardHolderName : ""
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign the observers and the blocks
@@ -61,14 +61,29 @@ class CardNameTextField:TapCardTextField {
 extension CardNameTextField: CardInputTextFieldProtocol {
     
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
-         if let text = self.text {
-            // Make sure it is valid where there is a text and the text contains only alphabets
-            if text.alphabetOnly() == text.lowercased() && (text.count > 2 && text.count <= 26) {
-                 return .Valid
-             }
+        // Check if the caller wants to validate the given string first
+        if let passedCardName = cardNumber,
+           !passedCardName.isEmpty {
+            return validateCardName(with: passedCardName)
+        }else {
+            return validateCardName(with: self.text)
          }
-         return .Invalid
      }
+    
+    /**
+     Applys the validation of a card name on the given string
+     - Parameter passedCardName: The value you want to validate against being a card holder name
+     */
+    internal func validateCardName(with passedCardName:String?) -> CrardInputTextFieldStatusEnum {
+        if let passedCardName = passedCardName,
+           !passedCardName.isEmpty {
+            // Make sure it is valid where there is a text and the text contains only alphabets
+            if passedCardName.alphabetOnly() == passedCardName.lowercased() && (passedCardName.count > 2 && passedCardName.count <= 26) {
+                return .Valid
+            }
+        }
+        return .Invalid
+    }
      
      func calculatedWidth() -> CGFloat {
          // Calculate the width of the field based on it is active status, if it is activbe we calculaye the width needed to show the max visible charachters and if it is inactive we calculate width based on minimum visible characters
