@@ -411,7 +411,8 @@ internal protocol TapCardInputCommonProtocol {
             self?.tapCard.tapCardName = cardName
             self?.cardDatachanged()
             //self?.cardName.resignFirstResponder()
-        }, preloadCardHolderName: preloadCardHolderName)
+        }, preloadCardHolderName: preloadCardHolderName,
+        editCardName: editCardName)
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(with: 5, placeholder: "",editingStatusChanged: {[weak self] (isEditing) in
@@ -563,6 +564,7 @@ internal protocol TapCardInputCommonProtocol {
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.cardCVV.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
             self?.cardExpiry.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
+            self?.cardName.alpha = (self?.showCardName ?? false) ? ((self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1) : 0
         })
     }
     
@@ -588,11 +590,18 @@ internal protocol TapCardInputCommonProtocol {
         tapCard.tapCardNumber = nil
         tapCard.tapCardExpiryYear = nil
         tapCard.tapCardExpiryMonth = nil
-        tapCard.tapCardName = nil
+        // Only name text field will keep its value if the caller disabled the editing ability and provided a card holder name
+        if editCardName {
+            tapCard.tapCardName = nil
+        }
         
+        // Reset the text in all textfields
         fields.forEach{
-            $0.text = ""
-            updateWidths(for: $0)
+            // Only name text field will keep its value if the caller disabled the editing ability and provided a card holder name
+            if $0 != cardName || editCardName {
+                $0.text = ""
+                updateWidths(for: $0)
+            }
             $0.resignFirstResponder()
         }
         cardDatachanged()
