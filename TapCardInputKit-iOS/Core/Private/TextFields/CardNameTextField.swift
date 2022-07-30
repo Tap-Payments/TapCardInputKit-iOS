@@ -25,8 +25,9 @@ class CardNameTextField:TapCardTextField {
     - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
     - Parameter cardNameChanged: Observer to listen to the event when a the card name is changed by user input till the moment
     - Parameter preloadCardHolderName:  A preloading value for the card holder name if needed
+    - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
     */
-    func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil, preloadCardHolderName:String = "") {
+    func setup(with minVisibleChars: Int = 16, maxVisibleChars: Int = 16, placeholder:String = "",editingStatusChanged: ((Bool) -> ())? = nil, cardNameChanged: ((String) -> ())? =  nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
         // Assign and save the passed attributes
         self.minVisibleChars = minVisibleChars
         self.maxVisibleChars = maxVisibleChars
@@ -36,6 +37,8 @@ class CardNameTextField:TapCardTextField {
         self.fillBiggestAvailableSpace = false
         // Set the initial value if a preloading value was passed and if this value is value
         self.text = validateCardName(with: preloadCardHolderName) == .Valid ? preloadCardHolderName : ""
+        // Enable/Disable the field based on the caller desire
+        self.isEnabled = editCardName
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign the observers and the blocks

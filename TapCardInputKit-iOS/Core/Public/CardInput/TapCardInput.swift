@@ -110,6 +110,8 @@ internal protocol TapCardInputCommonProtocol {
     internal let sharedLocalisationManager = TapLocalisationManager.shared
     /// A preloading value for the card holder name if needed
     internal var preloadCardHolderName:String = ""
+    /// Indicates whether or not the user can edit the card holder name field. Default is true
+    internal var editCardName:Bool = true
     
     // Public
     /// This defines the mode required to show the card input view in whether Full or Inline
@@ -165,14 +167,16 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter showCardBrandIcon: States if the parent controller wants to show a card brand icon or not
      - Parameter allowedCardBrands: States if the parent controller wants to allow set of cards only
      - Parameter cardIconUrl: States if the parent controller wants to show a card image instead of placeholder when valid
-     - Parameter preloadCardHolderName: A preloading value for the card holder name if needed
+     - Parameter preloadCardHolderName: A preloading value for the card holder name if needed. Default is none
+     - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil, preloadCardHolderName:String = "") {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
         self.showCardBrandIcon = showCardBrandIcon
         self.preloadCardHolderName = preloadCardHolderName
+        self.editCardName = editCardName
         // After applying the theme, we need now to actually setup the views
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         self.cardIconUrl = cardIconUrl

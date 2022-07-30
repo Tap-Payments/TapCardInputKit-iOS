@@ -51,7 +51,7 @@ class ExampleCardInputViewController: UIViewController {
         
         let cardBrands:[Int] = CardBrand.allCases.map{ $0.rawValue }
         
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),showCardName:true, showCardBrandIcon: true, allowedCardBrands: cardBrands, preloadCardHolderName: "OSAMA AHMED HELMY")
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),showCardName:true, showCardBrandIcon: true, allowedCardBrands: cardBrands, preloadCardHolderName: "OSAMA AHMED HELMY",editCardName: false)
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
