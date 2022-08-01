@@ -247,6 +247,27 @@ extension CardNumberTextField:UITextFieldDelegate {
         return shouldUpdate
     }
     
+    /// Call this method to revalidate and detect the brand. It will call the callback of brand detected if was set before
+    internal func reValidate(tapCardNumber:String?) {
+        // Make sure we do have a text to validate
+        // In card number we only allow digits and spaces. The spaces will come from the formatting we are applying
+        guard let filteredText:String = tapCardNumber?.digitsWithSpaces(),
+              !filteredText.isEmpty else { return }
+        
+        // Validae the state of the number by trimming all non numeric charachters
+        let validation = CardValidator.validate(cardNumber: filteredText.onlyDigits(),preferredBrands: allowedBrands.map{ CardBrand.init(rawValue: $0)! })
+        
+        
+        if let nonNullCardBrandBlock = cardBrandDetected {
+            // If there is a detected brand and the card brand deteced block is assigned, we need to fire this event
+            nonNullCardBrandBlock(validation.cardBrand)
+        }
+        
+        if let nonNullBlock = cardNumberChanged {
+            // If the card number changed block is assigned, we need to fire this event
+            nonNullBlock(filteredText.onlyDigits())
+        }
+    }
     
     internal func cardBrand(for cardNumber:String) -> (CardBrand?,CardValidationState) {
         // OSAA VALIDATE HERE
