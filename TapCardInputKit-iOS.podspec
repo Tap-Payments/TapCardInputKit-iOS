@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TapCardInputKit-iOS"
-  spec.version      = "1.0.31"
+  spec.version      = "1.0.32"
   spec.summary      = "Easy on the shelf card input view provided by TapCardInputKit-iOS."
 
   # This description is used to generate tags and improve search results.

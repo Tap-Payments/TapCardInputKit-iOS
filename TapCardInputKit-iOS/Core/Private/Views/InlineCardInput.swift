@@ -73,7 +73,7 @@ extension TapCardInput {
                 make.leading.equalTo(icon.snp.leading)
                 make.trailing.equalTo(cardCVV.snp.trailing)
                 make.height.equalToSuperview().dividedBy(2)
-                make.top.equalTo(icon.snp.bottom)
+                make.top.equalTo(icon.snp.bottom).offset(10)
                 //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
             }
         }
