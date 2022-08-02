@@ -146,7 +146,9 @@ extension CardExpiryTextField:UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // attempt to read the range they are trying to change, or exit if we can't
-        guard let currentText = textField.text as NSString? else {
+        // Also check it is only digits
+        guard let currentText = textField.text as NSString?,
+              string.onlyDigits() == string else {
             return false
         }
         // add the new text to the existing text
@@ -161,6 +163,8 @@ extension CardExpiryTextField:UITextFieldDelegate {
             return true
         } else if updatedText.count == 5 {
             // If the text is already has length of 5 MM/YY then e will not do anything, as it should be validated through the process until it reaches here
+            textField.text = updatedText
+            resignFirstResponder()
             return true
         } else if updatedText.count > 5 {
             // we will not allow entering more than 5 charachters MM/YY
@@ -185,7 +189,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
     internal func changeText(with month:String?, year:String?) -> Bool {
         
         if let nonNullMonth = formatMonthPart(with: month),
-            let nonNullYear = formatYearPart(with: year) {
+           let nonNullYear = formatYearPart(with: year) {
             // If the formatter accepted the given month and year, then e can assign those values to the field
             self.text = "\(nonNullMonth)/\(nonNullYear)"
         }
