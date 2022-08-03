@@ -52,10 +52,12 @@ import class CommonDataModelsKit_iOS.TapCommonConstants
     // Mark:- Init methods
     @objc public override init(frame: CGRect) {
         super.init(frame: frame)
+        
     }
     @objc public required init?(coder: NSCoder) {
         super.init(coder:coder)
         self.backgroundColor = .clear
+        semanticContentAttribute = TapLocalisationManager.shared.localisationLocale == "ar" ? .forceRightToLeft : .forceLeftToRight
     }
     
     

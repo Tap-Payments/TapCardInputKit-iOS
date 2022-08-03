@@ -22,6 +22,5 @@ target 'TapCardInputKit-iOS' do
   pod 'TapThemeManager2020'
   pod 'CommonDataModelsKit-iOS'
   pod 'LocalisationManagerKit-iOS'
-  pod 'MOLH'
   pod 'Nuke'
 end

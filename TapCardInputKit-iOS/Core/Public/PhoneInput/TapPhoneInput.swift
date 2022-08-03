@@ -70,6 +70,7 @@ import TapCardVlidatorKit_iOS
     @objc public required init?(coder: NSCoder) {
         super.init(coder:coder)
         self.backgroundColor = .clear
+        semanticContentAttribute = TapLocalisationManager.shared.localisationLocale == "ar" ? .forceRightToLeft : .forceLeftToRight
     }
     
     

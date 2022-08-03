@@ -11,8 +11,8 @@ import class CommonDataModelsKit_iOS.TapCard
 import class CommonDataModelsKit_iOS.TapCommonConstants
 import TapCardVlidatorKit_iOS
 import LocalisationManagerKit_iOS
-import MOLH
 import Nuke
+import UIKit
 
 /// Internal protocl for all card text fields to implement to consolidate the logic and make sure all needed logic is implemented
 internal protocol TapCardInputCommonProtocol {
@@ -63,7 +63,7 @@ internal protocol TapCardInputCommonProtocol {
 }
 
 /// This represents the custom view for card input provided by Tap
-@objc public class TapCardInput: MOLHView {
+@objc public class TapCardInput: UIView {
     
     // Internal
     
@@ -327,7 +327,7 @@ internal protocol TapCardInputCommonProtocol {
             }
             
             saveLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
-            MOLH.setLanguageTo(sharedLocalisationManager.localisationLocale ?? "en")
+            semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
         }
         
     }

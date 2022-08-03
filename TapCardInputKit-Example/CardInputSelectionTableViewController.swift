@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import TapThemeManager2020
 
 class CardInputSelectionTableViewController: UITableViewController {
@@ -19,7 +18,6 @@ class CardInputSelectionTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MOLH.setLanguageTo("en")
     }
 
     
