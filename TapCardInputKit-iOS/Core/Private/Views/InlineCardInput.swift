@@ -226,11 +226,16 @@ extension TapCardInput {
             
             guard let nonNullSelf = self else { return }
             // Determine whether we need to show the card cvv icon ot the original icon
-            if !(nonNullSelf.cardExpiry.isEditing || nonNullSelf.cardNumber.isEditing) && nonNullSelf.cardCVV.isEditing {
+            if !(nonNullSelf.cardExpiry.isEditing || nonNullSelf.cardNumber.isEditing || nonNullSelf.cardName.isEditing) && nonNullSelf.cardCVV.isEditing {
                 nonNullSelf.lastShownIcon = (nonNullSelf.icon.image != cvvPlaceHolder) ? nonNullSelf.icon.image : nonNullSelf.lastShownIcon
                 newImage = cvvPlaceHolder
             }else if let nonNullImage = nonNullSelf.lastShownIcon, nonNullSelf.lastShownIcon != nonNullSelf.icon.image {
-                newImage = nonNullImage
+                let (brand,_) = nonNullSelf.cardBrandWithStatus()
+                if let _ = nonNullSelf.shouldShowCardIcon(for: brand ?? .unknown) {
+                    newImage = nonNullImage
+                }else{
+                    newImage = TapThemeManager.imageValue(for: "\(nonNullSelf.themePath).iconImage.image",from: Bundle(for: type(of: nonNullSelf)))
+                }
             }
             
             // Perfom the icon change with flipping animation

@@ -148,8 +148,8 @@ internal protocol TapCardInputCommonProtocol {
             cardNumber.allowedBrands = allowedCardBrands
         }
     }
-    /// States if the parent controller wants to show a card image instead of placeholder when valid
-    @objc public var cardIconUrl:String?
+    /// Will be used to load the icons for the card brands, if it is configureed to show the detected brand upon changing the card number.
+    @objc public var cardsIconsUrls:[CardBrand.RawValue:String]?
     
     // Mark:- Init methods
     public override init(frame: CGRect) {
@@ -170,7 +170,7 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter preloadCardHolderName: A preloading value for the card holder name if needed. Default is none
      - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardIconUrl:String? = nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardsIconsUrls:[CardBrand.RawValue:String]? = nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
@@ -179,7 +179,7 @@ internal protocol TapCardInputCommonProtocol {
         self.editCardName = editCardName
         // After applying the theme, we need now to actually setup the views
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
-        self.cardIconUrl = cardIconUrl
+        self.cardsIconsUrls = cardsIconsUrls
         defer {
             self.allowedCardBrands = allowedCardBrands
         }
@@ -397,7 +397,6 @@ internal protocol TapCardInputCommonProtocol {
                     self?.cardExpiry.becomeFirstResponder()
                 }
             }
-            self?.handleOneBrandIcon(with: cardNumber)
         } shouldAllowChange: { [weak self] (updatedCardNumber) -> (Bool) in
             return self?.delegate?.shouldAllowChange(with: updatedCardNumber) ?? true
         }
@@ -457,24 +456,27 @@ internal protocol TapCardInputCommonProtocol {
         fields.forEach{ $0.textChanged = { [weak self] _ in self?.delegate?.dataChanged(tapCard: self!.tapCard) }}
         
         saveSwitch.addTarget(self, action: #selector(saveCardSwitchChanged), for: .valueChanged)
-        handleOneBrandIcon()
         localize()
     }
     
-    
-    internal func handleOneBrandIcon(with cardNumber:String = "") {
-        if let iconString:String = cardIconUrl, let iconURL:URL = URL(string: iconString) {
-            // Meaning, we have an icon to set, we check if it is not invalid we show the icon otherwise, the palceholder icon
-            let validationStatus = self.cardNumber.textFieldStatus(cardNumber: cardNumber)
-            if validationStatus == .Invalid && cardNumber != "" {
-                icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
-            }else {
-                let options = ImageLoadingOptions(
-                    transition: .fadeIn(duration: 0.2)
-                )
-                // Time to load the image iconf rom the given URL
-                Nuke.loadImage(with: iconURL,options:options, into: icon)
-            }
+    /// Decides which card icon should be displayed before the card number, whether the deteced brand logo, the placeholder or the CVV
+    /// - Parameter with cardBrand: The detected card brand we want to decide if we will show its logo or the palceholder
+    internal func handleOneBrandIcon(with cardBrand:CardBrand) {
+        // First make sure we are not in CVV mode
+        // As we are showing CVV placeholder while CVV is being editing
+        guard !cardCVV.isEditing else { return }
+        
+        // Now check if we can display a card brand icon or we will show the placeholder
+        if let iconURL:URL = shouldShowCardIcon(for: cardBrand) {
+            // Meaning we can display the icon for the detected brand
+            let options = ImageLoadingOptions(
+                transition: .fadeIn(duration: 0.2)
+            )
+            // Time to load the image iconf rom the given URL
+            Nuke.loadImage(with: iconURL,options:options, into: icon)
+        } else {
+            // No, let us show the placeholder then
+            icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
         }
     }
     
@@ -501,10 +503,7 @@ internal protocol TapCardInputCommonProtocol {
      */
     internal func cardBrandDetected(with brand:CardBrand?) {
         if let nonNullBrand = brand {
-            if showCardBrandIcon {
-                // Set the new icon based on the detected card brand
-                self.icon.image = UIImage(named: nonNullBrand.cardImageName(), in: Bundle(for: type(of: self)), compatibleWith: nil)
-            }
+            handleOneBrandIcon(with: nonNullBrand)
             // Update the cvv allowed length based on the detected card brand
             self.cardCVV.cvvLength = CardValidator.cvvLength(for: nonNullBrand)
             //let brandName:String = "\(nonNullBrand)"
@@ -520,6 +519,17 @@ internal protocol TapCardInputCommonProtocol {
             
             self.cardCVV.cvvLength = 3
         }
+    }
+    
+    
+    /// Decides if we can show the detected card icon or not. It sends back the URL if possible and nil otherwise
+    internal func shouldShowCardIcon(for detectedBrand:CardBrand) -> URL? {
+        guard showCardBrandIcon,
+              let cardsUrls = cardsIconsUrls,
+              let detectedBrandIconString:String = cardsUrls[detectedBrand.rawValue],
+              let detectedBrandIconURL:URL = URL(string: detectedBrandIconString) else { return nil }
+        
+        return detectedBrandIconURL
     }
     
     /// Method that glows or the dims the card input view based on the shadow theme provided and if any of the fields is active
@@ -559,6 +569,7 @@ internal protocol TapCardInputCommonProtocol {
             nonNullDelegate.cardDataChanged(tapCard: tapCard)
             let (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
             nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber))
+            handleOneBrandIcon(with: detectedBrand ?? .unknown)
         }
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         adjustExpiryCvv()

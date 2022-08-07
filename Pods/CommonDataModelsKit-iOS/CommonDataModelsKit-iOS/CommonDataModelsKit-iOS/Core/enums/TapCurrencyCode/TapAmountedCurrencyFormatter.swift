@@ -38,7 +38,7 @@ public protocol TapAmountedCurrencyFormatterProtocol {
     
     
     /// Indicates a space between currency code and amount or not. $ 100 or $100
-    @objc public var currencyCodeSpace: Bool = false
+    @objc public var currencyCodeSpace: Bool = true
     
     
     /// Set the locale to retrieve the currency from
@@ -283,7 +283,7 @@ extension TapAmountedCurrencyFormatter {
             // Then we check if the user set a custom code for this currency, we have to use it
             if let customCurrencySymbols:[Int:String] = TapAmountedCurrencyFormatter.customCurrencySymbols,
                let customCurrencySymbol:String = customCurrencySymbols[currency.rawValue] {
-                numberFormatter.currencySymbol = customCurrencySymbol
+                numberFormatter.currencySymbol = "\(customCurrencySymbol) "
             }
             // Not forced by the caller, hence we leave it to the default formatting for this currency as per Apple development.
             formattedValue = numberFormatter.string(from: validValue)

@@ -18,7 +18,8 @@ import Foundation
     @objc public var localisationLocale:String?
     /// An enum to define the source of the provided custom localisation file whether local or remote based
     @objc public var localisationType:TapLocalisationType = .LocalJsonFile
-    
+    /// Represents a direct provided JSON localisation data
+    @objc public var providedLocalisationData:[String:Any]?
     /// The localisation data whether fetched from a given local or remote localisation cusom json file
     internal var localisationData:[String:Any]? = nil
     
@@ -35,10 +36,14 @@ import Foundation
         var selectedLocale = localisationLocale ?? (Locale.current.languageCode ?? "en")
         // Check if the user configured the localisation file path and a locale
         if validConfiguration() {
-            // This means, the user provided a correct localisation file path and it has the provided locale
+            // This means, the user provided a correct localisation file path/Data and it has the provided locale
             selectedLocale = localisationLocale ?? "en"
-            // Now it is time to localise the value from the providede localisation file
-            if let localisedValueFromProvidedFile:String = localise(for: keyPath, with: selectedLocale, from: localisationFilePath!) {
+            // Now it is time to localise the value from the providede localisation file or the provided data
+            if localisationType == .DirectData {
+                if let localisedValueFromProvidedData:String = localise(for: keyPath, with: selectedLocale) {
+                    return localisedValueFromProvidedData
+                }
+            }else if let localisedValueFromProvidedFile:String = localise(for: keyPath, with: selectedLocale, from: localisationFilePath!) {
                 return localisedValueFromProvidedFile
             }
         }
@@ -64,18 +69,53 @@ import Foundation
     
     
     /**
-     Configures the localisation manager with custom localisation data
+     Configures the localisation manager with custom localisation data loading from file or from a provided localisation data
+     - Parameter filePath: The url to the file that contains the custom localisation data whether remote or a local path
+     - Parameter localistionData: Represents a direct provided JSON localisation data
+     - Parameter localisationType: Defines whether the passed file is a local or remote based one
+     - Returns: True if the file was located and has valid json format, false otherwise.
+     PS : If you path a file url then the type should be .LocalJsonFile OR .RemoteJsonFile.
+     */
+    @objc public func configureLocalisation(with filePath:URL?, or localistionData:[String:Any]?, from localisationType:TapLocalisationType) -> Bool {
+        // Let us make sure the user provided the correct combinations
+        if let filePath = filePath,
+           (localisationType == .RemoteJsonFile || localisationType == .LocalJsonFile){
+            // Provided a localisation file url
+            return configureLocalisationFromFile(with: filePath, from: localisationType)
+        }else if let localistionData = localistionData,
+                 localisationType == .DirectData {
+            // provided a direct localistion data
+            return configureLocalisationFromDirectData(with: localistionData)
+        }
+        return false
+    }
+    
+    /**
+     Configures the localisation manager with custom localisation data loading from file
      - Parameter filePath: The url to the file that contains the custom localisation data whether remote or a local path
      - Parameter localisationType: Defines whether the passed file is a local or remote based one
      - Returns: True if the file was located and has valid json format, false otherwise
      */
-    @objc public func configureLocalisation(with filePath:URL, from localisationType:TapLocalisationType) -> Bool {
+    internal func configureLocalisationFromFile(with filePath:URL, from localisationType:TapLocalisationType) -> Bool {
         switch localisationType {
         case .LocalJsonFile:
             return fetchLocalLocalisationData(with: filePath)
         case .RemoteJsonFile:
             return fetchRemoteLocalisationData(filePath: filePath)
+        default: return false
         }
+    }
+    
+    
+    /**
+     Configures the localisation manager with provided localistion data
+     - Parameter localistionData: Represents a direct provided JSON localisation data
+     - Returns: True if the file was located and has valid json format, false otherwise
+     */
+    internal func configureLocalisationFromDirectData(with localistionData:[String:Any]) -> Bool {
+        self.localisationData = localistionData
+        self.localisationType = .DirectData
+        return true
     }
     
     /**
@@ -164,6 +204,20 @@ import Foundation
     
     
     /**
+     Fetches the localised value from the parsed and saved data
+     - Parameter keyPath:  The keypath of the value you want inside the json localisation object. Exampe "tapCardInput.cardNumberPlaceholder"
+     - Parameter locale:   The locale you want the localiser to use
+     */
+    internal func localise(for keyPath:String, with locale:String) -> String? {
+        guard let localisationData = localisationData,
+              let localisedValue:String = localisationData[keyPath:KeyPath("\(locale).\(keyPath)")] as? String else {
+            return nil
+        }
+        return localisedValue
+    }
+    
+    
+    /**
      Decides if the given URL is a valid url and is pointing to a json file
      - Parameter remoteURL : The url to be checked
      - Returns: True if the remoteURL is a valid URL and points to a Json file, false otherwise
@@ -172,8 +226,8 @@ import Foundation
         // Validate the given string to be a valid URL and of a json file
         guard remoteURL.absoluteString.isValidURL,
               remoteURL.absoluteString.hasSuffix("json") else {
-                  return false
-              }
+            return false
+        }
         return true
     }
     
@@ -200,6 +254,8 @@ import Foundation
     case LocalJsonFile
     /// The custom localisation file is a remote  json file
     case RemoteJsonFile
+    /// The custom localisation data is provided directly to the localisation manager
+    case DirectData
 }
 
 

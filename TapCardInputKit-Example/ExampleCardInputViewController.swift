@@ -49,9 +49,14 @@ class ExampleCardInputViewController: UIViewController {
         
         cardInput.delegate = self
         
-        let cardBrands:[Int] = CardBrand.allCases.map{ $0.rawValue }
+        let cardBrands:[Int] = [CardBrand.visa.rawValue,CardBrand.masterCard.rawValue,CardBrand.americanExpress.rawValue]//CardBrand.allCases.map{ $0.rawValue }
         
-        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),showCardName:true, showCardBrandIcon: true, allowedCardBrands: cardBrands, preloadCardHolderName: "OSAMA AHMED HELMY",editCardName: false)
+        cardInput.setup(for: (isInline ? .InlineCardInput : .FullCardInput),showCardName:true, showCardBrandIcon: true, allowedCardBrands: cardBrands, cardsIconsUrls: [CardBrand.visa.rawValue:"https://back-end.b-cdn.net//payment_methods//visa.png", CardBrand.masterCard.rawValue:"https://back-end.b-cdn.net//payment_methods//mastercard.png", CardBrand.americanExpress.rawValue:"https://back-end.b-cdn.net//payment_methods//american_express.png"], preloadCardHolderName: "OSAMA AHMED HELMY",editCardName: false)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+            self?.cardInput.setCardData(tapCard: .init(tapCardNumber: "4242424242424242",tapCardExpiryMonth: "12",tapCardExpiryYear: "23"), then: true)
+        }
     }
     @IBAction func languageChanged(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
