@@ -25,7 +25,7 @@ public struct TapPaymentOptionsReponseModel: IdentifiableWithString {
     internal let object: String
     
     /// List of available payment options.
-    public let paymentOptions: [PaymentOption]
+    public var paymentOptions: [PaymentOption]
     
     /// Transaction currency.
     public let currency: TapCurrencyCode
@@ -105,7 +105,7 @@ extension TapPaymentOptionsReponseModel: Decodable {
         }
         
         paymentOptions = paymentOptions.filter { ($0.brand != .unknown || $0.paymentType == .ApplePay) }
-        
+        paymentOptions = paymentOptions.sorted(by: { $0.orderBy < $1.orderBy })
         
         // Filter saved cards based on allowed card types passed by the user when loading the SDK session
         let merchnantAllowedCards = SharedCommongDataModels.sharedCommongDataModels.allowedCardTypes

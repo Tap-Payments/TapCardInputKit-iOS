@@ -473,7 +473,14 @@ internal protocol TapCardInputCommonProtocol {
                 transition: .fadeIn(duration: 0.2)
             )
             // Time to load the image iconf rom the given URL
-            Nuke.loadImage(with: iconURL,options:options, into: icon)
+            Nuke.loadImage(with: iconURL,options:options, into: icon) { [weak self] result in
+                do {
+                    let result:ImageResponse = try result.get() as ImageResponse
+                    self?.lastShownIcon = result.image
+                }catch{
+                    print(error)
+                }
+            }
         } else {
             // No, let us show the placeholder then
             icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
