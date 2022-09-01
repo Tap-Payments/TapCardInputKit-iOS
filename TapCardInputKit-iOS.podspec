@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TapCardInputKit-iOS"
-  spec.version      = "1.0.38"
+  spec.version      = "1.0.39"
   spec.summary      = "Easy on the shelf card input view provided by TapCardInputKit-iOS."
 
   # This description is used to generate tags and improve search results.
@@ -105,7 +105,7 @@ Pod::Spec.new do |spec|
   #
 
   # spec.resource  = "icon.png"
-  spec.resources = "TapCardInputKit-iOS/Core/assets/**/*.{png,json}"
+  spec.resources = "TapCardInputKit-iOS/Core/assets/**/*.{png,json,xcassets}"
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
