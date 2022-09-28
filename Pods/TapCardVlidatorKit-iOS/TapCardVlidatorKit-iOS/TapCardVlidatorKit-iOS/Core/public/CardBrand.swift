@@ -43,6 +43,7 @@ import Foundation
     case etisalat
     case vodafone
     case meeza
+    case payPal
     
     case unknown
     
@@ -85,6 +86,7 @@ import Foundation
             .orange             : RawValues.orange,
             .etisalat           : RawValues.etisalat,
             .vodafone           : RawValues.vodafone,
+            .payPal             : RawValues.payPal,
             .meeza              : RawValues.meeza
         ]
         
@@ -110,6 +112,7 @@ import Foundation
         private static let omanNet          = ["OMAN_NET","OMANNET"]
         private static let sadad            = ["SADAD_ACCOUNT"]
         private static let tap              = ["TAP"]
+        private static let payPal           = ["PayPal"]
         private static let uatp             = ["UATP"]
         private static let unionPay         = ["UNION_PAY", "UNIONPAY"]
         private static let verve            = ["VERVE"]

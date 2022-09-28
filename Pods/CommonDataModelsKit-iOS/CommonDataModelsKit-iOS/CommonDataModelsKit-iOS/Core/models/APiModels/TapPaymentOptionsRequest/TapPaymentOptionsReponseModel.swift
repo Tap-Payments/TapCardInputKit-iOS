@@ -18,9 +18,6 @@ public struct TapPaymentOptionsReponseModel: IdentifiableWithString {
     /// Object identifier.
     public let identifier: String
     
-    /// Order identifier.
-    public private(set) var orderIdentifier: String?
-    
     /// Object type.
     internal let object: String
     
@@ -39,6 +36,12 @@ public struct TapPaymentOptionsReponseModel: IdentifiableWithString {
     /// Saved cards.
     public var savedCards: [SavedCard]?
     
+    /// Order data
+    public var order: Order?
+    
+    /// The dummy loyalty view model
+    public var loyaltyModel: TapLoyaltyModel?
+    
     // MARK: - Private -
     
     private enum CodingKeys: String, CodingKey {
@@ -49,31 +52,35 @@ public struct TapPaymentOptionsReponseModel: IdentifiableWithString {
         case paymentOptions             = "payment_methods"
         case supportedCurrenciesAmounts = "supported_currencies"
         
-        case orderIdentifier            = "order_id"
+        
         case savedCards                 = "cards"
         
         case merchantCountryCode        = "country"
+        
+        case order                      = "order"
     }
     
     // MARK: Methods
     
     public init(identifier:                        String,
-                orderIdentifier:                   String?,
                 object:                            String,
                 paymentOptions:                    [PaymentOption],
                 currency:                          TapCurrencyCode,
                 supportedCurrenciesAmounts:        [AmountedCurrency],
                 savedCards:                        [SavedCard]?,
-                merchantCountryCode:               String?) {
+                merchantCountryCode:               String?,
+                order:                             Order?,
+                loyalty:                           TapLoyaltyModel?) {
         
         self.identifier                     = identifier
-        self.orderIdentifier                = orderIdentifier
         self.object                         = object
         self.paymentOptions                 = paymentOptions
         self.currency                       = currency
         self.supportedCurrenciesAmounts     = supportedCurrenciesAmounts
         self.savedCards                     = savedCards
         self.merchantCountryCode            = merchantCountryCode
+        self.order                          = order
+        self.loyaltyModel                   = loyalty
     }
 }
 
@@ -85,13 +92,13 @@ extension TapPaymentOptionsReponseModel: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let identifier                      = try container.decode(String.self, forKey: .identifier)
-        let orderIdentifier                 = try container.decodeIfPresent(String.self, forKey: .orderIdentifier)
         let object                          = try container.decode(String.self, forKey: .object)
         var paymentOptions                  = try container.decode([PaymentOption].self, forKey: .paymentOptions)
         let currency                        = try container.decode(TapCurrencyCode.self, forKey: .currency)
         let supportedCurrenciesAmounts      = try container.decode([AmountedCurrency].self, forKey: .supportedCurrenciesAmounts)
         var savedCards                      = try container.decodeIfPresent([SavedCard].self, forKey: .savedCards)
         let merchantCountryCode             = try container.decodeIfPresent(String.self, forKey: .merchantCountryCode)
+        let order                           = try container.decodeIfPresent(Order.self, forKey: .order)
         
         
         paymentOptions = paymentOptions.sorted(by: { $0.orderBy < $1.orderBy })
@@ -111,14 +118,15 @@ extension TapPaymentOptionsReponseModel: Decodable {
         let merchnantAllowedCards = SharedCommongDataModels.sharedCommongDataModels.allowedCardTypes
         savedCards = savedCards?.filter { (merchnantAllowedCards.contains($0.cardType ?? CardType(cardType: .All))) }
         
-        self.init(identifier:                    identifier,
-                  orderIdentifier:                orderIdentifier,
-                  object:                        object,
-                  paymentOptions:                paymentOptions,
-                  currency:                        currency,
-                  supportedCurrenciesAmounts:    supportedCurrenciesAmounts,
-                  savedCards:                    savedCards,
-                  merchantCountryCode:          merchantCountryCode)
+        self.init(identifier:                   identifier,
+                  object:                       object,
+                  paymentOptions:               paymentOptions,
+                  currency:                     currency,
+                  supportedCurrenciesAmounts:   supportedCurrenciesAmounts,
+                  savedCards:                   savedCards,
+                  merchantCountryCode:          merchantCountryCode,
+                  order:                        order,
+                  loyalty:                      .init(id: "", bankName: "ADCB", bankLogo: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/78/00/ed/7800edd0-5854-b6ce-458f-dfcf75caa495/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1024x1024.jpg", loyaltyProgramName: "ADCB TouchPoints", loyaltyPointsName: "TouchPoints", termsConditionsLink: "https://www.adcb.com/en/personal/adcb-for-you/touchpoints/touchpoints-rewards.aspx", supportedCurrencies: [.init(currency: AmountedCurrency.init(.AED, 1000, "", 2, 50), balanceAmount: 1000, minimumAmount: 100),.init(currency: AmountedCurrency.init(.EGP, 5000, "", 2, 10), balanceAmount: 5000, minimumAmount: 500)], transactionsCount: "50.000"))
     }
 }
 

@@ -46,6 +46,9 @@ import Foundation
     /// Customer's first name.
     public var firstName: String?
     
+    /// Customer's address
+    public var address: Address?
+    
     /// Customer's middle name.
     public var middleName: String?
     
@@ -67,6 +70,8 @@ import Foundation
     /// Currency in which customer can be charged.
     public var currency: TapCurrencyCode?
     
+    /// Customer's locale.
+    public var locale: String?
     // MARK: Methods
     
     
@@ -75,7 +80,7 @@ import Foundation
      - Returns: A default tap customer for testing with the email of "taptestingemail@gmail.com"
      */
     public static func defaultCustomer() -> TapCustomer {
-        return try! .init(emailAddress: TapEmailAddress(emailAddressString: "taptestingemail@gmail.com"), phoneNumber: nil, name: "Tap Testing Default")
+        return try! .init(emailAddress: TapEmailAddress(emailAddressString: "taptestingemail@gmail.com"), phoneNumber: nil, name: "Tap Testing Default",address: nil)
     }
     
     
@@ -86,8 +91,8 @@ import Foundation
     ///   - phoneNumber: Phone number. Please check [TapPhone](x-source-tag://TapPhone)
     ///   - name: Name.
     /// - Throws: Invalid customer info error.
-    public convenience init(emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, name: String) throws {
-        try self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: name, middleName: nil, lastName: nil)
+    public convenience init(emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, name: String,address:Address?) throws {
+        try self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: name, middleName: nil, lastName: nil,address:address)
     }
     
     /// Initializes the customer with email address, phone number and a name.
@@ -98,10 +103,10 @@ import Foundation
     ///   - name: Name.
     /// - Warning: This method returns `nil` if you pass invalid customer data.
     @available(swift, obsoleted: 1.0)
-    @objc(initWithEmailAddress:phoneNumber:name:)
-    public convenience init?(with emailAddress: TapEmailAddress, phoneNumber: TapPhone, name: String) {
+    @objc(initWithEmailAddress:phoneNumber:name:address:)
+    public convenience init?(with emailAddress: TapEmailAddress, phoneNumber: TapPhone, name: String,address:Address?) {
         
-        try? self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, name: name)
+        try? self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, name: name, address: address)
     }
     
     /// Initializes the customer with email address, phone number, first name, middle name and last name.
@@ -113,11 +118,11 @@ import Foundation
     ///   - middleName: Middle name.
     ///   - lastName: Last name.
     /// - Throws: Invalid customer info error.
-    public convenience init(emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, firstName: String, middleName: String?, lastName: String?) throws {
+    public convenience init(emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, firstName: String, middleName: String?, lastName: String?, address:Address?) throws {
         if emailAddress == nil && phoneNumber == nil {
             throw("A customer must have at least an email or a phone number")
         }
-        try self.init(identifier: nil, emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: firstName, middleName: middleName, lastName: lastName)
+        try self.init(identifier: nil, emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: firstName, middleName: middleName, lastName: lastName, address: address)
     }
     
     /// Initializes the customer with email address, phone number, first name, middle name and last name.
@@ -130,10 +135,10 @@ import Foundation
     ///   - lastName: Last name.
     /// - Warning: This method returns `nil` if you pass invalid customer data.
     @available(swift, obsoleted: 1.0)
-    @objc(initWithEmailAddress:phoneNumber:firstName:middleName:lastName:)
-    public convenience init?(with emailAddress: TapEmailAddress, phoneNumber: TapPhone, firstName: String, middleName: String?, lastName: String?) {
+    @objc(initWithEmailAddress:phoneNumber:firstName:middleName:lastName:address:)
+    public convenience init?(with emailAddress: TapEmailAddress, phoneNumber: TapPhone, firstName: String, middleName: String?, lastName: String?, address:Address?) {
         
-        try? self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: firstName, middleName: middleName, lastName: lastName)
+        try? self.init(emailAddress: emailAddress, phoneNumber: phoneNumber, firstName: firstName, middleName: middleName, lastName: lastName, address: address)
     }
     
     /// Initializes the customer with the customer identifier.
@@ -142,7 +147,7 @@ import Foundation
     /// - Throws: Invalid customer info error.
     public convenience init(identifier: String) throws {
         
-        try self.init(identifier: identifier, emailAddress: nil, phoneNumber: nil, firstName: nil, middleName: nil, lastName: nil)
+        try self.init(identifier: identifier, emailAddress: nil, phoneNumber: nil, firstName: nil, middleName: nil, lastName: nil, address: nil)
     }
     
     /// Initializes the customer with the customer identifier.
@@ -170,12 +175,12 @@ import Foundation
         }
         
         return
-            
-            self.firstName      == otherCustomer.firstName      &&
-            self.middleName     == otherCustomer.middleName     &&
-            self.lastName       == otherCustomer.lastName       &&
-            self.emailAddress   == otherCustomer.emailAddress   &&
-            self.phoneNumber    == otherCustomer.phoneNumber
+        
+        self.firstName      == otherCustomer.firstName      &&
+        self.middleName     == otherCustomer.middleName     &&
+        self.lastName       == otherCustomer.lastName       &&
+        self.emailAddress   == otherCustomer.emailAddress   &&
+        self.phoneNumber    == otherCustomer.phoneNumber
     }
     
     /// Checks if 2 objects are equal.
@@ -205,6 +210,7 @@ import Foundation
         self.descriptionText        = self.descriptionText?.tap_trimWhitespacesAndNewlines(nullifyIfResultIsEmpty: true)
         self.title                  = self.title?.tap_trimWhitespacesAndNewlines(nullifyIfResultIsEmpty: true)
         self.nationality            = self.nationality?.tap_trimWhitespacesAndNewlines(nullifyIfResultIsEmpty: true)
+        self.locale                 = "ar"
     }
     
     // MARK: - Private -
@@ -222,13 +228,15 @@ import Foundation
         case title              = "title"
         case nationality        = "nationality"
         case currency           = "currency"
+        case address            = "address"
+        case locale             = "locale"
     }
     
     // MARK: Methods
     
     @available(*, unavailable) private override init() { super.init() }
     
-    private init(identifier: String?, emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, firstName: String?, middleName: String?, lastName: String?) throws {
+    private init(identifier: String?, emailAddress: TapEmailAddress?, phoneNumber: TapPhone?, firstName: String?, middleName: String?, lastName: String?, address:Address?) throws {
         
         self.identifier         = identifier
         self.emailAddress       = emailAddress
@@ -236,6 +244,8 @@ import Foundation
         self.firstName          = firstName
         self.middleName         = middleName
         self.lastName           = lastName
+        self.address            = address
+        self.locale             = "ar"
         
         super.init()
         
@@ -255,20 +265,22 @@ extension TapCustomer: NSCopying {
         let emailAddressCopy    = self.emailAddress?.copy() as? TapEmailAddress
         let phoneNumberCopy        = self.phoneNumber?.copy() as? TapPhone
         let currencyCopy        = self.currency
+        let addressCopy         = self.address?.copy() as? Address
         
         let result = try! TapCustomer(identifier:        self.identifier,
                                       emailAddress:    emailAddressCopy,
                                       phoneNumber:        phoneNumberCopy,
                                       firstName:        self.firstName,
                                       middleName:        self.middleName,
-                                      lastName:        self.lastName)
+                                      lastName:        self.lastName,
+                                      address: addressCopy)
         
         result.descriptionText    = self.descriptionText
         result.metadata            = self.metadata
         result.title            = self.title
         result.nationality        = self.nationality
         result.currency            = currencyCopy
-        
+        result.locale           = self.locale
         return result
     }
 }
@@ -297,6 +309,8 @@ extension TapCustomer: Encodable {
         try container.encodeIfPresent(self.title,           forKey: .title)
         try container.encodeIfPresent(self.nationality,     forKey: .nationality)
         try container.encodeIfPresent(self.currency,        forKey: .currency)
+        try container.encodeIfPresent(self.address,         forKey: .address)
+        try container.encodeIfPresent(self.locale,          forKey: .locale)
         
         
     }

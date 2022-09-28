@@ -43,7 +43,7 @@
             "cornerRadius": 0,
             "borderWidth": 0,
             "itemSpacing": 5,
-            "cvvPlaceHolder": "CvvPlaceholder",
+            "cvvPlaceHolder": "dark-cvv",
             "shadow":{
                 "color": "clear",
                 "radius": 0,
@@ -150,7 +150,7 @@
             "borderWidth": 0,
             "itemSpacing": 0,
             "separatorColor": "#0000001E",
-            "cvvPlaceHolder": "CvvPlaceholder",
+            "cvvPlaceHolder": "dark-cvv",
             "shadow":{
                 "color": "#2ACE00",
                 "radius": 3,
@@ -250,10 +250,39 @@
         "width" : 75,
         "height" : 4,
         "corner" : 2,
-        "backgroundColor": "white",
-        "cancelButton": {
-            "titleLabelFont" : "Roboto-Light,13",
-            "titleLabelColor" : "greyishBrown"
+        "backgroundColor": "white"
+    },
+    "loyaltyView" : {
+        "cardView": {
+            "backgroundColor" : "white",
+            "radius": 8,
+            "shadowColor":"#00000027",
+            "shadowRadius":26,
+            "shadowOpacity":1
+        },
+        "headerView": {
+            "backgroundColor" : "clear",
+            "switchOnTintColor" : "deepSkyBlue",
+            "titleTextColor" : "greyishBrown",
+            "subTitleTextColor" : "brownGreySeven",
+            "titleFont" : "Roboto-Regular,12",
+            "subTitleFont" : "Roboto-Regular,11"
+        },
+        "amountView": {
+            "titleTextColor" : "#9F9F9F",
+            "titleFont" : "Roboto-Regular,11",
+            "currencyTextColor" : "greyishBrown",
+            "currencyFont" : "Roboto-Regular,16",
+            "amountTextColor" : "greyishBrown",
+            "amountFont" : "Roboto-Regular,16",
+            "pointsTextColor" : "greyishBrown",
+            "pointsFont" : "Roboto-Regular,12"
+        },
+        "footerView": {
+            "pointsTextColor" : "#7E7E7E",
+            "pointsFont" : "Roboto-Regular,11",
+            "amountTextColor" : "#greyishBrown",
+            "amountFont" : "Roboto-Regular,11"
         }
     },
     "merchantHeaderView": {
@@ -262,11 +291,18 @@
         "subTitleLabelFont" : "Roboto-Regular,16",
         "subTitleLabelColor" : "greyishBrown",
         "merchantLogoCorner" : 8,
+        "merchantLogoShadowRadius":12,
+        "merchantLogoShadowColor":"#FFFFFF54",
         "merchantLogoPlaceHolderColor" : "black",
         "merchantLogoPlaceHolderFont" : "Roboto-Regular,16",
         "merchantLogoPlaceHolderLabelColor" : "white",
         "backgroundColor" : "white",
-        "closeCheckoutIcon": "closeCheckoutDarkIcon"
+        "closeCheckoutIcon": "closeCheckoutDarkIcon",
+        "cancelButton": {
+            "titleLabelFont" : "Roboto-Light,13",
+            "titleLabelColor" : "greyishBrown",
+            "backgroundColor" : "whiteTwo"
+        }
     },
     "amountSectionView": {
         "originalAmountLabelFont" : "Roboto-Regular,20",

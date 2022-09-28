@@ -22,47 +22,47 @@ extension TapCardInput {
         // Defines the constrints for the card icon image vie
         icon.snp.remakeConstraints { (make) in
             make.width.equalTo(24)
-            make.leading.equalToSuperview().offset(26)
+            make.leading.equalToSuperview().offset(12)
             make.height.equalTo(24)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(cardNumber.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? -3 : 0)
         }
         
         
         // Defines the constrints for the scan card button
         scanButton.snp.remakeConstraints { (make) in
             make.width.equalTo(24)
-            make.trailing.equalToSuperview().offset(-26)
+            make.trailing.equalToSuperview().offset(-12)
             make.height.equalTo(24)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(icon.snp.centerY)
         }
         
         // Defines the constrints for the card number field
         cardNumber.snp.remakeConstraints { (make) in
             // We set the card number width to the mimimum width based on its min visible characters attribute
             make.width.equalTo(cardNumber.calculatedWidth())
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(48)
             make.leading.equalTo(icon.snp.trailing).offset(10)
-            make.centerY.equalTo(icon.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? 4 : 0)
+            make.top.equalToSuperview()
         }
         
         // Defines the constrints for the card expiry field
         cardExpiry.snp.remakeConstraints { (make) in
             // We set the card expiry width to the mimimum width based on its min visible characters attribute
             make.width.equalTo(cardExpiry.calculatedWidth())
-            make.height.equalToSuperview().dividedBy(2)
-            make.centerX.equalToSuperview()
+            make.height.equalTo(cardNumber.snp.height)
             make.centerY.equalTo(cardNumber.snp.centerY)
-            //make.leading.greaterThanOrEqualTo(cardNumber.snp.trailing).offset(23)
+            make.trailing.equalTo(cardCVV.snp.leading)
         }
         
         // Defines the constrints for the card cvv field
         cardCVV.snp.remakeConstraints { (make) in
             // We set the card cvv width to the mimimum width based on its min visible characters attribute
             make.width.equalTo(cardCVV.calculatedWidth())
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(cardNumber.snp.height)
             make.trailing.equalTo(scanButton.snp.leading).offset(-0)
+            // For vertical center we may need to do a little shift to override the arabic font margin
             make.centerY.equalTo(cardNumber.snp.centerY)
-            //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
+            make.leading.equalTo(cardExpiry.snp.trailing)
         }
         
         
@@ -72,8 +72,8 @@ extension TapCardInput {
                 // We set the card cvv width to the mimimum width based on its min visible characters attribute
                 make.leading.equalTo(icon.snp.leading)
                 make.trailing.equalTo(cardCVV.snp.trailing)
-                make.height.equalToSuperview().dividedBy(2)
-                make.top.equalTo(icon.snp.bottom).offset(10)
+                make.height.equalTo(cardNumber.snp.height)
+                make.top.equalTo(cardNumber.snp.bottom)
                 //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
             }
         }
@@ -93,7 +93,7 @@ extension TapCardInput {
         //self.addSubview(scrollView)
         
         // Set the stack view attribtes
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.alignment = .center
         stackView.backgroundColor = .clear
         stackView.spacing = computedSpace
@@ -105,9 +105,9 @@ extension TapCardInput {
             //stackView.addArrangedSubview(field)
             addSubview(field)
         }
-        cardCVV.alignment = .right
-        cardExpiry.alpha = 0
-        cardCVV.alpha = 0
+        cardCVV.alignment = .center
+        cardExpiry.alpha = 1
+        cardCVV.alpha = 1
         cardName.alpha = 0
         // Add other fields not inside the scrolling areas
         addSubview(icon)
@@ -203,14 +203,18 @@ extension TapCardInput {
             
             let correctNumberText:String = nonNullView.isEditing ? (tapCard.tapCardNumber ?? "") : String(tapCard.tapCardNumber?.suffix(4) ?? "")
             let spacing = CardValidator.cardSpacing(cardNumber: correctNumberText.onlyDigits())
-            nonNullView.text = correctNumberText.cardFormat(with: spacing)
-            
+            var prefix:String = ""
+            if !nonNullView.isEditing && cardNumber.isValid(cardNumber: tapCard.tapCardNumber) {
+                prefix = "•••••"
+            }
+            nonNullView.text = "\(prefix)\(correctNumberText.cardFormat(with: spacing))"
             // Set the visibilog of cvv and expirty based on the validty of the card number
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                self?.cardExpiry.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
-                self?.cardCVV.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
+                self?.cardExpiry.alpha = (nonNullView.isEditing) ? 0 : 1
+                self?.cardCVV.alpha = (nonNullView.isEditing) ? 0 : 1
                 self?.cardName.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
                 self?.layoutIfNeeded()
+                self?.delegate?.heightChanged()
             })
         }
     }

@@ -18,6 +18,8 @@ internal class SelectorsConstants {
     static let setTextColorSelector = "setTextColor:"
     static let setHighlightedTextColorSelector = "setHighlightedTextColor:"
     static let setShadowColorSelector = "setShadowColor:"
+    static let setShadowRadiusSelector = "setShadowRadius:"
+    static let setShadowOpacitySelector = "setShadowOpacity:"
     static let tap_setTextAttributesSelector = "tap_setTextAttributes:"
     static let setBarStyleSelector = "setBarStyle:"
     static let setBarTintColorSelector = "setBarTintColor:"

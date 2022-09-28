@@ -140,6 +140,7 @@ extension CardNameTextField:UITextFieldDelegate {
         if updatedText.alphabetOnly() == updatedText.lowercased() && updatedText.count <= 26 {
             // Then set the text
             self.text = updatedText.uppercased()
+            didChangeText(textField: textField)
         }
         // Validate it
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor

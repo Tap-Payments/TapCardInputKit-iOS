@@ -20,6 +20,18 @@
     /// Shipping amount.
     public var amount: Decimal
     
+    /// Shipping currency
+    public var currency:TapCurrencyCode
+    
+    /// Shipping reciepent name
+    public var recipientName:String?
+    
+    /// Shipping address
+    public var address:Address?
+    
+    /// Shipping provider
+    public var provider:ShippingProvider?
+    
     // MARK: Methods
     
     /// Initializes `Shipping` model with the `name` and `amount`.
@@ -38,11 +50,15 @@
     ///   - name: Shipping name.
     ///   - descriptionText: Shipping description.
     ///   - amount: Shipping amount.
-    public init(name: String, descriptionText: String?, amount: Decimal) {
+    public init(name: String, descriptionText: String?, amount: Decimal, currency: TapCurrencyCode = .undefined, recipientName:String? = nil, address:Address? = nil, provider: ShippingProvider? = nil) {
         
         self.name = name
         self.descriptionText = descriptionText
         self.amount = amount
+        self.recipientName = recipientName
+        self.currency = currency
+        self.address = address
+        self.provider = provider
         
         super.init()
     }
@@ -54,6 +70,10 @@
         case name               = "name"
         case descriptionText    = "description"
         case amount             = "amount"
+        case currency           = "currency"
+        case recipientName      = "recipient_name"
+        case address            = "address"
+        case provider           = "provider"
     }
 }
 
@@ -66,6 +86,28 @@ extension Shipping: NSCopying {
     /// - Returns: Copy of the receiver.
     public func copy(with zone: NSZone? = nil) -> Any {
         
-        return Shipping(name: self.name, descriptionText: self.descriptionText, amount: self.amount)
+        return Shipping(name: self.name, descriptionText: self.descriptionText, amount: self.amount, currency: self.currency, recipientName: self.recipientName, address: self.address, provider: self.provider)
     }
+}
+
+
+/// The shipping provider model class
+@objcMembers public final class ShippingProvider: NSObject, Codable {
+    
+    @objc public init(id: String, name: String? = nil) {
+        self.id = id
+        self.name = name
+    }
+    
+    
+    // MARK: - Public -
+    // MARK: Properties
+    
+    /// Shipping provider id
+    public var id: String
+    
+    /// Shipping provider name.
+    public var name: String?
+    
+    
 }

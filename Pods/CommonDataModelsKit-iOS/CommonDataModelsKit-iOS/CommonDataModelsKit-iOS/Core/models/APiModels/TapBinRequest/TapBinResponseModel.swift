@@ -19,7 +19,7 @@ public struct TapBinResponseModel {
     internal let isAddressRequired: Bool
     
     /// Card issuer bank.
-    internal let bank: String?
+    public let bank: String?
     
     /// Bank logo URL.
     internal let bankLogoURL: URL?

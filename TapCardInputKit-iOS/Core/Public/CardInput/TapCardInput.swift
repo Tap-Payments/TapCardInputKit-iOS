@@ -60,6 +60,9 @@ internal protocol TapCardInputCommonProtocol {
      - Returns: True if the entered card number till now less than 6 digits or the prefix matches the allowed types (credit or debit)
      */
     @objc func shouldAllowChange(with cardNumber:String) -> Bool
+    
+    /// fires when the height of the widget changes
+    @objc func heightChanged()
 }
 
 /// This represents the custom view for card input provided by Tap
@@ -335,7 +338,7 @@ internal protocol TapCardInputCommonProtocol {
     /// Helper method to match the common theming values to the view from the theme file
     internal func setCommonUI() {
         // background color
-        self.tap_theme_backgroundColor = ThemeUIColorSelector.init(keyPath: "\(themePath).commonAttributes.backgroundColor")
+        self.backgroundColor = .clear //ThemeUIColorSelector.init(keyPath: "\(themePath).commonAttributes.backgroundColor")
         // The border color
         self.layer.tap_theme_borderColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.borderColor")
         // The border width
@@ -347,7 +350,7 @@ internal protocol TapCardInputCommonProtocol {
         self.layer.shadowRadius = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.radius")?.floatValue ?? 0)
         self.layer.tap_theme_shadowColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.shadow.color")
         self.layer.shadowOffset = CGSize(width: CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.offsetWidth")?.floatValue ?? 0), height: CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.offsetHeight")?.floatValue ?? 0))
-        self.layer.shadowOpacity = 0//Float(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
+        self.layer.shadowOpacity = Float(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0)
         self.layer.masksToBounds = false
         
         self.spacing = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.itemSpacing")?.floatValue ?? 0)
@@ -361,7 +364,10 @@ internal protocol TapCardInputCommonProtocol {
         scanButton.setTitle("", for: .normal)
         // Defines scan button icon
         scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
-        scanButton.imageView?.contentMode = .scaleAspectFit
+        scanButton.imageView?.contentMode = .scaleToFill
+        scanButton.contentHorizontalAlignment = .fill;
+        scanButton.contentVerticalAlignment = .fill;
+        
         scanButton.backgroundColor = .clear
         scanButton.tintColor = .clear
         scanButton.setBackgroundColor(color: .clear, forState: .highlighted)
@@ -380,7 +386,7 @@ internal protocol TapCardInputCommonProtocol {
     internal func configureViews() {
         
         // Setup the card number field with the needed data and listeners
-        cardNumber.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Number") { [weak self] (isEditing) in
+        cardNumber.setup(with: 8, maxVisibleChars: 16, placeholder: "Card Number") { [weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -541,35 +547,47 @@ internal protocol TapCardInputCommonProtocol {
     
     /// Method that glows or the dims the card input view based on the shadow theme provided and if any of the fields is active
     internal func  updateShadow() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // The final value we will animate the shadow opacity , default is 0
-            var finalShadowOpacity:Float = 0.0
-            // Calculate the starting valye which is the current opacity level
-            let startingValue:Float = self.layer.shadowOpacity
-            // Check if any of the fields is active first
-            for field in self.fields {
-                if field.isEditing {
-                    // Now we found one that is active, then we need to glow it based on the value provided from the theme
-                    finalShadowOpacity = Float(TapThemeManager.numberValue(for: "\(self.themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0
-                    )
-                    break
-                }
-            }
-            // If the value we want to animate to is the current one, then we have to do nothing
-            if finalShadowOpacity == startingValue { return }
-            
-            // Animate the change of the shadow opacity
-            let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
-            shadowAnimation.fromValue = startingValue
-            shadowAnimation.toValue = finalShadowOpacity
-            shadowAnimation.duration = 0.5
-            self.layer.add(shadowAnimation, forKey: "shadowOpacity")
-            self.layer.shadowOpacity = finalShadowOpacity
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+         // The final value we will animate the shadow opacity , default is 0
+         var finalShadowOpacity:Float = 0.0
+         // Calculate the starting valye which is the current opacity level
+         let startingValue:Float = self.layer.shadowOpacity
+         // Check if any of the fields is active first
+         for field in self.fields {
+         if field.isEditing {
+         // Now we found one that is active, then we need to glow it based on the value provided from the theme
+         finalShadowOpacity = Float(TapThemeManager.numberValue(for: "\(self.themePath).commonAttributes.shadow.opacity")?.floatValue ?? 0
+         )
+         break
+         }
+         }
+         // If the value we want to animate to is the current one, then we have to do nothing
+         if finalShadowOpacity == startingValue { return }
+         
+         // Animate the change of the shadow opacity
+         let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
+         shadowAnimation.fromValue = startingValue
+         shadowAnimation.toValue = finalShadowOpacity
+         shadowAnimation.duration = 0.5
+         self.layer.add(shadowAnimation, forKey: "shadowOpacity")
+         self.layer.shadowOpacity = finalShadowOpacity
+         }*/
+    }
+    
+    /// Enable/Disable expiry and cvv based on the validity of the card number
+    internal func adjustEnablementOfTextFields() {
+        if cardInputMode == .InlineCardInput &&
+            cardNumber.isValid() {
+            fields.forEach{ $0.isUserInteractionEnabled = true }
+        }else{
+            fields.forEach{ $0.isUserInteractionEnabled = false }
         }
+        cardNumber.isUserInteractionEnabled = true
     }
     
     /// The method that holds the logic needed to do when any of the card fields changed
     internal func cardDatachanged() {
+        //adjustEnablementOfTextFields()
         adjustScanButton()
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
@@ -586,10 +604,24 @@ internal protocol TapCardInputCommonProtocol {
     internal func adjustExpiryCvv() {
         guard cardInputMode == .InlineCardInput else { return }
         
+        cardCVV.isUserInteractionEnabled = cardNumber.isValid(cardNumber: tapCard.tapCardNumber)
+        cardExpiry.isUserInteractionEnabled = cardNumber.isValid(cardNumber: tapCard.tapCardNumber)
+        
+        // Because the CVV is secure text, the built in native dots have margins that we need to consider
+        cardCVV.snp.updateConstraints { make in
+            var offset = 0
+            if cardCVV.text != "" {
+                offset = (TapLocalisationManager.shared.localisationLocale == "ar") ? -6 : -2
+            }
+            make.centerY.equalTo(cardNumber.snp.centerY).offset(offset)
+            cardCVV.updateConstraints()
+        }
+        
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.cardCVV.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
-            self?.cardExpiry.alpha = (self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1
+            self?.cardCVV.alpha = (self?.cardNumber.isEditing ?? false) ? 0 : 1
+            self?.cardExpiry.alpha = (self?.cardNumber.isEditing ?? false) ? 0 : 1
             self?.cardName.alpha = (self?.showCardName ?? false) ? ((self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1) : 0
+            self?.delegate?.heightChanged()
         })
     }
     
@@ -853,6 +885,18 @@ extension TapCardInput:TapCardInputCommonProtocol {
         default:
             return
         }
+    }
+    
+    /**
+     Computes the required height to correctly display the card input form. Takes in consideration, the card input, the card name row, the save row.
+     - Returns: The needed height
+     */
+    public func requiredHeight() -> Double {
+        // Start with the basic height which is the card input row
+        var calculatedHeight:Double = 48.0
+        // Add to it the needed height to show the card name if any
+        calculatedHeight += (cardName.alpha == 1 && showCardName) ? 48 : 0
+        return calculatedHeight
     }
 }
 

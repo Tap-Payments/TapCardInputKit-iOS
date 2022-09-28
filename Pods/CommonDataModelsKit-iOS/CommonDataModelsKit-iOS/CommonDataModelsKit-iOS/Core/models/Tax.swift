@@ -55,7 +55,7 @@ import Foundation
         
         case title              = "name"
         case descriptionText    = "description"
-        case amount             = "amount"
+        case amount             = "rate"
     }
 }
 

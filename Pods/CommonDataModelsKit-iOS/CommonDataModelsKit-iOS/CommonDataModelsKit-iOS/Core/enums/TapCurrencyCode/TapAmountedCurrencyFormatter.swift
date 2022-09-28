@@ -285,6 +285,9 @@ extension TapAmountedCurrencyFormatter {
                let customCurrencySymbol:String = customCurrencySymbols[currency.rawValue] {
                 numberFormatter.currencySymbol = "\(customCurrencySymbol) "
             }
+            if !showCurrencySymbol {
+                numberFormatter.currencySymbol = ""
+            }
             // Not forced by the caller, hence we leave it to the default formatting for this currency as per Apple development.
             formattedValue = numberFormatter.string(from: validValue)
         }

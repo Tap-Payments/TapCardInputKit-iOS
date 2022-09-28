@@ -5,7 +5,7 @@
 //  Copyright © 2019 Tap Payments. All rights reserved.
 //
 
-public struct Order: IdentifiableWithString, Encodable {
+public struct Order: IdentifiableWithString, Encodable, Decodable {
     
     // MARK: - Internal -
     // MARK: Properties
