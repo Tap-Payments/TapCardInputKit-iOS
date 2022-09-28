@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "dark-cvv@1x.png",
+      "filename" : "light-cvv.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dark-cvv@2x.png",
+      "filename" : "light-cvv@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dark-cvv@3x.png",
+      "filename" : "light-cvv@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

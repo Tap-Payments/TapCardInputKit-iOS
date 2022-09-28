@@ -18,3 +18,12 @@ import Foundation
     /// This when you want show a phone number input
     case PhoneInput = 2
 }
+
+
+/// Sets the UI mode of the card input
+@objc public enum CardInputUIStatus:Int {
+    /// This when you want show the UI of the normal card. Empty fields, where user will have to fill them
+    case NormalCard = 0
+    /// This when you want to show the UI of a saved card
+    case SavedCard = 1
+}

@@ -68,11 +68,11 @@ class ExampleCardInputViewController: UIViewController {
         let alertController:UIAlertController = .init(title: "Which type?", message: "Choose a state", preferredStyle: .actionSheet)
         let valid:UIAlertAction = .init(title: "Valid card", style: .destructive) { [weak self] (_) in
             let card:TapCard = .init(tapCardNumber: "4242424242424242", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
-            self?.cardInput.setCardData(tapCard: card, then: false)
+            self?.cardInput.setCardData(tapCard: card, then: false, for: .NormalCard)
         }
         let inValid:UIAlertAction = .init(title: "Invalid card", style: .default) { [weak self] (_) in
             let card:TapCard = .init(tapCardNumber: "4242424242424211", tapCardName: "", tapCardExpiryMonth: "11", tapCardExpiryYear: "20", tapCardCVV: "100")
-            self?.cardInput.setCardData(tapCard: card, then: false)
+            self?.cardInput.setCardData(tapCard: card, then: false, for: .NormalCard)
         }
         let cancel:UIAlertAction = .init(title: "Cancel", style: .cancel)
         
@@ -88,6 +88,14 @@ class ExampleCardInputViewController: UIViewController {
 
 
 extension ExampleCardInputViewController: TapCardInputProtocol {
+    func closeSavedCard() {
+        
+    }
+    
+    func heightChanged() {
+        
+    }
+    
     
     func shouldAllowChange(with cardNumber: String) -> Bool {
         return true

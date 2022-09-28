@@ -7,8 +7,7 @@
 //
 import SnapKit
 import TapThemeManager2020
-import class CommonDataModelsKit_iOS.TapCard
-import class CommonDataModelsKit_iOS.TapCommonConstants
+import CommonDataModelsKit_iOS
 import TapCardVlidatorKit_iOS
 import LocalisationManagerKit_iOS
 import Nuke
@@ -54,6 +53,9 @@ internal protocol TapCardInputCommonProtocol {
      */
     @objc func dataChanged(tapCard:TapCard)
     
+    /// This method will be called whenever the user opted out from filling in the CVV for the saved card
+    @objc func closeSavedCard()
+    
     /**
      This method will be called whenever the user tries to enter new digits inside the card number, then we need to the delegate to tell us if we can complete the card number.
      - Parameter with cardNumber: The card number after changes.
@@ -68,7 +70,7 @@ internal protocol TapCardInputCommonProtocol {
 /// This represents the custom view for card input provided by Tap
 @objc public class TapCardInput: UIView {
     
-    // Internal
+    // MARK: Internal
     
     /// The scroll view that holds the form whether horizontal in Inline or vertical in Full mode
     internal lazy var scrollView = UIScrollView()
@@ -88,6 +90,12 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var cardExpiry  = CardExpiryTextField()
     /// The text field to enter the card  cvv
     internal lazy var cardCVV     = CardCVVTextField()
+    /// Displays the display title of the saved card number
+    internal lazy var savedCardNumberLabel = UILabel()
+    /// Displays the display title of the saved card expiry number
+    internal lazy var savedCardExpiryLabel = UILabel()
+    /// The close saved card flow button
+    internal lazy var closeSavedCardButton = UIButton()
     /// The save card label to be shown in full mode
     internal lazy var saveLabel:UILabel = UILabel()
     /// The save card switch to be shown in full mode
@@ -100,7 +108,8 @@ internal protocol TapCardInputCommonProtocol {
     internal var spacing:CGFloat = 7
     /// The left and right padding around the input card
     internal var inputLeftRightMargin:CGFloat = 15
-    
+    /// The last saved card called
+    public var savedCard:SavedCard?
     
     internal var computedSpace:CGFloat{
         get{
@@ -116,7 +125,7 @@ internal protocol TapCardInputCommonProtocol {
     /// Indicates whether or not the user can edit the card holder name field. Default is true
     internal var editCardName:Bool = true
     
-    // Public
+    //MARK: Public
     /// This defines the mode required to show the card input view in whether Full or Inline
     @objc public var cardInputMode:CardInputMode = .FullCardInput {
         didSet{
@@ -131,6 +140,13 @@ internal protocol TapCardInputCommonProtocol {
             }
         }
     }
+    ///Decides the UI mode of the card input
+    @objc public var cardUIStatus:CardInputUIStatus = .NormalCard {
+        didSet{
+            if cardUIStatus != oldValue { updateCardUI() }
+        }
+    }
+    
     /// States if the parent controller wants to show card number or not
     @objc public lazy var showCardName:Bool = false
     /// States if the parent controller wants to show save card option, only works wth full mode
@@ -194,8 +210,9 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter tapCard: The TapCard that holds the data needed to be filled into the textfields
      - Parameter then focusCardNumber: Indicate whether we need to focus the card number after setting the card data
      - Parameter shouldRemoveCurrentCard: Indicate If there is a card number, first thing to do now is to clear the fields
+     - Parameter for cardUIStatus: Indicates whether the given card is from a normal process like scanning or to show the special UI for a saved card flow
      */
-    @objc public func setCardData(tapCard:TapCard,then focusCardNumber:Bool,shouldRemoveCurrentCard:Bool = true) {
+    @objc public func setCardData(tapCard:TapCard,then focusCardNumber:Bool,shouldRemoveCurrentCard:Bool = true,for cardUIStatus:CardInputUIStatus) {
         // Match the tapCard attributes to the different card fields
         
         // First then, we check if there is a card number provided
@@ -257,6 +274,22 @@ internal protocol TapCardInputCommonProtocol {
         
     }
     
+    /**
+     Call this method to display the saved card details for the user and prompt him to enter the CVV
+     - Parameter savedCard: The saved card you want to validate before using
+     */
+    @objc public func setSavedCard(savedCard:SavedCard) {
+        // First of all, let us clear any data inside the card form if any
+        clearButtonClicked()
+        // Let us save the saved card for further usage
+        self.savedCard = savedCard
+        // Assign the needed UI data
+        savedCardNumberLabel.text = savedCard.displayTitle
+        savedCardExpiryLabel.text = "\(savedCard.expirationMonth)/\(savedCard.expirationYear)"
+        // declare our status to be saved card
+        self.cardUIStatus = .SavedCard
+    }
+    
     
     
     /**
@@ -279,6 +312,24 @@ internal protocol TapCardInputCommonProtocol {
         super.traitCollectionDidChange(previousTraitCollection)
         TapThemeManager.changeThemeDisplay(for: self.traitCollection.userInterfaceStyle)
         matchThemeAttributes()
+    }
+    
+    /// Call this method to update the UI of the card input upon changing his status from normal card to saved card and vice versa
+    internal func updateCardUI() {
+        // hide and show views based on the current status
+        cardNumber.alpha = (cardUIStatus == .NormalCard) ? 1 : 0
+        cardExpiry.alpha = (cardUIStatus == .NormalCard) ? 1 : 0
+        icon.alpha = (cardUIStatus == .NormalCard) ? 1 : 0
+        savedCardNumberLabel.alpha = (cardUIStatus == .SavedCard) ? 1 : 0
+        savedCardExpiryLabel.alpha = (cardUIStatus == .SavedCard) ? 1 : 0
+        closeSavedCardButton.alpha = (cardUIStatus == .SavedCard) ? 1 : 0
+        
+        // now let us see if we have to focus the CVV if we are filling in saved card data
+        if cardUIStatus == .SavedCard {
+            cardCVV.isUserInteractionEnabled = true
+            cardCVV.becomeFirstResponder()
+            cardCVV.cvvLength = CardValidator.cvvLength(for: savedCard?.brand)
+        }
     }
     
     /// Helper method to natch the text, error and palceholder colors from the theme to all the cards fields
@@ -306,6 +357,19 @@ internal protocol TapCardInputCommonProtocol {
         // Set the font of the save label
         saveLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).saveCardOption.labelTextFont")
     }
+    
+    /// Helper method to natch the fonts from the theme to all the saved card fields
+    internal func setSavedCardFonts() {
+        // Fonts
+        savedCardExpiryLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
+        savedCardNumberLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
+        // Colors
+        savedCardNumberLabel.tap_theme_textColor = .init(keyPath: "\(themePath).textFields.textColor")
+        savedCardExpiryLabel.tap_theme_textColor = .init(keyPath: "\(themePath).textFields.textColor")
+        // Set the font of the save label
+        saveLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).saveCardOption.labelTextFont")
+    }
+    
     
     /// Helper method to natch the localized values
     @objc public func localize(shouldFlip:Bool = true) {
@@ -358,6 +422,23 @@ internal protocol TapCardInputCommonProtocol {
         // The default card brand icon
         icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
         icon.contentMode = .scaleAspectFit
+        
+        
+        // Defines an action handler to the close saved card button
+        closeSavedCardButton.addTarget(self, action: #selector(closeSavedCardButtonClicked), for: .touchUpInside)
+        closeSavedCardButton.setTitle("", for: .normal)
+        // Defines close saved card button icon
+        // Defines scan button icon
+        closeSavedCardButton.setImage(TapThemeManager.imageValue(for: "\(themePath).closeSavedCardIcon",from: Bundle(for: type(of: self))), for: .normal)
+        closeSavedCardButton.imageView?.contentMode = .scaleToFill
+        closeSavedCardButton.contentHorizontalAlignment = .fill;
+        closeSavedCardButton.contentVerticalAlignment = .fill;
+        
+        closeSavedCardButton.backgroundColor = .clear
+        closeSavedCardButton.tintColor = .clear
+        closeSavedCardButton.setBackgroundColor(color: .clear, forState: .highlighted)
+        closeSavedCardButton.setBackgroundColor(color: .clear, forState: .selected)
+        closeSavedCardButton.setBackgroundColor(color: .clear, forState: .focused)
         
         // Defines an action handler to the scan button
         self.scanButton.addTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
@@ -602,7 +683,7 @@ internal protocol TapCardInputCommonProtocol {
     
     
     internal func adjustExpiryCvv() {
-        guard cardInputMode == .InlineCardInput else { return }
+        guard cardInputMode == .InlineCardInput, cardUIStatus == .NormalCard else { return }
         
         cardCVV.isUserInteractionEnabled = cardNumber.isValid(cardNumber: tapCard.tapCardNumber)
         cardExpiry.isUserInteractionEnabled = cardNumber.isValid(cardNumber: tapCard.tapCardNumber)
@@ -626,6 +707,14 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     /// The method that holds the logic needed to do when any of the scan button is clicked
+    @objc internal func closeSavedCardButtonClicked() {
+        // let us clear the data
+        clearButtonClicked()
+        // let us inform the delegate
+        delegate?.closeSavedCard()
+    }
+    
+    /// The method that holds the logic needed to do when any of the scan button is clicked
     @objc internal func scanButtonClicked() {
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
@@ -643,6 +732,8 @@ internal protocol TapCardInputCommonProtocol {
     
     @objc internal func clearButtonClicked() {
         
+        savedCard = nil
+        cardUIStatus = .NormalCard
         tapCard.tapCardCVV = nil
         tapCard.tapCardNumber = nil
         tapCard.tapCardExpiryYear = nil
@@ -669,6 +760,20 @@ internal protocol TapCardInputCommonProtocol {
         scanButton.removeTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         scanButton.removeTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         
+        // In case of save card scenario we hide it in case of valid CVV and we show CVV placedholder if CVV is not yet entered
+        // If we are in save card mode and CVV is entered, then we need to show CVV placeholder and no click handler
+        if cardUIStatus == .SavedCard {
+            if cardCVV.isValid() {
+                // Then we need to hide it
+                self.scanButton.isHidden = true
+            }else{
+                // Let us show the CVV placeholder for more clarity
+                self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).commonAttributes.cvvPlaceHolder",from: Bundle(for: type(of: self))), for: .normal)
+            }
+            return
+        }
+        
+        self.scanButton.isHidden = false
         
         if (fields.filter{ ($0.text?.count ?? 0) > 0}.count > 0) {
             self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).clearImage.image",from: Bundle(for: type(of: self))), for: .normal)
@@ -829,6 +934,7 @@ extension TapCardInput:TapCardInputCommonProtocol {
         // We then call the logic required to apply different parts of the theme in success
         setTextColors()
         setFonts()
+        setSavedCardFonts()
         setCommonUI()
         
     }

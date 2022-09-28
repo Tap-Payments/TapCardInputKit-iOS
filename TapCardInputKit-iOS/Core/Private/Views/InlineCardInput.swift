@@ -28,6 +28,15 @@ extension TapCardInput {
         }
         
         
+        // Defines the constrints for the close saved card button
+        closeSavedCardButton.snp.remakeConstraints { (make) in
+            make.width.equalTo(16)
+            make.leading.equalTo(icon.snp.leading)
+            make.height.equalTo(16)
+            make.centerY.equalTo(icon.snp.centerY)
+        }
+        
+        
         // Defines the constrints for the scan card button
         scanButton.snp.remakeConstraints { (make) in
             make.width.equalTo(24)
@@ -45,6 +54,16 @@ extension TapCardInput {
             make.top.equalToSuperview()
         }
         
+        
+        // Defines the constrints for the saved card number display label
+        savedCardNumberLabel.snp.remakeConstraints { (make) in
+            // We set the card number width to the mimimum width based on its min visible characters attribute
+            make.width.equalTo(cardNumber.calculatedWidth())
+            make.height.equalTo(cardNumber.snp.height)
+            make.leading.equalTo(cardNumber.snp.leading)
+            make.centerY.equalTo(cardNumber.snp.centerY)
+        }
+        
         // Defines the constrints for the card expiry field
         cardExpiry.snp.remakeConstraints { (make) in
             // We set the card expiry width to the mimimum width based on its min visible characters attribute
@@ -52,6 +71,16 @@ extension TapCardInput {
             make.height.equalTo(cardNumber.snp.height)
             make.centerY.equalTo(cardNumber.snp.centerY)
             make.trailing.equalTo(cardCVV.snp.leading)
+        }
+        
+        
+        // Defines the constrints for the saved card expiry display label
+        savedCardExpiryLabel.snp.remakeConstraints { (make) in
+            // We set the card expiry width to the mimimum width based on its min visible characters attribute
+            make.width.equalTo(cardExpiry.calculatedWidth())
+            make.height.equalTo(cardExpiry.snp.height)
+            make.centerY.equalTo(cardExpiry.snp.centerY)
+            make.trailing.equalTo(cardExpiry.snp.trailing)
         }
         
         // Defines the constrints for the card cvv field
@@ -105,10 +134,18 @@ extension TapCardInput {
             //stackView.addArrangedSubview(field)
             addSubview(field)
         }
+        // Add the saved card labels to be used in the saved card mode
+        addSubview(savedCardNumberLabel)
+        addSubview(savedCardExpiryLabel)
+        addSubview(closeSavedCardButton)
+        
         cardCVV.alignment = .center
         cardExpiry.alpha = 1
         cardCVV.alpha = 1
         cardName.alpha = 0
+        savedCardNumberLabel.alpha = 0
+        savedCardExpiryLabel.alpha = 0
+        closeSavedCardButton.alpha = 0
         // Add other fields not inside the scrolling areas
         addSubview(icon)
         addSubview(scanButton)
