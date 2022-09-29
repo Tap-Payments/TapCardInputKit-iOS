@@ -329,6 +329,7 @@ internal protocol TapCardInputCommonProtocol {
             cardCVV.isUserInteractionEnabled = true
             cardCVV.becomeFirstResponder()
             cardCVV.cvvLength = CardValidator.cvvLength(for: savedCard?.brand)
+            adjustScanButton()
         }
     }
     
