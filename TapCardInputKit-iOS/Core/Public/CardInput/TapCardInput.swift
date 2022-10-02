@@ -32,14 +32,16 @@ internal protocol TapCardInputCommonProtocol {
     /**
      This method will be called whenever the card data in the form has changed. It is being called in a live manner
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
+     - Parameter cardStatusUI: The current state of the card input. Saved card or normal card
      */
-    @objc func cardDataChanged(tapCard:TapCard)
+    @objc func cardDataChanged(tapCard:TapCard,cardStatusUI:CardInputUIStatus)
     /**
      This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
      - Parameter cardBrand: The detected card brand
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
+     - Parameter cardStatusUI: The current state of the card input. Saved card or normal card
      */
-    @objc func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum)
+    @objc func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum,cardStatusUI:CardInputUIStatus)
     /// This method will be called once the user clicks on Scan button
     @objc func scanCardClicked()
     /**
@@ -280,7 +282,7 @@ internal protocol TapCardInputCommonProtocol {
      */
     @objc public func setSavedCard(savedCard:SavedCard) {
         // First of all, let us clear any data inside the card form if any
-        clearButtonClicked()
+        clearButtonClicked(cardStatusUI: .SavedCard)
         // Let us save the saved card for further usage
         self.savedCard = savedCard
         // Assign the needed UI data
@@ -528,7 +530,7 @@ internal protocol TapCardInputCommonProtocol {
         },cardCVVChanged: {  [weak self] (cardCVV) in
             // If the card cvv changed, we change the holding TapCard and we fire the logic needed to do when the card data changed
             self?.tapCard.tapCardCVV = cardCVV
-            self?.cardDatachanged()
+            self?.cardDatachanged(cardStatusUI: self?.cardUIStatus ?? .NormalCard)
             if self?.cardCVV.isValid() ?? false {
                 // Check if there is a name to collect
                 if self?.showCardName ?? false {
@@ -668,14 +670,20 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     /// The method that holds the logic needed to do when any of the card fields changed
-    internal func cardDatachanged() {
+    internal func cardDatachanged(cardStatusUI:CardInputUIStatus = .NormalCard) {
         //adjustEnablementOfTextFields()
         adjustScanButton()
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
-            nonNullDelegate.cardDataChanged(tapCard: tapCard)
-            let (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
-            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber))
+            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI)
+            var (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
+            var validity = cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber)
+            // in case of saved card we take the brand and the validation from the saved card itself
+            if cardStatusUI == .SavedCard, let nonNullSavedCard = savedCard {
+                detectedBrand = nonNullSavedCard.brand
+                validity = .Valid
+            }
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI)
             handleOneBrandIcon(with: detectedBrand ?? .unknown)
         }
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
@@ -731,7 +739,7 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-    @objc internal func clearButtonClicked() {
+    @objc internal func clearButtonClicked(cardStatusUI:CardInputUIStatus = .NormalCard) {
         
         savedCard = nil
         cardUIStatus = .NormalCard
@@ -753,7 +761,7 @@ internal protocol TapCardInputCommonProtocol {
             }
             $0.resignFirstResponder()
         }
-        cardDatachanged()
+        cardDatachanged(cardStatusUI: cardStatusUI)
     }
     
     
