@@ -43,15 +43,21 @@ internal class TapCardTextField: UITextField {
     /// The text color for the textfields
     var placeHolderTextColor: UIColor = .black {
         didSet{
-            self.attributedPlaceholder = NSAttributedString(string: self.attributedPlaceholder?.string ?? "", attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
+            self.attributedPlaceholder = NSAttributedString(string: self.attributedPlaceholder?.string ?? "", attributes: [
+                .foregroundColor: placeHolderTextColor,
+                .font: fieldPlacedHolderFont])
             
         }
     }
     
+    /// The font for the palcedholder of the textfield
+    var fieldPlacedHolderFont:UIFont = .systemFont(ofSize: 12, weight: .regular)
+    
     /// The placeholder of the text field
     var fieldPlaceHolder:String = "" {
         didSet{
-            self.attributedPlaceholder = NSAttributedString(string: fieldPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
+            self.attributedPlaceholder = NSAttributedString(string: fieldPlaceHolder, attributes: [.foregroundColor: placeHolderTextColor,
+                                                                                                   .font: fieldPlacedHolderFont])
         }
     }
     /// The background color of the text fields

@@ -286,10 +286,32 @@ internal protocol TapCardInputCommonProtocol {
         // Let us save the saved card for further usage
         self.savedCard = savedCard
         // Assign the needed UI data
-        savedCardNumberLabel.text = savedCard.displayTitle
+        let style = NSMutableParagraphStyle()
+        style.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+        
+        // theme the last four digits text
+        let offsett:Double = ((TapThemeManager.fontValue(for: "\(themePath).textFields.font",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular)).capHeight - (TapThemeManager.fontValue(for: "\(themePath).textFields.saveCardFontDots",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular)).capHeight)/2.0
+        
+        let lastFourDigits = NSAttributedString(string: savedCard.lastFourDigits, attributes: [
+            .foregroundColor: TapThemeManager.colorValue(for: "\(themePath).textFields.textColor") ?? .blue,
+            .font: TapThemeManager.fontValue(for: "\(themePath).textFields.font",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular),
+            .paragraphStyle:style, .baselineOffset:-offsett])
+        
+        
+        // theme the prefix four dots
+        let prefixFourDots = NSMutableAttributedString(string: "•••• ", attributes: [
+            .foregroundColor: TapThemeManager.colorValue(for: "\(themePath).textFields.textColor") ?? .blue,
+            .font: TapThemeManager.fontValue(for: "\(themePath).textFields.saveCardFontDots",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular),
+            .paragraphStyle:style])
+        
+        prefixFourDots.append(lastFourDigits)
+        
+        savedCardNumberLabel.attributedText = prefixFourDots
+        
         savedCardExpiryLabel.text = "\(savedCard.expirationMonth)/\(savedCard.expirationYear)"
         // declare our status to be saved card
         self.cardUIStatus = .SavedCard
+        
     }
     
     
@@ -354,7 +376,8 @@ internal protocol TapCardInputCommonProtocol {
     internal func setFonts() {
         fields.forEach { (field) in
             // Fonts
-            field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
+            field.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font",shouldLocalise: false)
+            field.fieldPlacedHolderFont = TapThemeManager.fontValue(for: "\(themePath).textFields.font", shouldLocalise: true) ?? .systemFont(ofSize: 12, weight: .regular)
         }
         
         // Set the font of the save label
@@ -364,8 +387,8 @@ internal protocol TapCardInputCommonProtocol {
     /// Helper method to natch the fonts from the theme to all the saved card fields
     internal func setSavedCardFonts() {
         // Fonts
-        savedCardExpiryLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
-        savedCardNumberLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font")
+        savedCardExpiryLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font", shouldLocalise: false)
+        savedCardNumberLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).textFields.font", shouldLocalise: false)
         // Colors
         savedCardNumberLabel.tap_theme_textColor = .init(keyPath: "\(themePath).textFields.textColor")
         savedCardExpiryLabel.tap_theme_textColor = .init(keyPath: "\(themePath).textFields.textColor")
@@ -379,6 +402,7 @@ internal protocol TapCardInputCommonProtocol {
         // The default localisation file location
         let defaultLocalisationFilePath:URL = TapCommonConstants.pathForDefaultLocalisation()
         // Assign the localisation values
+        
         cardName.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
         
         cardNumber.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
@@ -396,7 +420,11 @@ internal protocol TapCardInputCommonProtocol {
                 field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
             }
             
-            saveLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            //savedCardNumberLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+            savedCardExpiryLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
             semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
         }
         
@@ -701,7 +729,7 @@ internal protocol TapCardInputCommonProtocol {
         cardCVV.snp.updateConstraints { make in
             var offset = 0
             if cardCVV.text != "" {
-                offset = (TapLocalisationManager.shared.localisationLocale == "ar") ? -6 : -2
+                offset = -2
             }
             make.centerY.equalTo(cardNumber.snp.centerY).offset(offset)
             cardCVV.updateConstraints()

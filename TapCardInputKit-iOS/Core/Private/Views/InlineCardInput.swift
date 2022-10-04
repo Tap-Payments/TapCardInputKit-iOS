@@ -24,7 +24,7 @@ extension TapCardInput {
             make.width.equalTo(24)
             make.leading.equalToSuperview().offset(12)
             make.height.equalTo(24)
-            make.centerY.equalTo(cardNumber.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? -3 : 0)
+            make.centerY.equalTo(cardNumber.snp.centerY).offset((TapLocalisationManager.shared.localisationLocale == "ar") ? -1 : 0)
         }
         
         
