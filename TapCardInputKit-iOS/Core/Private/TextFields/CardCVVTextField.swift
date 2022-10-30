@@ -15,13 +15,14 @@ class CardCVVTextField:TapCardTextField {
     
     /// This is the block that will fire an event when a the card cvv has changed
     var cardCVVChanged: ((String) -> ())? =  nil
-    
+    /// The timer used to mask the CVV digits after making them visible for a little bit of time
+    var timer: Timer?
     /// Defines the length of the cvv length allowed based on the brand detected
     var cvvLength:Int = 3 {
         didSet{
             // If the cvv length changed, then we need to make sure, if the user did input more than that then we need to trim it to the allowed max new length
             if let text = self.text,
-                text.count > cvvLength {
+               text.count > cvvLength {
                 self.text = text.substring(to: cvvLength)
             }
         }
@@ -50,7 +51,6 @@ class CardCVVTextField:TapCardTextField {
         // Assign the observers and the blocks
         self.editingStatusChanged = editingStatusChanged
         self.delegate = self
-        self.isSecureTextEntry = true
     }
     
     required init?(coder: NSCoder) {
@@ -128,6 +128,15 @@ extension CardCVVTextField:UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: range, with: string)
         // Apply and valiodate the new text before writing it
         let _ = changeText(with: updatedText, setTextAfterValidation: true)
+        textField.isSecureTextEntry = false
+        if let timer = timer {
+            timer.invalidate()
+        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
+            timer.invalidate()
+            textField.isSecureTextEntry = true
+        })
         return false
     }
     
