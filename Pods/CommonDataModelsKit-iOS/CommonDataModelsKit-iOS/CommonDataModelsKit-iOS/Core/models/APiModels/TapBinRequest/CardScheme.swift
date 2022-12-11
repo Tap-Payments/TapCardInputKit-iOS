@@ -16,7 +16,7 @@ public struct CardScheme {
     // MARK: - Private -
     // MARK: Methods
     
-    private init(_ brand: CardBrand) {
+    public init(_ brand: CardBrand) {
         
         self.cardBrand = brand
     }

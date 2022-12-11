@@ -453,7 +453,7 @@ internal protocol TapCardInputCommonProtocol {
         // The default card brand icon
         icon.image = TapThemeManager.imageValue(for: "\(themePath).iconImage.image",from: Bundle(for: type(of: self)))
         icon.contentMode = .scaleAspectFit
-        
+        icon.tap_theme_tintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).iconImage.tint")
         
         // Defines an action handler to the close saved card button
         closeSavedCardButton.addTarget(self, action: #selector(closeSavedCardButtonClicked), for: .touchUpInside)
@@ -461,12 +461,13 @@ internal protocol TapCardInputCommonProtocol {
         // Defines close saved card button icon
         // Defines scan button icon
         closeSavedCardButton.setImage(TapThemeManager.imageValue(for: "\(themePath).closeSavedCardIcon",from: Bundle(for: type(of: self))), for: .normal)
+        closeSavedCardButton.tap_theme_tintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).iconImage.tint")
+        
         closeSavedCardButton.imageView?.contentMode = .scaleToFill
         closeSavedCardButton.contentHorizontalAlignment = .fill;
         closeSavedCardButton.contentVerticalAlignment = .fill;
         
         closeSavedCardButton.backgroundColor = .clear
-        closeSavedCardButton.tintColor = .clear
         closeSavedCardButton.setBackgroundColor(color: .clear, forState: .highlighted)
         closeSavedCardButton.setBackgroundColor(color: .clear, forState: .selected)
         closeSavedCardButton.setBackgroundColor(color: .clear, forState: .focused)
@@ -476,12 +477,13 @@ internal protocol TapCardInputCommonProtocol {
         scanButton.setTitle("", for: .normal)
         // Defines scan button icon
         scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.image",from: Bundle(for: type(of: self))), for: .normal)
+        scanButton.tap_theme_tintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).scanImage.tint")
+        
         scanButton.imageView?.contentMode = .scaleToFill
         scanButton.contentHorizontalAlignment = .fill;
         scanButton.contentVerticalAlignment = .fill;
         
         scanButton.backgroundColor = .clear
-        scanButton.tintColor = .clear
         scanButton.setBackgroundColor(color: .clear, forState: .highlighted)
         scanButton.setBackgroundColor(color: .clear, forState: .selected)
         scanButton.setBackgroundColor(color: .clear, forState: .focused)

@@ -1,6 +1,6 @@
 PODS:
   - Capable/Colors (1.1.4)
-  - CommonDataModelsKit-iOS (1.0.76):
+  - CommonDataModelsKit-iOS (1.0.89):
     - SwiftyRSA
     - TapAdditionsKitV2
     - TapCardVlidatorKit-iOS
@@ -26,7 +26,7 @@ PODS:
   - TapSwiftFixesV2/CoreGraphics (1.0.0)
   - TapSwiftFixesV2/Exceptions (1.0.0)
   - TapSwiftFixesV2/Threading (1.0.0)
-  - TapThemeManager2020 (1.0.54):
+  - TapThemeManager2020 (1.0.64):
     - LocalisationManagerKit-iOS
     - TapFontKit-iOS
 
@@ -57,7 +57,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Capable: 9f420f2a80a12144814ea2f0ba196516a0827ca1
-  CommonDataModelsKit-iOS: fd0f83007da3d59a0d69ee273aee014b4b322211
+  CommonDataModelsKit-iOS: c094212afb12b272587929fe282e5267a29e5fa2
   LocalisationManagerKit-iOS: bd1a9d16509a06dd1aea45b9f47cf21bdfe0796c
   Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
   SheetyColors: a0273d30ec5ee02536bb43960ba36d58619ae719
@@ -68,7 +68,7 @@ SPEC CHECKSUMS:
   TapFontKit-iOS: 51ed2ddbe9f2b5ece1cc587ed45af9147e5c6fc1
   TapKeychain: 143aa70bb2d1b094e0298e944660264034c79849
   TapSwiftFixesV2: a8623a7273c6790b9754ec7e272e96fce7d3a800
-  TapThemeManager2020: 50ddf53588849fe3b1cda64f6c195c7ee3f0e1d6
+  TapThemeManager2020: e93b257d2d93b4a42c37fb1403af11deb1cabd2d
 
 PODFILE CHECKSUM: f9770c671a63c14dccf30286a5e856d440cfcf37
 
