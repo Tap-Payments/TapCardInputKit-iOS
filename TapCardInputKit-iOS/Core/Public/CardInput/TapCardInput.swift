@@ -332,6 +332,14 @@ internal protocol TapCardInputCommonProtocol {
         return (cardNumber.isValid(cardNumber: tapCard.tapCardNumber),cardExpiry.isValid(),cardCVV.isValid(), showCardName ? cardName.isValid() : true)
     }
     
+    /**
+     Decides what is the status of the card number field
+     VALID, INVALID or INCOMPLETE
+     */
+    public func cardNumberValidationStatus() -> CrardInputTextFieldStatusEnum {
+        return cardNumber.textFieldStatus()
+    }
+    
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         TapThemeManager.changeThemeDisplay(for: self.traitCollection.userInterfaceStyle)
