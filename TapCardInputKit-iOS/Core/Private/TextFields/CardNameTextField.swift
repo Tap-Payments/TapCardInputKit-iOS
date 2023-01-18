@@ -146,4 +146,9 @@ extension CardNameTextField:UITextFieldDelegate {
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         return false
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
