@@ -108,12 +108,13 @@ extension CardExpiryTextField:CardInputTextFieldProtocol {
      - Parameter textField: The text field that has its text changed
      */
     @objc func didChangeText(textField:UITextField) {
+        textField.text = String((self.text ?? "").prefix(5))
         if self.isValid(), let nonNullBlock = cardExpiryChanged {
             // If the text input by the user is valid and exxpiry changed block is assigned, we need to fire this event by passing back the entered month and year
-            nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3))
+            nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3).substring(to: 2))
         }
         if let nonNullTextChangeBlock = textChanged {
-            nonNullTextChangeBlock(self.text ?? "")
+            nonNullTextChangeBlock(String((self.text ?? "").prefix(5)))
         }
     }
 }
@@ -140,7 +141,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
         
         if self.isValid(), let nonNullBlock = cardExpiryChanged {
             // If the text input by the user is valid and exxpiry changed block is assigned, we need to fire this event by passing back the entered month and year
-            nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3))
+            nonNullBlock(textField.text!.substring(to: 2),textField.text!.substring(from: 3).substring(to: 2))
         }
     }
     
@@ -164,7 +165,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
         } else if updatedText.count == 5 {
             // If the text is already has length of 5 MM/YY then e will not do anything, as it should be validated through the process until it reaches here
             textField.text = updatedText
-            resignFirstResponder()
+            //resignFirstResponder()
             return true
         } else if updatedText.count > 5 {
             // we will not allow entering more than 5 charachters MM/YY
@@ -196,7 +197,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
         // Afterall, we need to color the text based on the validty of the field
         self.textColor = (self.isValid()) ? normalTextColor : errorTextColor
         if let nonNullTextChangeBlock = textChanged {
-            nonNullTextChangeBlock(self.text ?? "")
+            nonNullTextChangeBlock(String((self.text ?? "").prefix(5)))
         }
         return self.isValid()
     }
@@ -246,7 +247,7 @@ extension CardExpiryTextField:UITextFieldDelegate {
                 return nonNullYear
             }else if nonNullYear.count == 4 {
                 // If he passed YYYY we return the last two YY
-                return nonNullYear.substring(from: 3)
+                return nonNullYear.substring(from: 3).substring(to: 2)
             }
         }
         return nil
