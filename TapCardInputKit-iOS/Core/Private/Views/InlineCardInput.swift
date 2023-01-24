@@ -94,6 +94,12 @@ extension TapCardInput {
             make.leading.equalTo(cardExpiry.snp.trailing)
         }
         
+        underlineView.snp.remakeConstraints { make in
+            make.leading.equalTo(cardCVV.snp.leading)
+            make.trailing.equalTo(scanButton.snp.trailing)
+            make.height.equalTo(1)
+            make.top.equalTo(scanButton.snp.bottom).offset(5)
+        }
         
         if showCardName {
             // Defines the constrints for the card cvv field
@@ -146,9 +152,11 @@ extension TapCardInput {
         savedCardNumberLabel.alpha = 0
         savedCardExpiryLabel.alpha = 0
         closeSavedCardButton.alpha = 0
+        underlineView.alpha = 0
         // Add other fields not inside the scrolling areas
         addSubview(icon)
         addSubview(scanButton)
+        addSubview(underlineView)
     }
     
     
