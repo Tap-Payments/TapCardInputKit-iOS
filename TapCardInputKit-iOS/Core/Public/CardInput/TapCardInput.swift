@@ -314,6 +314,8 @@ internal protocol TapCardInputCommonProtocol {
         // declare our status to be saved card
         self.cardUIStatus = .SavedCard
         
+        self.cardDatachanged(cardStatusUI: self.cardUIStatus)
+        
     }
     
     
