@@ -518,6 +518,9 @@ internal protocol TapCardInputCommonProtocol {
     /// The method is responsible for configuring and setup the card text fields
     internal func configureViews() {
         
+        // The default localisation file location
+        let defaultLocalisationFilePath:URL = TapCommonConstants.pathForDefaultLocalisation()
+        
         // Setup the card number field with the needed data and listeners
         cardNumber.setup(with: 8, maxVisibleChars: 16, placeholder: "Card Number") { [weak self] (isEditing) in
             // We will glow the shadow if needed
@@ -555,7 +558,7 @@ internal protocol TapCardInputCommonProtocol {
                        editCardName: editCardName)
         
         // Setup the card expiry field with the needed data and listeners
-        cardExpiry.setup(with: 5, placeholder: "",editingStatusChanged: {[weak self] (isEditing) in
+        cardExpiry.setup(with: sharedLocalisationManager.localisationLocale == "en" ? 5 : 7, placeholder: sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath),editingStatusChanged: {[weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -571,7 +574,7 @@ internal protocol TapCardInputCommonProtocol {
         })
         
         // Setup the card cvv field with the needed data and listeners
-        cardCVV.setup(placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
+        cardCVV.setup(with:sharedLocalisationManager.localisationLocale == "en" ? 5 : 6, placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode

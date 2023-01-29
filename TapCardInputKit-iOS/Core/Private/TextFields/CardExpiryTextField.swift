@@ -34,8 +34,8 @@ class CardExpiryTextField:TapCardTextField {
         self.keyboardType = .phonePad
         
         // Assign and save the passed attributes
-        self.minVisibleChars = minVisibleChars
-        self.maxVisibleChars = maxVisibleChars
+        self.minVisibleChars = max(placeholder.count, minVisibleChars, maxVisibleChars)
+        self.maxVisibleChars = max(placeholder.count, minVisibleChars, maxVisibleChars)
         self.cardExpiryChanged = cardExpiryChanged
         
         // Listen to the event of text change

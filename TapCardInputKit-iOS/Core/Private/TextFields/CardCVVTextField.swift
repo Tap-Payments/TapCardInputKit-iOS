@@ -37,14 +37,14 @@ class CardCVVTextField:TapCardTextField {
      - Parameter editingStatusChanged: Observer to listen to the event when the editing status changed, whether started or ended editing
      - Parameter cardCVVChanged: Observer to listen to the event when a the card cvv is changed by user input till the moment
      */
-    func setup(with minVisibleChars: Int = 3, maxVisibleChars: Int = 3, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardCVVChanged: ((String) -> ())? =  nil) {
+    func setup(with minVisibleChars: Int = 5, maxVisibleChars: Int = 5, placeholder:String = "", editingStatusChanged: ((Bool) -> ())? = nil, cardCVVChanged: ((String) -> ())? =  nil) {
         // Set the place holder with the theme color
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeHolderTextColor])
         // Assign and save the passed attributes
         // Card number should have a numeric pad
         self.keyboardType = .phonePad
-        self.minVisibleChars = minVisibleChars
-        self.maxVisibleChars = maxVisibleChars
+        self.minVisibleChars = max(placeholder.count, minVisibleChars, maxVisibleChars)
+        self.maxVisibleChars = max(placeholder.count, minVisibleChars, maxVisibleChars)
         self.cardCVVChanged = cardCVVChanged
         // Listen to the event of text change
         self.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
