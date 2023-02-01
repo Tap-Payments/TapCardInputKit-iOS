@@ -67,6 +67,9 @@ internal protocol TapCardInputCommonProtocol {
     
     /// fires when the height of the widget changes
     @objc func heightChanged()
+    
+    /// Fires when one of the card fields is now focused & none of them were focused before.
+    @objc func cardFieldsAreFocused()
 }
 
 /// This represents the custom view for card input provided by Tap
@@ -128,6 +131,15 @@ internal protocol TapCardInputCommonProtocol {
     internal var preloadCardHolderName:String = ""
     /// Indicates whether or not the user can edit the card holder name field. Default is true
     internal var editCardName:Bool = true
+    
+    /// Fires when one of the card fields is now focused & none of them were focused before.
+    internal var isCardFieldFocused:Bool = false {
+        didSet{
+            if oldValue != isCardFieldFocused, isCardFieldFocused {
+                delegate?.cardFieldsAreFocused()
+            }
+        }
+    }
     
     //MARK: Public
     /// This defines the mode required to show the card input view in whether Full or Inline
@@ -523,6 +535,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card number field with the needed data and listeners
         cardNumber.setup(with: 8, maxVisibleChars: 16, placeholder: "Card Number") { [weak self] (isEditing) in
+            // Checks if any of the card fields is newly focused
+            self?.updateFousedStatus()
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -545,6 +559,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card name field with the needed data and listeners
         cardName.setup(with: 4, maxVisibleChars: 16, placeholder: "Card Holder Name", editingStatusChanged: { [weak self] (isEditing) in
+            // Checks if any of the card fields is newly focused
+            self?.updateFousedStatus()
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -559,6 +575,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card expiry field with the needed data and listeners
         cardExpiry.setup(with: sharedLocalisationManager.localisationLocale == "en" ? 5 : 7, placeholder: sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath),editingStatusChanged: {[weak self] (isEditing) in
+            // Checks if any of the card fields is newly focused
+            self?.updateFousedStatus()
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -575,6 +593,8 @@ internal protocol TapCardInputCommonProtocol {
         
         // Setup the card cvv field with the needed data and listeners
         cardCVV.setup(with:sharedLocalisationManager.localisationLocale == "en" ? 5 : 6, placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
+            // Checks if any of the card fields is newly focused
+            self?.updateFousedStatus()
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -679,6 +699,11 @@ internal protocol TapCardInputCommonProtocol {
               let detectedBrandIconURL:URL = URL(string: detectedBrandIconString) else { return nil }
         
         return detectedBrandIconURL
+    }
+    
+    /// Checks if any of the card fields is newly focused
+    internal func  updateFousedStatus() {
+        isCardFieldFocused = fields.map{ $0.isEditing }.reduce(false){ $0 || $1 }
     }
     
     /// Method that glows or the dims the card input view based on the shadow theme provided and if any of the fields is active
