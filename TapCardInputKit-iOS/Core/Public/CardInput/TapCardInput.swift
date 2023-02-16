@@ -383,7 +383,7 @@ internal protocol TapCardInputCommonProtocol {
     
     
     /// Update restoring/saving current card data for further usage
-    internal func restoreCachedCardData() {
+    public func restoreCachedCardData() {
         // Let us restore the previously typed card data whenever we display the new card status coming from saved card one
         if cardUIStatus == .NormalCard {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(0)) { [ weak self ] in
@@ -793,7 +793,7 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     /// The method that holds the logic needed to do when any of the card fields changed
-    internal func cardDatachanged(cardStatusUI:CardInputUIStatus = .NormalCard) {
+    public func cardDatachanged(cardStatusUI:CardInputUIStatus = .NormalCard) {
         //adjustEnablementOfTextFields()
         adjustScanButton()
         if let nonNullDelegate = delegate {
