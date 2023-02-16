@@ -181,7 +181,7 @@ extension CardCVVTextField:UITextFieldDelegate {
         if let nonNullTextChangeBlock = textChanged {
             nonNullTextChangeBlock(self.text ?? "")
         }
-        return true
+        return self.isValid()
     }
 }
 

@@ -60,6 +60,28 @@ class CardNameTextField:TapCardTextField {
         super.init(frame: frame)
     }
     
+    /**
+     This method does the logic required to check if a given text is allowed to be written to the card name field or not
+     - Parameter updatedText: The text we want to validate and write to the card name text field
+     - Parameter setTextAfterValidation: States if the caller wants to write the text if is correcly validated
+     - Returns: True if the text is valid and can be written to the card name field and false otherwise
+     */
+    internal func changeText(with updatedText:String, setTextAfterValidation:Bool = false) -> Bool {
+        
+        
+        if validateCardName(with: updatedText) == .Valid {
+            self.text = updatedText
+        }else{
+            self.text = ""
+        }
+        
+        if let nonNullTextChangeBlock = textChanged {
+            nonNullTextChangeBlock(self.text ?? "")
+        }
+        
+        return true
+    }
+    
 }
 
 
