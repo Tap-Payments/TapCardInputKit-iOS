@@ -33,15 +33,17 @@ internal protocol TapCardInputCommonProtocol {
      This method will be called whenever the card data in the form has changed. It is being called in a live manner
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
      - Parameter cardStatusUI: The current state of the card input. Saved card or normal card
+     - Parameter isCVVFocused: Will tell the focusing state of the CVV, will be used not to show CVV hint if the field is focused in the saved card view
      */
-    @objc func cardDataChanged(tapCard:TapCard,cardStatusUI:CardInputUIStatus)
+    @objc func cardDataChanged(tapCard:TapCard,cardStatusUI:CardInputUIStatus, isCVVFocused:Bool)
     /**
      This method will be called whenever the a brand is detected based on the current data typed by the user in the card form.
      - Parameter cardBrand: The detected card brand
      - Parameter validation: Tells the validity of the detected brand, whether it is invalid, valid or still incomplete
      - Parameter cardStatusUI: The current state of the card input. Saved card or normal card
+     - Parameter isCVVFocused: Will tell the focusing state of the CVV, will be used not to show CVV hint if the field is focused in the saved card view
      */
-    @objc func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum,cardStatusUI:CardInputUIStatus)
+    @objc func brandDetected(for cardBrand:CardBrand,with validation:CrardInputTextFieldStatusEnum,cardStatusUI:CardInputUIStatus, isCVVFocused:Bool)
     /// This method will be called once the user clicks on Scan button
     @objc func scanCardClicked()
     /**
@@ -52,8 +54,9 @@ internal protocol TapCardInputCommonProtocol {
     /**
      This method will be called whenever any text change occures
      - Parameter tapCard: The TapCard model that hold sthe data the currently enetred by the user till now
+     - Parameter isCVVFocused: Will tell the focusing state of the CVV, will be used not to show CVV hint if the field is focused in the saved card view
      */
-    @objc func dataChanged(tapCard:TapCard)
+    @objc func dataChanged(tapCard:TapCard,isCVVFocused:Bool)
     
     /// This method will be called whenever the user opted out from filling in the CVV for the saved card
     @objc func closeSavedCard()
@@ -115,6 +118,8 @@ internal protocol TapCardInputCommonProtocol {
     internal var spacing:CGFloat = 7
     /// The left and right padding around the input card
     internal var inputLeftRightMargin:CGFloat = 15
+    /// Defines if the card info textfields should support RTL in Arabic mode or not
+    internal var shouldFlip:Bool = true
     /// The last saved card called
     public var savedCard:SavedCard?
     
@@ -131,6 +136,12 @@ internal protocol TapCardInputCommonProtocol {
     internal let sharedLocalisationManager = TapLocalisationManager.shared
     /// A preloading value for the card holder name if needed
     internal var preloadCardHolderName:String = ""
+    /// Indicates if the card form shall have its own background theming or it should be clear and reflect whatever is behind it
+    internal var shouldThemeSelf:Bool = false {
+        didSet{
+            setCommonUI()
+        }
+    }
     /// Indicates whether or not the user can edit the card holder name field. Default is true
     internal var editCardName:Bool = true
     
@@ -209,17 +220,21 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter cardIconUrl: States if the parent controller wants to show a card image instead of placeholder when valid
      - Parameter preloadCardHolderName: A preloading value for the card holder name if needed. Default is none
      - Parameter editCardName: Indicates whether or not the user can edit the card holder name field. Default is true
+     - Parameter shouldFlip: Indicates whether the card fields should be in RTL in Arabic. If false, the card info fields will force LTR even in Arabic mode
+     - Parameter shouldThemeSelf: Indicates if the card form shall have its own background theming or it should be clear and reflect whatever is behind it
      */
-    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardsIconsUrls:[CardBrand.RawValue:String]? = nil, preloadCardHolderName:String = "", editCardName:Bool = true) {
+    @objc public func setup(for cardInputMode:CardInputMode,showCardName:Bool = false, showCardBrandIcon:Bool = false,allowedCardBrands:[Int] = [],cardsIconsUrls:[CardBrand.RawValue:String]? = nil, preloadCardHolderName:String = "", editCardName:Bool = true, shouldFlip:Bool, shouldThemeSelf:Bool) {
         
         self.cardInputMode = cardInputMode
         self.showCardName = showCardName
         self.showCardBrandIcon = showCardBrandIcon
         self.preloadCardHolderName = preloadCardHolderName
         self.editCardName = editCardName
+        self.shouldThemeSelf = shouldThemeSelf
         // After applying the theme, we need now to actually setup the views
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Setup_Called", timed:false , params:["defaultTheme":"true","cardInputMode":"\(cardInputMode)"])
         self.cardsIconsUrls = cardsIconsUrls
+        self.shouldFlip = shouldFlip
         defer {
             self.allowedCardBrands = allowedCardBrands
         }
@@ -320,7 +335,7 @@ internal protocol TapCardInputCommonProtocol {
         self.savedCard = savedCard
         // Assign the needed UI data
         let style = NSMutableParagraphStyle()
-        style.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+        style.alignment = (sharedLocalisationManager.localisationLocale == "ar" && shouldFlip) ? .right : .left
         
         // theme the last four digits text
         let offsett:Double = ((TapThemeManager.fontValue(for: "\(themePath).textFields.font",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular)).capHeight - (TapThemeManager.fontValue(for: "\(themePath).textFields.saveCardFontDots",shouldLocalise: false) ?? .systemFont(ofSize: 14, weight: .regular)).capHeight)/2.0
@@ -414,7 +429,7 @@ internal protocol TapCardInputCommonProtocol {
         // now let us see if we have to focus the CVV if we are filling in saved card data
         if cardUIStatus == .SavedCard {
             cardCVV.isUserInteractionEnabled = true
-            //cardCVV.becomeFirstResponder()
+            cardCVV.becomeFirstResponder()
             cardCVV.cvvLength = CardValidator.cvvLength(for: savedCard?.brand)
             adjustScanButton()
         }
@@ -477,7 +492,7 @@ internal protocol TapCardInputCommonProtocol {
         saveLabel.text = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardSaveLabel", with: defaultLocalisationFilePath)
         
         
-        if shouldFlip {
+        if self.shouldFlip && shouldFlip {
             // Change the alignments
             fields.forEach { (field) in
                 field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
@@ -496,7 +511,13 @@ internal protocol TapCardInputCommonProtocol {
     /// Helper method to match the common theming values to the view from the theme file
     internal func setCommonUI() {
         // background color
-        self.backgroundColor = .clear //ThemeUIColorSelector.init(keyPath: "\(themePath).commonAttributes.backgroundColor")
+        // If the card field is set to theme itself, then we set the color
+        if shouldThemeSelf {
+            self.tap_theme_backgroundColor = ThemeUIColorSelector.init(keyPath: "inlineCard.commonAttributes.backgroundColor")
+        }else{
+            // Otherwise, the parent view will theme instead
+            self.backgroundColor = .clear
+        }
         // The border color
         self.layer.tap_theme_borderColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.borderColor")
         // The border width
@@ -525,7 +546,7 @@ internal protocol TapCardInputCommonProtocol {
         // Defines close saved card button icon
         var closeSavedCardStatusImage:UIImage? = TapThemeManager.imageValue(for: "\(themePath).closeSavedCardIcon",from: Bundle(for: type(of: self)))
         // We will need to flip it in case of Arabic as it is an arrow
-        if sharedLocalisationManager.localisationLocale == "ar" {
+        if sharedLocalisationManager.localisationLocale == "ar" && shouldFlip {
             closeSavedCardStatusImage = closeSavedCardStatusImage?.withHorizontallyFlippedOrientation()
         }
         
@@ -642,6 +663,10 @@ internal protocol TapCardInputCommonProtocol {
         cardCVV.setup(with:sharedLocalisationManager.localisationLocale == "en" ? 5 : 6, placeholder: "CVV",editingStatusChanged: { [weak self] (isEditing) in
             // Checks if any of the card fields is newly focused
             self?.updateFousedStatus()
+            // Instruct the view model to adjust the hint view if only in saved card view
+            if self?.cardUIStatus == .SavedCard {
+                self?.cardDatachanged(cardStatusUI: .SavedCard)
+            }
             // We will glow the shadow if needed
             self?.updateShadow()
             // We will need to adjuust the width for the field when it is being active or inactive in the Inline mode
@@ -661,7 +686,7 @@ internal protocol TapCardInputCommonProtocol {
             }
         })
         
-        fields.forEach{ $0.textChanged = { [weak self] _ in self?.delegate?.dataChanged(tapCard: self!.tapCard) }}
+        fields.forEach{ $0.textChanged = { [weak self] _ in self?.delegate?.dataChanged(tapCard: self!.tapCard,isCVVFocused: self?.cardCVV.isEditing ?? false) }}
         
         saveSwitch.addTarget(self, action: #selector(saveCardSwitchChanged), for: .valueChanged)
         localize()
@@ -798,7 +823,7 @@ internal protocol TapCardInputCommonProtocol {
         adjustScanButton()
         if let nonNullDelegate = delegate {
             // If there is a delegate then we call the related method
-            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI)
+            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI, isCVVFocused: cardCVV.isEditing)
             var (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
             var validity = cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber)
             // in case of saved card we take the brand and the validation from the saved card itself
@@ -806,7 +831,7 @@ internal protocol TapCardInputCommonProtocol {
                 detectedBrand = nonNullSavedCard.brand
                 validity = .Valid
             }
-            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI)
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI, isCVVFocused: cardCVV.isEditing)
             handleOneBrandIcon(with: detectedBrand ?? .unknown)
         }
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
