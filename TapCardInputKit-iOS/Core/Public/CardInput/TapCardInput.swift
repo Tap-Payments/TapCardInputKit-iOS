@@ -474,6 +474,11 @@ internal protocol TapCardInputCommonProtocol {
         saveLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).saveCardOption.labelTextFont")
     }
     
+    /// Call it if you want to round specific corners only. By default, all of them are being rounded equally
+    ///  - Parameter for corners: The corners you want to apply the roun
+    @objc public func applyRoundedCornersMask(for corners:CACornerMask) {
+        self.layer.maskedCorners = corners
+    }
     
     /// Helper method to natch the localized values
     @objc public func localize(shouldFlip:Bool = true) {
@@ -523,8 +528,9 @@ internal protocol TapCardInputCommonProtocol {
         // The border width
         self.layer.tap_theme_borderWidth = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.borderWidth")
         // The border rounded corners
-        self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
+        //self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
         
+        self.layer.tap_theme_cornerRadious = ThemeCGFloatSelector.init(keyPath: "\(themePath).commonAttributes.cornerRadius")
         // The shadow details
         /* self.layer.shadowRadius = CGFloat(TapThemeManager.numberValue(for: "\(themePath).commonAttributes.shadow.radius")?.floatValue ?? 0)
          self.layer.tap_theme_shadowColor = ThemeCgColorSelector.init(keyPath: "\(themePath).commonAttributes.shadow.color")
