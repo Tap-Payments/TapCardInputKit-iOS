@@ -88,6 +88,8 @@ internal protocol TapCardInputCommonProtocol {
     internal lazy var icon = UIImageView()
     /// The underline view we will show when entering the CVV in save card mode
     internal lazy var underlineView = UIView()
+    /// The separator view between the fields and the card holder name
+    internal lazy var cardHolderNameSeparator = UIView()
     /// The card brand last image icon, will be used to show it back after the CVV animation
     internal lazy var lastShownIcon:UIImage? = nil
     /// The scan button
@@ -589,6 +591,7 @@ internal protocol TapCardInputCommonProtocol {
         saveSwitch.tap_theme_onTintColor = ThemeUIColorSelector.init(keyPath: "\(themePath).saveCardOption.switchOnThumbColor")
         
         underlineView.tap_theme_backgroundColor = ThemeUIColorSelector.init(keyPath: "\(themePath).commonAttributes.savedCardCvvUnderLineColor")
+        cardHolderNameSeparator.tap_theme_backgroundColor = .init(keyPath: "tapSeparationLine.backgroundColor")
         
         updateShadow()
     }

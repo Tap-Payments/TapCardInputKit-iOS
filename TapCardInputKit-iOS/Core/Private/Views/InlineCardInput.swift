@@ -102,7 +102,7 @@ extension TapCardInput {
         }
         
         if showCardName {
-            // Defines the constrints for the card cvv field
+            // Defines the constrints for the card name field
             cardName.snp.remakeConstraints { (make) in
                 // We set the card cvv width to the mimimum width based on its min visible characters attribute
                 make.leading.equalTo(icon.snp.leading)
@@ -111,6 +111,17 @@ extension TapCardInput {
                 make.top.equalTo(cardNumber.snp.bottom)
                 //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
             }
+            
+            cardHolderNameSeparator.snp.remakeConstraints { (make) in
+                // We set the card cvv width to the mimimum width based on its min visible characters attribute
+                make.leading.equalTo(icon.snp.leading)
+                make.trailing.equalTo(scanButton.snp.trailing)
+                make.height.equalTo(1)
+                make.bottom.equalTo(cardName.snp.top)
+                //make.leading.greaterThanOrEqualTo(cardExpiry.snp.trailing).offset(23)
+            }
+            
+            
         }
         
         layoutIfNeeded()
@@ -149,6 +160,7 @@ extension TapCardInput {
         cardExpiry.alpha = 1
         cardCVV.alpha = 1
         cardName.alpha = 0
+        cardHolderNameSeparator.alpha = 0
         savedCardNumberLabel.alpha = 0
         savedCardExpiryLabel.alpha = 0
         closeSavedCardButton.alpha = 0
@@ -157,12 +169,14 @@ extension TapCardInput {
         addSubview(icon)
         addSubview(scanButton)
         addSubview(underlineView)
+        addSubview(cardHolderNameSeparator)
     }
     
     
     /// Call this method if you want to hide the card name field
     internal func removeCardName() {
         cardName.isHidden = true
+        cardHolderNameSeparator.isHidden = true
         cardName.snp.makeConstraints { (make) in
             make.width.greaterThanOrEqualTo(0)
         }
@@ -258,6 +272,7 @@ extension TapCardInput {
                 self?.cardExpiry.alpha = (nonNullView.isEditing) ? 0 : 1
                 self?.cardCVV.alpha = (nonNullView.isEditing) ? 0 : 1
                 self?.cardName.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
+                self?.cardHolderNameSeparator.alpha = self?.cardName.alpha ?? 0
                 self?.layoutIfNeeded()
                 self?.delegate?.heightChanged()
             })
