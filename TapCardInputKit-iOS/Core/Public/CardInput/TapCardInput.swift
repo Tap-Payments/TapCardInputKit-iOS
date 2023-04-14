@@ -863,11 +863,12 @@ internal protocol TapCardInputCommonProtocol {
             make.centerY.equalTo(cardNumber.snp.centerY).offset(offset)
             cardCVV.updateConstraints()
         }
+        let (numberValid,expiryValid,cvvValid,_) = fieldsValidationStatuses()
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.cardCVV.alpha = (self?.cardNumber.isEditing ?? false) ? 0 : 1
             self?.cardExpiry.alpha = (self?.cardNumber.isEditing ?? false) ? 0 : 1
-            self?.cardName.alpha = (self?.showCardName ?? false) ? ((self?.cardNumber.isEditing ?? false || !(self?.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber) ?? false)) ? 0 : 1) : 0
+            self?.cardName.alpha = (self?.showCardName ?? false) ? ((self?.cardNumber.isEditing ?? false || !(numberValid && expiryValid && cvvValid)) ? 0 : 1) : 0
             self?.delegate?.heightChanged()
         })
     }

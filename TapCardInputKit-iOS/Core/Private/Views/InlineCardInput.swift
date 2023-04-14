@@ -267,11 +267,12 @@ extension TapCardInput {
                 prefix = "•••••"
             }
             nonNullView.text = "\(prefix)\(correctNumberText.cardFormat(with: spacing))"
+            let (numberValid,expiryValid,cvvValid,_) = fieldsValidationStatuses()
             // Set the visibilog of cvv and expirty based on the validty of the card number
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
                 self?.cardExpiry.alpha = (nonNullView.isEditing) ? 0 : 1
                 self?.cardCVV.alpha = (nonNullView.isEditing) ? 0 : 1
-                self?.cardName.alpha = (nonNullView.isEditing || !self!.cardNumber.isValid(cardNumber: self?.tapCard.tapCardNumber)) ? 0 : 1
+                self?.cardName.alpha = (nonNullView.isEditing || !(numberValid && expiryValid && cvvValid)) ? 0 : 1
                 self?.cardHolderNameSeparator.alpha = self?.cardName.alpha ?? 0
                 self?.layoutIfNeeded()
                 self?.delegate?.heightChanged()
