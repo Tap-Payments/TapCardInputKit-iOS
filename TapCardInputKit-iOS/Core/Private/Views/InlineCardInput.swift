@@ -274,6 +274,7 @@ extension TapCardInput {
                 self?.cardCVV.alpha = (nonNullView.isEditing) ? 0 : 1
                 self?.cardName.alpha = (nonNullView.isEditing || !(numberValid && expiryValid && cvvValid)) ? 0 : 1
                 self?.cardHolderNameSeparator.alpha = self?.cardName.alpha ?? 0
+                self?.cardHolderNameSeparator.isHidden = false
                 self?.layoutIfNeeded()
                 self?.delegate?.heightChanged()
             })
