@@ -406,7 +406,7 @@ internal protocol TapCardInputCommonProtocol {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(0)) { [ weak self ] in
                 self?.tapCard = .init(tapCardNumber: self?.cachedTapCard.tapCardNumber, tapCardName: self?.cachedTapCard.tapCardName, tapCardExpiryMonth: self?.cachedTapCard.tapCardExpiryMonth, tapCardExpiryYear: self?.cachedTapCard.tapCardExpiryYear, tapCardCVV: self?.cachedTapCard.tapCardCVV)
                 
-                self?.setCardData(tapCard: .init(tapCardNumber: self?.cachedTapCard.tapCardNumber, tapCardName: self?.cachedTapCard.tapCardName, tapCardExpiryMonth: self?.cachedTapCard.tapCardExpiryMonth, tapCardExpiryYear: self?.cachedTapCard.tapCardExpiryYear, tapCardCVV: self?.cachedTapCard.tapCardCVV), then: false, for: .NormalCard)
+                self?.setCardData(tapCard: .init(tapCardNumber: self?.cachedTapCard.tapCardNumber, tapCardName: self?.cachedTapCard.tapCardName, tapCardExpiryMonth: self?.cachedTapCard.tapCardExpiryMonth, tapCardExpiryYear: self?.cachedTapCard.tapCardExpiryYear, tapCardCVV: self?.cachedTapCard.tapCardCVV), then: false, shouldRemoveCurrentCard: false, for: .NormalCard)
                 
             }
         }

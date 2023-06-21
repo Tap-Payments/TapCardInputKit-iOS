@@ -23,7 +23,7 @@ import TapCardVlidatorKit_iOS
     
     
     
-    init(status:CardValidationState) {
+    public init(status:CardValidationState) {
         switch status {
         case .incomplete:
             self = .Incomplete
