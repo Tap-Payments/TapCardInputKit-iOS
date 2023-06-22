@@ -831,8 +831,6 @@ internal protocol TapCardInputCommonProtocol {
         //adjustEnablementOfTextFields()
         adjustScanButton()
         if let nonNullDelegate = delegate {
-            // If there is a delegate then we call the related method
-            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI, isCVVFocused: cardCVV.isEditing)
             var (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
             var validity = cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber)
             // in case of saved card we take the brand and the validation from the saved card itself
@@ -840,7 +838,9 @@ internal protocol TapCardInputCommonProtocol {
                 detectedBrand = nonNullSavedCard.brand
                 validity = cardCVV.textFieldStatus()
             }
+            // If there is a delegate then we call the related method
             nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI, isCVVFocused: cardCVV.isEditing)
+            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI, isCVVFocused: cardCVV.isEditing)
             handleOneBrandIcon(with: detectedBrand ?? .unknown)
         }
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
