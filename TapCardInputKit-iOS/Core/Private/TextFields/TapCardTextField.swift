@@ -21,6 +21,8 @@ import enum TapCardVlidatorKit_iOS.CardBrand
     func textFieldStatus(cardNumber:String?)->CrardInputTextFieldStatusEnum
     /// This is a valiation method that defines how to validate the input of this textfield
     func isValid(cardNumber:String?)->Bool
+    /// This is a valiation method that defines if we can show a warning related to this input, it will check first if the field is focused & the data is complete length
+    func canShowHint()->Bool
     /// Compute the field width
     func calculatedWidth() -> CGFloat
 }

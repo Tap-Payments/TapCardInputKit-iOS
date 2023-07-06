@@ -86,7 +86,9 @@ class CardNameTextField:TapCardTextField {
 
 
 extension CardNameTextField: CardInputTextFieldProtocol {
-    
+    func canShowHint()->Bool {
+        return false
+    }
     func textFieldStatus(cardNumber:String? = nil) -> CrardInputTextFieldStatusEnum {
         // Check if the caller wants to validate the given string first
         if let passedCardName = cardNumber,

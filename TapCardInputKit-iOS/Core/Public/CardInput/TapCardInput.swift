@@ -213,6 +213,9 @@ internal protocol TapCardInputCommonProtocol {
         self.backgroundColor = .clear
     }
     
+    
+    //MARK: - Public methods
+    
     /**
      Call this method when you  need to setup the view with a custom theme json file. Setup method is reponsible for laying out the view,  adding subviews and applying the default theme
      - Parameter cardInputMode: Defines the card input mode required whether Inline or Full mode
@@ -249,8 +252,9 @@ internal protocol TapCardInputCommonProtocol {
      - Parameter then focusCardNumber: Indicate whether we need to focus the card number after setting the card data
      - Parameter shouldRemoveCurrentCard: Indicate If there is a card number, first thing to do now is to clear the fields
      - Parameter for cardUIStatus: Indicates whether the given card is from a normal process like scanning or to show the special UI for a saved card flow
+     - Parameter forceNoFocus: If it is true, then no field will be focused whatsoever
      */
-    @objc public func setCardData(tapCard:TapCard,then focusCardNumber:Bool,shouldRemoveCurrentCard:Bool = true,for cardUIStatus:CardInputUIStatus) {
+    @objc public func setCardData(tapCard:TapCard,then focusCardNumber:Bool,shouldRemoveCurrentCard:Bool = true,for cardUIStatus:CardInputUIStatus, forceNoFocus:Bool = false) {
         // Match the tapCard attributes to the different card fields
         
         // First then, we check if there is a card number provided
@@ -269,17 +273,17 @@ internal protocol TapCardInputCommonProtocol {
             return
         }
         
-        if focusCardNumber || !cardNumber.isValid(cardNumber: providedCardNumber) {
+        if (focusCardNumber || !cardNumber.isValid(cardNumber: providedCardNumber)) && !forceNoFocus {
             cardNumber.becomeFirstResponder()
         }else {
-            //cardNumber.resignFirstResponder()
+            cardNumber.resignFirstResponder()
         }
         updateWidths(for: cardNumber)
         
         // Then we set the card expiry and check if it is valid or not
         guard cardExpiry.changeText(with: tapCard.tapCardExpiryMonth, year: tapCard.tapCardExpiryYear) else {
             cardExpiry.text = ""
-            if !focusCardNumber {
+            if !focusCardNumber && !forceNoFocus {
                 cardExpiry.becomeFirstResponder()
             }
             return
@@ -291,7 +295,7 @@ internal protocol TapCardInputCommonProtocol {
         // Then check if the usder provided a correct cvv
         guard cardCVV.changeText(with: tapCard.tapCardCVV ?? "", setTextAfterValidation: true) else {
             cardCVV.text = ""
-            if !focusCardNumber {
+            if !focusCardNumber && !forceNoFocus {
                 cardCVV.becomeFirstResponder()
             }
             return
@@ -304,27 +308,31 @@ internal protocol TapCardInputCommonProtocol {
         guard showCardName,
               cardName.changeText(with: tapCard.tapCardName ?? "", setTextAfterValidation: true) else {
             cardName.text = ""
-            if !focusCardNumber && showCardName {
+            if (!focusCardNumber && showCardName) && !forceNoFocus {
                 cardName.becomeFirstResponder()
             }
             return
         }
         
-        if focusCardNumber {
-            cardNumber.becomeFirstResponder()
-        }else if !cardNumber.isValid(cardNumber: providedCardNumber) {
-            cardNumber.becomeFirstResponder()
-        }else if !cardExpiry.isValid() {
-            cardExpiry.becomeFirstResponder()
-        }else if !cardCVV.isValid() {
-            cardCVV.becomeFirstResponder()
-        }else if showCardName && !cardName.isValid() {
-            cardName.becomeFirstResponder()
+        if !forceNoFocus {
+            if focusCardNumber {
+                cardNumber.becomeFirstResponder()
+            }else if !cardNumber.isValid(cardNumber: providedCardNumber) {
+                cardNumber.becomeFirstResponder()
+            }else if !cardExpiry.isValid() {
+                cardExpiry.becomeFirstResponder()
+            }else if !cardCVV.isValid() {
+                cardCVV.becomeFirstResponder()
+            }else if showCardName && !cardName.isValid() {
+                cardName.becomeFirstResponder()
+            }
         }
         
         //FlurryLogger.logEvent(with: "Tap_Card_Input_Fill_Data_Called", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
         
     }
+    
+    
     
     /**
      Call this method to display the saved card details for the user and prompt him to enter the CVV
@@ -418,6 +426,113 @@ internal protocol TapCardInputCommonProtocol {
         cachedTapCard = .init(tapCardNumber: tapCard.tapCardNumber, tapCardName: tapCard.tapCardName, tapCardExpiryMonth: tapCard.tapCardExpiryMonth, tapCardExpiryYear: tapCard.tapCardExpiryYear, tapCardCVV: tapCard.tapCardCVV)
     }
     
+    /// Call it if you want to round specific corners only. By default, all of them are being rounded equally
+    ///  - Parameter for corners: The corners you want to apply the roun
+    @objc public func applyRoundedCornersMask(for corners:CACornerMask) {
+        self.layer.maskedCorners = corners
+    }
+    
+    /// Helper method to natch the localized values
+    @objc public func localize(shouldFlip:Bool = true) {
+        // The default localisation file location
+        let defaultLocalisationFilePath:URL = TapCommonConstants.pathForDefaultLocalisation()
+        // Assign the localisation values
+        
+        cardName.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardNumber.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardCVV.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
+        
+        cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
+        
+        saveLabel.text = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardSaveLabel", with: defaultLocalisationFilePath)
+        
+        
+        if self.shouldFlip && shouldFlip {
+            // Change the alignments
+            fields.forEach { (field) in
+                field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            }
+            
+            //savedCardNumberLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+            savedCardExpiryLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
+            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+            semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
+        }
+        
+    }
+    
+    /// Will redo the logic of revalidating the current catd. useful, when you want to do the same UI actions as if you just detected a card (e.g. after setting a card manually)
+    @objc public func reValidateCardNumber() {
+        cardNumber.reValidate(tapCardNumber:tapCard.tapCardNumber)
+    }
+    
+    @objc func saveCardSwitchChanged(_ sender:Any) {
+        if let nonNullDelegate = delegate {
+            // If there is a delegate then we call the related method
+            nonNullDelegate.saveCardChanged(enabled: saveSwitch.isOn)
+        }
+    }
+    
+    /// Will reset the wholw UI + data inside the card element
+    @objc public func reset() {
+        clearButtonClicked()
+    }
+    
+    /// The method that holds the logic needed to do when any of the card fields changed
+    public func cardDatachanged(cardStatusUI:CardInputUIStatus = .NormalCard) {
+        //adjustEnablementOfTextFields()
+        adjustScanButton()
+        if let nonNullDelegate = delegate {
+            var (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
+            var validity = cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber)
+            // in case of saved card we take the brand and the validation from the saved card itself
+            if cardStatusUI == .SavedCard, let nonNullSavedCard = savedCard {
+                detectedBrand = nonNullSavedCard.brand
+                validity = cardCVV.textFieldStatus()
+            }
+            // If there is a delegate then we call the related method
+            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI, isCVVFocused: cardCVV.isEditing)
+            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI, isCVVFocused: cardCVV.isEditing)
+            handleOneBrandIcon(with: detectedBrand ?? .unknown)
+        }
+        //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
+        adjustExpiryCvv()
+    }
+    
+    /// The method that holds the logic needed to do when any of the scan button is clicked
+    @objc public func scannerClosed() {
+        adjustScanButton()
+    }
+    
+    /// Decides if we can show a hint related to the expiry field
+    /// - Returns: true if the card expiry is focused & the user entered a wrong full month & years.
+    public func showShowHintForExpiryField() -> Bool {
+        return cardExpiry.canShowHint()
+    }
+    
+    /// Decides if we can show a hint related to the CVV field
+    /// - Returns: true if the card CVV is focused & the user entered a wrong full CVV.
+    public func showShowHintForCVVField() -> Bool {
+        return cardCVV.canShowHint()
+    }
+    
+    /// Decides if we can show a hint related to the name field
+    /// - Returns: true if the card name is focused & the user entered a wrong full name.
+    public func showShowHintForNameField() -> Bool {
+        return cardName.canShowHint()
+    }
+    
+    /// Decides if we can show a hint related to the number field
+    /// - Returns: true if the card number is focused & the user entered an invalid card number.
+    public func showShowHintForNumberField() -> Bool {
+        return cardNumber.canShowHint()
+    }
+    
+    //MARK: - Internal methods
     /// Call this method to update the UI of the card input upon changing his status from normal card to saved card and vice versa
     internal func updateCardUI() {
         // hide and show views based on the current status
@@ -474,45 +589,6 @@ internal protocol TapCardInputCommonProtocol {
         savedCardExpiryLabel.tap_theme_textColor = .init(keyPath: "\(themePath).textFields.textColor")
         // Set the font of the save label
         saveLabel.tap_theme_font = ThemeFontSelector.init(stringLiteral: "\(themePath).saveCardOption.labelTextFont")
-    }
-    
-    /// Call it if you want to round specific corners only. By default, all of them are being rounded equally
-    ///  - Parameter for corners: The corners you want to apply the roun
-    @objc public func applyRoundedCornersMask(for corners:CACornerMask) {
-        self.layer.maskedCorners = corners
-    }
-    
-    /// Helper method to natch the localized values
-    @objc public func localize(shouldFlip:Bool = true) {
-        // The default localisation file location
-        let defaultLocalisationFilePath:URL = TapCommonConstants.pathForDefaultLocalisation()
-        // Assign the localisation values
-        
-        cardName.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNamePlaceHolder", with: defaultLocalisationFilePath)
-        
-        cardNumber.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardNumberPlaceHolder", with: defaultLocalisationFilePath)
-        
-        cardCVV.fieldPlaceHolder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardCVVPlaceHolder", with: defaultLocalisationFilePath)
-        
-        cardExpiry.placeholder = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardExpiryPlaceHolder", with: defaultLocalisationFilePath)
-        
-        saveLabel.text = sharedLocalisationManager.localisedValue(for: "TapCardInputKit.cardSaveLabel", with: defaultLocalisationFilePath)
-        
-        
-        if self.shouldFlip && shouldFlip {
-            // Change the alignments
-            fields.forEach { (field) in
-                field.alignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
-            }
-            
-            //savedCardNumberLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
-            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
-            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
-            savedCardExpiryLabel.textAlignment = (sharedLocalisationManager.localisationLocale == "ar") ? .right : .left
-            //savedCardNumberLabel.semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
-            semanticContentAttribute = (sharedLocalisationManager.localisationLocale == "ar") ? .forceRightToLeft : .forceLeftToRight
-        }
-        
     }
     
     /// Helper method to match the common theming values to the view from the theme file
@@ -730,22 +806,6 @@ internal protocol TapCardInputCommonProtocol {
     }
     
     
-    @objc public func reValidateCardNumber() {
-        cardNumber.reValidate(tapCardNumber:tapCard.tapCardNumber)
-    }
-    
-    @objc func saveCardSwitchChanged(_ sender:Any) {
-        if let nonNullDelegate = delegate {
-            // If there is a delegate then we call the related method
-            nonNullDelegate.saveCardChanged(enabled: saveSwitch.isOn)
-        }
-    }
-    
-    @objc public func reset() {
-        clearButtonClicked()
-    }
-    
-    
     /**
      The method that holds the logic needed to do when a card brand is detected
      - Parameter brand: The detected card brand
@@ -826,28 +886,7 @@ internal protocol TapCardInputCommonProtocol {
         cardNumber.isUserInteractionEnabled = true
     }
     
-    /// The method that holds the logic needed to do when any of the card fields changed
-    public func cardDatachanged(cardStatusUI:CardInputUIStatus = .NormalCard) {
-        //adjustEnablementOfTextFields()
-        adjustScanButton()
-        if let nonNullDelegate = delegate {
-            var (detectedBrand, _) = cardNumber.cardBrand(for: tapCard.tapCardNumber ?? "")
-            var validity = cardNumber.textFieldStatus(cardNumber: tapCard.tapCardNumber)
-            // in case of saved card we take the brand and the validation from the saved card itself
-            if cardStatusUI == .SavedCard, let nonNullSavedCard = savedCard {
-                detectedBrand = nonNullSavedCard.brand
-                validity = cardCVV.textFieldStatus()
-            }
-            // If there is a delegate then we call the related method
-            nonNullDelegate.brandDetected(for: detectedBrand ?? .unknown, with: validity, cardStatusUI: cardStatusUI, isCVVFocused: cardCVV.isEditing)
-            nonNullDelegate.cardDataChanged(tapCard: tapCard,cardStatusUI:cardStatusUI, isCVVFocused: cardCVV.isEditing)
-            handleOneBrandIcon(with: detectedBrand ?? .unknown)
-        }
-        //FlurryLogger.logEvent(with: "Tap_Card_Input_Data_Changed", timed:false , params:["card_number":tapCard.tapCardNumber ?? "","card_name":tapCard.tapCardName ?? "","card_month":tapCard.tapCardExpiryMonth ?? "","card_year":tapCard.tapCardExpiryYear ?? ""])
-        adjustExpiryCvv()
-    }
-    
-    
+    /// This method will do the animation trick of showing the entered CVV digit for a period of time before masking it again
     internal func adjustExpiryCvv() {
         guard cardInputMode == .InlineCardInput, cardUIStatus == .NormalCard else { return }
         
@@ -877,7 +916,7 @@ internal protocol TapCardInputCommonProtocol {
     
     /// The method that holds the logic needed to do when any of the scan button is clicked
     @objc internal func closeSavedCardButtonClicked() {
-        let delay:Int = cardCVV.isFocused ? 500 : 0
+//        let delay:Int = cardCVV.isFocused ? 500 : 0
         // let us clear the data
         clearButtonClicked()
         // let us inform the delegate
@@ -899,12 +938,8 @@ internal protocol TapCardInputCommonProtocol {
         self.scanButton.setImage(TapThemeManager.imageValue(for: "\(themePath).scanImage.selected",from: Bundle(for: type(of: self))), for: .normal)
     }
     
-    /// The method that holds the logic needed to do when any of the scan button is clicked
-    @objc public func scannerClosed() {
-        adjustScanButton()
-    }
-    
-    
+    /// An action handleer to be called whenthe clear button inside the card element is called
+    /// It makes ure all UI, session and data are cleared
     @objc internal func clearButtonClicked(cardStatusUI:CardInputUIStatus = .NormalCard) {
         
         savedCard = nil
@@ -930,7 +965,7 @@ internal protocol TapCardInputCommonProtocol {
         cardDatachanged(cardStatusUI: cardStatusUI)
     }
     
-    
+    /// It sets the correct image for th scan button. If the card is empty it shows the scanning, but if is filled it shows the CLEAR button
     internal func adjustScanButton() {
         scanButton.removeTarget(self, action: #selector(scanButtonClicked), for: .touchUpInside)
         scanButton.removeTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)

@@ -65,6 +65,10 @@ class CardCVVTextField:TapCardTextField {
 
 extension CardCVVTextField:CardInputTextFieldProtocol {
     
+    func canShowHint()->Bool {
+        return false
+    }
+    
     func calculatedWidth() -> CGFloat {
         
         return self.textWidth(textfield:self, text: generateFillingValueForWidth(with: self.isEditing ? maxVisibleChars : minVisibleChars))
